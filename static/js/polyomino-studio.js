@@ -339,10 +339,14 @@ function renderBoard() {
       // Fill
       ctx.fillStyle = piece.color;
       ctx.fillRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
-      // Subtle inner border
-      ctx.strokeStyle = 'rgba(0,0,0,0.15)';
-      ctx.lineWidth = 1;
+      // Visible border around each cell
+      ctx.strokeStyle = 'rgba(0,0,0,0.35)';
+      ctx.lineWidth = 1.5;
       ctx.strokeRect(x + 1.5, y + 1.5, cellSize - 3, cellSize - 3);
+      // Lighter inner highlight for depth
+      ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x + 2.5, y + 2.5, cellSize - 5, cellSize - 5);
     }
   }
 
@@ -461,37 +465,35 @@ function renderLibrary() {
       item.classList.add('active');
     }
 
-    // Uniform thumbnail: always 48x48 with shape centered
-    const thumbSize = 48;
+    // Uniform thumbnail: 40x40, shape centered
+    const thumbSize = 40;
     const thumb = document.createElement('canvas');
-    thumb.className = 'piece-thumb-canvas';
     const maxR = Math.max(...piece.shape.map(([r]) => r), 0) + 1;
     const maxC = Math.max(...piece.shape.map(([,c]) => c), 0) + 1;
-    const cs = Math.floor((thumbSize - 4) / Math.max(maxR, maxC, 1));
+    const cs = Math.floor((thumbSize - 6) / Math.max(maxR, maxC, 1));
     const offsetX = Math.floor((thumbSize - maxC * cs) / 2);
     const offsetY = Math.floor((thumbSize - maxR * cs) / 2);
 
     thumb.width = thumbSize;
     thumb.height = thumbSize;
-    thumb.style.width = thumbSize + 'px';
-    thumb.style.height = thumbSize + 'px';
+    // Don't set style.width/height — let CSS handle display size
+
     const ctx = thumb.getContext('2d');
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, thumbSize, thumbSize);
+    ctx.clearRect(0, 0, thumbSize, thumbSize);
     for (const [r, c] of piece.shape) {
       ctx.fillStyle = piece.color;
-      ctx.fillRect(offsetX + c * cs + 1, offsetY + r * cs + 1, cs - 2, cs - 2);
+      ctx.fillRect(offsetX + c * cs + 1, offsetY + r * cs + 1, cs - 1, cs - 1);
     }
 
     const info = document.createElement('div');
     info.className = 'piece-library-info';
-    const nameEl = document.createElement('div');
+    const nameEl = document.createElement('span');
     nameEl.className = 'piece-library-name';
     nameEl.textContent = piece.name;
-    const countEl = document.createElement('div');
+    const countEl = document.createElement('span');
     countEl.className = 'piece-library-count';
     const used = countPieceUsage(piece.id);
-    countEl.textContent = used > 0 ? `已放置 ${used} 个` : '未使用';
+    countEl.textContent = used > 0 ? `×${used}` : '';
     if (used > 0) countEl.style.color = 'var(--accent)';
 
     info.appendChild(nameEl);
@@ -499,7 +501,7 @@ function renderLibrary() {
     item.appendChild(thumb);
     item.appendChild(info);
 
-    // Delete button for user-created pieces (not builtins)
+    // Delete button for user-created pieces only
     if (!piece.id.startsWith('builtin_')) {
       const delBtn = document.createElement('button');
       delBtn.className = 'piece-library-delete';
@@ -510,12 +512,6 @@ function renderLibrary() {
         deletePiece(piece.id);
       });
       item.appendChild(delBtn);
-    } else {
-      // Spacer to keep text aligned when no delete button
-      const spacer = document.createElement('span');
-      spacer.style.width = '22px';
-      spacer.style.flexShrink = '0';
-      item.appendChild(spacer);
     }
 
     item.addEventListener('click', () => selectPiece(piece.id));
