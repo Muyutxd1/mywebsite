@@ -13,10 +13,12 @@ def create_app():
     from routes.main import main_bp
     from routes.fortune import fortune_bp
     from routes.chess import chess_bp
+    from routes.mbti import mbti_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(fortune_bp, url_prefix='/fortune')
     app.register_blueprint(chess_bp, url_prefix='/chess')
+    app.register_blueprint(mbti_bp, url_prefix='/mbti')
 
     return app
 
