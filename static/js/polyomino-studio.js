@@ -96,6 +96,20 @@ function getAllOrientations(shape) {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   COLOR UTILITY
+   ═══════════════════════════════════════════════════════════ */
+
+function darkenColor(hex, factor) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const dr = Math.round(r * (1 - factor));
+  const dg = Math.round(g * (1 - factor));
+  const db = Math.round(b * (1 - factor));
+  return '#' + [dr, dg, db].map(v => Math.max(0, v).toString(16).padStart(2, '0')).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════
    BOARD LOGIC
    ═══════════════════════════════════════════════════════════ */
 
@@ -331,20 +345,58 @@ function renderBoard() {
     const piece = pieceLibrary.find(p => p.id === pl.pieceId);
     if (!piece) continue;
     const coords = getTransformedCoords(piece.shape, pl.rotation, pl.flipH, pl.flipV);
+    const cellSet = new Set(coords.map(([dr, dc]) => `${pl.originR + dr},${pl.originC + dc}`));
+
+    // Fill all cells
     for (const [dr, dc] of coords) {
       const r = pl.originR + dr;
       const c = pl.originC + dc;
       const x = c * cellSize;
       const y = r * cellSize;
-      const margin = 1;
-      const sz = cellSize - margin * 2;
-      // Fill with piece color
       ctx.fillStyle = piece.color;
-      ctx.fillRect(x + margin, y + margin, sz, sz);
-      // Dark border around each cell (inset)
-      ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-      ctx.lineWidth = Math.max(1.5, cellSize * 0.12);
-      ctx.strokeRect(x + margin + 0.5, y + margin + 0.5, sz - 1, sz - 1);
+      ctx.fillRect(x + 1, y + 1, cellSize - 1, cellSize - 1);
+    }
+
+    // Draw outer perimeter only (edges not shared with another cell of same piece)
+    const borderColor = darkenColor(piece.color, 0.3);
+    ctx.strokeStyle = borderColor;
+    ctx.lineWidth = Math.max(2, cellSize * 0.15);
+    ctx.lineCap = 'square';
+
+    for (const [dr, dc] of coords) {
+      const r = pl.originR + dr;
+      const c = pl.originC + dc;
+      const x = c * cellSize;
+      const y = r * cellSize;
+
+      // Top edge
+      if (!cellSet.has(`${r-1},${c}`)) {
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + cellSize, y);
+        ctx.stroke();
+      }
+      // Bottom edge
+      if (!cellSet.has(`${r+1},${c}`)) {
+        ctx.beginPath();
+        ctx.moveTo(x, y + cellSize);
+        ctx.lineTo(x + cellSize, y + cellSize);
+        ctx.stroke();
+      }
+      // Left edge
+      if (!cellSet.has(`${r},${c-1}`)) {
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x, y + cellSize);
+        ctx.stroke();
+      }
+      // Right edge
+      if (!cellSet.has(`${r},${c+1}`)) {
+        ctx.beginPath();
+        ctx.moveTo(x + cellSize, y);
+        ctx.lineTo(x + cellSize, y + cellSize);
+        ctx.stroke();
+      }
     }
   }
 
