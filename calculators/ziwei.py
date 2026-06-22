@@ -3,8 +3,8 @@
 安命宫 → 定十二宫 → 安十四主星 → 安辅星 → 定四化
 """
 from core.ganzhi import (
-    TIAN_GAN, DI_ZHI, year_ganzhi_simple, month_zhi,
-    day_ganzhi, hour_zhi, ganzhi_from_index, ganzhi_index
+    TIAN_GAN, DI_ZHI, year_ganzhi_simple, month_zhi, month_gan,
+    day_ganzhi, hour_zhi, ganzhi_from_index, ganzhi_index, nayin,
 )
 import json
 import os
@@ -33,6 +33,9 @@ class ZiweiCalculator:
     AUX_STARS = ['文昌', '文曲', '左辅', '右弼', '天魁', '天钺',
                  '禄存', '擎羊', '陀罗', '火星', '铃星', '天马']
 
+    # 纳音五行 → 局数
+    WUXING_JU_MAP = {'金': 4, '木': 3, '水': 2, '火': 6, '土': 5}
+
     def calculate(self, year, month, day, hour=0, minute=0, gender='male'):
         year = int(year)
         month = int(month)
@@ -45,37 +48,32 @@ class ZiweiCalculator:
         d_gan, d_zhi = day_ganzhi(year, month, day)
         h_zhi = hour_zhi(hour)
 
-        # Lunar month number for Ziwei (use solar term-based month branch index)
+        # Ziwei uses 寅-based indexing: 寅=0, 卯=1, ..., 丑=11
         zhi_order = ['寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑']
         lunar_month = zhi_order.index(m_zhi) + 1  # 1=寅月, 2=卯月, ...
-
-        # Hour branch index
         hour_branch_idx = zhi_order.index(h_zhi)  # 0=寅, 1=卯, ...
 
         # ── Step 1: 安命宫 & 身宫 ──
-        # 命宫 = (lunar_month, hour_branch) → offset
-        ming_offset = (lunar_month - 1 + hour_branch_idx) % 12
-        # Actually, the formula is more complex:
-        # 命宫地支 = (寅月起数 + 时支) → count from 寅
-        # Simplified: ming_zhi_index = (lunar_month + hour_branch) mod 12
-
-        # Traditional formula:
-        # Count from 寅: month + hour → offset
+        # 命宫: 从寅宫起正月，顺数至生月，再顺数至生时
         ming_idx = (lunar_month + hour_branch_idx) % 12  # 0-based from 寅
+        ming_zhi = zhi_order[ming_idx]
 
-        # 身宫 = (lunar_month + hour) mod 12 but counted differently
+        # 命宫天干: 用五虎遁（同年干起月干）
+        ming_gan = month_gan(y_gan, ming_zhi)
+
+        # 身宫
         shen_idx = (lunar_month + hour_branch_idx + 1) % 12
+        shen_zhi = zhi_order[shen_idx]
 
         # ── Step 2: 定十二宫 ──
-        # Ming palace determines the order of all 12 palaces
         palaces = self._layout_palaces(ming_idx, shen_idx)
 
         # ── Step 3: 安十四主星 ──
         palace_stars = {p: [] for p in self.PALACE_NAMES}
 
-        # Determine Ziwei star position based on 五行局 (from nayin)
-        # Ziwei position = f(五行局, 农历日)
-        wuxing_ju = self._get_wuxing_ju(nayin_idx=ganzhi_index(y_gan, y_zhi) // 2)
+        # 五行局 from 命宫干支纳音 (NOT year pillar!)
+        ming_nayin = nayin(ming_gan, ming_zhi)
+        wuxing_ju = self._get_wuxing_ju_from_nayin(ming_nayin)
         ziwei_pos = self._get_ziwei_position(wuxing_ju, day)
 
         if ziwei_pos is not None:
@@ -127,6 +125,8 @@ class ZiweiCalculator:
                 'year_gan': y_gan, 'year_zhi': y_zhi,
                 'month_zhi': m_zhi, 'day_gan': d_gan, 'day_zhi': d_zhi,
                 'hour_zhi': h_zhi, 'lunar_month': lunar_month,
+                'ming_gan': ming_gan, 'ming_zhi': ming_zhi,
+                'ming_nayin': ming_nayin, 'wuxing_ju': wuxing_ju,
             },
             'palaces': [
                 {
@@ -151,21 +151,19 @@ class ZiweiCalculator:
             palaces[idx] = self.PALACE_NAMES[i]
         return palaces
 
-    def _get_wuxing_ju(self, nayin_idx):
-        """Get 五行局 (Water 2, Wood 3, Metal 4, Earth 5, Fire 6)."""
-        # Simplified: based on nayin
-        nayin_wuxing = ['水', '火', '木', '土', '金', '火',
-                        '水', '土', '金', '木', '水', '土',
-                        '火', '木', '水', '金', '火', '木',
-                        '土', '金', '火', '水', '土', '金',
-                        '木', '水', '水', '木', '水', '金']
-        wx = nayin_wuxing[nayin_idx % 30]
-        wuxing_numbers = {'水': 2, '木': 3, '金': 4, '土': 5, '火': 6}
-        return wuxing_numbers.get(wx, 2)
+    def _get_wuxing_ju_from_nayin(self, nayin_name):
+        """
+        Get 五行局 number from 纳音 name.
+        纳音最后一个字即是五行: 金→4局, 木→3局, 水→2局, 火→6局, 土→5局
+        """
+        # Extract the wuxing element (last character of nayin)
+        # e.g. '海中金' → '金', '杨柳木' → '木'
+        wx = nayin_name[-1] if nayin_name else '水'
+        return self.WUXING_JU_MAP.get(wx, 2)
 
     def _get_ziwei_position(self, ju, day):
         """Calculate Ziwei star position based on 五行局 and day of month."""
-        # Ziwei position table (simplified)
+        # Ziwei position table: maps (五行局, day) → branch index (0-based from 寅)
         table = {
             2: [2, 3, 4, 5, 6, 7, 8, 9, 10,11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11, 0, 1, 2, 3, 4, 5, 6, 7, 8],
             3: [3, 5, 7, 9, 11,1, 3, 5, 7, 9, 11, 1, 3, 5, 7, 9, 11, 1, 3, 5, 7, 9, 11, 1, 3, 5, 7, 9, 11, 1, 3],
@@ -174,9 +172,9 @@ class ZiweiCalculator:
             6: [6, 2, 8, 4, 0, 6, 2, 8, 4, 0, 6, 2, 8, 4, 0, 6, 2, 8, 4, 0, 6, 2, 8, 4, 0, 6, 2, 8, 4, 0, 6],
         }
         positions = table.get(ju, table[2])
-        d = min(max(day, 1), 30)
-        ziwei_idx = positions[d - 1]  # value from table
-        return ziwei_idx % 12  # 0-based
+        d = min(max(day, 1), 30) - 1  # 0-based index
+        ziwei_idx = positions[d]
+        return ziwei_idx % 12
 
     def _get_sihua(self, year_gan):
         """Get 四化 for the year stem."""
