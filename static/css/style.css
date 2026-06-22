@@ -477,8 +477,10 @@ input:focus, select:focus {
   box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
 }
 .piece-library-item canvas {
-  border-radius: 3px;
+  border-radius: 4px;
   flex-shrink: 0;
+  border: 1px solid var(--border-light);
+  background: #fff;
 }
 .piece-library-info {
   flex: 1;

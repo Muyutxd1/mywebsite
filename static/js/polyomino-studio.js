@@ -461,13 +461,27 @@ function renderLibrary() {
       item.classList.add('active');
     }
 
+    // Uniform thumbnail: always 48x48 with shape centered
+    const thumbSize = 48;
     const thumb = document.createElement('canvas');
-    thumb.width = 50;
-    thumb.height = 50;
+    thumb.className = 'piece-thumb-canvas';
     const maxR = Math.max(...piece.shape.map(([r]) => r), 0) + 1;
     const maxC = Math.max(...piece.shape.map(([,c]) => c), 0) + 1;
-    const cs = Math.min(14, Math.floor(44 / Math.max(maxR, maxC, 1)));
-    renderPieceThumbnail(thumb, piece.shape, piece.color, cs);
+    const cs = Math.floor((thumbSize - 4) / Math.max(maxR, maxC, 1));
+    const offsetX = Math.floor((thumbSize - maxC * cs) / 2);
+    const offsetY = Math.floor((thumbSize - maxR * cs) / 2);
+
+    thumb.width = thumbSize;
+    thumb.height = thumbSize;
+    thumb.style.width = thumbSize + 'px';
+    thumb.style.height = thumbSize + 'px';
+    const ctx = thumb.getContext('2d');
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, thumbSize, thumbSize);
+    for (const [r, c] of piece.shape) {
+      ctx.fillStyle = piece.color;
+      ctx.fillRect(offsetX + c * cs + 1, offsetY + r * cs + 1, cs - 2, cs - 2);
+    }
 
     const info = document.createElement('div');
     info.className = 'piece-library-info';
@@ -478,6 +492,7 @@ function renderLibrary() {
     countEl.className = 'piece-library-count';
     const used = countPieceUsage(piece.id);
     countEl.textContent = used > 0 ? `已放置 ${used} 个` : '未使用';
+    if (used > 0) countEl.style.color = 'var(--accent)';
 
     info.appendChild(nameEl);
     info.appendChild(countEl);
@@ -495,6 +510,12 @@ function renderLibrary() {
         deletePiece(piece.id);
       });
       item.appendChild(delBtn);
+    } else {
+      // Spacer to keep text aligned when no delete button
+      const spacer = document.createElement('span');
+      spacer.style.width = '22px';
+      spacer.style.flexShrink = '0';
+      item.appendChild(spacer);
     }
 
     item.addEventListener('click', () => selectPiece(piece.id));
