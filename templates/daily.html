@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% block title %}每日一句 · Muyu{% endblock %}
+
+{% block head %}
+<style>
+  .quote-container {
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .quote-date {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 40px;
+  }
+  .quote-text {
+    font-size: 24px;
+    line-height: 1.8;
+    color: var(--text);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+    position: relative;
+    padding: 0 16px;
+  }
+  .quote-text::before {
+    content: '"';
+    font-size: 72px;
+    color: var(--accent);
+    opacity: 0.25;
+    position: absolute;
+    left: -16px;
+    top: -24px;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .quote-source {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+  .quote-author {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .quote-separator {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0.4;
+    margin: 24px auto;
+    border-radius: 1px;
+  }
+  .quote-actions {
+    margin-top: 48px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .quote-actions button {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 24px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .quote-actions button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+  .quote-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+    opacity: 0.6;
+  }
+  .quote-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 4px 12px;
+    border-radius: 10px;
+    background: var(--border-light);
+  }
+  .quote-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .quote-nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .quote-nav-dot.active {
+    background: var(--accent);
+    width: 20px;
+    border-radius: 3px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="quote-container">
+  <div class="quote-date" id="quote-date">今日 · 宜沉思</div>
+  <div class="quote-text" id="quote-text">加载中...</div>
+  <div class="quote-separator"></div>
+  <div class="quote-source" id="quote-source"></div>
+  <div class="quote-author" id="quote-author"></div>
+
+  <div class="quote-actions">
+    <button onclick="refreshQuote()">🔄 换一句</button>
+    <button onclick="shareQuote()">📋 复制</button>
+    <button onclick="showRandomQuote()">🎲 随机</button>
+  </div>
+
+  <div class="quote-tags" id="quote-tags"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let quotes = [];
+let currentIndex = 0;
+
+// Simple string hash
+function hashStr(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = ((h << 5) - h) + str.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+}
+
+async function loadQuotes() {
+  try {
+    const resp = await fetch('/static/data/quotes.json');
+    quotes = await resp.json();
+    // Daily deterministic quote based on date
+    const today = new Date();
+    const dateKey = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+    currentIndex = hashStr(dateKey) % quotes.length;
+    renderQuote();
+  } catch (e) {
+    document.getElementById('quote-text').textContent = '加载失败，请刷新页面';
+  }
+}
+
+function renderQuote() {
+  if (!quotes.length) return;
+  const q = quotes[currentIndex];
+
+  // Date display
+  const today = new Date();
+  const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+  const dateStr = `${today.getFullYear()}年${today.getMonth()+1}月${today.getDate()}日 · 星期${weekdays[today.getDay()]}`;
+  document.getElementById('quote-date').textContent = dateStr;
+
+  // Quote text
+  document.getElementById('quote-text').textContent = q.text;
+
+  // Source and author
+  if (q.source || q.author) {
+    document.getElementById('quote-source').textContent = q.source ? `—— ${q.source}` : '';
+    document.getElementById('quote-author').textContent = q.author || '';
+  }
+
+  // Tags: detect category from source/author
+  const tags = [];
+  if (q.author && /李白|杜甫|苏轼|王维|李商隐|白居易|辛弃疾|李清照/.test(q.author)) tags.push('唐诗宋词');
+  else if (q.author && /木心|徐志摩|三毛|海子|顾城|北岛|村上春树/.test(q.author)) tags.push('现代文学');
+  else if (q.source && /《.*》.*电影|台词/.test(q.source)) tags.push('电影台词');
+  else if (q.author && /尼采|泰戈尔|毛姆|梵高/.test(q.author)) tags.push('哲理名言');
+  else tags.push('文艺语录');
+
+  const tagsHtml = tags.map(t => `<span class="quote-tag">${t}</span>`).join('');
+  document.getElementById('quote-tags').innerHTML = tagsHtml;
+}
+
+function refreshQuote() {
+  if (!quotes.length) return;
+  currentIndex = (currentIndex + 1) % quotes.length;
+  renderQuote();
+  document.getElementById('quote-text').scrollIntoView({ behavior: 'smooth' });
+}
+
+function showRandomQuote() {
+  if (!quotes.length) return;
+  currentIndex = Math.floor(Math.random() * quotes.length);
+  renderQuote();
+  document.getElementById('quote-text').scrollIntoView({ behavior: 'smooth' });
+}
+
+function shareQuote() {
+  const q = quotes[currentIndex];
+  const text = `"${q.text}"\n—— ${q.source || ''}${q.author ? ' · ' + q.author : ''}`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = '✅ 已复制';
+    setTimeout(() => btn.textContent = orig, 1500);
+  }).catch(() => {
+    // Fallback for non-HTTPS
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = '✅ 已复制';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadQuotes);
+</script>
+{% endblock %}
