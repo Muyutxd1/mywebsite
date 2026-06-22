@@ -747,6 +747,22 @@ input:focus, select:focus {
   border-color: #e74c3c;
 }
 
+/* ── Chess ──────────────────────────────── */
+
+.chess-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.chess-iframe {
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 940px;
+  height: 700px;
+}
+
 /* ── Responsive ────────────────────────── */
 
 @media (max-width: 800px) {
@@ -822,6 +838,13 @@ input:focus, select:focus {
   .placement-hint {
     font-size: 11px;
     padding: 0 8px;
+  }
+}
+
+@media (max-width: 800px) {
+  .chess-iframe {
+    height: 820px;
+    max-width: 100%;
   }
 }
 

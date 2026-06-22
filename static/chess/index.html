@@ -162,6 +162,55 @@ select.difficulty {
   border: 2px solid transparent; transition: border-color 0.2s;
 }
 .promo-piece:hover { border-color: #769656; }
+
+/* ── Mobile responsive ───────────────── */
+@media (max-width: 780px) {
+  .container {
+    flex-direction: column;
+    gap: 16px;
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .board {
+    width: min(480px, calc(100vw - 48px));
+    height: min(480px, calc(100vw - 48px));
+    font-size: min(48px, calc((100vw - 48px) / 10));
+  }
+  .square { font-size: inherit; }
+
+  .rank-labels { left: -18px; font-size: 11px; }
+  .file-labels { font-size: 11px; margin-top: 1px; }
+
+  .sidebar {
+    width: 100%;
+    gap: 10px;
+  }
+  .sidebar h1 { font-size: 18px; padding-bottom: 6px; }
+  .status-bar { font-size: 14px; min-height: 34px; }
+
+  .control-group { gap: 6px; }
+  .control-row { gap: 6px; }
+  .btn { padding: 12px 0; font-size: 15px; }
+
+  .move-list-container { min-height: 100px; max-height: 180px; }
+
+  .promo-piece { width: 56px; height: 56px; font-size: 36px; }
+
+  .overlay-box { padding: 24px 20px; margin: 0 16px; }
+  .overlay-box h2 { font-size: 24px; }
+  .overlay-box p { font-size: 14px; }
+}
+
+@media (max-width: 400px) {
+  .container { padding: 8px; gap: 10px; }
+  .board {
+    width: calc(100vw - 32px);
+    height: calc(100vw - 32px);
+  }
+  .sidebar h1 { font-size: 16px; }
+  .btn { padding: 10px 0; font-size: 14px; }
+}
 </style>
 </head>
 <body>
