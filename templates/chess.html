@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}国际象棋 — Muyu{% endblock %}
+
+{% block content %}
+<div style="padding:20px 0">
+  <h2 style="margin-bottom:16px">♟️ 国际象棋</h2>
+  <p style="color:var(--text-secondary);font-size:13px;margin-bottom:20px">完整规则的国际象棋对弈</p>
+</div>
+
+<div class="chess-wrapper">
+  <iframe src="{{ url_for('static', filename='chess/index.html') }}" width="920" height="680"></iframe>
+</div>
+{% endblock %}

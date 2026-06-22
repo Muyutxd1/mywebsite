@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Muyu{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block head %}{% endblock %}
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">🏠 Muyu</a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/projects" class="nav-link">Projects</a>
+      <a href="/fortune" class="nav-link">🔮 灵占</a>
+      <a href="/chess" class="nav-link">♟️ 象棋</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="site-main">
+{% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <p>© 2026 Muyu · <a href="https://muyutxd1.com">muyutxd1.com</a></p>
+</footer>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Projects — Muyu{% endblock %}
+
+{% block content %}
+<section>
+  <h2 style="margin-bottom:24px">📦 项目展示</h2>
+
+  <div class="projects-grid">
+    <a href="/fortune" class="project-card">
+      <div class="project-icon">🔮</div>
+      <h3>灵占 · Fortunetelling</h3>
+      <p>融合六大玄学体系的多功能占卜应用。梅花易数、八字排盘、紫微斗数、易经铜钱起卦、塔罗牌阵、西洋占星本命盘——每个系统都有详细解读。</p>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:4px">Python · Flask · 原生 JS</p>
+      <span class="project-link">在线使用 →</span>
+    </a>
+
+    <a href="/chess" class="project-card">
+      <div class="project-icon">♟️</div>
+      <h3>国际象棋 Chess</h3>
+      <p>完整规则的国际象棋游戏，支持所有棋子走法、将军检测。pywebview 桌面版 + Web 版。</p>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:4px">Python · pywebview · HTML/CSS</p>
+      <span class="project-link">在线对弈 →</span>
+    </a>
+
+    <div class="project-card">
+      <div class="project-icon">🎵</div>
+      <h3>NCM 转 FLAC</h3>
+      <p>网易云音乐 .ncm 文件批量转 .flac 格式，完整保留元数据（封面、歌手、专辑等）。RC4 + AES 解密核心，tkinter GUI。</p>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:4px">Python · pycryptodome · mutagen · tkinter</p>
+      <span class="project-tag">桌面应用</span>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🏷️</div>
+      <h3>音频标题重命名</h3>
+      <p>批量将音频文件的 Title 标签修改为文件名，支持 MP3/FLAC/WAV/M4A/OGG 等 12+ 格式。</p>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:4px">Python · mutagen · tkinter</p>
+      <span class="project-tag">桌面应用</span>
+    </div>
+  </div>
+</section>
+{% endblock %}

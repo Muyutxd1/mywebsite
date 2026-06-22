@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Muyu — Personal Site{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1 class="hero-title">Hi, I'm Muyu 👋</h1>
+  <p class="hero-subtitle">写代码、玩玄学、做小工具。<br>欢迎来到我的数字花园。</p>
+</section>
+
+<section class="projects-grid">
+  <a href="/fortune" class="project-card">
+    <div class="project-icon">🔮</div>
+    <h3>灵占 · Fortunetelling</h3>
+    <p>梅花易数 / 八字 / 紫微斗数 / 易经 / 塔罗 / 占星 — 六大玄学体系在线占卜</p>
+    <span class="project-link">立即体验 →</span>
+  </a>
+
+  <a href="/chess" class="project-card">
+    <div class="project-icon">♟️</div>
+    <h3>国际象棋</h3>
+    <p>在线对弈 · 完整规则 · 简约界面</p>
+    <span class="project-link">开始对局 →</span>
+  </a>
+
+  <div class="project-card disabled">
+    <div class="project-icon">🎵</div>
+    <h3>NCM 转 FLAC</h3>
+    <p>网易云音乐格式转换工具 · 桌面应用</p>
+    <span class="project-tag">桌面版</span>
+  </div>
+
+  <div class="project-card disabled">
+    <div class="project-icon">🏷️</div>
+    <h3>音频标题重命名</h3>
+    <p>批量修改音频文件的 Title 标签</p>
+    <span class="project-tag">桌面版</span>
+  </div>
+</section>
+{% endblock %}

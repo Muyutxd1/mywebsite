@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}灵占 · Fortunetelling{% endblock %}
+
+{% block content %}
+<div class="fortune-app">
+  <header class="app-header">
+    <h1>灵占 · Fortunetelling</h1>
+    <p class="subtitle">梅花易数 · 八字 · 紫微斗数 · 易经 · 塔罗 · 占星</p>
+  </header>
+
+  <nav class="tab-bar">
+    <button class="tab-btn active" data-tab="meihua"><span class="tab-icon">☯</span>梅花易数</button>
+    <button class="tab-btn" data-tab="bazi"><span class="tab-icon">🪷</span>八字</button>
+    <button class="tab-btn" data-tab="ziwei"><span class="tab-icon">⭐</span>紫微斗数</button>
+    <button class="tab-btn" data-tab="yijing"><span class="tab-icon">☰</span>易经</button>
+    <button class="tab-btn" data-tab="tarot"><span class="tab-icon">🃏</span>塔罗牌</button>
+    <button class="tab-btn" data-tab="astrology"><span class="tab-icon">🌌</span>占星</button>
+  </nav>
+
+  <!-- Meihua Tab -->
+  <div class="tab-panel active" id="tab-meihua">
+    <div class="card">
+      <div class="card-title">🔮 梅花易数 · 数字起卦</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">上卦数 (1-8)</label>
+          <input type="number" id="mh-n1" min="1" max="999" placeholder="如 3" style="width:90px">
+        </div>
+        <div class="form-group">
+          <label class="form-label">下卦数 (1-8)</label>
+          <input type="number" id="mh-n2" min="1" max="999" placeholder="如 6" style="width:90px">
+        </div>
+        <div class="form-group">
+          <label class="form-label">动爻数 (1-6)</label>
+          <input type="number" id="mh-n3" min="1" max="999" placeholder="如 2" style="width:90px">
+        </div>
+        <div class="form-group">
+          <label class="form-label">&nbsp;</label>
+          <button class="btn btn-primary" onclick="doMeihua()">起卦</button>
+          <button class="btn btn-secondary" onclick="randomMeihua()">随机</button>
+        </div>
+      </div>
+      <div class="result-area" id="meihua-result"></div>
+    </div>
+  </div>
+
+  <!-- Bazi Tab -->
+  <div class="tab-panel" id="tab-bazi">
+    <div class="card">
+      <div class="card-title">🪷 八字 · 四柱排盘</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">出生年</label><input type="number" id="bz-year" value="2000" min="1900" max="2100" style="width:80px"></div>
+        <div class="form-group"><label class="form-label">月</label><input type="number" id="bz-month" value="1" min="1" max="12" style="width:65px"></div>
+        <div class="form-group"><label class="form-label">日</label><input type="number" id="bz-day" value="1" min="1" max="31" style="width:65px"></div>
+        <div class="form-group"><label class="form-label">时 (0-23)</label><input type="number" id="bz-hour" value="12" min="0" max="23" style="width:70px"></div>
+        <div class="form-group"><label class="form-label">&nbsp;</label><button class="btn btn-primary" onclick="doBazi()">排盘</button></div>
+      </div>
+      <div class="result-area" id="bazi-result"></div>
+    </div>
+  </div>
+
+  <!-- Ziwei Tab -->
+  <div class="tab-panel" id="tab-ziwei">
+    <div class="card">
+      <div class="card-title">⭐ 紫微斗数 · 命盘排盘</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">出生年</label><input type="number" id="zw-year" value="2000" min="1900" max="2100" style="width:80px"></div>
+        <div class="form-group"><label class="form-label">月</label><input type="number" id="zw-month" value="1" min="1" max="12" style="width:65px"></div>
+        <div class="form-group"><label class="form-label">日</label><input type="number" id="zw-day" value="1" min="1" max="31" style="width:65px"></div>
+        <div class="form-group"><label class="form-label">时</label><input type="number" id="zw-hour" value="12" min="0" max="23" style="width:70px"></div>
+        <div class="form-group"><label class="form-label">性别</label><select id="zw-gender" style="width:80px"><option value="male">男</option><option value="female">女</option></select></div>
+        <div class="form-group"><label class="form-label">&nbsp;</label><button class="btn btn-primary" onclick="doZiwei()">排盘</button></div>
+      </div>
+      <div class="result-area" id="ziwei-result"></div>
+    </div>
+  </div>
+
+  <!-- Yijing Tab -->
+  <div class="tab-panel" id="tab-yijing">
+    <div class="card">
+      <div class="card-title">☰ 易经 · 铜钱起卦</div>
+      <p style="color:var(--text-secondary);font-size:13px;margin-bottom:16px">诚心默念所问之事，然后掷卦六次。每次三枚铜钱，记录正反面。</p>
+      <div class="form-row">
+        <button class="btn btn-primary" onclick="doYijingCast()">🎲 自动起卦</button>
+        <button class="btn btn-secondary" onclick="resetYijingManual()">🖐 手动掷卦 (6步)</button>
+      </div>
+      <div id="yj-manual" style="display:none;margin-top:12px">
+        <div class="form-row">
+          <span id="yj-step-label" style="font-size:13px;color:var(--text-secondary)">第 1/6 次：</span>
+          <button class="btn btn-secondary" onclick="yjManualToss(3)">三正 (⚊○)</button>
+          <button class="btn btn-secondary" onclick="yjManualToss(2)">两正一反 (⚋)</button>
+          <button class="btn btn-secondary" onclick="yjManualToss(1)">两反一正 (⚊)</button>
+          <button class="btn btn-secondary" onclick="yjManualToss(0)">三反 (⚋×)</button>
+        </div>
+        <div id="yj-manual-progress" style="font-size:13px;color:var(--text-muted);margin-top:8px"></div>
+      </div>
+      <div class="result-area" id="yijing-result"></div>
+    </div>
+  </div>
+
+  <!-- Tarot Tab -->
+  <div class="tab-panel" id="tab-tarot">
+    <div class="card">
+      <div class="card-title">🃏 塔罗牌 · 牌阵占卜</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">牌阵选择</label>
+          <select id="tarot-spread" style="width:180px">
+            <option value="single">单张牌 · 每日指引</option>
+            <option value="three">三张牌 · 过去/现在/未来</option>
+            <option value="celtic_cross">凯尔特十字 · 全面解读 (10张)</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">&nbsp;</label><button class="btn btn-primary" onclick="doTarotDraw()">✨ 抽牌</button></div>
+      </div>
+      <div class="result-area" id="tarot-result"></div>
+    </div>
+  </div>
+
+  <!-- Astrology Tab -->
+  <div class="tab-panel" id="tab-astrology">
+    <div class="card">
+      <div class="card-title">🌌 西洋占星 · 本命盘</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">年</label><input type="number" id="as-year" value="2000" min="1900" max="2100" style="width:80px"></div>
+        <div class="form-group"><label class="form-label">月</label><input type="number" id="as-month" value="1" min="1" max="12" style="width:65px"></div>
+        <div class="form-group"><label class="form-label">日</label><input type="number" id="as-day" value="1" min="1" max="31" style="width:65px"></div>
+        <div class="form-group"><label class="form-label">时</label><input type="number" id="as-hour" value="12" min="0" max="23" style="width:65px"></div>
+        <div class="form-group"><label class="form-label">分</label><input type="number" id="as-minute" value="0" min="0" max="59" style="width:65px"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">纬度</label><input type="number" id="as-lat" value="39.9" step="0.1" style="width:100px"></div>
+        <div class="form-group"><label class="form-label">经度</label><input type="number" id="as-lng" value="116.4" step="0.1" style="width:100px"></div>
+        <div class="form-group"><label class="form-label">时区</label><input type="number" id="as-tz" value="8" min="-12" max="14" style="width:70px"></div>
+        <div class="form-group"><label class="form-label">&nbsp;</label><button class="btn btn-primary" onclick="doAstrology()">绘制星盘</button></div>
+      </div>
+      <div class="result-area" id="astrology-result"></div>
+    </div>
+  </div>
+
+  <p class="disclaimer">✨ 仅供娱乐参考 · 愿宇宙的智慧指引你 ✨</p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/fortune-api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ui-meihua.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ui-bazi.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ui-ziwei.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ui-yijing.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ui-tarot.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ui-astrology.js') }}"></script>
+<script src="{{ url_for('static', filename='js/fortune-app.js') }}"></script>
+{% endblock %}
