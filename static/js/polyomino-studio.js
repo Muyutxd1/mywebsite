@@ -336,17 +336,15 @@ function renderBoard() {
       const c = pl.originC + dc;
       const x = c * cellSize;
       const y = r * cellSize;
-      // Fill
+      const margin = 1;
+      const sz = cellSize - margin * 2;
+      // Fill with piece color
       ctx.fillStyle = piece.color;
-      ctx.fillRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
-      // Visible border around each cell
-      ctx.strokeStyle = 'rgba(0,0,0,0.35)';
-      ctx.lineWidth = 1.5;
-      ctx.strokeRect(x + 1.5, y + 1.5, cellSize - 3, cellSize - 3);
-      // Lighter inner highlight for depth
-      ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(x + 2.5, y + 2.5, cellSize - 5, cellSize - 5);
+      ctx.fillRect(x + margin, y + margin, sz, sz);
+      // Dark border around each cell (inset)
+      ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+      ctx.lineWidth = Math.max(1.5, cellSize * 0.12);
+      ctx.strokeRect(x + margin + 0.5, y + margin + 0.5, sz - 1, sz - 1);
     }
   }
 
