@@ -395,45 +395,46 @@ input:focus, select:focus {
 .polyomino-layout {
   display: flex;
   gap: 0;
-  min-height: calc(100vh - 52px - 60px); /* nav + footer */
+  /* Fill available height */
+  min-height: calc(100vh - 52px - 60px);
+  margin-top: -12px; /* reduce wasted top space from site-main padding */
 }
 
 /* ── Sidebar ───────────────────────────── */
 
 .polyomino-sidebar {
-  width: 300px;
-  min-width: 300px;
+  width: 280px;
+  min-width: 280px;
   background: var(--bg-card);
   border-right: 1px solid var(--border-light);
-  padding: 16px;
+  padding: 12px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  transition: width 0.25s, min-width 0.25s, padding 0.25s;
+  gap: 8px;
 }
 .polyomino-sidebar.collapsed {
   width: 0;
   min-width: 0;
-  padding: 16px 0;
+  padding: 12px 0;
   overflow: hidden;
   border-right: none;
 }
 
 .sidebar-section {
-  background: var(--bg);
-  border-radius: var(--radius);
-  padding: 12px;
-  border: 1px solid var(--border-light);
+  /* transparent sections — let the sidebar background show through */
+  padding: 0;
 }
 .sidebar-title {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  color: var(--text);
-  margin-bottom: 8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 .designer-toggle {
   cursor: pointer;
@@ -452,40 +453,37 @@ input:focus, select:focus {
 .piece-library {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  max-height: 300px;
-  overflow-y: auto;
+  gap: 3px;
 }
 .piece-library-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 8px;
+  padding: 6px;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  background: var(--bg-card);
   transition: background 0.15s;
 }
 .piece-library-item:hover {
-  background: var(--bg-input);
+  background: var(--accent-light);
 }
 .piece-library-item.active {
   background: var(--accent-light);
-  outline: 2px solid var(--accent);
-  outline-offset: -1px;
+  box-shadow: inset 0 0 0 2px var(--accent);
 }
 .piece-library-item canvas {
   border-radius: 3px;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
 }
 .piece-library-info {
   flex: 1;
   min-width: 0;
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: 5px;
   overflow: hidden;
 }
 .piece-library-name {
@@ -498,51 +496,56 @@ input:focus, select:focus {
 }
 .piece-library-count {
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--accent);
   flex-shrink: 0;
 }
 .piece-library-delete {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 0 6px;
-  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  border-radius: 3px;
   border: none;
   background: transparent;
   line-height: 1;
   flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s;
 }
+.piece-library-item:hover .piece-library-delete { opacity: 1; }
 .piece-library-delete:hover {
   color: #e74c3c;
-  background: rgba(231, 76, 60, 0.1);
+  background: rgba(231, 76, 60, 0.12);
 }
 
 /* ── Active Piece Panel ────────────────── */
 
 .active-preview-canvas {
   display: block;
-  margin: 0 auto 8px;
+  margin: 0 auto 6px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
+  background: #fff;
 }
 .active-piece-name {
   text-align: center;
   font-size: 13px;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .transform-controls {
   display: flex;
   gap: 4px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .transform-controls .btn { flex: 1; }
 .active-piece-count {
   text-align: center;
   font-size: 12px;
   color: var(--text-muted);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 /* ── Piece Designer ────────────────────── */
@@ -551,7 +554,7 @@ input:focus, select:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 .designer-canvas {
   border-radius: var(--radius-sm);
@@ -561,12 +564,12 @@ input:focus, select:focus {
 }
 .designer-controls {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   width: 100%;
 }
 .designer-name-input {
   flex: 1;
-  padding: 5px 10px;
+  padding: 5px 8px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: 12px;
@@ -586,7 +589,7 @@ input:focus, select:focus {
 
 .sidebar-actions {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 .sidebar-actions .btn { flex: 1; }
 
@@ -594,22 +597,22 @@ input:focus, select:focus {
 
 .polyomino-main {
   flex: 1;
-  padding: 16px 24px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   overflow-y: auto;
-  position: relative; /* anchor for toggle button */
+  background: var(--bg);
 }
 
 /* ── Sidebar Toggle Button ─────────────── */
 
 .sidebar-toggle-btn {
-  display: none; /* hidden on desktop */
+  display: none;
   align-items: center;
   gap: 4px;
-  padding: 6px 14px;
+  padding: 6px 12px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--bg-card);
@@ -617,7 +620,7 @@ input:focus, select:focus {
   font-size: 12px;
   font-family: var(--font);
   cursor: pointer;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   align-self: flex-start;
 }
 .sidebar-toggle-btn:hover { background: var(--accent-light); }
@@ -626,7 +629,7 @@ input:focus, select:focus {
 
 .board-toolbar {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
@@ -635,22 +638,22 @@ input:focus, select:focus {
 .board-action-controls,
 .board-session-controls {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   align-items: center;
 }
 .board-size-controls label {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-secondary);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
 }
 .size-input {
-  width: 56px;
-  padding: 4px 8px;
+  width: 50px;
+  padding: 3px 6px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  font-size: 13px;
+  font-size: 12px;
   font-family: var(--font);
   text-align: center;
   background: var(--bg-card);
@@ -666,11 +669,8 @@ input:focus, select:focus {
 .board-container {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: 8px;
-  overflow: auto;
-  max-width: 100%;
-  max-height: calc(100vh - 240px);
+  box-shadow: var(--shadow-sm);
+  padding: 6px;
 }
 .board-container canvas {
   display: block;
@@ -680,28 +680,28 @@ input:focus, select:focus {
 
 .board-legend {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
 }
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-size: 12px;
   color: var(--text-secondary);
 }
 .legend-swatch {
-  width: 14px;
-  height: 14px;
-  border-radius: 3px;
-  border: 1px solid rgba(0,0,0,0.15);
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.2);
 }
 
 /* ── Placement Hint ────────────────────── */
 
 .placement-hint {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
   text-align: center;
 }

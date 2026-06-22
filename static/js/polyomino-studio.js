@@ -465,8 +465,8 @@ function renderLibrary() {
       item.classList.add('active');
     }
 
-    // Uniform thumbnail: 40x40, shape centered
-    const thumbSize = 40;
+    // Uniform thumbnail: 36x36, shape centered
+    const thumbSize = 36;
     const thumb = document.createElement('canvas');
     const maxR = Math.max(...piece.shape.map(([r]) => r), 0) + 1;
     const maxC = Math.max(...piece.shape.map(([,c]) => c), 0) + 1;
