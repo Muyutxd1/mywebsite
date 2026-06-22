@@ -591,7 +591,27 @@ input:focus, select:focus {
   align-items: center;
   gap: 10px;
   overflow-y: auto;
+  position: relative; /* anchor for toggle button */
 }
+
+/* ── Sidebar Toggle Button ─────────────── */
+
+.sidebar-toggle-btn {
+  display: none; /* hidden on desktop */
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--accent);
+  font-size: 12px;
+  font-family: var(--font);
+  cursor: pointer;
+  margin-bottom: 4px;
+  align-self: flex-start;
+}
+.sidebar-toggle-btn:hover { background: var(--accent-light); }
 
 /* ── Board Toolbar ─────────────────────── */
 
@@ -677,9 +697,9 @@ input:focus, select:focus {
   text-align: center;
 }
 
-/* ── Buttons (reusable) ────────────────── */
+/* ── Buttons (polyomino-scoped) ──────────── */
 
-.btn {
+.polyomino-layout .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -695,51 +715,125 @@ input:focus, select:focus {
   transition: all 0.15s;
   white-space: nowrap;
 }
-.btn:hover {
+.polyomino-layout .btn:hover {
   background: var(--bg-input);
   border-color: var(--text-muted);
 }
-.btn-sm { padding: 4px 10px; font-size: 11px; }
-.btn-primary {
+.polyomino-layout .btn-sm { padding: 4px 10px; font-size: 11px; }
+.polyomino-layout .btn-primary {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
 }
-.btn-primary:hover {
+.polyomino-layout .btn-primary:hover {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
 }
-.btn-secondary {
+.polyomino-layout .btn-secondary {
   background: var(--bg-input);
   color: var(--text-secondary);
 }
-.btn-secondary:hover {
+.polyomino-layout .btn-secondary:hover {
   background: var(--border);
 }
-.btn-danger {
+.polyomino-layout .btn-danger {
   color: #e74c3c;
   border-color: rgba(231, 76, 60, 0.3);
 }
-.btn-danger:hover {
+.polyomino-layout .btn-danger:hover {
   background: rgba(231, 76, 60, 0.08);
   border-color: #e74c3c;
 }
 
 /* ── Responsive ────────────────────────── */
 
-@media (max-width: 700px) {
-  .polyomino-layout { flex-direction: column; }
+@media (max-width: 800px) {
+  .polyomino-layout {
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* Sidebar: hidden by default, slides over when open */
   .polyomino-sidebar {
-    width: 100%;
-    min-width: 100%;
-    max-height: 40vh;
+    position: fixed;
+    top: 52px; /* nav height */
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    min-width: 280px;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: var(--shadow-lg);
+    max-height: none;
+    overflow-y: auto;
   }
-  .polyomino-sidebar.collapsed {
-    width: 100%;
-    min-width: 100%;
-    max-height: 0;
-    padding: 0 16px;
+  .polyomino-sidebar.open {
+    transform: translateX(0);
   }
-  .polyomino-main { padding: 12px 8px; }
-  .board-toolbar { gap: 8px; }
+
+  /* Overlay when sidebar is open */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    top: 52px;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 199;
+  }
+  .sidebar-overlay.active { display: block; }
+
+  /* Show the toggle button */
+  .sidebar-toggle-btn { display: inline-flex; }
+
+  .polyomino-main {
+    padding: 12px 8px;
+    width: 100%;
+  }
+
+  .board-toolbar {
+    gap: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .board-size-controls,
+  .board-action-controls,
+  .board-session-controls {
+    justify-content: center;
+  }
+
+  /* Larger touch targets */
+  .piece-library-item {
+    padding: 10px 8px;
+  }
+  .transform-controls .btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .board-container {
+    max-height: none;
+    overflow: auto;
+  }
+
+  .placement-hint {
+    font-size: 11px;
+    padding: 0 8px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 400px) {
+  .polyomino-sidebar {
+    width: 260px;
+    min-width: 260px;
+  }
+  .board-toolbar .btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  .size-input {
+    width: 44px;
+  }
 }

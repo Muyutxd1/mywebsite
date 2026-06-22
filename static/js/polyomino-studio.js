@@ -264,11 +264,12 @@ function computeCellSize(rows, cols, maxWidth, maxHeight) {
 function recalcCellSize() {
   const canvas = document.getElementById('boardCanvas');
   if (!canvas) return;
-  const container = canvas.parentElement;
-  // Use the main area width (minus padding), not the scrollable container width
-  const mainArea = document.querySelector('.polyomino-main');
-  const maxW = (mainArea ? mainArea.clientWidth : container.clientWidth) - 48;
-  const maxH = Math.min(window.innerHeight - 260, 800);
+  // Use window/viewport width for more stable sizing
+  const isMobile = window.innerWidth <= 800;
+  const padding = isMobile ? 32 : 48;
+  const maxW = window.innerWidth - padding - (isMobile ? 0 : 300); // sidebar width on desktop
+  const toolbarH = isMobile ? 200 : 140;
+  const maxH = Math.min(window.innerHeight - 120 - toolbarH, 800);
   cachedCellSize = computeCellSize(boardState.rows, boardState.cols, maxW, maxH);
 }
 
@@ -958,11 +959,90 @@ function init() {
     }
   });
 
+  // ── Sidebar toggle (mobile) ──
+  const sidebarEl = document.getElementById('sidebar');
+  let overlayEl = null;
+
+  function openSidebar() {
+    sidebarEl.classList.add('open');
+    if (!overlayEl) {
+      overlayEl = document.createElement('div');
+      overlayEl.className = 'sidebar-overlay';
+      document.getElementById('polyominoApp').appendChild(overlayEl);
+      overlayEl.addEventListener('click', closeSidebar);
+    }
+    overlayEl.classList.add('active');
+  }
+
+  function closeSidebar() {
+    sidebarEl.classList.remove('open');
+    if (overlayEl) overlayEl.classList.remove('active');
+  }
+
+  function toggleSidebar() {
+    if (sidebarEl.classList.contains('open')) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  }
+
+  document.getElementById('sidebarToggleBtn').addEventListener('click', toggleSidebar);
+
+  // Close sidebar when a piece is selected (on mobile)
+  const origSelectPiece = selectPiece;
+  selectPiece = function(pieceId) {
+    origSelectPiece(pieceId);
+    if (window.innerWidth <= 800) {
+      closeSidebar();
+    }
+  };
+
+  // ── Touch events for board ──
+  const boardCanvas2 = document.getElementById('boardCanvas');
+  boardCanvas2.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1) {
+      // Single touch: simulate mouse click
+      const touch = e.touches[0];
+      const cell = getCellFromEvent(touch, boardCanvas2);
+      if (cell && activeSelection) {
+        e.preventDefault();
+        const ok = placePiece(
+          activeSelection.pieceId, cell.r, cell.c,
+          activeSelection.rotation, activeSelection.flipH, activeSelection.flipV
+        );
+        if (ok) {
+          saveBoardSession();
+          refreshAll();
+        }
+      }
+    }
+  }, { passive: false });
+
+  boardCanvas2.addEventListener('touchmove', function(e) {
+    if (e.touches.length === 1) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      uiState.hoverCell = getCellFromEvent(touch, boardCanvas2);
+      renderBoard();
+    }
+  }, { passive: false });
+
+  boardCanvas2.addEventListener('touchend', function(e) {
+    uiState.hoverCell = null;
+    renderBoard();
+  });
+
   // ── Window resize ──
   window.addEventListener('resize', function() {
     cachedCellSize = null;
     recalcCellSize();
     renderBoard();
+    // Reset sidebar state when crossing breakpoint
+    if (window.innerWidth > 800) {
+      sidebarEl.classList.remove('open');
+      if (overlayEl) overlayEl.classList.remove('active');
+    }
   });
 
   // ── Auto-save on page unload ──
