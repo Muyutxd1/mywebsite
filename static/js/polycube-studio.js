@@ -221,31 +221,43 @@ function renderBoardGrid() {
   boxLine.position.set(sx/2 - 0.5, sy/2 - 0.5, sz/2 - 0.5);
   boardGroup.add(boxLine);
 
-  // Grid dots on bottom
-  const dotGeo = new THREE.SphereGeometry(0.06, 6, 6);
-  const dotMat = new THREE.MeshBasicMaterial({ color: '#334466' });
+  // Grid dots on bottom — also serve as visual anchors for the Y=0 plane
+  const dotGeo = new THREE.SphereGeometry(0.08, 6, 6);
+  const dotMat = new THREE.MeshBasicMaterial({ color: '#8899cc' });
   for (let x = 0; x < sx; x++) {
     for (let z = 0; z < sz; z++) {
       const dot = new THREE.Mesh(dotGeo, dotMat);
-      dot.position.set(x, -0.1, z);
+      dot.position.set(x, 0, z);
       boardGroup.add(dot);
     }
   }
 
-  // Semi-transparent floor plane (visual)
-  const floorGeo = new THREE.PlaneGeometry(sx, sz);
-  const floorMat = new THREE.MeshBasicMaterial({ color: '#223344', side: THREE.DoubleSide, transparent: true, opacity: 0.3 });
-  const floor = new THREE.Mesh(floorGeo, floorMat);
-  floor.rotation.x = -Math.PI / 2;
-  floor.position.set(sx/2 - 0.5, -0.55, sz/2 - 0.5);
-  boardGroup.add(floor);
+  // Cross-grid lines on the Y=0 plane for visual cell boundaries
+  const gridLineMat = new THREE.LineBasicMaterial({ color: '#445577', transparent: true, opacity: 0.5 });
+  for (let x = 0; x <= sx; x++) {
+    const pts = [new THREE.Vector3(x, 0.01, -0.5), new THREE.Vector3(x, 0.01, sz - 0.5)];
+    const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+    boardGroup.add(new THREE.Line(lineGeo, gridLineMat));
+  }
+  for (let z = 0; z <= sz; z++) {
+    const pts = [new THREE.Vector3(-0.5, 0.01, z), new THREE.Vector3(sx - 0.5, 0.01, z)];
+    const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+    boardGroup.add(new THREE.Line(lineGeo, gridLineMat));
+  }
 
-  // Invisible ground mesh for raycasting (covers exactly the board footprint at y=0)
-  const groundGeo = new THREE.PlaneGeometry(sx, sz);
-  const groundMat = new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide });
-  boardGroundMesh = new THREE.Mesh(groundGeo, groundMat);
+  // Visible floor plane at Y=0 — serves as BOTH visual floor AND raycasting target.
+  // (Must keep object.visible=true for raycaster to detect it.)
+  const floorGeo = new THREE.PlaneGeometry(sx, sz);
+  const floorMat = new THREE.MeshBasicMaterial({
+    color: '#2a3a5c',
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: 0.35,
+    depthWrite: false
+  });
+  boardGroundMesh = new THREE.Mesh(floorGeo, floorMat);
   boardGroundMesh.rotation.x = -Math.PI / 2;
-  boardGroundMesh.position.set(sx/2 - 0.5, 0, sz/2 - 0.5);
+  boardGroundMesh.position.set(sx/2 - 0.5, 0.01, sz/2 - 0.5);
   boardGroundMesh.userData = { isBoardGround: true };
   boardGroup.add(boardGroundMesh);
 }
