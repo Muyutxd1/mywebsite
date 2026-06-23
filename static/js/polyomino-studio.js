@@ -481,26 +481,81 @@ function renderBoard() {
       );
       uiState.placementValid = valid;
 
+      const ghostCells = [];
       for (const [dr, dc] of coords) {
         const r = uiState.hoverCell.r + dr;
         const c = uiState.hoverCell.c + dc;
+        if (r < 0 || r >= boardState.rows || c < 0 || c >= boardState.cols) continue;
+        ghostCells.push([r, c]);
+      }
+      const ghostSet = new Set(ghostCells.map(([r, c]) => `${r},${c}`));
+
+      const fillColor = valid ? 'rgba(0, 200, 100, 0.3)' : 'rgba(255, 80, 80, 0.3)';
+      const lineColor = valid ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.25)';
+      const diagColor = valid ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.12)';
+
+      // Fill cells
+      for (const [r, c] of ghostCells) {
         const x = c * cellSize;
         const y = r * cellSize;
-        if (r < 0 || r >= boardState.rows || c < 0 || c >= boardState.cols) continue;
-        if (valid && !occupied[`${r},${c}`]) {
-          ctx.fillStyle = 'rgba(0, 200, 100, 0.35)';
-        } else if (!valid) {
-          ctx.fillStyle = 'rgba(255, 80, 80, 0.35)';
-        } else {
-          ctx.fillStyle = 'rgba(255, 80, 80, 0.35)';
-        }
+        ctx.fillStyle = fillColor;
         ctx.fillRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
-        ctx.strokeStyle = 'rgba(0,0,0,0.3)';
-        ctx.lineWidth = 1.5;
-        ctx.setLineDash([3, 2]);
-        ctx.strokeRect(x + 1.5, y + 1.5, cellSize - 3, cellSize - 3);
-        ctx.setLineDash([]);
       }
+
+      // Orthogonal connection lines
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = lineColor;
+      ctx.lineWidth = Math.max(1, cellSize * 0.07);
+      const drawnEdges = new Set();
+      for (const [r, c] of ghostCells) {
+        const cx = (c + 0.5) * cellSize;
+        const cy = (r + 0.5) * cellSize;
+        for (const [nr, nc] of [[r, c+1], [r+1, c]]) {
+          if (ghostSet.has(`${nr},${nc}`)) {
+            const ek = `${Math.min(r,nr)},${Math.min(c,nc)}-${Math.max(r,nr)},${Math.max(c,nc)}`;
+            if (!drawnEdges.has(ek)) {
+              drawnEdges.add(ek);
+              ctx.beginPath();
+              ctx.moveTo(cx, cy);
+              ctx.lineTo((nc + 0.5) * cellSize, (nr + 0.5) * cellSize);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+      // Diagonal connection lines
+      ctx.strokeStyle = diagColor;
+      ctx.lineWidth = Math.max(0.6, cellSize * 0.04);
+      for (const [r, c] of ghostCells) {
+        const cx = (c + 0.5) * cellSize;
+        const cy = (r + 0.5) * cellSize;
+        for (const [nr, nc] of [[r-1, c-1], [r-1, c+1], [r+1, c-1], [r+1, c+1]]) {
+          if (ghostSet.has(`${nr},${nc}`)) {
+            const ek = `${Math.min(r,nr)},${Math.min(c,nc)}-${Math.max(r,nr)},${Math.max(c,nc)}`;
+            if (!drawnEdges.has(ek)) {
+              drawnEdges.add(ek);
+              ctx.beginPath();
+              ctx.moveTo(cx, cy);
+              ctx.lineTo((nc + 0.5) * cellSize, (nr + 0.5) * cellSize);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      // Dashed outline around entire ghost shape
+      ctx.strokeStyle = valid ? 'rgba(0, 180, 80, 0.5)' : 'rgba(255, 60, 60, 0.5)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 2]);
+      for (const [r, c] of ghostCells) {
+        const x = c * cellSize;
+        const y = r * cellSize;
+        if (!ghostSet.has(`${r-1},${c}`)) { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + cellSize, y); ctx.stroke(); }
+        if (!ghostSet.has(`${r+1},${c}`)) { ctx.beginPath(); ctx.moveTo(x, y + cellSize); ctx.lineTo(x + cellSize, y + cellSize); ctx.stroke(); }
+        if (!ghostSet.has(`${r},${c-1}`)) { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + cellSize); ctx.stroke(); }
+        if (!ghostSet.has(`${r},${c+1}`)) { ctx.beginPath(); ctx.moveTo(x + cellSize, y); ctx.lineTo(x + cellSize, y + cellSize); ctx.stroke(); }
+      }
+      ctx.setLineDash([]);
     }
   }
 
