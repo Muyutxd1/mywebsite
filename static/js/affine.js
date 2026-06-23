@@ -346,9 +346,9 @@ function autoFitView() {
   const spanYR = maxY - minY || 2;
 
   // Use the larger span across both views for consistent scale
-  const spanX = Math.max(spanXL, spanXR);
-  const spanY = Math.max(spanYL, spanYR);
-  const pad = Math.max(spanX, spanY) * 0.8;
+  const spanX = Math.max(spanXL, spanXR, Math.abs(cxL), Math.abs(cxR));
+  const spanY = Math.max(spanYL, spanYR, Math.abs(cyL), Math.abs(cyR));
+  const pad = Math.max(spanX, spanY) * 1.2;
 
   viewLeft.cx = cxL;
   viewLeft.cy = cyL;
@@ -613,12 +613,10 @@ function init() {
     if (h <= 0) h = container.clientHeight || window.innerHeight - 200;
     if (w <= 0) w = 800;
     if (h <= 0) h = 500;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
+    canvas.width = w;
+    canvas.height = h;
     canvas.style.width = w + 'px';
     canvas.style.height = h + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     computeLayout();
     autoFitView();
     renderAll();
