@@ -177,9 +177,13 @@ controls.maxDistance = 20;
 
 function resetCamera() {
   const { sx, sy, sz } = boardState;
-  const cx = (sx - 1) / 2, cy = (sy - 1) / 2, cz = (sz - 1) / 2;
-  const dist = Math.max(sx, sy, sz) * 1.8 + 3;
-  camera.position.set(cx + dist * 0.6, cy + dist * 0.5, cz + dist * 0.7);
+  // Board + designer width (designer is 4 units wide, at sx+0.6 offset)
+  const totalW = sx + 0.6 + 4;
+  const cx = totalW / 2 - 1;  // center between board start and designer end
+  const cy = (sy - 1) / 2;
+  const cz = (sz - 1) / 2;
+  const dist = Math.max(totalW, sy, sz) * 1.6 + 2;
+  camera.position.set(cx + dist * 0.5, cy + dist * 0.4, cz + dist * 0.8);
   controls.target.set(cx, cy, cz);
   controls.update();
 }
@@ -189,7 +193,7 @@ const boardGroup = new THREE.Group(); scene.add(boardGroup);
 const piecesGroup = new THREE.Group(); scene.add(piecesGroup);
 const ghostGroup = new THREE.Group(); scene.add(ghostGroup);
 const designerGroup = new THREE.Group();
-designerGroup.position.set(boardState.sx + 2.5, 0, 0); // offset to the right of the board
+designerGroup.position.set(boardState.sx + 0.6, 0, 0);
 scene.add(designerGroup);
 
 // Raycaster
