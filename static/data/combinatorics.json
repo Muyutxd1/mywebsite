@@ -1,0 +1,211 @@
+{
+  "title": "组合数学基础知识目录",
+  "description": "初等组合与竞赛组合定理总目录，涵盖计数原理、容斥、递推、生成函数、图论计数等18个章节约100个核心知识点。组织方式：五层学习路线，自底向上从工具层到理论层。",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "基础计数原理",
+      "entries": [
+        {"id": 1, "title": "加法原理", "statement": "若完成一件事有 n 类互不相交的方法，第 i 类有 a_i 种方法，则总方法数为 Σa_i。", "formula": "|A \\cup B| = |A| + |B| \\quad (A \\cap B = \\varnothing)", "detail": "分类计数、互斥性是前提。推广到有限多个两两不交的集合。", "tags": ["核心", "基础"]},
+        {"id": 2, "title": "乘法原理", "statement": "若一件事需依次完成 n 步，第 i 步有 a_i 种方法，各步选择独立，则总方法数为 ∏a_i。", "formula": "|A \\times B| = |A| \\cdot |B|", "detail": "分步计数，关键在\"各步选择独立\"。", "tags": ["核心", "基础"]},
+        {"id": 3, "title": "补集计数", "statement": "所求对象数 = 总数 − 不合法对象数。", "formula": "|A| = |U| - |A^c|", "detail": "当直接计数困难时，转而计数其补集。在容斥原理中有系统推广。", "tags": ["核心", "基础"]},
+        {"id": 4, "title": "分类计数与分步计数", "statement": "复杂问题常需将分类与分步结合，按某一标准先分类，再在每一类中分步计数。", "detail": "拆解策略：先大类后细节，\"先分类后分步\"是解题的经典口头禅。", "tags": ["核心", "方法"]},
+        {"id": 5, "title": "一一对应保数原则", "statement": "若两个有限集之间存在双射，则它们元素个数相等。", "formula": "\\exists f: A \\xrightarrow{\\text{双射}} B \\implies |A| = |B|", "detail": "组合数学最深刻的原理之一——把难数的对象映射到易数的对象。Catalan数、反射原理本质上都是构造双射。", "tags": ["核心", "方法"]},
+        {"id": 6, "title": "双计数原理", "statement": "同一集合按两种不同方式计数，所得结果相等。", "detail": "经典应用：证明组合恒等式（如 Vandermonde）、握手定理的计数证明。关键是找到合适的计数对象和两种计数角度。", "tags": ["核心", "方法"]}
+      ]
+    },
+    {
+      "num": 2,
+      "title": "排列、组合与多重计数",
+      "entries": [
+        {"id": 7, "title": "排列数公式", "statement": "从 n 个不同元素中取 k 个有序排列。", "formula": "A(n,k) = P(n,k) = \\frac{n!}{(n-k)!} = n(n-1)\\cdots(n-k+1)", "tags": ["核心", "基础"]},
+        {"id": 8, "title": "组合数公式", "statement": "从 n 个不同元素中取 k 个的无序子集数。", "formula": "C(n,k) = \\binom{n}{k} = \\frac{n!}{k!(n-k)!}", "tags": ["核心", "基础"]},
+        {"id": 9, "title": "Pascal 恒等式", "statement": "组合数的递推关系。", "formula": "\\binom{n}{k} = \\binom{n-1}{k} + \\binom{n-1}{k-1}", "detail": "组合解释：选特定元素→要么选它（从 n−1 中再选 k−1），要么不选它（从 n−1 中选 k 个）。Pascal 三角形的基本递推。", "tags": ["核心", "基础"]},
+        {"id": 10, "title": "对称性公式", "formula": "\\binom{n}{k} = \\binom{n}{n-k}", "detail": "Pascal 三角形的左右对称。组合解释：选 k 个等于选 n−k 个留下的。", "tags": ["核心", "基础"]},
+        {"id": 11, "title": "多项式系数", "statement": "将 n 个不同元素分配到 r 个有序组，第 i 组有 a_i 个元素。", "formula": "\\binom{n}{a_1,a_2,\\ldots,a_r} = \\frac{n!}{a_1!\\,a_2!\\,\\cdots\\,a_r!}", "detail": "也称多重组合数。(x₁+...+x_r)^n 展开式中 x₁^{a₁}...x_r^{a_r} 的系数。", "tags": ["核心", "基础"]},
+        {"id": 12, "title": "圆排列公式", "statement": "n 个不同元素排成一圈的方案数。", "formula": "(n-1)!", "detail": "旋转等价视为同一排列。若圆排列还可分为翻转等价（项链问题），则是 Burnside 引理的经典应用。", "tags": ["核心", "基础"]},
+        {"id": 13, "title": "可重组合（插板法）", "statement": "从 n 种元素中取 r 个（每种无限多，可重复取），组合数。", "formula": "\\binom{n+r-1}{r} = \\binom{n+r-1}{n-1}", "detail": "经典模型：r 个无区别球放入 n 个有区别盒子。等价于 x₁+...+x_n=r 的非负整数解个数。", "tags": ["核心", "方法"]},
+        {"id": 14, "title": "正整数解个数", "statement": "方程 x₁+...+x_n=r 的正整数解个数。", "formula": "\\binom{r-1}{n-1}", "detail": "在 r 个球的 r−1 个间隙中选 n−1 个插入隔板。等价于令 y_i=x_i−1 转化为非负整数解。", "tags": ["核心", "方法"]}
+      ]
+    },
+    {
+      "num": 3,
+      "title": "二项式定理与经典恒等式",
+      "entries": [
+        {"id": 15, "title": "二项式定理", "formula": "(x+y)^n = \\sum_{k=0}^{n} \\binom{n}{k} x^{n-k} y^k", "detail": "组合数学的基石。当 x=y=1 时得到 2^n = ΣC(n,k)。", "tags": ["核心", "基础"]},
+        {"id": 16, "title": "Vandermonde 恒等式", "formula": "\\sum_{k} \\binom{m}{k}\\binom{n}{r-k} = \\binom{m+n}{r}", "detail": "从 m 男 n 女中选 r 人，按选 k 男分类。生成函数形式：(1+x)^m(1+x)^n=(1+x)^{m+n}，比较 x^r 系数。", "tags": ["核心", "恒等式"]},
+        {"id": 17, "title": "Hockey-stick 恒等式（朱世杰恒等式）", "formula": "\\sum_{i=k}^{n} \\binom{i}{k} = \\binom{n+1}{k+1}", "detail": "Pascal 三角形中沿对角线求和压缩为一项。南宋数学家朱世杰在《四元玉鉴》(1303) 中记载，比西方早 300 多年。", "tags": ["核心", "恒等式"]},
+        {"id": 18, "title": "二项式求和（全子集数）", "formula": "\\sum_{k=0}^{n} \\binom{n}{k} = 2^n", "detail": "n 元集合的所有子集个数。二项式定理中令 x=y=1。", "tags": ["核心", "基础"]},
+        {"id": 19, "title": "交错二项式和", "formula": "\\sum_{k=0}^{n} (-1)^k \\binom{n}{k} = 0 \\quad (n \\ge 1)", "detail": "二项式定理中令 x=1,y=-1。组合解释：偶大小子集数 = 奇大小子集数。", "tags": ["核心", "基础"]},
+        {"id": 20, "title": "平方和恒等式", "formula": "\\sum_{k=0}^{n} \\binom{n}{k}^2 = \\binom{2n}{n}", "detail": "Vandermonde 恒等式中取 m=n=r。组合解释：从 2n 人中选 n 人 = 按前 n 人中选 k 人分类。", "tags": ["核心", "恒等式"]},
+        {"id": 21, "title": "吸收恒等式", "formula": "k\\binom{n}{k} = n\\binom{n-1}{k-1}", "detail": "将一个组合数\"吸收\"成另一个。在推导有限差分的和时非常有用。", "tags": ["核心", "恒等式"]}
+      ]
+    },
+    {
+      "num": 4,
+      "title": "容斥原理与错排问题",
+      "entries": [
+        {"id": 22, "title": "两集合容斥", "formula": "|A \\cup B| = |A| + |B| - |A \\cap B|", "tags": ["核心", "基础"]},
+        {"id": 23, "title": "三集合容斥", "formula": "|A \\cup B \\cup C| = |A|+|B|+|C| - |A \\cap B| - |B \\cap C| - |C \\cap A| + |A \\cap B \\cap C|", "tags": ["核心", "基础"]},
+        {"id": 24, "title": "一般容斥原理", "formula": "\\left|\\bigcup_{i=1}^{n} A_i\\right| = \\sum_{\\varnothing \\neq J \\subseteq [n]} (-1)^{|J|+1}\\left|\\bigcap_{j\\in J} A_j\\right|", "detail": "交替加减的通用形式。等价的对偶形式常更有用：计数不满足任何\"坏性质\"的对象 = Σ(-1)^{|J|} N(J)，其中 N(J) 为至少满足 J 中全部性质的对象数。", "tags": ["核心", "方法"]},
+        {"id": 25, "title": "错排公式", "formula": "D_n = n!\\sum_{k=0}^{n} \\frac{(-1)^k}{k!}, \\quad D_n = (n-1)(D_{n-1}+D_{n-2})", "detail": "n 个元素无一在原来位置的排列数。D₁=0, D₂=1, D₃=2, D₄=9, D₅=44。D_n ≈ n!/e。递推式的推导：第一个人有 n−1 种选择，选了 k 的位置后，若 k 选回第一个人则归约为 D_{n-2}，否则归约为 D_{n-1}。", "tags": ["核心", "经典"]},
+        {"id": 26, "title": "满射计数公式", "formula": "\\sum_{k=0}^{m} (-1)^k \\binom{m}{k} (m-k)^n", "detail": "从 n 元集到 m 元集的满射个数。用容斥原理：总数 m^n 减去至少一个元素没被映到的情形。", "tags": ["核心", "方法"]}
+      ]
+    },
+    {
+      "num": 5,
+      "title": "抽屉原理与极值思想",
+      "entries": [
+        {"id": 27, "title": "基本抽屉原理（鸽巢原理）", "statement": "若 n+1 个物体放入 n 个抽屉，则至少有一个抽屉含 ≥2 个物体。", "detail": "Dirichlet 提出。证明存在性命题的利器——不构造具体对象，只证明其必然存在。", "tags": ["核心", "基础"]},
+        {"id": 28, "title": "广义抽屉原理", "formula": "\\left\\lceil \\frac{N}{m} \\right\\rceil", "statement": "N 个物体放入 m 个抽屉，必有抽屉含至少 ⌈N/m⌉ 个物体。", "tags": ["核心", "基础"]},
+        {"id": 29, "title": "Erdős–Szekeres 单调子序列定理", "statement": "任意长度为 n²+1 的实数序列，必含长度为 n+1 的单调（递增或递减）子序列。", "detail": "1935 年提出，拉姆齐理论的先驱。证明正是典型的抽屉原理应用。n=3 时：任意 10 个实数中必含长 4 的单调子序列。", "tags": ["经典", "进阶"]}
+      ]
+    },
+    {
+      "num": 6,
+      "title": "递推关系与常见数列",
+      "entries": [
+        {"id": 30, "title": "Fibonacci 递推", "formula": "F_n = F_{n-1} + F_{n-2}, \\quad F_0 = 0, F_1 = 1", "detail": "通项（Binet公式）：F_n = (φ^n−ψ^n)/√5，其中 φ=(1+√5)/2, ψ=(1−√5)/2。生长模型：兔子繁殖问题。", "tags": ["核心", "经典"]},
+        {"id": 31, "title": "线性齐次递推一般形式", "formula": "a_n = c_1 a_{n-1} + c_2 a_{n-2} + \\cdots + c_k a_{n-k}", "detail": "k 阶常系数线性递推。通解结构由特征方程的根决定。", "tags": ["核心", "方法"]},
+        {"id": 32, "title": "特征方程法", "formula": "r^k - c_1 r^{k-1} - c_2 r^{k-2} - \\cdots - c_k = 0", "detail": "设 a_n = r^n 代入递推式得特征方程。每个特征根 r_i 对应项 C·r_i^n（若为单根）。", "tags": ["核心", "方法"]},
+        {"id": 33, "title": "二阶递推通解结构", "statement": "两不等实根 r₁≠r₂：a_n = A·r₁^n + B·r₂^n；重根 r₁=r₂=r：a_n = (A+Bn)·r^n。", "detail": "由初值条件确定系数 A,B。Fibonacci 即为两不等实根的经典情形。", "tags": ["核心", "方法"]},
+        {"id": 34, "title": "Catalan 型递推思想", "formula": "a_n = \\sum_{k=0}^{n-1} a_k a_{n-1-k}", "detail": "卷积型递推，对应生成函数满足 A(x) = 1 + xA(x)²。许多树结构、括号化、三角剖分问题都归结于此。", "tags": ["核心", "经典"]},
+        {"id": 35, "title": "第二类 Stirling 数递推", "formula": "S(n,k) = S(n-1, k-1) + k \\cdot S(n-1, k)", "detail": "S(n,k) = 将 n 个不同元素划分为 k 个非空子集的方案数。递推解释：考虑第 n 个元素，要么独自成一子集，要么加入已有的 k 个子集之一。", "tags": ["核心", "经典"]},
+        {"id": 36, "title": "第一类 Stirling 数递推", "formula": "c(n,k) = c(n-1, k-1) + (n-1) \\cdot c(n-1, k)", "detail": "c(n,k) = n 个元素的置换中含 k 个轮换的个数（带符号版本）。递推与第二类类似但系数为 n−1。", "tags": ["核心", "经典"]},
+        {"id": 37, "title": "Bell 数递推", "formula": "B_{n+1} = \\sum_{k=0}^{n} \\binom{n}{k} B_k, \\quad B_0 = 1", "detail": "B_n = n 元集合的所有划分数 = Σ_k S(n,k)。前几项：1,1,2,5,15,52,203。指数生成函数：exp(e^x−1)。", "tags": ["核心", "经典"]}
+      ]
+    },
+    {
+      "num": 7,
+      "title": "生成函数入门",
+      "entries": [
+        {"id": 38, "title": "普通生成函数定义", "formula": "A(x) = \\sum_{n=0}^{\\infty} a_n x^n", "detail": "序列 (a_n) 的形式幂级数。x 的指数标记项的位置，系数携带组合信息。", "tags": ["核心", "方法"]},
+        {"id": 39, "title": "等比级数生成函数", "formula": "\\frac{1}{1-x} = 1 + x + x^2 + \\cdots = \\sum_{n=0}^{\\infty} x^n", "detail": "最基本的生成函数。1/(1−x)^k 的展开给出可重组合数。", "tags": ["核心", "基础"]},
+        {"id": 40, "title": "生成函数乘法对应卷积", "formula": "[x^n]A(x)B(x) = \\sum_{k=0}^{n} a_k b_{n-k}", "detail": "两个生成函数相乘对应序列的卷积。组合意义：把 n 个对象分成两组，第一组用序列 a 计数，第二组用序列 b 计数。", "tags": ["核心", "方法"]},
+        {"id": 41, "title": "插板法的生成函数解释", "formula": "[x^r]\\frac{1}{(1-x)^n} = \\binom{n+r-1}{r}", "detail": "1/(1−x)^n = (1+x+x²+...)^n，其中 x^r 的系数就是从 n 个因子中各选一项使其指数和为 r 的方案数 = 可重组合数。", "tags": ["核心", "方法"]},
+        {"id": 42, "title": "指数生成函数", "formula": "E(x) = \\sum_{n=0}^{\\infty} a_n \\frac{x^n}{n!}", "detail": "适用于涉及排列、标号结构的问题。例如：Bell 数的指数生成函数为 exp(e^x−1)，错排的指数生成函数为 e^{−x}/(1−x)。", "tags": ["核心", "方法"]},
+        {"id": 43, "title": "Euler 分拆生成函数", "formula": "\\sum_{n=0}^{\\infty} p(n)x^n = \\prod_{m=1}^{\\infty} \\frac{1}{1-x^m}", "detail": "p(n) = 将 n 分拆为无序正整数之和的方法数。无穷乘积形式的推导：每个因子 1/(1−x^m) = 1+x^m+x^{2m}+... 表示选取 m 的个数。", "tags": ["核心", "经典"]}
+      ]
+    },
+    {
+      "num": 8,
+      "title": "分拆理论与 Ferrers 图",
+      "entries": [
+        {"id": 44, "title": "Euler 奇异分拆定理", "statement": "整数 n 分拆为互异部分的方案数 = 分拆为奇数部分的方案数。", "formula": "\\prod_{m=1}^{\\infty}(1+x^m) = \\prod_{k=1}^{\\infty}\\frac{1}{1-x^{2k-1}}", "detail": "生成函数证明优美简洁：左 = ∏(1+x^m) = ∏(1−x^{2m})/(1−x^m) = ∏1/(1−x^{2k−1}) = 右。", "tags": ["核心", "经典"]},
+        {"id": 45, "title": "分拆共轭（Ferrers 图转置）", "statement": "将 Ferrers 图沿对角线翻转，最大部分为 k 的分拆与恰有 k 个部分的分拆一一对应。", "detail": "共轭是分拆理论中最核心的双射之一。由此推出：把 n 分拆为 ≤k 个部分的方案数 = 把 n 分拆为各部分 ≤k 的方案数。", "tags": ["核心", "方法"]},
+        {"id": 46, "title": "Euler 五边形数定理", "formula": "\\prod_{m=1}^{\\infty}(1-x^m) = \\sum_{k=-\\infty}^{\\infty} (-1)^k x^{k(3k-1)/2}", "detail": "五边形数：1,5,12,22,35,...（通项 k(3k−1)/2）。该恒等式给出 p(n) 的高效递推关系，且是 Jacobi 三重积恒等式的特例。", "tags": ["进阶", "经典"]}
+      ]
+    },
+    {
+      "num": 9,
+      "title": "Catalan 体系与路径计数",
+      "entries": [
+        {"id": 47, "title": "Catalan 数公式", "formula": "C_n = \\frac{1}{n+1}\\binom{2n}{n} = \\binom{2n}{n} - \\binom{2n}{n+1}", "detail": "C₀=1, C₁=1, C₂=2, C₃=5, C₄=14, C₅=42。计数对象超过200种：括号化方案、二叉树的个数、Dyck 路径、Catalan 三角剖分……", "tags": ["核心", "经典"]},
+        {"id": 48, "title": "Catalan 递推", "formula": "C_n = \\sum_{k=0}^{n-1} C_k C_{n-1-k}, \\quad C_0 = 1", "detail": "卷积型递推。生成函数满足 C(x)=1+xC(x)²，解得 C(x)=(1−√(1−4x))/(2x)。", "tags": ["核心", "经典"]},
+        {"id": 49, "title": "Bertrand 投票定理", "statement": "选举中候选人 A 得 p 票、B 得 q 票（p>q），A 的票数始终严格领先于 B 的概率。", "formula": "\\frac{p-q}{p+q}", "detail": "也称 Ballot 定理 (1887)。组合证明使用反射原理——将从 (0,0) 到 (p,q) 的路径中违反\"始终领先\"条件的路径反射到从 (0,0) 到(q−1,p+1)的路径。", "tags": ["核心", "经典"]},
+        {"id": 50, "title": "反射原理", "statement": "从 (0,0) 到 (m,n) 的格点路径中，触及或越过某条直线 y=x+k 的路径可以与另一类路径建立双射。", "detail": "André 反射法 (1887)：将首次触碰后的路径关于该直线反射，得到一条终点不同的路径。这是推导 Catalan 数和 Ballot 问题的标准工具。", "tags": ["核心", "方法"]},
+        {"id": 51, "title": "格点路径计数", "formula": "\\binom{m+n}{m}", "statement": "从 (0,0) 到 (m,n) 的格点路径数（每次向上或向右一步）。", "detail": "等价于在 m+n 步中选 m 步为右（或选 n 步为上）。是许多格点模型的基础计数。", "tags": ["核心", "基础"]}
+      ]
+    },
+    {
+      "num": 10,
+      "title": "组合恒等式与双计数",
+      "entries": [
+        {"id": 52, "title": "子集按大小求和", "formula": "\\sum_{k=0}^{n} \\binom{n}{k} = 2^n", "detail": "即全子集数。双计数证明：按子集大小 k 分类计数所有子集 = 每个元素可选/不选，共 2^n。", "tags": ["核心", "基础"]},
+        {"id": 53, "title": "子集元素总出现次数", "formula": "\\sum_{k=0}^{n} k\\binom{n}{k} = n \\cdot 2^{n-1}", "detail": "双计数证明：所有子集的元素总出现次数 = 每个元素出现在 2^{n-1} 个子集中 × n 个元素 = n·2^{n-1}。", "tags": ["核心", "基础"]},
+        {"id": 54, "title": "平均值双计数思想", "statement": "总量÷对象数 = 平均值，借平均值推存在性。", "detail": "典型推理：若平均值 > t，则存在某个对象 ≥ t+1。在极值组合和存在性问题中广泛应用。", "tags": ["核心", "方法"]},
+        {"id": 55, "title": "组合恒等式的计数证明法", "statement": "构造具体的计数模型，用两种方式计数同一集合，从而证明恒等式。", "detail": "例如：证明 ΣC(n,k)²=C(2n,n) → 从 2n 人中选 n 人 = 按\"从前 n 人中选 k 人\"分类。", "tags": ["核心", "方法"]}
+      ]
+    },
+    {
+      "num": 11,
+      "title": "集合族与偏序理论",
+      "entries": [
+        {"id": 56, "title": "偏序集与链、反链", "statement": "链：两两可比的元素集；反链：两两不可比的元素集。", "detail": "经典例子：子集格 (2^{[n]}, ⊆) 是偏序集。链的大小 ≤ n+1，最大反链大小 = C(n,⌊n/2⌋)（Sperner）。", "tags": ["核心", "概念"]},
+        {"id": 57, "title": "Sperner 定理", "formula": "\\max\\{|\\mathcal{F}| : \\mathcal{F} \\subseteq 2^{[n]}, A \\not\\subset B \\text{ for } A,B \\in \\mathcal{F}\\} = \\binom{n}{\\lfloor n/2 \\rfloor}", "detail": "n 元集合的子集族中，若没有两个集合互为子集关系（反链），则族的大小不超过中间层的组合数。LYM 不等式是其推广。", "tags": ["核心", "定理"]},
+        {"id": 58, "title": "LYM 不等式", "formula": "\\sum_{A \\in \\mathcal{F}} \\frac{1}{\\binom{n}{|A|}} \\le 1", "statement": "对任意反链 F ⊆ 2^{[n]}，各项权重和 ≤ 1。", "detail": "Lubell–Yamamoto–Meshalkin 不等式。直推 Sperner 定理：最大反链集中在中间层，每项 1/C(n,n/2)，总和 ≤ 1 → 最多 C(n,n/2) 个。", "tags": ["核心", "定理"]},
+        {"id": 59, "title": "Dilworth 定理", "statement": "偏序集中，最大反链的大小 = 最少链覆盖数。", "detail": "对偶于 Mirsky 定理。在竞赛中常用于解决\"按某偏序关系的最少分组数\"问题——将问题转化为求最大反链。", "tags": ["进阶", "定理"]},
+        {"id": 60, "title": "Mirsky 定理", "statement": "偏序集中，最大链的长度 = 最少反链覆盖数。", "detail": "Dilworth 定理的对偶形式。两者合在一起完整描述了偏序集的\"宽度\"与\"高度\"。", "tags": ["进阶", "定理"]},
+        {"id": 61, "title": "Erdős–Ko–Rado 定理", "formula": "\\binom{n-1}{k-1} \\quad (n \\ge 2k)", "statement": "若 n 元集合的 k 元子集族中任意两个子集都相交，则当 n ≥ 2k 时，族的最大大小为 C(n−1,k−1)。", "detail": "极值集合论的奠基性成果（1961）。证明使用 Katona 的圆排列法和移位法。n<2k 时所有 k 元子集都相交，平凡。", "tags": ["进阶", "定理", "竞赛高频"]}
+      ]
+    },
+    {
+      "num": 12,
+      "title": "Ramsey 理论与极值组合",
+      "entries": [
+        {"id": 62, "title": "Ramsey 数定义", "formula": "R(s,t) = \\min\\{n : \\text{任意 } K_n \\text{ 的红蓝边染色，必含红色 } K_s \\text{ 或蓝色 } K_t\\}", "detail": "已知：R(3,3)=6, R(4,4)=18, R(5,5) 在 43~48 之间（精确值未知！）。R(3,3)=6 的证明即\"六人中必有三人互相认识或三人互不认识\"。", "tags": ["核心", "概念"]},
+        {"id": 63, "title": "Ramsey 定理", "statement": "对任意正整数 s,t，R(s,t) 有限。即足够大的完全图中任意红蓝边染色的结构是\"不可避免\"的。", "detail": "证明思路：归纳 + 抽屉原理。一般形式：对任意 k,r,c 存在 Ramsey 数 R_k(c;r)。", "tags": ["核心", "定理"]},
+        {"id": 64, "title": "Turán 定理", "formula": "\\operatorname{ex}(n, K_{r+1}) = \\left(1 - \\frac{1}{r}\\right)\\frac{n^2}{2} + O(n)", "statement": "不含 K_{r+1} 子图的 n 顶点图的最大边数由 Turán 图 T(n,r)（完全 r 部均衡图）达到。", "detail": "极值图论的奠基定理（1941）。T(n,r) 的构造：将 n 个顶点尽可能均匀地分成 r 部分，边连接所有不同部分的顶点对。", "tags": ["进阶", "定理", "竞赛高频"]},
+        {"id": 65, "title": "Schur 定理", "statement": "将正整数集有限着色，必存在同色的三个数 x,y,z 满足 x+y=z。", "detail": "Ramsey 理论的数论版。证明使用 Ramsey 定理：构造完全图 K_n，边 (i,j) 的颜色 = |i−j| 的颜色。", "tags": ["进阶", "定理"]},
+        {"id": 66, "title": "van der Waerden 定理", "statement": "将正整数有限着色，必存在任意长的同色等差数列。", "detail": "1927 年提出，是 Ramsey 理论中最深刻的成果之一。证明极为复杂（使用双重归纳）。", "tags": ["进阶", "定理"]},
+        {"id": 67, "title": "Hales–Jewett 定理", "statement": "高维字母立方体 [k]^n 的有限着色中，必存在单色组合线。", "detail": "组合线：按坐标分为不动集和变动集，变动集上取值同步变化的一组点。该定理统一了 van der Waerden 等多条 Ramsey 型结论。", "tags": ["视野拓展"]}
+      ]
+    },
+    {
+      "num": 13,
+      "title": "图论基础计数结论",
+      "entries": [
+        {"id": 68, "title": "握手定理", "formula": "\\sum_{v \\in V} \\deg(v) = 2|E|", "detail": "每条边贡献两个度数。推论：任何图中奇度点个数必为偶数。", "tags": ["核心", "基础"]},
+        {"id": 69, "title": "奇度点个数为偶数", "statement": "任何图中，度数为奇数的顶点个数必为偶数。", "detail": "握手定理的直接推论。在 Euler 回路存在性判定中起关键作用。", "tags": ["核心", "基础"]},
+        {"id": 70, "title": "树的边数公式", "statement": "n 个顶点的树恰有 n−1 条边。", "detail": "等价的树的定义：(1) 无回路的连通图，(2) n−1 条边的连通图，(3) n−1 条边的无回路图，(4) 任两点间恰有一条路径。", "tags": ["核心", "基础"]},
+        {"id": 71, "title": "Cayley 公式", "formula": "\\tau(K_n) = n^{n-2}", "statement": "n 个标号顶点上的不同树的总数为 n^{n-2}。", "detail": "n=3→3, n=4→16, n=5→125。证明方法：Prüfer 编码（每个长为 n−2 的序列唯一对应一棵标号树）。", "tags": ["核心", "经典"]},
+        {"id": 72, "title": "Kirchhoff 矩阵树定理", "statement": "任意图 G 的生成树个数 = 其 Laplace 矩阵 L = D − A 的任意余子式的行列式。", "detail": "Laplace 矩阵：L_{ii}=deg(v_i), L_{ij}=−1（若 ij 有边）。去掉第 i 行第 i 列求行列式即得生成树个数。Cayley 公式是该定理 K_n 的特例。", "tags": ["进阶", "定理"]},
+        {"id": 73, "title": "Euler 回路判定", "statement": "连通图有 Euler 回路当且仅当所有顶点度数为偶数（有向图需出度=入度）。", "detail": "必要性：进入顶点一次必离开一次，每次消耗两条边。充分性：算法上可用 Hierholzer 算法构造。", "tags": ["核心", "基础"]}
+      ]
+    },
+    {
+      "num": 14,
+      "title": "匹配、覆盖与网络流型结论",
+      "entries": [
+        {"id": 74, "title": "Hall 婚配定理", "statement": "二分图 G=(X,Y;E) 中存在饱和 X 的匹配 ⇔ 对任意 S ⊆ X 有 |N(S)| ≥ |S|。", "detail": "Philipp Hall (1935)。必要性显然，充分性可用归纳法或网络流证明。在组合数学中极为重要——它是许多存在性结果的根源。", "tags": ["核心", "定理", "竞赛高频"]},
+        {"id": 75, "title": "König 定理", "statement": "二分图中，最大匹配数 = 最小点覆盖数。", "detail": "König (1931)，对偶定理，Hall 定理的等价形式。一般图中未必成立（奇圈破坏）。", "tags": ["核心", "定理"]},
+        {"id": 76, "title": "Menger 定理", "statement": "图中去掉最少 k 个顶点才能断开 s 到 t 的连通性 ⇔ s 到 t 最多存在 k 条内点不交的路径。", "detail": "Menger (1927)，网络流理论的前身。点版本和边版本均有。", "tags": ["进阶", "定理"]},
+        {"id": 77, "title": "最大流最小割定理", "statement": "网络中最大流量 = 最小割的容量。", "detail": "Ford–Fulkerson (1956)。是 König、Menger 等定理的统一推广框架。竞赛中常用于建模"最少删除元素使其失去某性质"的问题。", "tags": ["进阶", "定理", "竞赛高频"]}
+      ]
+    },
+    {
+      "num": 15,
+      "title": "染色、多项式与图计数",
+      "entries": [
+        {"id": 78, "title": "图染色数", "formula": "\\chi(G) = \\min\\{k : G \\text{ 可 } k\\text{-正常染色}\\}", "detail": "正常染色：相邻顶点颜色不同。四色定理：χ(G)≤4 对任意平面图 G。", "tags": ["核心", "概念"]},
+        {"id": 79, "title": "染色多项式", "formula": "P_G(k) = \\text{用 } k \\text{ 种颜色正常染 } G \\text{ 的方案数}", "detail": "Birkhoff (1912) 引入，希望用来证明四色定理。P_G(k) 是 k 的整系数多项式，次数 = |V|，首项系数 1。", "tags": ["核心", "概念"]},
+        {"id": 80, "title": "删除—收缩递推", "formula": "P_G(k) = P_{G-e}(k) - P_{G/e}(k)", "detail": "选一条边 e，要么两端点颜色不同（= P_{G-e}(k)），要么相同（= P_{G/e}(k) 将两端点收缩为一点）。递归至空图（k^{|V|}）可计算任意图的染色多项式。", "tags": ["核心", "方法"]}
+      ]
+    },
+    {
+      "num": 16,
+      "title": "对称群作用与计数",
+      "entries": [
+        {"id": 81, "title": "轨道—稳定子公式", "formula": "|\\operatorname{Orb}(x)| \\cdot |\\operatorname{Stab}(x)| = |G|", "detail": "群 G 作用在集合 X 上，元素 x 的轨道大小 × 稳定子群大小 = 群的大小。Lagrange 定理的推广。", "tags": ["核心", "基础"]},
+        {"id": 82, "title": "Burnside 引理", "formula": "\\#\\text{轨道} = \\frac{1}{|G|}\\sum_{g \\in G} |\\operatorname{Fix}(g)|", "detail": "轨道数 = 各群元素不动点个数的算术平均。名称有误（Burnside 不是第一个发现的），但已成习惯。用于计数\"考虑对称性\"的组合对象（如项链、多面体染色）。", "tags": ["核心", "定理", "竞赛高频"]},
+        {"id": 83, "title": "Pólya 计数定理", "formula": "\\frac{1}{|G|}\\sum_{g \\in G} m^{c(g)}", "statement": "用 m 种颜色给 n 个位置染色，考虑置换群 G 作用的轨道数 = (1/|G|) Σ m^{c(g)}，其中 c(g) 为 g 的循环个数。", "detail": "Burnside 引理的多色推广。循环指标多项式 (Cycle Index) 统一处理多色分布。是项链计数、分子异构体计数的标准工具。", "tags": ["进阶", "定理", "竞赛高频"]}
+      ]
+    },
+    {
+      "num": 17,
+      "title": "设计、编码与有限几何相关结论",
+      "entries": [
+        {"id": 84, "title": "Steiner 系统 S(t,k,n)", "statement": "S(t,k,n) 是一个 n 元集合上的 k 元子集族（称为块），使得任意 t 元子集恰好包含在唯一一个块中。", "detail": "最著名的例子：S(2,3,7) = Fano 平面（7 点 7 线，每线 3 点），S(5,8,24) = Witt 设计（与 Leech 格子和散在单群有关）。", "tags": ["进阶", "概念"]},
+        {"id": 85, "title": "BIBD 参数关系", "formula": "vr = bk, \\quad \\lambda(v-1) = r(k-1)", "statement": "平衡不完全区组设计 BIBD(v,b,r,k,λ)：v 个处理、b 个区组、每个区组 k 个处理、每个处理出现在 r 个区组中、每对处理恰出现在 λ 个区组中。", "detail": "两个基本参数关系：处理−出现次数恒等式和每对处理出现次数恒等式。", "tags": ["进阶", "基础"]},
+        {"id": 86, "title": "纠错码的 Hamming 界", "formula": "\\sum_{i=0}^{t} \\binom{n}{i}(q-1)^i \\le q^{n-k}", "statement": "一个能纠正 ≤t 个错误的 q 元 (n,k) 码必须满足球打包上界。", "detail": "以每个码字为中心、半径 t 的 Hamming 球必须两两不交，故总体积 ≤ 全空间大小。等号成立时为完美码（如 Hamming 码、Golay 码）。", "tags": ["视野拓展"]}
+      ]
+    },
+    {
+      "num": 18,
+      "title": "竞赛组合小众定理清单",
+      "entries": [
+        {"id": 87, "title": "Kruskal–Katona 定理", "statement": "固定大小为 k 的集合族，其\"影子\"（每个集合去掉一个元素得到的 k−1 元集族）的最小规模由初始集合按反向字典序排列时达到。", "detail": "回答了\"给定大量 k 元子集，最少包含多少 (k−1) 元子集？\"极值集合论的基石之一。", "tags": ["视野拓展"]},
+        {"id": 88, "title": "Lovász 局部引理", "statement": "若一组\"坏事件\"中每个事件的发生概率 ≤ p，且每个事件最多与 d 个其他事件有依赖关系，且 ep(d+1) ≤ 1，则可以同时避免所有坏事件。", "detail": "Erdős–Lovász (1975)。概率方法的重要突破：即使有依赖关系，只要依赖稀疏，仍可避免所有坏事件。在 Ramsey 理论、超图染色中有大量应用。", "tags": ["视野拓展", "定理"]},
+        {"id": 89, "title": "Möbius 反演（偏序形式）", "statement": "偏序集上的 Möbius 函数 μ(x,y) 由 Σ_{x≤z≤y} μ(x,z) = δ_{xy} 定义，给出 f(y)=Σ_{x≤y} g(x) 的反演公式 g(y)=Σ_{x≤y} μ(x,y)f(x)。", "detail": "经典数论 Möbius 反演（整除偏序）和容斥原理（子集偏序）的统一框架。Rota (1964) 推广。", "tags": ["视野拓展", "方法"]},
+        {"id": 90, "title": "Combinatorial Nullstellensatz", "statement": "设 F 是域，f∈F[x₁,...,x_n]，若 x₁^{t₁}...x_n^{t_n} 是 f 的单项且 deg(f)=Σt_i，则对任意满足 |S_i|>t_i 的集合 S_i⊆F，存在 a_i∈S_i 使 f(a₁,...,a_n)≠0。", "detail": "Alon (1999)。多项式方法的有力工具，在加法组合和极值组合中应用广泛。Chevalley–Warning 定理的推广。", "tags": ["视野拓展", "方法", "竞赛高频"]},
+        {"id": 91, "title": "平面图 Euler 公式", "formula": "V - E + F = 2", "detail": "连通平面图的顶点数−边数+面数=2（含外部无限面）。推论：E ≤ 3V−6（无三角形时 ≤ 2V−4），用于证明 K₅ 和 K₃,₃ 非平面。", "tags": ["核心", "基础"]},
+        {"id": 92, "title": "概率方法", "statement": "要证明存在满足某性质的对象，构造一个随机模型使得\"随机对象满足性质\"的概率 > 0。", "detail": "Erdős 的开创性贡献。经典例子：Ramsey 数下界 R(k,k) > 2^{k/2} 的证明只需随机染色后计算期望。", "tags": ["核心", "方法", "竞赛高频"]},
+        {"id": 93, "title": "期望线性性", "formula": "\\mathbb{E}[X_1 + \\cdots + X_n] = \\mathbb{E}[X_1] + \\cdots + \\mathbb{E}[X_n]", "detail": "不要求独立性！这是概率方法中最常用的技术——将复杂随机变量分解为简单指示变量的和。", "tags": ["核心", "方法"]},
+        {"id": 94, "title": "二次矩法 / 方差法", "statement": "若 Var(X) = o((EX)²)，则 X > 0 的概率接近 1。", "detail": "用于证明某随机变量\"几乎总是\"取正值。常与期望线性性配合，先证 EX→∞ 再证方差小→集中在均值附近。", "tags": ["进阶", "方法"]},
+        {"id": 95, "title": "半随机法 / Alternation method", "statement": "先随机生成一个近似解，再删除/修改其中\"坏\"的部分，得到一个严格的解。", "detail": "结合随机性和确定性修正。在构造大独立集、大 gap 染色等问题中常用。", "tags": ["进阶", "方法"]},
+        {"id": 96, "title": "Szemerédi 型思想", "statement": "足够稠密的整数集必含任意长的等差数列。", "detail": "Szemerédi 定理 (1975) 的定性描述。精确陈述涉及上 Banach 密度。Green–Tao 定理 (2008) 将其推广到素数集合。", "tags": ["视野拓展"]},
+        {"id": 97, "title": "组合专题链条建议", "statement": "学习路径：双计数 → 递推与生成函数 → 集合族 → 图论 → 群作用 → 概率方法。", "detail": "六个模块从具体到抽象逐步深入。掌握前四个模块即可应对大多数竞赛组合题；后两个模块（群作用计数 Burnside/Pólya、概率方法）是冲击高分的进阶武器。", "tags": ["元学习"]}
+      ]
+    }
+  ]
+}

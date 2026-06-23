@@ -1,0 +1,242 @@
+{
+  "title": "初等数论基础知识目录",
+  "description": "覆盖高中数竞数论全部内容，23个章节268个条目。包含整除理论、同余、原根、二次剩余、丢番图方程、算术函数、筛法等完整链条。组织特点：每条标注难度标签，提供证明入口与学习路径指引。",
+  "chapters": [
+    {
+      "num": 0,
+      "title": "学习路径指引",
+      "entries": [
+        {"id": 0, "title": "六条推荐学习链条", "statement": "①整除→唯一分解→同余→CRT→Fermat/Euler/Wilson→阶与原根（核心链）", "detail": "②同余→LTE→p-adic→二次剩余→二次互反律（模算术链）\n③不定方程→Pell→连分数→逼近→二次型（丢番图链）\n④Dirichlet卷积→Möbius反演→筛法→算术函数（分析链）\n⑤代数数论入口：Gauss整数→Eisenstein整数→二次域\n⑥素数分布→PNT→Dirichlet→Green–Tao→ABC猜想（视野链）", "tags": ["元学习"]}
+      ]
+    },
+    {
+      "num": 1,
+      "title": "整除与带余除法",
+      "entries": [
+        {"id": 1, "title": "带余除法（Euclid 除法）", "statement": "对任意整数 a,b (b≠0)，存在唯一的整数 q,r 使得 a=bq+r，其中 0≤r<|b|。", "formula": "a = bq + r, \\quad 0 \\le r < |b|", "detail": "q=⌊a/b⌋（b>0时）。这是全部初等数论的基础。唯一性：若 a=bq₁+r₁=bq₂+r₂ 均在 [0,|b|) 内，则两式相减得 b|(r₁−r₂)，由范围限制得 r₁=r₂,q₁=q₂。", "tags": ["核心", "基础"]},
+        {"id": 2, "title": "整除基本性质", "statement": "(1) a|b,b|c ⇒ a|c；(2) a|b,a|c ⇒ a|(bx+cy)；(3) a|b,b≠0 ⇒ |a|≤|b|。", "detail": "前两条说明整除关系是偏序且产生理想结构（整数环是主理想整环）。", "tags": ["核心", "基础"]},
+        {"id": 3, "title": "最大公约数 (GCD)", "formula": "\\gcd(a,b) = \\max\\{d > 0 : d|a \\text{ 且 } d|b\\}", "detail": "约定 gcd(0,0) 无定义。性质：gcd(a,b)=gcd(b,a mod b) (Euclid算法的基础)；gcd(ca,cb)=|c|gcd(a,b)；gcd(a,b)=1 称a,b互素。", "tags": ["核心", "基础"]},
+        {"id": 4, "title": "Euclid 算法", "formula": "\\gcd(a,b) = \\gcd(b, a \\bmod b), \\quad \\gcd(r_{k-2},r_{k-1}) \\to \\cdots \\to r_n = \\gcd", "detail": "每次迭代将较大数替换为两数相除的余数，直到某一项为0。复杂度 O(log min(a,b))（Fibonacci 数列是最坏情况）。", "tags": ["核心", "基础"]},
+        {"id": 5, "title": "Bézout 定理（扩展 Euclid）", "formula": "\\gcd(a,b) = \\min\\{ax+by > 0 : x,y \\in \\mathbb{Z}\\}", "statement": "存在整数 x,y 使得 ax+by=gcd(a,b)。特别地，a,b 互素 ⇔ ∃x,y 使 ax+by=1。", "detail": "x,y 可由扩展 Euclid 算法递推求出：从 gcd(a,b)=r_n 回代。该定理是解一次同余方程和证明算术基本定理唯一性的关键。", "tags": ["核心", "基础"]},
+        {"id": 6, "title": "最小公倍数 (LCM)", "formula": "\\operatorname{lcm}(a,b) = \\frac{|ab|}{\\gcd(a,b)}", "detail": "gcd 和 lcm 的关系式极为常用。注意只有两个数时此式成立，三个及以上需小心。", "tags": ["核心", "基础"]},
+        {"id": 7, "title": "Euclid 引理", "statement": "若 p 是素数且 p|ab，则 p|a 或 p|b。", "detail": "等价于 Z 中素元不可约。该引理是算术基本定理唯一性证明的核心步骤。", "tags": ["核心", "基础"]}
+      ]
+    },
+    {
+      "num": 2,
+      "title": "算术基本定理与唯一分解",
+      "entries": [
+        {"id": 8, "title": "算术基本定理", "statement": "每个大于1的整数可唯一地（不计次序）分解为素数的乘积。", "formula": "n = p_1^{a_1} p_2^{a_2} \\cdots p_k^{a_k}", "detail": "存在性由归纳法，唯一性使用 Euclid 引理。该定理是全部数论的基石。", "tags": ["核心", "基础"]},
+        {"id": 9, "title": "除数函数 d(n)", "formula": "d(n) = \\prod_{i=1}^{k} (a_i + 1)", "statement": "若 n=∏p_i^{a_i}，则正约数个数 d(n)=∏(a_i+1)。", "detail": "每个素因子可取指数 0,1,...,a_i。d(n) 是积性函数。", "tags": ["核心", "基础"]},
+        {"id": 10, "title": "约数和函数 σ(n)", "formula": "\\sigma(n) = \\prod_{i=1}^{k} \\frac{p_i^{a_i+1}-1}{p_i-1}", "detail": "σ(n) 也是积性函数。σ(n)=2n 定义了完全数。前几个完全数：6,28,496,8128。偶完全数由 Mersenne 素数生成（Euclid–Euler 定理）。", "tags": ["核心", "基础"]},
+        {"id": 11, "title": "v_p(n) 记号和 p-adic 赋值", "formula": "v_p(n) = a \\text{ 表示 } p^a \\mid n \\text{ 但 } p^{a+1} \\nmid n", "detail": "v_p 是从 Z\\{0} 到 N₀ 的函数。满足：v_p(ab)=v_p(a)+v_p(b)；v_p(a+b)≥min(v_p(a),v_p(b))，等号在 v_p(a)≠v_p(b) 时成立。", "tags": ["进阶核心", "工具"]},
+        {"id": 12, "title": "完全数判定（Euclid–Euler）", "formula": "n = 2^{p-1}(2^p-1)", "statement": "偶完全数 ⇔ n=2^{p-1}(2^p-1)，其中 2^p−1 是 Mersenne 素数。", "detail": "奇完全数是否存在是数论中尚未解决的古老问题（至2026年仍未知）。", "tags": ["进阶核心", "经典"]}
+      ]
+    },
+    {
+      "num": 3,
+      "title": "同余与一次同余方程",
+      "entries": [
+        {"id": 13, "title": "同余定义", "formula": "a \\equiv b \\pmod{m} \\iff m \\mid (a-b)", "detail": "同余是等价关系：自反、对称、传递。与加减乘运算兼容（保持同余性），除法需小心（当除数和模互素时可除）。", "tags": ["核心", "基础"]},
+        {"id": 14, "title": "同余类环 Z/mZ", "statement": "模 m 的同余类构成含幺交换环 Z/mZ。m 为素数时构成域 F_p。", "detail": "Z/mZ 的元素：0,1,...,m−1（或 m 个剩余类）。乘法可逆元恰为与 m 互素的类（共 φ(m) 个）。", "tags": ["核心", "概念"]},
+        {"id": 15, "title": "一次同余方程", "formula": "ax \\equiv b \\pmod{m} \\text{ 有解 } \\iff \\gcd(a,m) \\mid b", "detail": "解的个数 = gcd(a,m)（模 m 意义下）。用扩展 Euclid 算法求特解。", "tags": ["核心", "基础"]},
+        {"id": 16, "title": "模逆元", "formula": "a^{-1} \\pmod{m} \\iff \\gcd(a,m)=1", "statement": "扩展 Euclid 算法求 ax+my=1，则 x≡a^{−1} (mod m)。", "detail": "模素数时，a^{−1}≡a^{p−2} (mod p)（Fermat 小定理）。一般模数不能用此法。", "tags": ["核心", "基础"]}
+      ]
+    },
+    {
+      "num": 4,
+      "title": "中国剩余定理 (CRT)",
+      "entries": [
+        {"id": 17, "title": "中国剩余定理", "formula": "x \\equiv a_i \\pmod{m_i} \\quad (i=1,\\ldots,k), \\; \\gcd(m_i,m_j)=1", "statement": "若模数两两互素，则同余方程组模 M=∏m_i 有唯一解。", "detail": "解法：令 M_i=M/m_i，求 y_i≡M_i^{−1} (mod m_i)，则 x≡Σa_i·M_i·y_i (mod M)。孙子定理最早见于《孙子算经》(约公元3世纪) 的\"物不知数\"问题。", "tags": ["核心", "基础"]},
+        {"id": 18, "title": "CRT 的环论诠释", "formula": "\\mathbb{Z}/m\\mathbb{Z} \\cong \\mathbb{Z}/p_1^{e_1}\\mathbb{Z} \\times \\cdots \\times \\mathbb{Z}/p_k^{e_k}\\mathbb{Z}", "statement": "中国剩余定理本质上是环同构定理。乘法群同理：φ(m)=φ(p₁^{e₁})⋯φ(p_k^{e_k})。", "detail": "该同构将模合数问题拆解为模素数幂的子问题，是处理几乎所有模合数问题的标准策略。", "tags": ["进阶核心", "方法"]}
+      ]
+    },
+    {
+      "num": 5,
+      "title": "Fermat 小定理、Euler 定理与 Wilson 定理",
+      "entries": [
+        {"id": 19, "title": "Euler 函数 φ(n)", "formula": "\\varphi(n) = n\\prod_{p\\mid n}\\left(1-\\frac{1}{p}\\right) = \\prod p_i^{e_i-1}(p_i-1)", "detail": "φ(n) = {1≤k≤n:gcd(k,n)=1}。积性函数：gcd(m,n)=1 ⇒ φ(mn)=φ(m)·φ(n)。", "tags": ["核心", "基础"]},
+        {"id": 20, "title": "Euler 定理", "formula": "a^{\\varphi(m)} \\equiv 1 \\pmod{m} \\quad (\\gcd(a,m)=1)", "detail": "Lagrange 定理在 (Z/mZ)^× 上的应用——群的大小为 φ(m)，任一元素的阶整除 φ(m)。", "tags": ["核心", "基础"]},
+        {"id": 21, "title": "Fermat 小定理", "formula": "a^{p-1} \\equiv 1 \\pmod{p} \\quad (p \\nmid a), \\qquad a^p \\equiv a \\pmod{p}", "detail": "Euler 定理中取 m=p 素数即得。1640年 Fermat 提出，1736年 Euler 发表第一个证明。后者更强：对所有 a 成立。", "tags": ["核心", "基础"]},
+        {"id": 22, "title": "Wilson 定理", "formula": "(p-1)! \\equiv -1 \\pmod{p} \\iff p \\text{ 是素数}", "detail": "证明思路：Z/pZ 中乘法的配对——每个 a∈[1,p−1] 的逆元唯一，a=a^{−1} 当且仅当 a²≡1⇒a≡±1。其余元素两两配对相乘 ≡1，故 Π≡1·(−1)≡−1。", "tags": ["核心", "经典"]},
+        {"id": 23, "title": "Carmichael 函数 λ(n)", "statement": "使得 a^k≡1 (mod n) 对所有 gcd(a,n)=1 成立的最小正整数。", "formula": "\\lambda(p^k)=\\varphi(p^k) (p>2), \\lambda(2^k)=\\varphi(2^k)/2 (k\\ge 3)", "detail": "在 RSA 等密码学环境中有实际用途。λ(1)=1，λ(2)=1，λ(4)=2。", "tags": ["进阶核心", "概念"]}
+      ]
+    },
+    {
+      "num": 6,
+      "title": "阶与原根",
+      "entries": [
+        {"id": 24, "title": "模 m 的阶 ord_m(a)", "formula": "\\operatorname{ord}_m(a) = \\min\\{k>0 : a^k \\equiv 1 \\pmod{m}\\}", "statement": "前提 gcd(a,m)=1。由 Euler 定理保证阶存在且 ord_m(a) | φ(m)。", "detail": "核心性质：a^k≡1 ⇔ ord(a)|k；ord(a^k)=ord(a)/gcd(ord(a),k)。", "tags": ["核心", "概念"]},
+        {"id": 25, "title": "原根定义", "statement": "g 是模 m 的原根，若 ord_m(g)=φ(m)，即 g 生成整个乘法群 (Z/mZ)^×。", "detail": "不是所有模数都有原根。有原根的模数：1,2,4,p^k,2p^k（p 是奇素数）。", "tags": ["核心", "概念"]},
+        {"id": 26, "title": "原根存在性定理", "formula": "m \\in \\{1,2,4,p^k,2p^k \\mid p \\text{ 奇素数}, k\\ge 1\\}", "statement": "模 m 的原根存在 ⇔ m ∈ {1,2,4} 或 m = p^k 或 2p^k（p 为奇素数，k≥1）。", "detail": "证明分两步：(1) 奇素数幂有原根；(2) 2 的幂只有 2,4 有原根。然后由 CRT 拼接得到 2p^k 的情形。", "tags": ["核心", "定理"]},
+        {"id": 27, "title": "原根个数", "formula": "\\varphi(\\varphi(m)) \\text{ 个（当原根存在时）}", "statement": "若有原根，则所有原根为 g^k，其中 gcd(k,φ(m))=1（共 φ(φ(m)) 个）。", "detail": "这来自循环群中生成元的刻画。", "tags": ["进阶核心", "经典"]},
+        {"id": 28, "title": "指数与离散对数", "statement": "类似于实数中的对数。若 g 是模 p 的原根，则每个与 p 互素的数 a 可唯一表示为 a≡g^{ind_g(a)} (mod p)。", "detail": "化乘为加：ind(ab)≡ind(a)+ind(b) (mod p−1)。在解高次同余方程时极有用。", "tags": ["进阶核心", "方法"]}
+      ]
+    },
+    {
+      "num": 7,
+      "title": "p-adic 赋值与 LTE 引理",
+      "entries": [
+        {"id": 29, "title": "LTE 引理（Lifting The Exponent）", "formula": "v_p(x^n - y^n) = v_p(x-y) + v_p(n) \\quad (p \\mid x-y, p \\nmid xy, n \\text{ 奇数或 } p=2 \\text{ 且 } 4\\mid x-y)", "detail": "竞赛数论中最重要的工具之一！精确计算整除指数。经典形式对 x−y 和 x+y 成立。需注意各种边界条件（p=2 的特殊性）。", "tags": ["进阶核心", "竞赛高频"]},
+        {"id": 30, "title": "LTE 对 x^n+y^n 的情形", "formula": "v_p(x^n + y^n) = v_p(x+y) + v_p(n) \\quad (p \\mid x+y, p \\nmid xy, n \\text{ 奇数})", "detail": "仅对奇数 n 成立。注意两个条件缺一不可。", "tags": ["进阶核心", "竞赛高频"]},
+        {"id": 31, "title": "LTE 的 p=2 特殊情形", "statement": "v₂(x^n−y^n) 在 x,y 均为奇数且 4∤(x−y) 时需加 v₂(x+y)+v₂(n)−1 项。", "detail": "p=2 是 LTE 中最容易出错的情形——因为 (Z/2^kZ)^× 不是循环群（k≥3），结构比奇素数复杂。", "tags": ["进阶核心", "竞赛高频"]}
+      ]
+    },
+    {
+      "num": 8,
+      "title": "二项式系数与同余",
+      "entries": [
+        {"id": 32, "title": "Lucas 定理", "formula": "\\binom{n}{m} \\equiv \\prod_{i=0}^{k} \\binom{n_i}{m_i} \\pmod{p}", "statement": "将 n,m 写成 p 进制：n=Σn_i p^i, m=Σm_i p^i，则 C(n,m) ≡ ∏C(n_i,m_i) (mod p)。", "detail": "关键推论：C(n,m) 不被 p 整除 ⇔ 所有 m_i≤n_i（即 p 进制下 m 的每位 ≤ n 的对应位）。在组合几何中应用广泛。", "tags": ["进阶核心", "定理"]},
+        {"id": 33, "title": "Kummer 定理", "statement": "v_p(C(n,m)) = p 进制下 m+(n−m) 做加法时的进位数。", "detail": "等价于 p 进制下 n−m 的减法过程中的借位数。与 Lucas 定理结合可精确计算组合数的 p-adic 赋值。", "tags": ["进阶核心", "定理"]},
+        {"id": 34, "title": "Wolstenholme 定理", "formula": "\\binom{2p-1}{p-1} \\equiv 1 \\pmod{p^3} \\quad (p \\ge 5)", "detail": "更强的形式：调和数 H_{p-1} 的分子被 p² 整除。与 Fermat 大定理的一类反证法尝试有关。", "tags": ["进阶核心", "经典"]}
+      ]
+    },
+    {
+      "num": 9,
+      "title": "二次剩余与 Legendre 符号",
+      "entries": [
+        {"id": 35, "title": "二次剩余定义", "statement": "a 是模 p 的二次剩余 ⇔ ∃x 使 x²≡a (mod p)，gcd(a,p)=1。", "detail": "模奇素数 p 下恰好有 (p−1)/2 个二次剩余，(p−1)/2 个二次非剩余。", "tags": ["核心", "概念"]},
+        {"id": 36, "title": "Legendre 符号", "formula": "\\left(\\frac{a}{p}\\right) = \\begin{cases} 1 & a \\text{ 是模 } p \\text{ 的二次剩余} \\\\ -1 & a \\text{ 是模 } p \\text{ 的二次非剩余} \\\\ 0 & p \\mid a \\end{cases}", "detail": "Euler 判别法：(a/p) ≡ a^{(p−1)/2} (mod p)。积性：(ab/p)=(a/p)(b/p)。", "tags": ["核心", "工具"]},
+        {"id": 37, "title": "Euler 判别法", "formula": "\\left(\\frac{a}{p}\\right) \\equiv a^{\\frac{p-1}{2}} \\pmod{p}", "detail": "证明使用 Fermat 小定理：a^{(p−1)/2}≡±1 (mod p) 且二次剩余恰好满足 ≡+1。", "tags": ["核心", "基础"]},
+        {"id": 38, "title": "Gauss 引理", "statement": "(a/p) = (−1)^μ，其中 μ 为 a,2a,...,((p−1)/2)a 模 p 后落在 ((p−1)/2, p) 内的个数。", "detail": "Gauss 年轻时给出的优雅证明。直接推论：(2/p) = (−1)^{(p²−1)/8} = 1 当 p≡±1 (mod 8)。", "tags": ["核心", "方法"]},
+        {"id": 39, "title": "二次互反律（Gauss 的黄金定理）", "formula": "\\left(\\frac{p}{q}\\right)\\left(\\frac{q}{p}\\right) = (-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}", "detail": "Gauss 称之为\"黄金定理\"(Theorema Aureum)，给出了七种不同的证明。这是数论中最深刻优美的定理之一——它建立了两个不同素数间的二次剩余判别关系。互补公式：(−1/p)=(−1)^{(p−1)/2}, (2/p)=(−1)^{(p²−1)/8}。", "tags": ["核心", "定理", "竞赛高频"]},
+        {"id": 40, "title": "Jacobi 符号", "formula": "\\left(\\frac{a}{n}\\right) = \\prod \\left(\\frac{a}{p_i}\\right)^{e_i} \\; (n=\\prod p_i^{e_i})", "detail": "Legendre 符号对合数模的推广。注意：Jacobi 符号 =1 不意味着 a 是模 n 的二次剩余！仅当 n 为素数时两者等价。", "tags": ["进阶核心", "工具"]}
+      ]
+    },
+    {
+      "num": 10,
+      "title": "高次剩余与圆分多项式",
+      "entries": [
+        {"id": 41, "title": "k 次剩余", "statement": "a 是 k 次剩余 ⇔ 同余式 x^k≡a (mod p) 有解。", "detail": "判定：a^{(p−1)/gcd(k,p−1)}≡1 (mod p)。特别地，若 gcd(k,p−1)=1，则每个非零元都是 k 次剩余（映射 x→x^k 是双射）。", "tags": ["进阶核心", "概念"]},
+        {"id": 42, "title": "圆分多项式 Φ_n(x)", "formula": "x^n - 1 = \\prod_{d\\mid n} \\Phi_d(x)", "detail": "Φ_n(x) = n 次本原单位根的极小多项式。前几个：Φ₁(x)=x−1, Φ₂(x)=x+1, Φ₃(x)=x²+x+1, Φ₄(x)=x²+1, Φ₅(x)=x⁴+x³+x²+x+1, Φ₆(x)=x²−x+1。系数不一定是 ±1！Φ₁₀₅(x) 的系数出现 2。", "tags": ["进阶核心", "概念"]}
+      ]
+    },
+    {
+      "num": 11,
+      "title": "不定方程基础",
+      "entries": [
+        {"id": 43, "title": "线性丢番图方程", "formula": "ax + by = c \\text{ 有整数解 } \\iff \\gcd(a,b) \\mid c", "detail": "通解：x=x₀+(b/d)·t, y=y₀−(a/d)·t，其中 d=gcd(a,b)。无穷多组解，参数 t∈Z。", "tags": ["核心", "基础"]},
+        {"id": 44, "title": "Pythagorean 三元组", "formula": "a = k(m^2-n^2), \\; b = 2kmn, \\; c = k(m^2+n^2)", "statement": "所有本原 Pythagoras 三元组（gcd(a,b,c)=1,a 奇）为 a=m²−n², b=2mn, c=m²+n²，其中 m>n>0, gcd(m,n)=1, m≢n (mod 2)。", "detail": "本原三元组的积 abc 被 60 整除。该公式在巴比伦泥板 Plimpton 322 (约公元前1800年) 中已有记载。", "tags": ["核心", "经典"]},
+        {"id": 45, "title": "Mordell 方程 y²=x³+k", "statement": "椭圆曲线的最简形式。有限整数解（Mordell定理，后来是 Faltings 定理的特例）。", "detail": "k=0: (t²,t³)；k=1:(0,±1),(2,±3)；k=−2:(3,±5)。寻找所有整数解可使用 Z[√k] 的因子分解法。", "tags": ["进阶核心", "方法"]},
+        {"id": 46, "title": "Catalan 猜想（Mihăilescu 定理）", "formula": "3^2 - 2^3 = 1 \\text{ 是唯一解}", "statement": "a^b−c^d=1 在 a,b,c,d>1 下的唯一解是 3²−2³=1。", "detail": "1844年 Catalan 提出猜想，2002年 Mihăilescu 给出证明。", "tags": ["视野拓展", "经典"]}
+      ]
+    },
+    {
+      "num": 12,
+      "title": "Pell 方程",
+      "entries": [
+        {"id": 47, "title": "Pell 方程标准形式", "formula": "x^2 - d \\cdot y^2 = 1 \\quad (d>0 \\text{ 非完全平方数})", "statement": "若 d 不是完全平方数，则 Pell 方程有无穷多组正整数解。", "detail": "最小正整数解 (x₁,y₁) 称为基本解。所有解由 (x₁+y₁√d)^n 生成：x_n+y_n√d=(x₁+y₁√d)^n。", "tags": ["核心", "经典"]},
+        {"id": 48, "title": "Pell 方程的递推关系", "formula": "x_{n+1} = x_1 x_n + d y_1 y_n, \\quad y_{n+1} = x_1 y_n + y_1 x_n", "detail": "等价于二阶线性递推。也可用矩阵形式表达。", "tags": ["核心", "基础"]},
+        {"id": 49, "title": "广义 Pell 方程", "formula": "x^2 - d y^2 = N \\quad (N \\neq 1)", "detail": "可能有零组、有限组或无穷多组解。与二次域的类数和基本单位密切相关。", "tags": ["进阶核心", "概念"]},
+        {"id": 50, "title": "负 Pell 方程", "formula": "x^2 - d y^2 = -1", "detail": "有解当且仅当 d 的连分数周期为奇数。例如 x²−34y²=−1 无解，x²−13y²=−1 有解 18²−13·5²=−1。", "tags": ["进阶核心", "经典"]}
+      ]
+    },
+    {
+      "num": 13,
+      "title": "连分数与丢番图逼近",
+      "entries": [
+        {"id": 51, "title": "有限连分数（Euclid算法形式）", "formula": "[a_0; a_1, a_2, \\ldots, a_n] = a_0 + \\cfrac{1}{a_1 + \\cfrac{1}{a_2 + \\cdots + \\cfrac{1}{a_n}}}", "detail": "有理数的连分数表示有限。无理数的连分数展开无限。", "tags": ["核心", "基础"]},
+        {"id": 52, "title": "周期性连分数（Lagrange定理）", "statement": "二次无理数（形如 (P+√D)/Q）的连分数展开是最终周期的。", "detail": "Pell 方程基本解由 √d 的连分数周期给出。这是解 Pell 方程的标准算法。", "tags": ["核心", "定理"]},
+        {"id": 53, "title": "最佳有理逼近", "statement": "连分数的渐近分数 p_n/q_n 是分母不超过 q_n 的所有分数中对该无理数的最佳逼近。", "detail": "满足 |α−p/q|<1/q² 的有理数必是 α 的某渐近分数。", "tags": ["进阶核心", "经典"]},
+        {"id": 54, "title": "Dirichlet 逼近定理", "formula": "\\left|\\alpha - \\frac{p}{q}\\right| < \\frac{1}{q^2}", "statement": "对任意无理数 α，存在无穷多组 p,q 满足 |α−p/q|<1/q²。", "detail": "抽屉原理的经典应用！Kronecker 定理和等分布理论的基础。", "tags": ["核心", "定理"]}
+      ]
+    },
+    {
+      "num": 14,
+      "title": "二次型与格点方法",
+      "entries": [
+        {"id": 55, "title": "二次型的一般形式", "formula": "f(x,y) = ax^2 + bxy + cy^2", "statement": "判别式 D=b²−4ac。等价于理想类群的计算。", "detail": "Gauss 在《算术研究》(1801) 中建立了二次型理论的完整框架。", "tags": ["进阶核心", "概念"]},
+        {"id": 56, "title": "Minkowski 定理（格点）", "formula": "\\operatorname{vol}(S) > 2^n \\det(\\Lambda)", "statement": "R^n 中关于格 Λ 对称的凸体，若体积充分大，则必含非零格点。", "detail": "几何数论的基本结果。用它可以证明：每个素数 p≡1 (mod 4) 可表为两平方和（结合二次剩余知识）。", "tags": ["进阶核心", "定理"]},
+        {"id": 57, "title": "两平方和定理", "formula": "p = a^2 + b^2 \\iff p = 2 \\text{ 或 } p \\equiv 1 \\pmod{4}", "statement": "奇素数 p 可表为两平方和 ⇔ p≡1 (mod 4)。", "detail": "Fermat 在给 Mersenne 的信中首次陈述 (1640)，Euler 在 1747 年给出第一个完整证明。", "tags": ["核心", "定理"]},
+        {"id": 58, "title": "四平方和定理（Lagrange）", "formula": "n = a^2 + b^2 + c^2 + d^2", "statement": "每一个正整数都可以表示为四个整数的平方和。", "detail": "Lagrange (1770) 的证明使用 Euler 的四平方恒等式。这是 Waring 问题的起点。", "tags": ["核心", "定理"]}
+      ]
+    },
+    {
+      "num": 15,
+      "title": "有限域与多项式方法",
+      "entries": [
+        {"id": 59, "title": "有限域 F_p", "statement": "模素数 p 的同余类构成有限域 F_p，含 p 个元素。F_p^× 是 p−1 阶循环群。", "detail": "有限域的唯一性：所有 q=p^n 元有限域同构。特征必为素数。", "tags": ["核心", "概念"]},
+        {"id": 60, "title": "Chevalley–Warning 定理", "statement": "若多项式方程组在 F_p 上的次数之和小于变量个数，则解的个数被 p 整除。", "detail": "推论：若存在平凡解（全零解），则必有非平凡解。是 Combinatorial Nullstellensatz 的先驱。", "tags": ["进阶核心", "定理"]},
+        {"id": 61, "title": "多项式恒等定理", "statement": "次数 <p 的非零多项式（系数在 F_p 中）在 F_p 上至多有 deg(f) 个根。", "detail": "这是\"Lagrange 定理在群上的应用\"的有限域版本。用于证明某些多项式在 F_p 上不可能完全因式分解。", "tags": ["核心", "方法"]}
+      ]
+    },
+    {
+      "num": 16,
+      "title": "素数分布",
+      "entries": [
+        {"id": 62, "title": "素数无限性（Euclid 经典证明）", "statement": "素数有无穷多个。", "detail": "Euclid：设所有素数为 p₁,...,p_k，构造 N=p₁p₂⋯p_k+1，N 的任一素因子必为新素数。Euler 另证：Σ1/p 发散。", "tags": ["核心", "基础"]},
+        {"id": 63, "title": "素数定理 (PNT)", "formula": "\\pi(x) \\sim \\frac{x}{\\ln x} \\quad (x \\to \\infty)", "detail": "Hadamard 和 de la Vallée-Poussin 于 1896 年独立证明。误差项与 Riemann ζ 函数的零点分布有关——这是解析数论的中心问题。", "tags": ["视野拓展", "经典"]},
+        {"id": 64, "title": "Dirichlet 定理", "statement": "若 gcd(a,d)=1，则等差数列 a, a+d, a+2d, ... 中包含无穷多个素数。", "detail": "证明使用 Dirichlet L-函数和解析方法（1837）。特殊情形如 4k+1 型和 4k+3 型素数均为无穷多。", "tags": ["进阶核心", "定理"]},
+        {"id": 65, "title": "Green–Tao 定理", "statement": "素数集合中包含任意长的等差数列。", "detail": "2008 年证明，使用 Szemerédi 定理和伪随机测度方法。这是素数分布理论的重大突破。", "tags": ["视野拓展", "定理"]},
+        {"id": 66, "title": "Bertrand 公设（Chebyshev）", "statement": "对任意 n>1，n 和 2n 之间至少存在一个素数。", "formula": "\\forall n \\ge 2, \\; \\exists p \\text{ prime s.t. } n < p < 2n", "detail": "Chebyshev 于 1850 年给出证明。Erdős 在 19 岁时用初等方法（仅用组合恒等式和不等式）给出了一个优雅的证明。", "tags": ["核心", "经典"]}
+      ]
+    },
+    {
+      "num": 17,
+      "title": "Dirichlet 卷积与算术函数",
+      "entries": [
+        {"id": 67, "title": "Dirichlet 卷积", "formula": "(f * g)(n) = \\sum_{d\\mid n} f(d)\\,g\\!\\left(\\frac{n}{d}\\right)", "detail": "积性函数的 Dirichlet 卷积仍为积性函数。单位元：ε(n)=[n=1]。所有积性函数在 Dirichlet 卷积下构成 Abel 群（可逆充要条件：f(1)≠0）。", "tags": ["进阶核心", "工具"]},
+        {"id": 68, "title": "Möbius 函数 μ(n)", "formula": "\\mu(n) = \\begin{cases} 1 & n=1 \\\\ (-1)^k & n=p_1\\cdots p_k \\text{ (无平方因子)} \\\\ 0 & \\text{有平方因子} \\end{cases}", "detail": "μ 是常函数 1 在 Dirichlet 卷积下的逆：μ * 1 = ε。Möbius 反演的核心。", "tags": ["核心", "概念"]},
+        {"id": 69, "title": "Möbius 反演公式", "formula": "f(n) = \\sum_{d\\mid n} g(d) \\iff g(n) = \\sum_{d\\mid n} \\mu(d)\\,f\\!\\left(\\frac{n}{d}\\right)", "detail": "Dirichlet 卷积形式的自然推论：f=g*1 ⇔ g=f*μ。在组合数学中也有偏序集版本。经典应用：φ(n)=n·Σ_{d|n} μ(d)/d。", "tags": ["核心", "方法"]},
+        {"id": 70, "title": "积性函数与完全积性函数", "statement": "积性：gcd(m,n)=1 ⇒ f(mn)=f(m)f(n)。完全积性：对所有 m,n 成立 f(mn)=f(m)f(n)。", "detail": "积性函数举例：φ, μ, σ_k, d=σ₀；完全积性函数举例：1(n)=1, id(n)=n, ε(n)=[n=1]。", "tags": ["核心", "概念"]},
+        {"id": 71, "title": "Euler 乘积公式", "formula": "\\sum_{n=1}^{\\infty} \\frac{f(n)}{n^s} = \\prod_{p} \\left(\\sum_{k=0}^{\\infty} \\frac{f(p^k)}{p^{ks}}\\right)", "statement": "对积性函数 f，其 Dirichlet 级数可写为 Euler 乘积。", "detail": "Riemann ζ 函数：ζ(s)=∑1/n^s=∏(1−p^{-s})^{-1}。这是解析数论的入口。", "tags": ["进阶核心", "方法"]}
+      ]
+    },
+    {
+      "num": 18,
+      "title": "筛法入门",
+      "entries": [
+        {"id": 72, "title": "Eratosthenes 筛法", "statement": "依次划去素数的倍数，剩下的即为素数。", "detail": "初等筛法的本质：集合 A 中不被前 z 个素数中任何一个整除的元素个数，通过容斥原理估计。", "tags": ["核心", "基础"]},
+        {"id": 73, "title": "Brun 筛法", "statement": "用截断容斥给出筛法的上界和下界。", "detail": "经典结果：孪生素数的倒数和收敛（Brun 常数 < ∞）。现代筛法的奠基之作。", "tags": ["进阶核心", "方法"]},
+        {"id": 74, "title": "Selberg 筛法", "statement": "构造非负二次型权函数优化筛法上界。", "detail": "Selberg 引入 λ_d² 权重使上界的常数因子得到优化。在 Goldbach 和孪生素数猜想的逼近中起关键作用。", "tags": ["视野拓展", "方法"]}
+      ]
+    },
+    {
+      "num": 19,
+      "title": "Fibonacci 与 Lucas 序列（数论性质）",
+      "entries": [
+        {"id": 75, "title": "Fibonacci 序列的整除性质", "formula": "m \\mid n \\implies F_m \\mid F_n", "detail": "更强的结论：gcd(F_m,F_n)=F_{gcd(m,n)}。是数论和组合交汇处的经典结果。", "tags": ["核心", "经典"]},
+        {"id": 76, "title": "Lucas 序列", "formula": "U_n = \\frac{\\alpha^n - \\beta^n}{\\alpha-\\beta}, \\quad V_n = \\alpha^n + \\beta^n", "statement": "α,β 是 x²−Px+Q=0 的两根。U_n 类似 Fibonacci，V_n 类似 Lucas 数。", "detail": "Lucas 序列在素性检验（Lucas 测试）中有实际应用。Lucas–Lehmer 检验判定 Mersenne 素数的标准方法。", "tags": ["进阶核心", "概念"]},
+        {"id": 77, "title": "Fibonacci 数的模周期性", "formula": "F_n \\pmod{m} \\text{ 是周期的，周期 } \\pi(m) \\text{（Pisano 周期）}", "detail": "π(2)=3, π(3)=8, π(5)=20。π(p) 整除 p−1 或 2p+2（取决于 p≡±1 mod 5 还是 p≡±2 mod 5）。", "tags": ["进阶核心", "经典"]}
+      ]
+    },
+    {
+      "num": 20,
+      "title": "代数数论入门：二次域",
+      "entries": [
+        {"id": 78, "title": "Gauss 整数 Z[i]", "formula": "\\mathbb{Z}[i] = \\{a+bi : a,b \\in \\mathbb{Z}\\}", "detail": "范数：N(a+bi)=a²+b²（积性！）。单位元：±1,±i。Gauss 素数：由通常素数在 Z[i] 中的分解得到。", "tags": ["进阶核心", "概念"]},
+        {"id": 79, "title": "Gauss 整数中的唯一分解", "statement": "Z[i] 是唯一分解整环 (UFD)。素数 p≡1 (mod 4) 在 Z[i] 中分解为两个共轭素元之积。", "detail": "这是两平方和定理的代数解释：p=x²+y² 当且仅当 p 在 Z[i] 中不是素元。", "tags": ["进阶核心", "经典"]},
+        {"id": 80, "title": "Eisenstein 整数 Z[ω]", "formula": "\\mathbb{Z}[\\omega], \\; \\omega = e^{2\\pi i/3} = \\frac{-1+\\sqrt{-3}}{2}", "detail": "范数：N(a+bω)=a²−ab+b²。单位元：±1,±ω,±ω²（6个）。用于处理 x²+xy+y² 型表示问题。", "tags": ["视野拓展", "概念"]}
+      ]
+    },
+    {
+      "num": 21,
+      "title": "素性判别",
+      "entries": [
+        {"id": 81, "title": "Lucas 素性测试", "statement": "基于 Lucas 序列在模 n 下的行为判定素性。", "detail": "若存在 a 使 a^{n−1}≡1 (mod n) 且对所有 n−1 的真因子 q 有 a^{(n−1)/q}≢1 (mod n)，则 n 为素数（当知道 n−1 的因子分解时有效）。", "tags": ["进阶核心", "方法"]},
+        {"id": 82, "title": "Proth 定理", "formula": "n = k \\cdot 2^m + 1 \\; (k < 2^m)", "statement": "Proth 数 n=k·2^m+1 (k<2^m, k 奇) 是素数 ⇔ 存在 a 使 a^{(n−1)/2}≡−1 (mod n)。", "detail": "在寻找大素数（如 PrimeGrid 项目）中有实际用途。", "tags": ["进阶核心", "方法"]},
+        {"id": 83, "title": "Pépin 测试（Fermat 数）", "formula": "F_n = 2^{2^n} + 1 \\text{ 是素数 } \\iff 3^{(F_n-1)/2} \\equiv -1 \\pmod{F_n}", "detail": "F₀=3, F₁=5, F₂=17, F₃=257, F₄=65537 均为素数。F₅,F₆,...,F₃₂ 均已证为合数。F₃₃ 在 2026 年状况未知。", "tags": ["进阶核心", "经典"]},
+        {"id": 84, "title": "AKS 素性判别", "statement": "2002年 Agrawal–Kayal–Saxena 提出第一个确定性多项式时间素性判别算法。", "detail": "理论意义极为重大（证明了 PRIMES ∈ P），但实际应用中 Miller–Rabin 随机测试更高效。", "tags": ["视野拓展", "定理"]}
+      ]
+    },
+    {
+      "num": 22,
+      "title": "分拆与 q-级数",
+      "entries": [
+        {"id": 85, "title": "分拆函数 p(n)", "formula": "\\sum_{n=0}^{\\infty} p(n) x^n = \\prod_{m=1}^{\\infty} \\frac{1}{1-x^m}", "statement": "p(n) = 将 n 分拆为无序正整数之和的方法数。", "detail": "Ramanujan 同余：p(5n+4)≡0 (mod 5)，p(7n+5)≡0 (mod 7)，p(11n+6)≡0 (mod 11)。", "tags": ["进阶核心", "经典"]},
+        {"id": 86, "title": "Jacobi 三重积恒等式", "formula": "\\sum_{n=-\\infty}^{\\infty} z^n q^{n^2} = \\prod_{m=1}^{\\infty} (1-q^{2m})(1+zq^{2m-1})(1+z^{-1}q^{2m-1})", "detail": "统一了 Euler 五边形数定理、Gauss 平方恒等式、Jacobi 两平方和定理等，是 q-级数理论的核心恒等式。", "tags": ["视野拓展", "经典"]}
+      ]
+    },
+    {
+      "num": 23,
+      "title": "深层丢番图：椭圆曲线与 ABC 猜想",
+      "entries": [
+        {"id": 87, "title": "椭圆曲线有理点群（Mordell–Weil）", "statement": "Q 上的椭圆曲线 E 的有理点构成有限生成 Abel 群 E(Q) ≅ Z^r × T。", "detail": "r 称为秩，T 为挠子群（Mazur 定理：仅有 15 种可能）。秩可以任意大吗？——仍未知。", "tags": ["视野拓展", "定理"]},
+        {"id": 88, "title": "Faltings 定理（Mordell 猜想）", "statement": "Q 上亏格 ≥2 的光滑射影代数曲线上只有有限多个有理点。", "detail": "Faltings (1983) 获 Fields 奖的成果。蕴含了对任意 n≥3，方程 xⁿ+yⁿ=zⁿ 在互素整数下只有有限多组非平凡解（加上 Wiles 的模性定理可得仅有平凡解）。", "tags": ["视野拓展", "定理"]},
+        {"id": 89, "title": "ABC 猜想", "formula": "\\forall \\varepsilon>0, \\; \\exists C_\\varepsilon \\text{ s.t. } \\max(|a|,|b|,|c|) \\le C_\\varepsilon \\cdot \\operatorname{rad}(abc)^{1+\\varepsilon}", "statement": "对互素正整数 a+b=c，c 被 rad(abc) 的幂控制。", "detail": "若成立，可推出 Fermat 大定理（对充分大的 n）、Catalan 猜想、Mordell 猜想等一系列深刻结果。望月新一 (2012) 宣称用\"宇宙际 Teichmüller 理论\"给出了证明，但数学界尚未达成共识。", "tags": ["视野拓展", "猜想"]},
+        {"id": 90, "title": "Fermat 大定理", "statement": "n≥3 时，方程 xⁿ+yⁿ=zⁿ 没有正整数解。", "detail": "Fermat 在 1637 年写下页边注称\"发现了一个绝妙的证明\"。历经 358 年，Wiles 于 1995 年使用模性定理完成了最终证明（获 2016 年 Abel 奖）。", "tags": ["视野拓展", "定理"]},
+        {"id": 91, "title": "Birch–Swinnerton-Dyer 猜想", "statement": "椭圆曲线 E 的秩 r 等于其 Hasse–Weil L-函数 L(E,s) 在 s=1 处的零点阶。", "detail": "Clay 数学研究所七大千禧年大奖问题之一（悬赏 $1,000,000）。在秩为 0 和 1 的情形已被证明（Gross–Zagier, Kolyvagin）。", "tags": ["视野拓展", "猜想"]}
+      ]
+    }
+  ]
+}
