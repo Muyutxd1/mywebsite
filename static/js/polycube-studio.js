@@ -378,26 +378,7 @@ function getIntersections(event) {
   mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
 
-  const boardTargets = [...piecesGroup.children, ...ghostGroup.children];
-  // Add invisible board-position cubes for clicking empty cells
-  // We compute hover from raycaster intersection with a floor plane
-
-  // Intersect with floor plane to get board position
-  const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-  const target = new THREE.Vector3();
-  const hit = raycaster.ray.intersectPlane(plane, target);
-
-  let boardCell = null;
-  if (hit) {
-    const bx = Math.round(target.x);
-    const by = Math.round(target.y);
-    const bz = Math.round(target.z);
-    if (bx >= 0 && bx < boardState.sx && by >= 0 && by < boardState.sy && bz >= 0 && bz < boardState.sz) {
-      boardCell = { x: bx, y: by, z: bz };
-    }
-  }
-
-  // Also check designer objects
+  // 1. Check designer objects first (they're outside the board)
   const designerHits = raycaster.intersectObjects(designerGroup.children, true);
   let designerCell = null;
   if (designerHits.length > 0) {
@@ -411,6 +392,53 @@ function getIntersections(event) {
         obj = obj.parent;
       }
       if (designerCell) break;
+    }
+  }
+
+  // 2. Check intersection with placed pieces and ghost
+  const allTargets = [...piecesGroup.children, ...ghostGroup.children];
+  const pieceHits = raycaster.intersectObjects(allTargets, false);
+
+  let boardCell = null;
+
+  if (pieceHits.length > 0) {
+    // Hit a placed piece or ghost — place adjacent to the hit face
+    const hit = pieceHits[0];
+    const normal = hit.face.normal.clone();
+    // Transform normal to world space
+    normal.transformDirection(hit.object.matrixWorld);
+    // Round normal to axis direction
+    const absN = [Math.abs(normal.x), Math.abs(normal.y), Math.abs(normal.z)];
+    const maxIdx = absN.indexOf(Math.max(...absN));
+    const sign = [normal.x, normal.y, normal.z][maxIdx] > 0 ? 1 : -1;
+    const dir = [0, 0, 0];
+    dir[maxIdx] = sign;
+
+    // Get the cell position of the hit piece
+    const pos = hit.object.position;
+    const cellX = Math.round(pos.x + dir[0]);
+    const cellY = Math.round(pos.y + dir[1]);
+    const cellZ = Math.round(pos.z + dir[2]);
+
+    if (cellX >= 0 && cellX < boardState.sx &&
+        cellY >= 0 && cellY < boardState.sy &&
+        cellZ >= 0 && cellZ < boardState.sz) {
+      boardCell = { x: cellX, y: cellY, z: cellZ };
+    }
+  }
+
+  // 3. Fallback: intersect with y=0 floor plane for bottom layer
+  if (!boardCell) {
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+    const target = new THREE.Vector3();
+    const planeHit = raycaster.ray.intersectPlane(plane, target);
+    if (planeHit) {
+      const bx = Math.round(target.x);
+      const by = 0;  // Floor plane always y=0
+      const bz = Math.round(target.z);
+      if (bx >= 0 && bx < boardState.sx && bz >= 0 && bz < boardState.sz) {
+        boardCell = { x: bx, y: by, z: bz };
+      }
     }
   }
 
