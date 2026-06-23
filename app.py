@@ -20,6 +20,7 @@ def create_app():
     from routes.factorize import factorize_bp
     from routes.affine import affine_bp
     from routes.inversion import inversion_bp
+    from routes.mdrender import mdrender_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(fortune_bp, url_prefix='/fortune')
@@ -31,6 +32,7 @@ def create_app():
     app.register_blueprint(factorize_bp, url_prefix='/factorize')
     app.register_blueprint(affine_bp, url_prefix='/affine')
     app.register_blueprint(inversion_bp, url_prefix='/inversion')
+    app.register_blueprint(mdrender_bp, url_prefix='/mdrender')
 
     return app
 
