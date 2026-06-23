@@ -44,6 +44,16 @@ function applyTransform(M, x, y) {
   };
 }
 
+function applyInversion(x, y, cx, cy, R) {
+  // Inversion in circle center (cx,cy) radius R: OP × OP' = R²
+  const dx = x - cx;
+  const dy = y - cy;
+  const d2 = dx * dx + dy * dy;
+  if (d2 < 1e-10) return { x: Infinity, y: Infinity }; // center maps to infinity
+  const k = R * R / d2;
+  return { x: cx + dx * k, y: cy + dy * k };
+}
+
 /* ═══════════════════════════════════════════
    PRESET TRANSFORMATIONS
    ═══════════════════════════════════════════ */
@@ -121,6 +131,12 @@ const DIVIDER_WIDTH = 3;
 let projectiveMode = false;
 let projectiveG = 0;
 let projectiveH = 0;
+
+// Inversion (反演) params
+let inversionMode = false;
+let inversionCX = 0;
+let inversionCY = 0;
+let inversionR = 2;
 
 /* ═══════════════════════════════════════════
    COORDINATE CONVERSION
@@ -333,8 +349,7 @@ function autoFitView() {
   const spanYL = maxY - minY || 2;
 
   // ── Right view: center on TRANSFORMED shape ──
-  const M = buildFullMatrix();
-  const tVerts = shapeVertices.map(v => applyTransform(M, v.x, v.y));
+  const tVerts = getTransformedVertices();
   minX = Infinity; maxX = -Infinity; minY = Infinity; maxY = -Infinity;
   for (const v of tVerts) {
     minX = Math.min(minX, v.x); maxX = Math.max(maxX, v.x);
@@ -377,14 +392,31 @@ function renderAll() {
   // Right view — Transformed
   drawGrid(ctx, rightRect, viewRight);
 
-  // Build full projective matrix
-  const M = buildFullMatrix();
-  const transformedVertices = shapeVertices.map(v => applyTransform(M, v.x, v.y));
+  const transformedVertices = getTransformedVertices();
+
+  // Draw inversion circle if enabled
+  if (inversionMode) {
+    const ctr = worldToCanvas(inversionCX, inversionCY, viewRight, rightRect);
+    const rPx = inversionR * viewRight.scale;
+    ctx.strokeStyle = '#9B59B6';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath();
+    ctx.arc(ctr.x, ctr.y, rPx, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#9B59B6';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`反演圆 R=${inversionR.toFixed(1)}`, ctr.x + rPx + 4, ctr.y - 4);
+  }
+
   drawShape(ctx, transformedVertices, viewRight, rightRect, '#FF6B6B', true, hoveredVertex && hoveredVertex.side === 'right' ? hoveredVertex.idx : -1);
   ctx.fillStyle = '#FF6B6B';
   ctx.font = 'bold 13px sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText('变换后图形', rightRect.x + 10, rightRect.y + 20);
+  const rightLabel = inversionMode ? '仿射+反演' : '变换后图形';
+  ctx.fillText(rightLabel, rightRect.x + 10, rightRect.y + 20);
 
   // Draw divider
   drawDivider(ctx);
@@ -400,6 +432,16 @@ function buildFullMatrix() {
     M[7] = projectiveH;
   }
   return M;
+}
+
+function getTransformedVertices() {
+  // Apply affine (+ optional projective) transform, then inversion if enabled
+  const M = buildFullMatrix();
+  let verts = shapeVertices.map(v => applyTransform(M, v.x, v.y));
+  if (inversionMode) {
+    verts = verts.map(v => applyInversion(v.x, v.y, inversionCX, inversionCY, inversionR));
+  }
+  return verts;
 }
 
 /* ═══════════════════════════════════════════
@@ -450,6 +492,22 @@ function readSliders() {
   projectiveH = parseFloat(document.getElementById('slH')?.value || 0);
 }
 
+function readInversionSliders() {
+  const slCX = document.getElementById('slInvCX');
+  const slCY = document.getElementById('slInvCY');
+  const slR  = document.getElementById('slInvR');
+  if (slCX) inversionCX = parseFloat(slCX.value);
+  if (slCY) inversionCY = parseFloat(slCY.value);
+  if (slR)  inversionR  = parseFloat(slR.value);
+  // Update labels
+  const ids = ['slInvCX','slInvCY','slInvR'];
+  for (const id of ids) {
+    const label = document.getElementById(id + 'Val');
+    const slider = document.getElementById(id);
+    if (label && slider) label.textContent = parseFloat(slider.value).toFixed(2);
+  }
+}
+
 function updateSliderLabels() {
   const ids = ['slA','slB','slTx','slC','slD','slTy','slG','slH'];
   for (const id of ids) {
@@ -486,7 +544,7 @@ function getClickTarget(e) {
   // Check if click is near a vertex
   const vertices = side === 'left'
     ? shapeVertices
-    : shapeVertices.map(v => applyTransform(buildFullMatrix(), v.x, v.y));
+    : getTransformedVertices();
   const threshold = 12 / view.scale; // 12 pixels in world units
   let vertexIdx = -1;
   for (let i = 0; i < vertices.length; i++) {
@@ -549,10 +607,17 @@ function onPointerMove(e) {
       shapeVertices[dragging.idx].y = target.world.y;
     } else {
       // Move the transformed vertex — need to inverse-transform
+      let wx = target.world.x;
+      let wy = target.world.y;
+      // Inversion is its own inverse: apply again to undo
+      if (inversionMode) {
+        const invPt = applyInversion(wx, wy, inversionCX, inversionCY, inversionR);
+        wx = invPt.x; wy = invPt.y;
+      }
       const M = buildFullMatrix();
       const inv = matInv(M);
       if (inv) {
-        const orig = applyTransform(inv, target.world.x, target.world.y);
+        const orig = applyTransform(inv, wx, wy);
         shapeVertices[dragging.idx].x = orig.x;
         shapeVertices[dragging.idx].y = orig.y;
       }
@@ -664,9 +729,32 @@ function init() {
       projRow.style.display = projectiveMode ? '' : 'none';
       readSliders();
       updateMatrixDisplay();
+      autoFitView();
       renderAll();
     });
   }
+
+  // Inversion toggle
+  const invToggle = document.getElementById('invToggle');
+  const invRow = document.getElementById('invRow');
+  if (invToggle && invRow) {
+    invToggle.addEventListener('change', () => {
+      inversionMode = invToggle.checked;
+      invRow.style.display = inversionMode ? '' : 'none';
+      readInversionSliders();
+      autoFitView();
+      renderAll();
+    });
+  }
+
+  // Inversion slider events
+  document.querySelectorAll('#invRow .affine-slider').forEach(slider => {
+    slider.addEventListener('input', () => {
+      readInversionSliders();
+      autoFitView();
+      renderAll();
+    });
+  });
 
   // Reset button
   const resetBtn = document.getElementById('affineReset');
@@ -676,8 +764,12 @@ function init() {
       shapeVertices = defaultShape.map(v => ({...v}));
       projectiveG = 0; projectiveH = 0;
       projectiveMode = false;
+      inversionMode = false;
+      inversionCX = 0; inversionCY = 0; inversionR = 2;
       if (projToggle) projToggle.checked = false;
       if (projRow) projRow.style.display = 'none';
+      if (invToggle) invToggle.checked = false;
+      if (invRow) invRow.style.display = 'none';
       updateSlidersFromMatrix();
       autoFitView();
       renderAll();
