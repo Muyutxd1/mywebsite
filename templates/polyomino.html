@@ -8,10 +8,8 @@
   <aside class="polyomino-sidebar" id="sidebar">
 
     <div class="sidebar-section">
-      <h3 class="sidebar-title">🧩 拼图库</h3>
-      <div class="piece-library" id="pieceLibrary">
-        <!-- Populated by JS -->
-      </div>
+      <h3 class="sidebar-title">🧩 拼图库 <span style="font-weight:400;color:var(--text-muted);font-size:10px;">— 点击选择</span></h3>
+      <div class="piece-library" id="pieceLibrary"></div>
     </div>
 
     <div class="sidebar-section" id="activePiecePanel" style="display:none;">
@@ -19,9 +17,9 @@
       <canvas class="active-preview-canvas" id="activePreviewCanvas" width="120" height="120"></canvas>
       <div class="active-piece-name" id="activePieceName"></div>
       <div class="transform-controls">
-        <button class="btn btn-sm" id="btnRotate" title="旋转 90° (R)">↻ 旋转</button>
-        <button class="btn btn-sm" id="btnFlipH" title="水平翻转 (H)">↔ 翻转</button>
-        <button class="btn btn-sm" id="btnFlipV" title="垂直翻转 (V)">↕ 翻转</button>
+        <button class="btn btn-sm" id="btnRotate" title="顺时针旋转 90°">↻ 旋转</button>
+        <button class="btn btn-sm" id="btnFlipH" title="水平镜像翻转">↔ 翻转</button>
+        <button class="btn btn-sm" id="btnFlipV" title="垂直镜像翻转">↕ 翻转</button>
       </div>
       <div class="active-piece-count" id="activePieceCount"></div>
       <button class="btn btn-sm btn-secondary" id="btnDeselect">✕ 取消选中</button>
@@ -29,16 +27,15 @@
 
     <div class="sidebar-section">
       <h3 class="sidebar-title designer-toggle" id="designerToggle">
-        🔧 拼图设计器
-        <span class="toggle-arrow">▼</span>
+        🔧 设计器 <span class="toggle-arrow">▼</span>
       </h3>
       <div class="piece-designer" id="pieceDesigner">
         <canvas class="designer-canvas" id="designerCanvas" width="240" height="240"></canvas>
         <div class="designer-controls">
-          <input type="text" class="designer-name-input" id="designerName" placeholder="输入名称…" maxlength="20">
+          <input type="text" class="designer-name-input" id="designerName" placeholder="名称…" maxlength="20">
           <button class="btn btn-sm btn-primary" id="btnSavePiece">保存</button>
         </div>
-        <p class="designer-hint">点击 8×8 网格设计形状，需连通</p>
+        <p class="designer-hint">点击网格切换，设计好后保存</p>
       </div>
     </div>
 
@@ -57,11 +54,11 @@
       <div class="board-size-controls">
         <label>行 <input type="number" id="boardRows" value="8" min="2" max="50" class="size-input"></label>
         <label>列 <input type="number" id="boardCols" value="8" min="2" max="50" class="size-input"></label>
-        <button class="btn btn-sm btn-primary" id="btnUpdateSize">更新</button>
+        <button class="btn btn-sm btn-primary" id="btnUpdateSize">更新棋盘</button>
       </div>
       <span class="toolbar-sep"></span>
       <div class="board-action-controls">
-        <button class="btn btn-sm" id="btnUndo" title="撤销 (Ctrl+Z)">↩ 撤销</button>
+        <button class="btn btn-sm" id="btnUndo">↩ 撤销</button>
         <button class="btn btn-sm btn-danger" id="btnClear">🗑 清空</button>
       </div>
       <span class="toolbar-sep"></span>
@@ -75,12 +72,10 @@
       <canvas id="boardCanvas"></canvas>
     </div>
 
-    <div class="board-legend" id="boardLegend">
-      <!-- Populated by JS -->
-    </div>
+    <div class="board-legend" id="boardLegend"></div>
 
     <div class="placement-hint">
-      💡 选择拼图块 → 点击棋盘放置 | R 旋转 · H/V 翻转 · Esc 取消 · Shift+点击连续放置 · Ctrl+Z 撤销
+      💡 从左侧选择拼图块 → 点击棋盘放置 | R 旋转 · H/V 翻转 · Esc 取消
     </div>
   </main>
 
