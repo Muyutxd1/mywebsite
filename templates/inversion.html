@@ -9,12 +9,12 @@
   margin-top: -12px;
 }
 
+/* ── Sidebar ─────────────────────── */
 .inv-sidebar {
-  width: 240px;
-  min-width: 240px;
+  width: 210px; min-width: 210px;
   background: var(--bg-card);
   border-right: 1px solid var(--border-light);
-  padding: 12px 14px;
+  padding: 12px;
   overflow-y: auto;
   display: flex; flex-direction: column; gap: 10px;
 }
@@ -31,6 +31,30 @@
   text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
 }
 
+/* ── Toolbar ─────────────────────── */
+.inv-toolbar {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px;
+}
+.inv-tool-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; padding: 10px 4px;
+  font-size: 20px;
+  border: 2px solid var(--border); border-radius: 8px;
+  background: var(--bg-input); color: var(--text);
+  cursor: pointer; transition: all 0.12s;
+  font-family: var(--font);
+}
+.inv-tool-btn:hover { background: var(--accent-light); border-color: var(--accent); }
+.inv-tool-btn.active {
+  background: var(--accent-light); border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-light);
+}
+.inv-tool-btn .tool-label {
+  font-size: 9px; font-weight: 700; color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+
+/* ── Sliders ─────────────────────── */
 .inv-slider-row {
   display: flex; align-items: center; gap: 6px; margin-bottom: 5px;
 }
@@ -52,39 +76,33 @@
   color: var(--text-secondary); width: 36px; text-align: right;
 }
 
-.inv-mode-group { display: flex; flex-direction: column; gap: 4px; }
-.inv-mode-group label {
-  display: flex; align-items: center; gap: 8px; padding: 7px 10px;
-  border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;
-  color: var(--text); transition: all 0.12s; border: 1px solid transparent;
-}
-.inv-mode-group label:hover { background: var(--accent-light); }
-.inv-mode-group input:checked + span { color: var(--accent); }
-.inv-mode-group label:has(input:checked) {
-  background: var(--accent-light); border-color: var(--accent);
-}
-
-.inv-shape-group { display: flex; flex-direction: column; gap: 4px; }
-.inv-shape-group label {
-  display: flex; align-items: center; gap: 8px; padding: 6px 10px;
-  border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;
-  color: var(--text); transition: all 0.12s; border: 1px solid transparent;
-}
-.inv-shape-group label:hover { background: var(--accent-light); }
-.inv-shape-group label:has(input:checked) {
-  background: var(--accent-light); border-color: var(--accent);
-}
-
-.inv-actions { display: flex; gap: 5px; }
+/* ── Buttons ─────────────────────── */
+.inv-actions { display: flex; gap: 4px; flex-wrap: wrap; }
 .inv-btn {
-  flex: 1; padding: 7px 10px; font-size: 12px; font-weight: 600;
-  font-family: var(--font); border: 2px solid var(--border); border-radius: 8px;
+  flex: 1; padding: 6px 8px; font-size: 11px; font-weight: 600;
+  font-family: var(--font); border: 1.5px solid var(--border); border-radius: 6px;
   background: #fff; color: var(--text); cursor: pointer; transition: all 0.12s;
+  white-space: nowrap;
 }
 .inv-btn:hover { background: var(--accent-light); border-color: var(--accent); }
 .inv-btn.danger { color: #e74c3c; border-color: rgba(231,76,60,0.3); }
 .inv-btn.danger:hover { background: rgba(231,76,60,0.08); border-color: #e74c3c; }
 
+/* ── Legend ──────────────────────── */
+.inv-legend { display: flex; gap: 12px; font-size: 11px; align-items: center; flex-wrap: wrap; }
+.inv-legend-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 3px; }
+
+/* ── Shortcuts ───────────────────── */
+.inv-shortcuts {
+  font-size: 10px; color: var(--text-muted); line-height: 1.6;
+}
+.inv-shortcuts kbd {
+  display: inline-block; padding: 1px 5px; font-size: 9px; font-family: monospace;
+  background: var(--bg-input); border: 1px solid var(--border);
+  border-radius: 3px; margin: 0 1px;
+}
+
+/* ── Main area ───────────────────── */
 .inv-main {
   flex: 1; display: flex; flex-direction: column;
   background: #fafbfc; position: relative; overflow: hidden;
@@ -92,18 +110,16 @@
 .inv-canvas-wrap { flex: 1; position: relative; }
 .inv-canvas-wrap canvas { display: block; }
 
-.inv-info {
-  font-size: 12px; color: var(--text-muted); text-align: center;
-  padding: 5px 12px; background: var(--bg-card);
-  border-top: 1px solid var(--border-light);
+.inv-status {
+  font-size: 11px; color: var(--text-muted); padding: 4px 12px;
+  background: var(--bg-card); border-top: 1px solid var(--border-light);
+  display: flex; justify-content: space-between; align-items: center;
 }
-
-.inv-legend { display: flex; gap: 14px; font-size: 12px; align-items: center; }
-.inv-legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
 
 @media (max-width: 800px) {
   .inv-layout { flex-direction: column; height: auto; }
-  .inv-sidebar { width: 100%; min-width: 0; max-height: 45vh; }
+  .inv-sidebar { width: 100%; min-width: 0; max-height: 40vh; }
+  .inv-toolbar { grid-template-columns: repeat(5, 1fr); }
   .inv-main { height: 50vh; min-height: 350px; }
 }
 </style>
@@ -113,6 +129,27 @@
 <div class="inv-layout">
 
   <aside class="inv-sidebar">
+
+    <div class="section">
+      <h3 class="section-title">🔧 工具栏</h3>
+      <div class="inv-toolbar">
+        <button class="inv-tool-btn" id="invTool_select" title="选择/移动 (V)">
+          🖱<span class="tool-label">选择</span>
+        </button>
+        <button class="inv-tool-btn" id="invTool_point" title="点工具 (P)">
+          ●<span class="tool-label">点</span>
+        </button>
+        <button class="inv-tool-btn" id="invTool_segment" title="线段工具 (S)">
+          ╱<span class="tool-label">线段</span>
+        </button>
+        <button class="inv-tool-btn" id="invTool_circle" title="圆工具 (C)">
+          ○<span class="tool-label">圆</span>
+        </button>
+        <button class="inv-tool-btn active" id="invTool_invCenter" title="反演圆心 (I)">
+          ⊕<span class="tool-label">反演心</span>
+        </button>
+      </div>
+    </div>
 
     <div class="section">
       <h3 class="section-title">🔮 反演参数</h3>
@@ -133,28 +170,10 @@
       </div>
     </div>
 
-    <div class="section">
-      <h3 class="section-title">🖱 鼠标模式</h3>
-      <div class="inv-mode-group">
-        <label><input type="radio" name="invMode" value="center" checked><span>📍 设置圆心</span></label>
-        <label><input type="radio" name="invMode" value="place"><span>➕ 放置图形</span></label>
-        <label><input type="radio" name="invMode" value="drag"><span>✋ 拖拽顶点</span></label>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3 class="section-title">📐 图形类型</h3>
-      <div class="inv-shape-group">
-        <label><input type="radio" name="invShape" value="point" checked><span>● 点</span></label>
-        <label><input type="radio" name="invShape" value="segment"><span>━ 线段</span></label>
-        <label><input type="radio" name="invShape" value="circle"><span>○ 圆</span></label>
-      </div>
-    </div>
-
     <div class="section inv-actions">
       <button class="inv-btn" id="invFitView">🔄 适应</button>
-      <button class="inv-btn" id="invUndo">↩ 撤销</button>
-      <button class="inv-btn danger" id="invClear">🗑 清空</button>
+      <button class="inv-btn danger" id="invDelete">🗑 删除</button>
+      <button class="inv-btn danger" id="invClear">✖ 清空</button>
     </div>
 
     <div class="section">
@@ -165,11 +184,21 @@
       </div>
     </div>
 
+    <div class="section">
+      <div class="inv-shortcuts">
+        <kbd>V</kbd> 选择 <kbd>P</kbd> 点 <kbd>S</kbd> 线段 <kbd>C</kbd> 圆 <kbd>I</kbd> 反演心<br>
+        <kbd>Del</kbd> 删除 <kbd>Esc</kbd> 取消 <kbd>F</kbd> 适应
+      </div>
+    </div>
+
   </aside>
 
   <main class="inv-main">
     <div class="inv-canvas-wrap"><canvas id="invCanvas"></canvas></div>
-    <div class="inv-info" id="invInfo"></div>
+    <div class="inv-status">
+      <span id="invStatus">🖱 选择工具 — 点击选择 · 拖拽移动 · 右键平移 · 滚轮缩放</span>
+      <span id="invCoord"></span>
+    </div>
   </main>
 
 </div>
