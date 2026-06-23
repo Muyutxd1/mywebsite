@@ -64,11 +64,15 @@ a:hover { color: var(--accent-hover); }
 }
 .nav-logo {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 650;
   color: var(--text);
   letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--accent) 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.nav-logo:hover { color: var(--text); opacity: 0.8; }
+.nav-logo:hover { opacity: 0.8; }
 .nav-links { display: flex; gap: 4px; }
 .nav-link {
   padding: 8px 18px;
@@ -79,6 +83,10 @@ a:hover { color: var(--accent-hover); }
   border-radius: 6px;
 }
 .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+.nav-link-more {
+  color: var(--text-muted);
+  font-size: 12px;
+}
 
 .site-main {
   flex: 1;
@@ -178,6 +186,13 @@ a:hover { color: var(--accent-hover); }
   background: var(--bg-card);
 }
 .project-icon { font-size: 36px; margin-bottom: 16px; }
+.card-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
 .project-card h3 { font-size: 19px; font-weight: 650; margin-bottom: 6px; letter-spacing: -0.02em; }
 .project-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
 .project-link {
