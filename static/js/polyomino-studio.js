@@ -375,18 +375,41 @@ function renderBoard() {
       ctx.fillRect(x + 1, y + 1, cellSize - 1, cellSize - 1);
     }
 
-    // Draw connection lines (center-to-center for adjacent cells)
-    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
-    ctx.lineWidth = Math.max(1, cellSize * 0.08);
-    ctx.lineCap = 'round';
+    // Draw connection lines (center-to-center for adjacent and diagonal cells)
     const drawnEdges = new Set();
+    // Orthogonal neighbors first (thicker)
+    ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+    ctx.lineWidth = Math.max(1.2, cellSize * 0.09);
+    ctx.lineCap = 'round';
     for (const [dr, dc] of coords) {
       const r = pl.originR + dr;
       const c = pl.originC + dc;
       const cx = (c + 0.5) * cellSize;
       const cy = (r + 0.5) * cellSize;
-      // Check right and down neighbors
       for (const [nr, nc] of [[r, c+1], [r+1, c]]) {
+        if (cellSet.has(`${nr},${nc}`)) {
+          const edgeKey = `${Math.min(r,nr)},${Math.min(c,nc)}-${Math.max(r,nr)},${Math.max(c,nc)}`;
+          if (!drawnEdges.has(edgeKey)) {
+            drawnEdges.add(edgeKey);
+            const nx = (nc + 0.5) * cellSize;
+            const ny = (nr + 0.5) * cellSize;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(nx, ny);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    // Diagonal neighbor connections (thinner, more transparent)
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = Math.max(0.8, cellSize * 0.05);
+    for (const [dr, dc] of coords) {
+      const r = pl.originR + dr;
+      const c = pl.originC + dc;
+      const cx = (c + 0.5) * cellSize;
+      const cy = (r + 0.5) * cellSize;
+      for (const [nr, nc] of [[r-1, c-1], [r-1, c+1], [r+1, c-1], [r+1, c+1]]) {
         if (cellSet.has(`${nr},${nc}`)) {
           const edgeKey = `${Math.min(r,nr)},${Math.min(c,nc)}-${Math.max(r,nr)},${Math.max(c,nc)}`;
           if (!drawnEdges.has(edgeKey)) {
