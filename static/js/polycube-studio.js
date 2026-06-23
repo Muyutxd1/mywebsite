@@ -32,17 +32,17 @@ const DEFAULT_PIECES = [
 
 let pieceLibrary = [];
 let boardState = { sx: 4, sy: 4, sz: 4, placements: [] };
-let activeSelection = null; // { pieceId, rotIdx }
-let designerCells = []; // [[x,y,z],...] current designer state
+let activeSelection = null;
+let designerCells = [];
 let paletteIdx = 0;
-let hoveredCell = null; // { x, y, z } | null — board cell under cursor
+let hoveredCell = null;
 let placementValid = false;
 
 /* ═══════════════════════════════════════════
    3D ROTATIONS (24 cube orientations)
    ═══════════════════════════════════════════ */
 
-function matMul(a, b) { // 3x3 matrices as [row0, row1, row2] arrays
+function matMul(a, b) {
   const r = [[0,0,0],[0,0,0],[0,0,0]];
   for (let i = 0; i < 3; i++)
     for (let j = 0; j < 3; j++)
@@ -78,7 +78,7 @@ function getAllRotations() {
       }
     }
   }
-  return ALL_ROTATIONS; // 24 matrices
+  return ALL_ROTATIONS;
 }
 
 function applyRotation(cell, rot) {
@@ -144,6 +144,8 @@ function placePiece(pieceId, ox, oy, oz, rotIdx) {
    ═══════════════════════════════════════════ */
 
 const container = document.getElementById('pcCanvasContainer');
+if (!container) throw new Error('pcCanvasContainer not found');
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#1a1a2e');
 scene.fog = new THREE.Fog('#1a1a2e', 15, 40);
@@ -156,7 +158,7 @@ renderer.shadowMap.enabled = true;
 container.appendChild(renderer.domElement);
 
 // Lights
-scene.add(new THREE.AmbientLight('#ffffff', 0.6));
+scene.add(new THREE.AmbientLight('#ffffff', 0.7));
 const sun = new THREE.DirectionalLight('#ffffff', 1.2);
 sun.position.set(10, 18, 8);
 sun.castShadow = true;
@@ -173,13 +175,14 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.1;
 controls.minDistance = 3;
-controls.maxDistance = 20;
+controls.maxDistance = 25;
 
 function resetCamera() {
   const { sx, sy, sz } = boardState;
-  // Board + designer width (designer is 4 units wide, at sx+0.6 offset)
-  const totalW = sx + 0.6 + 4;
-  const cx = totalW / 2 - 1;  // center between board start and designer end
+  const gap = 1.0;
+  const designerW = 4;
+  const totalW = sx + gap + designerW;
+  const cx = totalW / 2;
   const cy = (sy - 1) / 2;
   const cz = (sz - 1) / 2;
   const dist = Math.max(totalW, sy, sz) * 1.6 + 2;
@@ -193,8 +196,11 @@ const boardGroup = new THREE.Group(); scene.add(boardGroup);
 const piecesGroup = new THREE.Group(); scene.add(piecesGroup);
 const ghostGroup = new THREE.Group(); scene.add(ghostGroup);
 const designerGroup = new THREE.Group();
-designerGroup.position.set(boardState.sx + 0.6, 0, 0);
+designerGroup.position.set(boardState.sx + 1.0, 0, 0);
 scene.add(designerGroup);
+
+// Invisible ground mesh for reliable board floor raycasting
+let boardGroundMesh = null;
 
 // Raycaster
 const raycaster = new THREE.Raycaster();
@@ -211,22 +217,13 @@ function renderBoardGrid() {
   // Wireframe bounding box
   const boxGeo = new THREE.BoxGeometry(sx, sy, sz);
   const boxEdges = new THREE.EdgesGeometry(boxGeo);
-  const boxLine = new THREE.LineSegments(boxEdges, new THREE.LineBasicMaterial({ color: '#556688', linewidth: 1 }));
+  const boxLine = new THREE.LineSegments(boxEdges, new THREE.LineBasicMaterial({ color: '#556688' }));
   boxLine.position.set(sx/2 - 0.5, sy/2 - 0.5, sz/2 - 0.5);
   boardGroup.add(boxLine);
 
-  // Grid dots at each integer position
+  // Grid dots on bottom
   const dotGeo = new THREE.SphereGeometry(0.06, 6, 6);
   const dotMat = new THREE.MeshBasicMaterial({ color: '#334466' });
-  for (let x = 0; x <= sx; x++) {
-    for (let y = 0; y <= sy; y++) {
-      for (let z = 0; z <= sz; z++) {
-        if (x < sx && y < sy && z < sz) continue; // only boundary
-        // Actually, show all grid points for clarity
-      }
-    }
-  }
-  // Show visible grid points on bottom and edges
   for (let x = 0; x < sx; x++) {
     for (let z = 0; z < sz; z++) {
       const dot = new THREE.Mesh(dotGeo, dotMat);
@@ -234,13 +231,23 @@ function renderBoardGrid() {
       boardGroup.add(dot);
     }
   }
-  // Floor semi-transparent plane
+
+  // Semi-transparent floor plane (visual)
   const floorGeo = new THREE.PlaneGeometry(sx, sz);
   const floorMat = new THREE.MeshBasicMaterial({ color: '#223344', side: THREE.DoubleSide, transparent: true, opacity: 0.3 });
   const floor = new THREE.Mesh(floorGeo, floorMat);
   floor.rotation.x = -Math.PI / 2;
   floor.position.set(sx/2 - 0.5, -0.55, sz/2 - 0.5);
   boardGroup.add(floor);
+
+  // Invisible ground mesh for raycasting (covers exactly the board footprint at y=0)
+  const groundGeo = new THREE.PlaneGeometry(sx, sz);
+  const groundMat = new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide });
+  boardGroundMesh = new THREE.Mesh(groundGeo, groundMat);
+  boardGroundMesh.rotation.x = -Math.PI / 2;
+  boardGroundMesh.position.set(sx/2 - 0.5, 0, sz/2 - 0.5);
+  boardGroundMesh.userData = { isBoardGround: true };
+  boardGroup.add(boardGroundMesh);
 }
 
 /* ═══════════════════════════════════════════
@@ -262,18 +269,15 @@ function createCellMesh(color, opacity = 1) {
   mesh.castShadow = true;
   mesh.receiveShadow = true;
 
-  // Edge outline
   const edgeGeo = new THREE.EdgesGeometry(geo);
   const edgeMat = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.25 * opacity });
-  const edgeLine = new THREE.LineSegments(edgeGeo, edgeMat);
-  mesh.add(edgeLine);
+  mesh.add(new THREE.LineSegments(edgeGeo, edgeMat));
 
   return mesh;
 }
 
 function renderPlacedPieces() {
   piecesGroup.clear();
-  const occ = getOccupied3D();
   for (const pl of boardState.placements) {
     const piece = pieceLibrary.find(p => p.id === pl.pieceId);
     if (!piece) continue;
@@ -290,7 +294,6 @@ function computePlacementOrigin(pieceId, rotIdx, hoverX, hoverY, hoverZ) {
   const piece = pieceLibrary.find(p => p.id === pieceId);
   if (!piece) return [hoverX, hoverY, hoverZ];
   const cells = getTransformedCells(piece, rotIdx);
-  // Try each cell as the anchor — prefer valid positions
   for (const [dx, dy, dz] of cells) {
     const ox = hoverX - dx, oy = hoverY - dy, oz = hoverZ - dz;
     let inBounds = true;
@@ -300,7 +303,6 @@ function computePlacementOrigin(pieceId, rotIdx, hoverX, hoverY, hoverZ) {
     }
     if (inBounds) return [ox, oy, oz];
   }
-  // Fallback: first cell as anchor
   const [dx, dy, dz] = cells[0] || [0,0,0];
   return [hoverX - dx, hoverY - dy, hoverZ - dz];
 }
@@ -315,9 +317,9 @@ function renderGhostPreview() {
 
   const rotIdx = activeSelection.rotIdx;
   const cells = getTransformedCells(piece, rotIdx);
-  const { x: ox, y: oy, z: oz } = hoveredCell;
+  const { x, y, z } = hoveredCell;
 
-  const [box, boy, boz] = computePlacementOrigin(piece.id, rotIdx, ox, oy, oz);
+  const [box, boy, boz] = computePlacementOrigin(piece.id, rotIdx, x, y, z);
   lastComputedOrigin = { ox: box, oy: boy, oz: boz };
   placementValid = isValidPlacement(piece.id, box, boy, boz, activeSelection.rotIdx);
 
@@ -335,9 +337,11 @@ function renderGhostPreview() {
 
 function renderDesigner() {
   designerGroup.clear();
-  // Position designer to the right of the board
-  designerGroup.position.set(boardState.sx + 2.5, 0, 0);
+  // Position designer with a clear gap from the board
+  const offset = boardState.sx + 1.0;
+  designerGroup.position.set(offset, 0, 0);
   const size = 4;
+
   // Base platform
   const baseGeo = new THREE.BoxGeometry(size + 0.2, 0.1, size + 0.2);
   const baseMat = new THREE.MeshStandardMaterial({ color: '#2a2a3e', roughness: 0.8 });
@@ -345,7 +349,7 @@ function renderDesigner() {
   base.position.set(size/2 - 0.5, -0.55, size/2 - 0.5);
   designerGroup.add(base);
 
-  // Cell dots for designer
+  // Designer cells
   for (let x = 0; x < size; x++) {
     for (let y = 0; y < size; y++) {
       for (let z = 0; z < size; z++) {
@@ -369,75 +373,80 @@ function renderDesigner() {
 }
 
 /* ═══════════════════════════════════════════
-   RAYCASTER & MOUSE
+   RAYCASTER & INTERACTION
    ═══════════════════════════════════════════ */
 
 function getIntersections(event) {
   const rect = renderer.domElement.getBoundingClientRect();
+  if (rect.width === 0 || rect.height === 0) return { boardCell: null, designerCell: null };
+
   mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
   mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
 
-  // 1. Check designer objects first (they're outside the board)
-  const designerHits = raycaster.intersectObjects(designerGroup.children, true);
-  let designerCell = null;
-  if (designerHits.length > 0) {
-    for (const hitObj of designerHits) {
-      let obj = hitObj.object;
-      while (obj) {
-        if (obj.userData && obj.userData.isDesigner) {
-          designerCell = { x: obj.userData.dx, y: obj.userData.dy, z: obj.userData.dz };
-          break;
-        }
-        obj = obj.parent;
-      }
-      if (designerCell) break;
-    }
+  // Build target list: board ground + placed pieces + designer cells
+  const targets = [];
+
+  // Board ground (invisible mesh for floor detection)
+  if (boardGroundMesh) targets.push(boardGroundMesh);
+
+  // Placed pieces (for face-adjacent detection)
+  targets.push(...piecesGroup.children);
+
+  // Designer cells (only direct children that have userData.isDesigner)
+  for (const child of designerGroup.children) {
+    if (child.userData && child.userData.isDesigner) targets.push(child);
   }
 
-  // 2. Check intersection with placed pieces and ghost
-  const allTargets = [...piecesGroup.children, ...ghostGroup.children];
-  const pieceHits = raycaster.intersectObjects(allTargets, false);
+  const hits = raycaster.intersectObjects(targets, false);
+  // Sort by distance
+  hits.sort((a, b) => a.distance - b.distance);
 
   let boardCell = null;
+  let designerCell = null;
 
-  if (pieceHits.length > 0) {
-    // Hit a placed piece or ghost — place adjacent to the hit face
-    const hit = pieceHits[0];
-    const normal = hit.face.normal.clone();
-    // Transform normal to world space
-    normal.transformDirection(hit.object.matrixWorld);
-    // Round normal to axis direction
-    const absN = [Math.abs(normal.x), Math.abs(normal.y), Math.abs(normal.z)];
-    const maxIdx = absN.indexOf(Math.max(...absN));
-    const sign = [normal.x, normal.y, normal.z][maxIdx] > 0 ? 1 : -1;
-    const dir = [0, 0, 0];
-    dir[maxIdx] = sign;
+  for (const hit of hits) {
+    const obj = hit.object;
 
-    // Get the cell position of the hit piece
-    const pos = hit.object.position;
-    const cellX = Math.round(pos.x + dir[0]);
-    const cellY = Math.round(pos.y + dir[1]);
-    const cellZ = Math.round(pos.z + dir[2]);
-
-    if (cellX >= 0 && cellX < boardState.sx &&
-        cellY >= 0 && cellY < boardState.sy &&
-        cellZ >= 0 && cellZ < boardState.sz) {
-      boardCell = { x: cellX, y: cellY, z: cellZ };
+    // Check if this is a designer cell
+    if (obj.userData && obj.userData.isDesigner) {
+      if (!designerCell) {
+        designerCell = { x: obj.userData.dx, y: obj.userData.dy, z: obj.userData.dz };
+      }
+      continue;
     }
-  }
 
-  // 3. Fallback: intersect with y=0 floor plane for bottom layer
-  if (!boardCell) {
-    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-    const target = new THREE.Vector3();
-    const planeHit = raycaster.ray.intersectPlane(plane, target);
-    if (planeHit) {
-      const bx = Math.round(target.x);
-      const by = 0;  // Floor plane always y=0
-      const bz = Math.round(target.z);
-      if (bx >= 0 && bx < boardState.sx && bz >= 0 && bz < boardState.sz) {
-        boardCell = { x: bx, y: by, z: bz };
+    // Check if this is the board ground plane
+    if (obj.userData && obj.userData.isBoardGround) {
+      if (!boardCell) {
+        const pt = hit.point;
+        const bx = Math.round(pt.x);
+        const bz = Math.round(pt.z);
+        if (bx >= 0 && bx < boardState.sx && bz >= 0 && bz < boardState.sz) {
+          boardCell = { x: bx, y: 0, z: bz };
+        }
+      }
+      continue;
+    }
+
+    // This is a placed piece — compute adjacent cell from face normal
+    if (!boardCell) {
+      const normal = hit.face.normal.clone();
+      normal.transformDirection(obj.matrixWorld);
+      const absN = [Math.abs(normal.x), Math.abs(normal.y), Math.abs(normal.z)];
+      const maxIdx = absN.indexOf(Math.max(...absN));
+      const sign = [normal.x, normal.y, normal.z][maxIdx] > 0 ? 1 : -1;
+      const dir = [0, 0, 0]; dir[maxIdx] = sign;
+
+      const pos = obj.position;
+      const cellX = Math.round(pos.x + dir[0]);
+      const cellY = Math.round(pos.y + dir[1]);
+      const cellZ = Math.round(pos.z + dir[2]);
+
+      if (cellX >= 0 && cellX < boardState.sx &&
+          cellY >= 0 && cellY < boardState.sy &&
+          cellZ >= 0 && cellZ < boardState.sz) {
+        boardCell = { x: cellX, y: cellY, z: cellZ };
       }
     }
   }
@@ -445,36 +454,80 @@ function getIntersections(event) {
   return { boardCell, designerCell };
 }
 
-function onMouseMove(event) {
-  const { boardCell } = getIntersections(event);
-  if (boardCell) {
+function onPointerMove(event) {
+  const { boardCell, designerCell } = getIntersections(event);
+
+  if (designerCell && !boardCell) {
+    // Mouse is exclusively over designer — show cursor as pointer
+    renderer.domElement.style.cursor = 'pointer';
+    hoveredCell = null;
+  } else if (boardCell) {
+    // Mouse is over the board (possibly also hitting designer behind)
+    renderer.domElement.style.cursor = activeSelection ? 'crosshair' : 'grab';
     hoveredCell = boardCell;
   } else {
+    renderer.domElement.style.cursor = 'grab';
     hoveredCell = null;
   }
+
   renderGhostPreview();
 }
 
-function onClick(event) {
+function onPointerDown(event) {
+  // Only handle left click
+  if (event.button !== 0) return;
+
   const { boardCell, designerCell } = getIntersections(event);
 
-  // Designer click toggles cells
+  // Designer click — toggle cell
   if (designerCell) {
-    const { x, y, z } = designerCell;
-    const idx = designerCells.findIndex(c => c[0]===x && c[1]===y && c[2]===z);
-    if (idx >= 0) designerCells.splice(idx, 1);
-    else designerCells.push([x, y, z]);
-    renderDesigner();
-    return;
+    // Check if the click is PRIMARILY on the designer (closest hit is designer)
+    const rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+
+    // Get closest hit among designer cells
+    const designerOnly = [];
+    for (const child of designerGroup.children) {
+      if (child.userData && child.userData.isDesigner) designerOnly.push(child);
+    }
+    const dHits = raycaster.intersectObjects(designerOnly, false);
+
+    // Also check board ground
+    let boardDist = Infinity;
+    if (boardGroundMesh) {
+      const bHits = raycaster.intersectObjects([boardGroundMesh], false);
+      if (bHits.length > 0) boardDist = bHits[0].distance;
+    }
+
+    // Only toggle designer if it's the CLOSEST hit (designer is in front of board)
+    if (dHits.length > 0 && dHits[0].distance < boardDist) {
+      const { x, y, z } = designerCell;
+      const idx = designerCells.findIndex(c => c[0]===x && c[1]===y && c[2]===z);
+      if (idx >= 0) designerCells.splice(idx, 1);
+      else designerCells.push([x, y, z]);
+      renderDesigner();
+      return;
+    }
   }
 
   // Board click — place piece
-  if (boardCell && activeSelection && lastComputedOrigin) {
-    const { ox, oy, oz } = lastComputedOrigin;
-    if (placePiece(activeSelection.pieceId, ox, oy, oz, activeSelection.rotIdx)) {
-      saveBoardSession();
-      renderAll();
-    }
+  if (!boardCell || !activeSelection) return;
+
+  // Compute origin
+  let origin = lastComputedOrigin;
+  if (!origin) {
+    const [ox, oy, oz] = computePlacementOrigin(
+      activeSelection.pieceId, activeSelection.rotIdx,
+      boardCell.x, boardCell.y, boardCell.z
+    );
+    origin = { ox, oy, oz };
+  }
+
+  if (placePiece(activeSelection.pieceId, origin.ox, origin.oy, origin.oz, activeSelection.rotIdx)) {
+    saveBoardSession();
+    renderAll();
   }
 }
 
@@ -496,11 +549,11 @@ function renderAll() {
    ═══════════════════════════════════════════ */
 
 function renderLibrary() {
-  const container = document.getElementById('pcPieceLibrary');
-  if (!container) return;
-  container.innerHTML = '';
+  const lib = document.getElementById('pcPieceLibrary');
+  if (!lib) return;
+  lib.innerHTML = '';
   if (pieceLibrary.length === 0) {
-    container.innerHTML = '<p style="font-size:12px;color:var(--text-muted);padding:8px;text-align:center;">拼图库为空</p>';
+    lib.innerHTML = '<p style="font-size:12px;color:var(--text-muted);padding:8px;text-align:center;">拼图库为空</p>';
     return;
   }
   for (const piece of pieceLibrary) {
@@ -509,13 +562,11 @@ function renderLibrary() {
     if (activeSelection && activeSelection.pieceId === piece.id) item.classList.add('active');
 
     const swatch = document.createElement('div');
-    swatch.className = 'legend-swatch';
-    swatch.style.backgroundColor = piece.color;
-    swatch.style.width = '20px'; swatch.style.height = '20px'; swatch.style.borderRadius = '4px';
-    swatch.style.flexShrink = '0';
+    swatch.style.cssText = `width:20px;height:20px;border-radius:4px;flex-shrink:0;background:${piece.color}`;
 
     const info = document.createElement('div');
     info.className = 'piece-library-info';
+
     const nameEl = document.createElement('span');
     nameEl.className = 'piece-library-name';
     nameEl.textContent = piece.name + ` (${piece.cells.length}块)`;
@@ -524,7 +575,7 @@ function renderLibrary() {
     countEl.className = 'piece-library-count';
     const used = boardState.placements.filter(p => p.pieceId === piece.id).length;
     countEl.textContent = used > 0 ? `×${used}` : '';
-    if (used > 0) countEl.style.color = 'var(--accent)';
+    countEl.style.color = used > 0 ? 'var(--accent)' : 'transparent';
 
     info.appendChild(nameEl);
     info.appendChild(countEl);
@@ -540,7 +591,7 @@ function renderLibrary() {
       item.appendChild(delBtn);
     }
     item.addEventListener('click', () => selectPiece3D(piece.id));
-    container.appendChild(item);
+    lib.appendChild(item);
   }
 }
 
@@ -575,13 +626,25 @@ function updateActivePanel() {
   document.getElementById('pcActiveCount').textContent = `已使用: ${used} 个`;
 }
 
+function composeRotation(rotIdx, axis, dir) {
+  // Compose the current rotation matrix with a 90° rotation around the given axis
+  // (local rotation — apply delta after current matrix)
+  const rots = getAllRotations();
+  const current = rots[((rotIdx % rots.length) + rots.length) % rots.length];
+  const angle = dir > 0 ? 1 : 3; // 1 = +90°, 3 = -90° (270°)
+  let delta;
+  if (axis === 'x') delta = rotX90(angle);
+  else if (axis === 'y') delta = rotY90(angle);
+  else delta = rotZ90(angle);
+  const result = matMul(current, delta);
+  const key = result.flat().join(',');
+  const newIdx = rots.findIndex(r => r.flat().join(',') === key);
+  return newIdx >= 0 ? newIdx : rotIdx;
+}
+
 function rotateActive(axis, dir) {
   if (!activeSelection) return;
-  // Cycle through rotations - increment/decrement
-  const total = getAllRotations().length;
-  if (axis === 'x') activeSelection.rotIdx = (activeSelection.rotIdx + dir + total) % total;
-  if (axis === 'y') activeSelection.rotIdx = (activeSelection.rotIdx + dir * 4 + total) % total;
-  if (axis === 'z') activeSelection.rotIdx = (activeSelection.rotIdx + dir * 8 + total) % total;
+  activeSelection.rotIdx = composeRotation(activeSelection.rotIdx, axis, dir);
   updateActivePanel();
   renderAll();
 }
@@ -636,13 +699,20 @@ function saveDesignerPiece() {
    ═══════════════════════════════════════════ */
 
 function resize() {
-  const w = container.clientWidth || container.parentElement.clientWidth;
-  const h = container.clientHeight || container.parentElement.clientHeight || 500;
-  if (w > 0 && h > 0) {
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
+  let w = container.clientWidth;
+  let h = container.clientHeight;
+  if (!w || !h) {
+    const parent = container.parentElement;
+    if (parent) {
+      w = w || parent.clientWidth;
+      h = h || parent.clientHeight;
+    }
   }
+  w = w || 800;
+  h = h || 500;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
 }
 
 /* ═══════════════════════════════════════════
@@ -659,14 +729,21 @@ function init() {
   document.getElementById('pcSizeY').value = boardState.sy;
   document.getElementById('pcSizeZ').value = boardState.sz;
 
-  resize();
-  resetCamera();
-  renderAll();
+  // Delay initial render to ensure CSS layout is resolved
+  requestAnimationFrame(() => {
+    resize();
+    resetCamera();
+    renderAll();
 
-  // Mouse events
-  renderer.domElement.addEventListener('mousemove', onMouseMove);
-  renderer.domElement.addEventListener('click', onClick);
+    // Update designer position to match the possibly-loaded board size
+    designerGroup.position.set(boardState.sx + 1.0, 0, 0);
+  });
+
+  // Use pointer events (more reliable than click)
+  renderer.domElement.addEventListener('pointermove', onPointerMove);
+  renderer.domElement.addEventListener('pointerdown', onPointerDown);
   renderer.domElement.addEventListener('contextmenu', e => {
+    e.preventDefault();
     if (activeSelection) { activeSelection = null; updateActivePanel(); renderAll(); }
   });
 
@@ -713,6 +790,7 @@ function init() {
       const cells = getTransformedCells(piece, pl.rotIdx);
       return cells.every(([dx,dy,dz]) => pl.ox+dx>=0 && pl.ox+dx<sx && pl.oy+dy>=0 && pl.oy+dy<sy && pl.oz+dz>=0 && pl.oz+dz<sz);
     });
+    designerGroup.position.set(boardState.sx + 1.0, 0, 0);
     saveBoardSession(); resetCamera(); renderAll();
   });
   document.getElementById('pcExport').addEventListener('click', () => {
@@ -737,7 +815,7 @@ function init() {
     reader.readAsText(e.target.files[0]);
   });
 
-  // Resize
+  // Resize handling
   window.addEventListener('resize', () => {
     resize();
     if (window.innerWidth > 800) {
@@ -776,9 +854,7 @@ function init() {
   }
 
   const pcToggleBtn = document.getElementById('pcSidebarToggle');
-  if (pcToggleBtn) {
-    pcToggleBtn.addEventListener('click', togglePcSidebar);
-  }
+  if (pcToggleBtn) pcToggleBtn.addEventListener('click', togglePcSidebar);
 
   // Close sidebar when selecting a piece on mobile
   const origSelect3D = selectPiece3D;
@@ -796,4 +872,10 @@ function init() {
   animate();
 }
 
-document.addEventListener('DOMContentLoaded', init);
+// Module script with CDN imports may execute after DOMContentLoaded has fired.
+// Use readyState check to avoid the race.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
