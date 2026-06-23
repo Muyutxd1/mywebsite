@@ -921,22 +921,22 @@ input:focus, select:focus {
 
 .polycube-layout {
   display: flex;
-  min-height: calc(100vh - 52px - 60px);
+  height: calc(100vh - 52px - 56px);
   margin-top: -12px;
 }
 
 /* ── Sidebar ───────────────────────────── */
 
 .polycube-sidebar {
-  width: 290px;
-  min-width: 290px;
+  width: 270px;
+  min-width: 270px;
   background: var(--bg-card);
   border-right: 1px solid var(--border-light);
-  padding: 16px;
+  padding: 12px 14px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 .polycube-sidebar .sidebar-section {
@@ -945,7 +945,7 @@ input:focus, select:focus {
 }
 .polycube-sidebar .sidebar-section + .sidebar-section {
   border-top: 1px solid var(--border-light);
-  padding-top: 14px;
+  padding-top: 10px;
 }
 
 .polycube-sidebar .sidebar-title {
@@ -953,368 +953,241 @@ input:focus, select:focus {
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
 }
 
 /* ── 3D Piece Library ──────────────────── */
 
+.polycube-sidebar .piece-library { display: flex; flex-direction: column; gap: 1px; }
 .polycube-sidebar .piece-library-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 8px;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.12s ease;
+  border: 2px solid transparent;
 }
 .polycube-sidebar .piece-library-item:hover {
   background: var(--accent-light);
+  border-color: rgba(108,92,231,0.25);
 }
 .polycube-sidebar .piece-library-item.active {
   background: var(--accent-light);
-  box-shadow: 0 0 0 2px var(--accent);
+  border-color: var(--accent);
 }
 .polycube-sidebar .piece-library-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  overflow: hidden;
+  flex: 1; min-width: 0;
+  display: flex; align-items: center; gap: 5px; overflow: hidden;
 }
 .polycube-sidebar .piece-library-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 13px; font-weight: 600; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .polycube-sidebar .piece-library-count {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent);
-  flex-shrink: 0;
-  background: var(--accent-light);
-  padding: 1px 7px;
-  border-radius: 10px;
+  font-size: 11px; font-weight: 700; color: #fff;
+  background: var(--accent); padding: 2px 7px; border-radius: 10px;
 }
 .polycube-sidebar .piece-library-delete {
-  font-size: 16px;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 2px 7px;
-  border-radius: 4px;
-  border: none;
-  background: transparent;
-  line-height: 1;
-  flex-shrink: 0;
-  opacity: 0;
-  transition: all 0.15s;
+  font-size: 15px; color: var(--text-muted); cursor: pointer;
+  padding: 2px 6px; border-radius: 4px; border: none; background: transparent;
+  opacity: 0; transition: all 0.12s;
 }
 .polycube-sidebar .piece-library-item:hover .piece-library-delete { opacity: 1; }
 .polycube-sidebar .piece-library-delete:hover {
-  color: #e74c3c;
-  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c; background: rgba(231,76,60,0.1);
 }
 
-/* ── 3D Active Panel ───────────────────── */
+/* ── Active Panel ──────────────────────── */
 
 .polycube-sidebar .active-piece-name {
-  text-align: center;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 8px;
+  text-align: center; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px;
 }
-.polycube-sidebar .transform-controls {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 6px;
-}
+.polycube-sidebar .transform-controls { display: flex; gap: 4px; margin-bottom: 5px; }
 .polycube-sidebar .transform-controls .btn { flex: 1; }
 .polycube-sidebar .active-piece-count {
-  text-align: center;
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 6px;
+  text-align: center; font-size: 12px; color: var(--text-muted); margin-bottom: 5px;
 }
 
-/* ── 3D Designer ───────────────────────── */
+/* ── Designer ──────────────────────────── */
 
-.designer-name-input-wrap {
-  display: flex;
-  gap: 4px;
-  margin-top: 8px;
-}
+.polycube-sidebar .designer-hint { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+.designer-name-input-wrap { display: flex; gap: 5px; margin-top: 6px; }
 .designer-name-input-wrap .designer-name-input {
-  flex: 1;
-  padding: 7px 10px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: 13px;
-  font-family: var(--font);
-  background: var(--bg-input);
-  color: var(--text);
+  flex: 1; padding: 7px 10px; border: 1px solid var(--border);
+  border-radius: 6px; font-size: 13px; font-family: var(--font);
+  background: var(--bg-input); color: var(--text);
 }
 .designer-name-input-wrap .designer-name-input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
+  outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light);
 }
 
-/* ── 3D Main Area ──────────────────────── */
+/* ── Sidebar Actions ───────────────────── */
+
+.polycube-sidebar .sidebar-actions { display: flex; gap: 5px; }
+.polycube-sidebar .sidebar-actions .btn { flex: 1; }
+
+/* ── SIDEBAR BUTTONS ───────────────────── */
+
+.polycube-sidebar .btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 4px; padding: 7px 14px;
+  border: 2px solid var(--border); border-radius: 8px;
+  background: #fff; color: var(--text);
+  font-size: 12px; font-weight: 600; font-family: var(--font);
+  cursor: pointer; transition: all 0.12s ease; white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+.polycube-sidebar .btn:hover {
+  background: var(--accent-light); border-color: var(--accent);
+  box-shadow: 0 2px 6px rgba(108,92,231,0.15);
+}
+.polycube-sidebar .btn:active { transform: scale(0.96); }
+.polycube-sidebar .btn-sm { padding: 5px 10px; font-size: 11px; }
+.polycube-sidebar .btn-primary {
+  background: var(--accent); color: #fff; border-color: var(--accent);
+  font-weight: 700; box-shadow: 0 2px 4px rgba(108,92,231,0.3);
+}
+.polycube-sidebar .btn-primary:hover {
+  background: var(--accent-hover); border-color: var(--accent-hover);
+  box-shadow: 0 4px 12px rgba(108,92,231,0.35);
+}
+.polycube-sidebar .btn-secondary {
+  background: var(--bg-input); color: var(--text-secondary);
+}
+.polycube-sidebar .btn-secondary:hover { background: var(--border); color: var(--text); }
+
+/* ── 3D MAIN AREA ──────────────────────── */
 
 .polycube-main {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   background: #1a1a2e;
   position: relative;
+  overflow: hidden;
 }
 
+/* The 3D canvas fills available space */
 .canvas3d-container {
   flex: 1;
   cursor: grab;
-  min-height: 400px;
 }
 .canvas3d-container:active { cursor: grabbing; }
 .canvas3d-container canvas { display: block; }
 
-/* ── 3D Toolbar (inside polycube-main) ─── */
+/* ── 3D TOOLBAR ────────────────────────── */
 
 .polycube-main .board-toolbar {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  flex-wrap: wrap;
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
   justify-content: center;
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(8px);
-  padding: 10px 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 14px;
+  background: rgba(10,10,30,0.95);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .polycube-main .board-size-controls {
-  display: flex;
-  gap: 6px;
-  align-items: center;
+  display: flex; gap: 5px; align-items: center;
 }
 .polycube-main .board-size-controls label {
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.7);
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.8);
+  display: flex; align-items: center; gap: 3px;
 }
 .polycube-main .size-input {
-  width: 42px;
-  padding: 4px 5px;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 6px;
-  font-size: 12px;
-  font-family: var(--font);
-  text-align: center;
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-  font-weight: 600;
-  transition: border-color 0.15s;
+  width: 44px; padding: 5px 4px;
+  border: 2px solid rgba(255,255,255,0.2); border-radius: 6px;
+  font-size: 13px; font-family: var(--font); text-align: center;
+  background: rgba(255,255,255,0.1); color: #fff; font-weight: 700;
 }
 .polycube-main .size-input:focus {
-  outline: none;
-  border-color: var(--accent);
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(108,92,231,0.2);
 }
-.polycube-main .board-action-controls {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-}
+.polycube-main .board-action-controls { display: flex; gap: 5px; align-items: center; }
 
-/* ── 3D Hint ───────────────────────────── */
+/* ── 3D TOOLBAR BUTTONS ────────────────── */
 
-.polycube-main .placement-hint {
-  font-size: 11px;
-  color: rgba(255,255,255,0.45);
-  text-align: center;
-  padding: 6px 12px;
-  background: rgba(0,0,0,0.3);
-}
-
-/* ── Buttons (polycube-scoped) ───────────── */
-
-/* Light sidebar buttons */
-.polycube-sidebar .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 7px 14px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg-input);
-  color: var(--text);
-  font-size: 12px;
-  font-weight: 500;
-  font-family: var(--font);
-  cursor: pointer;
-  transition: all 0.15s ease;
-  white-space: nowrap;
-}
-.polycube-sidebar .btn:hover {
-  background: var(--border);
-  border-color: var(--text-muted);
-}
-.polycube-sidebar .btn:active {
-  transform: scale(0.97);
-}
-.polycube-sidebar .btn-sm {
-  padding: 5px 10px;
-  font-size: 11px;
-}
-.polycube-sidebar .btn-primary {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-  font-weight: 600;
-}
-.polycube-sidebar .btn-primary:hover {
-  background: var(--accent-hover);
-  border-color: var(--accent-hover);
-  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.25);
-}
-.polycube-sidebar .btn-secondary {
-  background: var(--bg-input);
-  color: var(--text-secondary);
-}
-.polycube-sidebar .btn-secondary:hover {
-  background: var(--border);
-  color: var(--text);
-}
-
-/* Dark toolbar buttons */
 .polycube-main .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 6px 14px;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 8px;
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.85);
-  font-size: 12px;
-  font-weight: 500;
-  font-family: var(--font);
-  cursor: pointer;
-  transition: all 0.15s ease;
-  white-space: nowrap;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 5px; padding: 7px 16px;
+  border: 2px solid rgba(255,255,255,0.25); border-radius: 8px;
+  background: rgba(255,255,255,0.1); color: #fff;
+  font-size: 13px; font-weight: 600; font-family: var(--font);
+  cursor: pointer; transition: all 0.12s ease; white-space: nowrap;
 }
 .polycube-main .btn:hover {
-  background: rgba(255,255,255,0.14);
-  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4);
 }
-.polycube-main .btn:active {
-  transform: scale(0.97);
-}
+.polycube-main .btn:active { transform: scale(0.96); }
+.polycube-main .btn-sm { padding: 5px 12px; font-size: 12px; }
 .polycube-main .btn-primary {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-  font-weight: 600;
+  background: var(--accent); color: #fff; border-color: var(--accent);
+  font-weight: 700; box-shadow: 0 2px 8px rgba(108,92,231,0.4);
 }
 .polycube-main .btn-primary:hover {
-  background: var(--accent-hover);
-  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.35);
+  background: var(--accent-hover); border-color: var(--accent-hover);
+  box-shadow: 0 4px 16px rgba(108,92,231,0.5);
 }
 .polycube-main .btn-danger {
-  color: #ff6b6b;
-  border-color: rgba(255, 107, 107, 0.3);
+  color: #ff6b6b; border-color: rgba(255,107,107,0.4);
 }
 .polycube-main .btn-danger:hover {
-  background: rgba(255, 107, 107, 0.1);
-  border-color: #ff6b6b;
-}
-.polycube-main .btn-sm {
-  padding: 4px 10px;
-  font-size: 11px;
+  background: rgba(255,107,107,0.15); border-color: #ff6b6b;
 }
 
-/* ── Responsive (Polycube) ─────────────── */
+/* ── Hint bar ──────────────────────────── */
+
+.polycube-main .placement-hint {
+  font-size: 12px; color: rgba(255,255,255,0.5);
+  text-align: center; padding: 6px 12px;
+  background: rgba(0,0,0,0.4);
+}
+
+/* ── Mobile sidebar toggle ─────────────── */
+
+.polycube-main .sidebar-toggle-btn {
+  position: absolute; top: 6px; left: 6px; z-index: 10;
+  display: none;
+  align-items: center; gap: 4px;
+  padding: 7px 14px;
+  border: 2px solid rgba(255,255,255,0.3); border-radius: 8px;
+  background: rgba(0,0,0,0.7); color: #fff;
+  font-size: 13px; font-weight: 700; font-family: var(--font);
+  cursor: pointer;
+}
+.polycube-main .sidebar-toggle-btn:hover {
+  background: rgba(108,92,231,0.5); border-color: var(--accent);
+}
+
+/* ── Responsive ────────────────────────── */
 
 @media (max-width: 800px) {
-  .polycube-layout {
-    flex-direction: column;
-    margin-top: 0;
-    min-height: auto;
-  }
+  .polycube-layout { flex-direction: column; margin-top: 0; height: auto; }
 
   .polycube-sidebar {
-    position: fixed;
-    top: 52px;
-    left: 0;
-    bottom: 0;
-    width: 300px;
-    min-width: 300px;
-    z-index: 200;
-    transform: translateX(-100%);
-    transition: transform 0.25s ease;
-    box-shadow: var(--shadow-lg);
-    overflow-y: auto;
-    padding: 14px;
-    gap: 12px;
+    position: fixed; top: 52px; left: 0; bottom: 0;
+    width: 280px; min-width: 280px; z-index: 200;
+    transform: translateX(-100%); transition: transform 0.25s ease;
+    box-shadow: var(--shadow-lg); overflow-y: auto; padding: 12px; gap: 10px;
   }
-  .polycube-sidebar.open {
-    transform: translateX(0);
-  }
+  .polycube-sidebar.open { transform: translateX(0); }
 
   .sidebar-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    top: 52px;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 199;
-    backdrop-filter: blur(2px);
+    display: none; position: fixed; inset: 0; top: 52px;
+    background: rgba(0,0,0,0.4); z-index: 199; backdrop-filter: blur(2px);
   }
   .sidebar-overlay.active { display: block; }
 
-  .polycube-main {
-    height: 65vh;
-    min-height: 400px;
-  }
+  .polycube-main { flex: 1; height: 60vh; min-height: 350px; }
+  .polycube-main .sidebar-toggle-btn { display: inline-flex; }
 
-  .polycube-main .board-toolbar {
-    gap: 6px;
-    padding: 8px 10px;
-  }
-  .polycube-main .board-toolbar .btn {
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-  .polycube-main .size-input {
-    width: 36px;
-    font-size: 11px;
-  }
-  .polycube-main .placement-hint {
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-
-  .polycube-main .sidebar-toggle-btn {
-    display: inline-flex;
-  }
+  .polycube-main .board-toolbar { gap: 5px; padding: 6px 8px; }
+  .polycube-main .board-toolbar .btn { font-size: 11px; padding: 5px 10px; }
+  .polycube-main .size-input { width: 38px; font-size: 12px; }
+  .polycube-main .placement-hint { font-size: 10px; padding: 4px 8px; }
 }
 
 @media (max-width: 400px) {
-  .polycube-sidebar {
-    width: 280px;
-    min-width: 280px;
-  }
-  .polycube-main {
-    height: 55vh;
-  }
+  .polycube-sidebar { width: 260px; min-width: 260px; }
+  .polycube-main { height: 50vh; }
 }

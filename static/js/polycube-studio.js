@@ -148,9 +148,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#1a1a2e');
 scene.fog = new THREE.Fog('#1a1a2e', 15, 40);
 
-const camera = new THREE.PerspectiveCamera(50, 1, 0.5, 60);
-camera.position.set(8, 6, 10);
-camera.lookAt(2, 1.5, 2);
+const camera = new THREE.PerspectiveCamera(50, 2, 0.5, 60);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -172,12 +170,19 @@ scene.add(new THREE.HemisphereLight('#8899cc', '#334455', 0.3));
 
 // OrbitControls
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(2, 1.5, 2);
 controls.enableDamping = true;
 controls.dampingFactor = 0.1;
 controls.minDistance = 3;
 controls.maxDistance = 20;
-controls.update();
+
+function resetCamera() {
+  const { sx, sy, sz } = boardState;
+  const cx = (sx - 1) / 2, cy = (sy - 1) / 2, cz = (sz - 1) / 2;
+  const dist = Math.max(sx, sy, sz) * 1.8 + 3;
+  camera.position.set(cx + dist * 0.6, cy + dist * 0.5, cz + dist * 0.7);
+  controls.target.set(cx, cy, cz);
+  controls.update();
+}
 
 // Scene groups
 const boardGroup = new THREE.Group(); scene.add(boardGroup);
@@ -599,11 +604,13 @@ function saveDesignerPiece() {
    ═══════════════════════════════════════════ */
 
 function resize() {
-  const w = container.clientWidth;
-  const h = container.clientHeight || window.innerHeight - 200;
-  renderer.setSize(w, h, false);
-  camera.aspect = w / Math.max(h, 1);
-  camera.updateProjectionMatrix();
+  const w = container.clientWidth || container.parentElement.clientWidth;
+  const h = container.clientHeight || container.parentElement.clientHeight || 500;
+  if (w > 0 && h > 0) {
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
 }
 
 /* ═══════════════════════════════════════════
@@ -621,6 +628,7 @@ function init() {
   document.getElementById('pcSizeZ').value = boardState.sz;
 
   resize();
+  resetCamera();
   renderAll();
 
   // Mouse events
@@ -673,7 +681,7 @@ function init() {
       const cells = getTransformedCells(piece, pl.rotIdx);
       return cells.every(([dx,dy,dz]) => pl.ox+dx>=0 && pl.ox+dx<sx && pl.oy+dy>=0 && pl.oy+dy<sy && pl.oz+dz>=0 && pl.oz+dz<sz);
     });
-    saveBoardSession(); renderAll();
+    saveBoardSession(); resetCamera(); renderAll();
   });
   document.getElementById('pcExport').addEventListener('click', () => {
     const blob = new Blob([JSON.stringify(pieceLibrary,null,2)], {type:'application/json'});
@@ -738,11 +746,6 @@ function init() {
   const pcToggleBtn = document.getElementById('pcSidebarToggle');
   if (pcToggleBtn) {
     pcToggleBtn.addEventListener('click', togglePcSidebar);
-    // Show only on mobile
-    pcToggleBtn.style.display = window.innerWidth <= 800 ? 'inline-flex' : 'none';
-    window.addEventListener('resize', () => {
-      pcToggleBtn.style.display = window.innerWidth <= 800 ? 'inline-flex' : 'none';
-    });
   }
 
   // Close sidebar when selecting a piece on mobile

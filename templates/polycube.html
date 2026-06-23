@@ -1,10 +1,9 @@
 {% extends "base.html" %}
-{% block title %}3D Polycube Puzzle Studio — 三维拼图{% endblock %}
+{% block title %}3D Polycube — 三维拼图{% endblock %}
 
 {% block content %}
 <div class="polycube-layout" id="polycubeApp">
 
-  <!-- Sidebar -->
   <aside class="polycube-sidebar" id="pcSidebar">
 
     <div class="sidebar-section">
@@ -20,20 +19,20 @@
         <button class="btn btn-sm" id="pcRotY">↻ Y</button>
         <button class="btn btn-sm" id="pcRotZ">↻ Z</button>
       </div>
-      <div class="transform-controls" style="margin-top:2px;">
+      <div class="transform-controls">
         <button class="btn btn-sm" id="pcRotXccw">↺ X</button>
         <button class="btn btn-sm" id="pcRotYccw">↺ Y</button>
         <button class="btn btn-sm" id="pcRotZccw">↺ Z</button>
       </div>
       <div class="active-piece-count" id="pcActiveCount"></div>
-      <button class="btn btn-sm btn-secondary" id="pcDeselect">✕ 取消选中</button>
+      <button class="btn btn-sm btn-secondary" id="pcDeselect">取消选中</button>
     </div>
 
     <div class="sidebar-section">
-      <h3 class="sidebar-title">🔧 3D 设计器</h3>
-      <p class="designer-hint" style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">点击右侧 4×4×4 网格添加/移除方块</p>
+      <h3 class="sidebar-title">🔧 设计器</h3>
+      <p class="designer-hint">点击右侧 4×4×4 网格设计形状</p>
       <div class="designer-name-input-wrap">
-        <input type="text" class="designer-name-input" id="pcDesignerName" placeholder="输入名称…" maxlength="16">
+        <input type="text" class="designer-name-input" id="pcDesignerName" placeholder="名称…" maxlength="16">
         <button class="btn btn-sm btn-primary" id="pcSavePiece">保存</button>
       </div>
     </div>
@@ -45,12 +44,8 @@
     </div>
   </aside>
 
-  <!-- 3D View -->
   <main class="polycube-main">
-    <!-- Mobile sidebar toggle -->
-    <button class="sidebar-toggle-btn" id="pcSidebarToggle" style="position:absolute;top:8px;left:8px;z-index:10;background:rgba(255,255,255,0.1);color:#fff;border-color:rgba(255,255,255,0.2);">
-      ☰ 拼图库
-    </button>
+    <button class="sidebar-toggle-btn" id="pcSidebarToggle">☰ 拼图库</button>
 
     <div class="board-toolbar">
       <div class="board-size-controls">
@@ -66,12 +61,10 @@
       </div>
     </div>
 
-    <div class="canvas3d-container" id="pcCanvasContainer">
-      <!-- Three.js canvas injected here -->
-    </div>
+    <div class="canvas3d-container" id="pcCanvasContainer"></div>
 
     <div class="placement-hint">
-      💡 拖拽旋转 · 滚轮缩放 · 右键平移 · 选中拼图块后点击棋盘放置 · 方向键旋转 · Esc 取消 · Ctrl+Z 撤销
+      🖱 拖拽旋转 · 滚轮缩放 · 右键平移 · 点击棋盘放置 · 方向键旋转拼图块 · Esc 取消
     </div>
   </main>
 
@@ -80,12 +73,10 @@
 
 {% block scripts %}
 <script type="importmap">
-{
-  "imports": {
+{ "imports": {
     "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
     "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-  }
-}
+}}
 </script>
 <script type="module" src="{{ url_for('static', filename='js/polycube-studio.js') }}"></script>
 {% endblock %}
