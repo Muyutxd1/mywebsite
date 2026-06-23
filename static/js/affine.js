@@ -319,29 +319,46 @@ function computeLayout() {
 }
 
 function autoFitView() {
-  // Compute bounding box of shape in world coords
+  if (!leftRect) return;
+
+  // ── Left view: center on original shape ──
   let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
   for (const v of shapeVertices) {
     minX = Math.min(minX, v.x); maxX = Math.max(maxX, v.x);
     minY = Math.min(minY, v.y); maxY = Math.max(maxY, v.y);
   }
-  const cx = (minX + maxX) / 2;
-  const cy = (minY + maxY) / 2;
-  const spanX = maxX - minX || 2;
-  const spanY = maxY - minY || 2;
+  const cxL = (minX + maxX) / 2;
+  const cyL = (minY + maxY) / 2;
+  const spanXL = maxX - minX || 2;
+  const spanYL = maxY - minY || 2;
 
-  // Left view: center on shape with padding
-  const pad = Math.max(spanX, spanY) * 0.6;
-  viewLeft.cx = cx;
-  viewLeft.cy = cy;
+  // ── Right view: center on TRANSFORMED shape ──
+  const M = buildFullMatrix();
+  const tVerts = shapeVertices.map(v => applyTransform(M, v.x, v.y));
+  minX = Infinity; maxX = -Infinity; minY = Infinity; maxY = -Infinity;
+  for (const v of tVerts) {
+    minX = Math.min(minX, v.x); maxX = Math.max(maxX, v.x);
+    minY = Math.min(minY, v.y); maxY = Math.max(maxY, v.y);
+  }
+  const cxR = (minX + maxX) / 2;
+  const cyR = (minY + maxY) / 2;
+  const spanXR = maxX - minX || 2;
+  const spanYR = maxY - minY || 2;
+
+  // Use the larger span across both views for consistent scale
+  const spanX = Math.max(spanXL, spanXR);
+  const spanY = Math.max(spanYL, spanYR);
+  const pad = Math.max(spanX, spanY) * 0.8;
+
+  viewLeft.cx = cxL;
+  viewLeft.cy = cyL;
   viewLeft.scale = Math.min(
-    (leftRect.w * 0.7) / (spanX + pad * 2),
-    (leftRect.h * 0.7) / (spanY + pad * 2)
+    (leftRect.w * 0.65) / (spanX + pad * 2),
+    (leftRect.h * 0.65) / (spanY + pad * 2)
   );
 
-  // Right view: same scale as left (so user can compare sizes), but possibly offset
-  viewRight.cx = cx;
-  viewRight.cy = cy;
+  viewRight.cx = cxR;
+  viewRight.cy = cyR;
   viewRight.scale = viewLeft.scale;
 }
 
@@ -446,6 +463,7 @@ function onSliderInput() {
   readSliders();
   updateSliderLabels();
   updateMatrixDisplay();
+  autoFitView();
   renderAll();
 }
 
@@ -588,8 +606,13 @@ function init() {
   // Size canvas to fill container
   function resizeCanvas() {
     const container = canvas.parentElement;
-    const w = container.clientWidth || 800;
-    const h = container.clientHeight || 500;
+    const rect = container.getBoundingClientRect();
+    let w = rect.width;
+    let h = rect.height;
+    if (w <= 0) w = container.clientWidth || window.innerWidth - 280;
+    if (h <= 0) h = container.clientHeight || window.innerHeight - 200;
+    if (w <= 0) w = 800;
+    if (h <= 0) h = 500;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = w * dpr;
     canvas.height = h * dpr;
@@ -622,6 +645,7 @@ function init() {
       btn.addEventListener('click', () => {
         transformMatrix = [...preset.mat];
         updateSlidersFromMatrix();
+        autoFitView();
         renderAll();
       });
       presetContainer.appendChild(btn);
@@ -677,9 +701,8 @@ function init() {
   renderAll();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (document.readyState === 'loading') return;
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
   init();
-});
-// Fallback if DOMContentLoaded already fired
-if (document.readyState !== 'loading') init();
+}
