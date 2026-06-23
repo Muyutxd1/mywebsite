@@ -16,6 +16,7 @@ def create_app():
     from routes.mbti import mbti_bp
     from routes.daily import daily_bp
     from routes.polyomino import polyomino_bp
+    from routes.polycube import polycube_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(fortune_bp, url_prefix='/fortune')
@@ -23,6 +24,7 @@ def create_app():
     app.register_blueprint(mbti_bp, url_prefix='/mbti')
     app.register_blueprint(daily_bp, url_prefix='/daily')
     app.register_blueprint(polyomino_bp, url_prefix='/polyomino')
+    app.register_blueprint(polycube_bp, url_prefix='/polycube')
 
     return app
 

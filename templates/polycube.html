@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}3D Polycube Puzzle Studio — 三维拼图{% endblock %}
+
+{% block content %}
+<div class="polycube-layout" id="polycubeApp">
+
+  <!-- Sidebar -->
+  <aside class="polycube-sidebar" id="pcSidebar">
+    <div class="sidebar-section">
+      <h3 class="sidebar-title">🧊 拼图库</h3>
+      <div class="piece-library" id="pcPieceLibrary"></div>
+    </div>
+
+    <div class="sidebar-section" id="pcActivePanel" style="display:none;">
+      <h3 class="sidebar-title">当前拼图块</h3>
+      <div class="active-piece-name" id="pcActiveName"></div>
+      <div class="transform-controls">
+        <button class="btn btn-sm" id="pcRotX">↻ X</button>
+        <button class="btn btn-sm" id="pcRotY">↻ Y</button>
+        <button class="btn btn-sm" id="pcRotZ">↻ Z</button>
+      </div>
+      <div class="transform-controls" style="margin-top:2px;">
+        <button class="btn btn-sm" id="pcRotXccw">↺ X</button>
+        <button class="btn btn-sm" id="pcRotYccw">↺ Y</button>
+        <button class="btn btn-sm" id="pcRotZccw">↺ Z</button>
+      </div>
+      <div class="active-piece-count" id="pcActiveCount"></div>
+      <button class="btn btn-sm btn-secondary" id="pcDeselect">取消选中</button>
+    </div>
+
+    <div class="sidebar-section">
+      <h3 class="sidebar-title">🔧 3D 设计器</h3>
+      <div class="designer-hint">在 4×4×4 网格中点击添加/移除方块</div>
+      <div class="designer-name-input-wrap">
+        <input type="text" class="designer-name-input" id="pcDesignerName" placeholder="名称" maxlength="16">
+        <button class="btn btn-sm btn-primary" id="pcSavePiece">保存</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section sidebar-actions">
+      <button class="btn btn-sm" id="pcExport">📥 导出</button>
+      <button class="btn btn-sm" id="pcImport">📤 导入</button>
+      <input type="file" id="pcImportFile" accept=".json" style="display:none;">
+    </div>
+  </aside>
+
+  <!-- 3D View -->
+  <main class="polycube-main">
+    <div class="board-toolbar">
+      <div class="board-size-controls">
+        <label>X <input type="number" id="pcSizeX" value="4" min="1" max="10" class="size-input"></label>
+        <label>Y <input type="number" id="pcSizeY" value="4" min="1" max="10" class="size-input"></label>
+        <label>Z <input type="number" id="pcSizeZ" value="4" min="1" max="10" class="size-input"></label>
+        <button class="btn btn-sm btn-primary" id="pcUpdateSize">更新</button>
+      </div>
+      <div class="board-action-controls">
+        <button class="btn btn-sm" id="pcUndo">↩ 撤销</button>
+        <button class="btn btn-sm btn-danger" id="pcClear">🗑 清空</button>
+        <button class="btn btn-sm" id="pcSave">💾 保存</button>
+      </div>
+    </div>
+
+    <div class="canvas3d-container" id="pcCanvasContainer">
+      <!-- Three.js canvas injected here -->
+    </div>
+
+    <div class="placement-hint">
+      💡 拖拽旋转 | 滚轮缩放 | 右键平移 | 选中拼图块后点击棋盘放置 | 方向键旋转拼图块
+    </div>
+  </main>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="{{ url_for('static', filename='js/polycube-studio.js') }}"></script>
+{% endblock %}
