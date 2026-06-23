@@ -18,21 +18,21 @@ const STORAGE_KEY_PIECES = 'polyomino_pieces';
 const STORAGE_KEY_BOARD = 'polyomino_board_session';
 
 const DEFAULT_PALETTE = [
-  '#6C5CE7', '#00B894', '#E17055', '#0984E3', '#FDCB6E',
-  '#E84393', '#00CEC9', '#D63031', '#636E72', '#2D3436',
-  '#A29BFE', '#55EFC4', '#FAB1A0', '#74B9FF', '#FFEAA7',
-  '#FD79A8', '#81ECEC', '#FF7675', '#B2BEC3', '#DFE6E9'
+  '#FF6B6B', '#FF8E53', '#FFD93D', '#6BCB77', '#4D96FF',
+  '#9B59B6', '#FF6FB7', '#00D2D3', '#F368E0', '#FF9FF3',
+  '#54A0FF', '#5F27CD', '#01A3A4', '#FECA57', '#FF6348',
+  '#7BED9F', '#70A1FF', '#FFA502', '#2ED573', '#FF4757'
 ];
 
 const DEFAULT_PIECES = [
-  { id: 'builtin_monomino', name: '单体 (1×1)', shape: [[0,0]], color: '#636E72' },
-  { id: 'builtin_domino',    name: '多米诺 (1×2)', shape: [[0,0],[0,1]], color: '#6C5CE7' },
-  { id: 'builtin_L_tromino', name: 'L-三格', shape: [[0,0],[1,0],[2,0],[2,1]], color: '#00B894' },
-  { id: 'builtin_I_tromino', name: 'I-三格', shape: [[0,0],[1,0],[2,0]], color: '#E17055' },
-  { id: 'builtin_T_tetromino', name: 'T-四格', shape: [[0,0],[0,1],[0,2],[1,1]], color: '#0984E3' },
-  { id: 'builtin_Z_tetromino', name: 'Z-四格', shape: [[0,0],[0,1],[1,1],[1,2]], color: '#FDCB6E' },
-  { id: 'builtin_L_tetromino', name: 'L-四格', shape: [[0,0],[1,0],[2,0],[2,1]], color: '#E84393' },
-  { id: 'builtin_O_tetromino', name: '方块 (2×2)', shape: [[0,0],[0,1],[1,0],[1,1]], color: '#00CEC9' },
+  { id: 'builtin_monomino', name: '单体 (1×1)', shape: [[0,0]], color: '#FF6B6B' },
+  { id: 'builtin_domino',    name: '多米诺 (1×2)', shape: [[0,0],[0,1]], color: '#4D96FF' },
+  { id: 'builtin_L_tromino', name: 'L-三格', shape: [[0,0],[1,0],[2,0],[2,1]], color: '#6BCB77' },
+  { id: 'builtin_I_tromino', name: 'I-三格', shape: [[0,0],[1,0],[2,0]], color: '#FF8E53' },
+  { id: 'builtin_T_tetromino', name: 'T-四格', shape: [[0,0],[0,1],[0,2],[1,1]], color: '#9B59B6' },
+  { id: 'builtin_Z_tetromino', name: 'Z-四格', shape: [[0,0],[0,1],[1,1],[1,2]], color: '#FFD93D' },
+  { id: 'builtin_L_tetromino', name: 'L-四格', shape: [[0,0],[1,0],[2,0],[2,1]], color: '#FF6FB7' },
+  { id: 'builtin_O_tetromino', name: '方块 (2×2)', shape: [[0,0],[0,1],[1,0],[1,1]], color: '#00D2D3' },
 ];
 
 let pieceLibrary = [];
@@ -278,12 +278,14 @@ function computeCellSize(rows, cols, maxWidth, maxHeight) {
 function recalcCellSize() {
   const canvas = document.getElementById('boardCanvas');
   if (!canvas) return;
-  // Use window/viewport width for more stable sizing
   const isMobile = window.innerWidth <= 800;
-  const padding = isMobile ? 32 : 48;
-  const maxW = window.innerWidth - padding - (isMobile ? 0 : 300); // sidebar width on desktop
-  const toolbarH = isMobile ? 200 : 140;
-  const maxH = Math.min(window.innerHeight - 120 - toolbarH, 800);
+  // On mobile use nearly full viewport width; desktop accounts for sidebar
+  const maxW = isMobile
+    ? window.innerWidth - 16
+    : window.innerWidth - 280 - 48;
+  const maxH = isMobile
+    ? window.innerHeight - 200
+    : Math.min(window.innerHeight - 200, 750);
   cachedCellSize = computeCellSize(boardState.rows, boardState.cols, maxW, maxH);
 }
 
@@ -355,6 +357,33 @@ function renderBoard() {
       const y = r * cellSize;
       ctx.fillStyle = piece.color;
       ctx.fillRect(x + 1, y + 1, cellSize - 1, cellSize - 1);
+    }
+
+    // Draw connection lines (center-to-center for adjacent cells)
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.lineWidth = Math.max(1, cellSize * 0.08);
+    ctx.lineCap = 'round';
+    const drawnEdges = new Set();
+    for (const [dr, dc] of coords) {
+      const r = pl.originR + dr;
+      const c = pl.originC + dc;
+      const cx = (c + 0.5) * cellSize;
+      const cy = (r + 0.5) * cellSize;
+      // Check right and down neighbors
+      for (const [nr, nc] of [[r, c+1], [r+1, c]]) {
+        if (cellSet.has(`${nr},${nc}`)) {
+          const edgeKey = `${Math.min(r,nr)},${Math.min(c,nc)}-${Math.max(r,nr)},${Math.max(c,nc)}`;
+          if (!drawnEdges.has(edgeKey)) {
+            drawnEdges.add(edgeKey);
+            const nx = (nc + 0.5) * cellSize;
+            const ny = (nr + 0.5) * cellSize;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(nx, ny);
+            ctx.stroke();
+          }
+        }
+      }
     }
 
     // Draw outer perimeter only (edges not shared with another cell of same piece)
