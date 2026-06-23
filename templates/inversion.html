@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% block title %}反演操作台 — 圆反演几何探索{% endblock %}
+
+{% block head %}
+<style>
+.inv-layout {
+  display: flex;
+  height: calc(100vh - 52px - 56px);
+  margin-top: -12px;
+}
+
+.inv-sidebar {
+  width: 240px;
+  min-width: 240px;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-light);
+  padding: 12px 14px;
+  overflow-y: auto;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.inv-sidebar .section {
+  background: transparent; padding: 0;
+}
+.inv-sidebar .section + .section {
+  border-top: 1px solid var(--border-light); padding-top: 10px;
+}
+
+.inv-sidebar .section-title {
+  font-size: 11px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
+}
+
+.inv-slider-row {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 5px;
+}
+.inv-slider-label {
+  font-size: 13px; font-weight: 700; font-family: "SF Mono","Fira Code",monospace;
+  color: var(--text); width: 22px; text-align: center;
+}
+.inv-slider {
+  flex: 1; -webkit-appearance: none; appearance: none; height: 6px;
+  border-radius: 3px; background: var(--border); outline: none;
+}
+.inv-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent); cursor: pointer; border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.inv-slider-val {
+  font-size: 12px; font-family: "SF Mono","Fira Code",monospace;
+  color: var(--text-secondary); width: 36px; text-align: right;
+}
+
+.inv-mode-group { display: flex; flex-direction: column; gap: 4px; }
+.inv-mode-group label {
+  display: flex; align-items: center; gap: 8px; padding: 7px 10px;
+  border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;
+  color: var(--text); transition: all 0.12s; border: 1px solid transparent;
+}
+.inv-mode-group label:hover { background: var(--accent-light); }
+.inv-mode-group input:checked + span { color: var(--accent); }
+.inv-mode-group label:has(input:checked) {
+  background: var(--accent-light); border-color: var(--accent);
+}
+
+.inv-shape-group { display: flex; flex-direction: column; gap: 4px; }
+.inv-shape-group label {
+  display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+  border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;
+  color: var(--text); transition: all 0.12s; border: 1px solid transparent;
+}
+.inv-shape-group label:hover { background: var(--accent-light); }
+.inv-shape-group label:has(input:checked) {
+  background: var(--accent-light); border-color: var(--accent);
+}
+
+.inv-actions { display: flex; gap: 5px; }
+.inv-btn {
+  flex: 1; padding: 7px 10px; font-size: 12px; font-weight: 600;
+  font-family: var(--font); border: 2px solid var(--border); border-radius: 8px;
+  background: #fff; color: var(--text); cursor: pointer; transition: all 0.12s;
+}
+.inv-btn:hover { background: var(--accent-light); border-color: var(--accent); }
+.inv-btn.danger { color: #e74c3c; border-color: rgba(231,76,60,0.3); }
+.inv-btn.danger:hover { background: rgba(231,76,60,0.08); border-color: #e74c3c; }
+
+.inv-main {
+  flex: 1; display: flex; flex-direction: column;
+  background: #fafbfc; position: relative; overflow: hidden;
+}
+.inv-canvas-wrap { flex: 1; position: relative; }
+.inv-canvas-wrap canvas { display: block; }
+
+.inv-info {
+  font-size: 12px; color: var(--text-muted); text-align: center;
+  padding: 5px 12px; background: var(--bg-card);
+  border-top: 1px solid var(--border-light);
+}
+
+.inv-legend { display: flex; gap: 14px; font-size: 12px; align-items: center; }
+.inv-legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
+
+@media (max-width: 800px) {
+  .inv-layout { flex-direction: column; height: auto; }
+  .inv-sidebar { width: 100%; min-width: 0; max-height: 45vh; }
+  .inv-main { height: 50vh; min-height: 350px; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="inv-layout">
+
+  <aside class="inv-sidebar">
+
+    <div class="section">
+      <h3 class="section-title">🔮 反演参数</h3>
+      <div class="inv-slider-row">
+        <span class="inv-slider-label">cx</span>
+        <input type="range" class="inv-slider" id="slICX" min="-8" max="8" step="0.1" value="0">
+        <span class="inv-slider-val" id="slICXVal">0.0</span>
+      </div>
+      <div class="inv-slider-row">
+        <span class="inv-slider-label">cy</span>
+        <input type="range" class="inv-slider" id="slICY" min="-8" max="8" step="0.1" value="0">
+        <span class="inv-slider-val" id="slICYVal">0.0</span>
+      </div>
+      <div class="inv-slider-row">
+        <span class="inv-slider-label">R</span>
+        <input type="range" class="inv-slider" id="slIR" min="0.2" max="8" step="0.1" value="2">
+        <span class="inv-slider-val" id="slIRVal">2.0</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">🖱 鼠标模式</h3>
+      <div class="inv-mode-group">
+        <label><input type="radio" name="invMode" value="center" checked><span>📍 设置圆心</span></label>
+        <label><input type="radio" name="invMode" value="place"><span>➕ 放置图形</span></label>
+        <label><input type="radio" name="invMode" value="drag"><span>✋ 拖拽顶点</span></label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">📐 图形类型</h3>
+      <div class="inv-shape-group">
+        <label><input type="radio" name="invShape" value="point" checked><span>● 点</span></label>
+        <label><input type="radio" name="invShape" value="segment"><span>━ 线段</span></label>
+        <label><input type="radio" name="invShape" value="circle"><span>○ 圆</span></label>
+      </div>
+    </div>
+
+    <div class="section inv-actions">
+      <button class="inv-btn" id="invFitView">🔄 适应</button>
+      <button class="inv-btn" id="invUndo">↩ 撤销</button>
+      <button class="inv-btn danger" id="invClear">🗑 清空</button>
+    </div>
+
+    <div class="section">
+      <div class="inv-legend">
+        <span><span class="inv-legend-dot" style="background:#4D96FF"></span>原始</span>
+        <span><span class="inv-legend-dot" style="background:#FF6B6B"></span>反演</span>
+        <span><span class="inv-legend-dot" style="background:#9B59B6"></span>反演圆</span>
+      </div>
+    </div>
+
+  </aside>
+
+  <main class="inv-main">
+    <div class="inv-canvas-wrap"><canvas id="invCanvas"></canvas></div>
+    <div class="inv-info" id="invInfo"></div>
+  </main>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/inversion.js') }}"></script>
+{% endblock %}
