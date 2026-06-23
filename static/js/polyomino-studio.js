@@ -298,7 +298,7 @@ function recalcCellSize() {
   // On mobile use nearly full viewport width; desktop accounts for sidebar
   const maxW = isMobile
     ? window.innerWidth - 16
-    : window.innerWidth - 280 - 48;
+    : window.innerWidth - 300 - 56;  // sidebar 300px + main padding 28px*2
   const maxH = isMobile
     ? window.innerHeight - 200
     : Math.min(window.innerHeight - 200, 750);

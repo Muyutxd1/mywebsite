@@ -394,57 +394,55 @@ input:focus, select:focus {
 
 .polyomino-layout {
   display: flex;
-  gap: 0;
-  /* Fill available height */
   min-height: calc(100vh - 52px - 60px);
-  margin-top: -12px; /* reduce wasted top space from site-main padding */
+  margin-top: -12px;
 }
 
 /* ── Sidebar ───────────────────────────── */
 
 .polyomino-sidebar {
-  width: 280px;
-  min-width: 280px;
+  width: 300px;
+  min-width: 300px;
   background: var(--bg-card);
   border-right: 1px solid var(--border-light);
-  padding: 12px;
+  padding: 16px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-.polyomino-sidebar.collapsed {
-  width: 0;
-  min-width: 0;
-  padding: 12px 0;
-  overflow: hidden;
-  border-right: none;
+  gap: 14px;
 }
 
 .sidebar-section {
-  /* transparent sections — let the sidebar background show through */
+  background: transparent;
   padding: 0;
 }
+.sidebar-section + .sidebar-section {
+  border-top: 1px solid var(--border-light);
+  padding-top: 14px;
+}
+
 .sidebar-title {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 6px;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
+
 .designer-toggle {
   cursor: pointer;
   user-select: none;
+  transition: color 0.15s;
 }
 .designer-toggle:hover { color: var(--accent); }
 .toggle-arrow {
   font-size: 10px;
-  transition: transform 0.2s;
-  color: var(--text-muted);
+  transition: transform 0.2s ease;
+  margin-left: auto;
 }
 .designer-toggle.open .toggle-arrow { transform: rotate(180deg); }
 
@@ -453,37 +451,37 @@ input:focus, select:focus {
 .piece-library {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
+
 .piece-library-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px;
-  border-radius: var(--radius-sm);
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: all 0.15s ease;
 }
 .piece-library-item:hover {
   background: var(--accent-light);
 }
 .piece-library-item.active {
   background: var(--accent-light);
-  box-shadow: inset 0 0 0 2px var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
 }
 .piece-library-item canvas {
-  border-radius: 3px;
+  border-radius: 4px;
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
   border: 1px solid var(--border);
+  background: #fff;
 }
 .piece-library-info {
   flex: 1;
   min-width: 0;
   display: flex;
-  align-items: baseline;
-  gap: 5px;
+  align-items: center;
+  gap: 6px;
   overflow: hidden;
 }
 .piece-library-name {
@@ -499,53 +497,56 @@ input:focus, select:focus {
   font-weight: 700;
   color: var(--accent);
   flex-shrink: 0;
+  background: var(--accent-light);
+  padding: 1px 7px;
+  border-radius: 10px;
 }
 .piece-library-delete {
   font-size: 16px;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 2px 6px;
-  border-radius: 3px;
+  padding: 2px 7px;
+  border-radius: 4px;
   border: none;
   background: transparent;
   line-height: 1;
   flex-shrink: 0;
   opacity: 0;
-  transition: opacity 0.15s;
+  transition: all 0.15s;
 }
 .piece-library-item:hover .piece-library-delete { opacity: 1; }
 .piece-library-delete:hover {
   color: #e74c3c;
-  background: rgba(231, 76, 60, 0.12);
+  background: rgba(231, 76, 60, 0.1);
 }
 
 /* ── Active Piece Panel ────────────────── */
 
 .active-preview-canvas {
   display: block;
-  margin: 0 auto 6px;
-  border-radius: var(--radius-sm);
+  margin: 0 auto 10px;
+  border-radius: 8px;
   border: 1px solid var(--border);
   background: #fff;
 }
 .active-piece-name {
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .transform-controls {
   display: flex;
   gap: 4px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .transform-controls .btn { flex: 1; }
 .active-piece-count {
   text-align: center;
   font-size: 12px;
   color: var(--text-muted);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 /* ── Piece Designer ────────────────────── */
@@ -554,10 +555,10 @@ input:focus, select:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 .designer-canvas {
-  border-radius: var(--radius-sm);
+  border-radius: 8px;
   border: 1px solid var(--border);
   cursor: pointer;
   background: #fff;
@@ -569,10 +570,10 @@ input:focus, select:focus {
 }
 .designer-name-input {
   flex: 1;
-  padding: 5px 8px;
+  padding: 7px 10px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  font-size: 12px;
+  font-size: 13px;
   font-family: var(--font);
   background: var(--bg-card);
   color: var(--text);
@@ -580,6 +581,7 @@ input:focus, select:focus {
 .designer-name-input:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
 }
 .designer-hint {
   font-size: 11px;
@@ -589,7 +591,7 @@ input:focus, select:focus {
 
 .sidebar-actions {
   display: flex;
-  gap: 4px;
+  gap: 6px;
 }
 .sidebar-actions .btn { flex: 1; }
 
@@ -597,11 +599,11 @@ input:focus, select:focus {
 
 .polyomino-main {
   flex: 1;
-  padding: 20px;
+  padding: 24px 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   overflow-y: auto;
   background: var(--bg);
 }
@@ -611,69 +613,95 @@ input:focus, select:focus {
 .sidebar-toggle-btn {
   display: none;
   align-items: center;
-  gap: 4px;
-  padding: 6px 12px;
+  gap: 5px;
+  padding: 8px 16px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: 8px;
   background: var(--bg-card);
   color: var(--accent);
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 600;
   font-family: var(--font);
   cursor: pointer;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   align-self: flex-start;
+  transition: all 0.15s;
 }
-.sidebar-toggle-btn:hover { background: var(--accent-light); }
+.sidebar-toggle-btn:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
 
 /* ── Board Toolbar ─────────────────────── */
 
 .board-toolbar {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
+  background: var(--bg-card);
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
 }
-.board-size-controls,
+.board-size-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.board-size-controls label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.size-input {
+  width: 48px;
+  padding: 5px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: var(--font);
+  text-align: center;
+  background: var(--bg-card);
+  color: var(--text);
+  font-weight: 600;
+  transition: border-color 0.15s;
+}
+.size-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+.board-toolbar .toolbar-sep {
+  width: 1px;
+  height: 24px;
+  background: var(--border-light);
+  margin: 0 2px;
+}
 .board-action-controls,
 .board-session-controls {
   display: flex;
   gap: 4px;
   align-items: center;
 }
-.board-size-controls label {
-  font-size: 12px;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-.size-input {
-  width: 50px;
-  padding: 3px 6px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-family: var(--font);
-  text-align: center;
-  background: var(--bg-card);
-  color: var(--text);
-}
-.size-input:focus {
-  outline: none;
-  border-color: var(--accent);
-}
 
 /* ── Board Container ───────────────────── */
 
 .board-container {
   background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 6px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  padding: 8px;
+  border: 1px solid var(--border-light);
 }
 .board-container canvas {
   display: block;
+  border-radius: 6px;
 }
 
 /* ── Board Legend ──────────────────────── */
@@ -683,27 +711,34 @@ input:focus, select:focus {
   gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 4px 0;
 }
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-size: 12px;
   color: var(--text-secondary);
+  font-weight: 500;
+  background: var(--bg-card);
+  padding: 4px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--border-light);
 }
 .legend-swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-  border: 1px solid rgba(0,0,0,0.2);
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.15);
 }
 
 /* ── Placement Hint ────────────────────── */
 
 .placement-hint {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   text-align: center;
+  padding: 4px 0 0;
 }
 
 /* ── Buttons (polyomino-scoped) ──────────── */
@@ -712,45 +747,58 @@ input:focus, select:focus {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 6px 14px;
+  gap: 5px;
+  padding: 7px 16px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: 8px;
   background: var(--bg-card);
   color: var(--text);
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 500;
   font-family: var(--font);
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.15s ease;
   white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 .polyomino-layout .btn:hover {
   background: var(--bg-input);
   border-color: var(--text-muted);
 }
-.polyomino-layout .btn-sm { padding: 4px 10px; font-size: 11px; }
+.polyomino-layout .btn:active {
+  transform: scale(0.97);
+}
+.polyomino-layout .btn-sm {
+  padding: 5px 12px;
+  font-size: 12px;
+}
 .polyomino-layout .btn-primary {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
+  font-weight: 600;
 }
 .polyomino-layout .btn-primary:hover {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.25);
 }
 .polyomino-layout .btn-secondary {
   background: var(--bg-input);
   color: var(--text-secondary);
+  font-weight: 500;
 }
 .polyomino-layout .btn-secondary:hover {
   background: var(--border);
+  color: var(--text);
 }
 .polyomino-layout .btn-danger {
   color: #e74c3c;
-  border-color: rgba(231, 76, 60, 0.3);
+  border-color: rgba(231, 76, 60, 0.25);
+  font-weight: 500;
 }
 .polyomino-layout .btn-danger:hover {
-  background: rgba(231, 76, 60, 0.08);
+  background: rgba(231, 76, 60, 0.06);
   border-color: #e74c3c;
 }
 
@@ -770,48 +818,45 @@ input:focus, select:focus {
   height: 700px;
 }
 
-/* ── Responsive ────────────────────────── */
+/* ── Responsive (Polyomino) ────────────── */
 
 @media (max-width: 800px) {
   .polyomino-layout {
     flex-direction: column;
-    position: relative;
     margin-top: 0;
     min-height: auto;
   }
 
-  /* Sidebar: hidden by default, slides over when open */
   .polyomino-sidebar {
     position: fixed;
     top: 52px;
     left: 0;
     bottom: 0;
-    width: 280px;
-    min-width: 280px;
+    width: 300px;
+    min-width: 300px;
     z-index: 200;
     transform: translateX(-100%);
     transition: transform 0.25s ease;
     box-shadow: var(--shadow-lg);
     overflow-y: auto;
-    padding: 12px;
-    gap: 8px;
+    padding: 14px;
+    gap: 12px;
   }
   .polyomino-sidebar.open {
     transform: translateX(0);
   }
 
-  /* Overlay when sidebar is open */
   .sidebar-overlay {
     display: none;
     position: fixed;
     inset: 0;
     top: 52px;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.4);
     z-index: 199;
+    backdrop-filter: blur(2px);
   }
   .sidebar-overlay.active { display: block; }
 
-  /* Show the toggle button */
   .sidebar-toggle-btn {
     display: inline-flex;
     position: sticky;
@@ -820,39 +865,27 @@ input:focus, select:focus {
   }
 
   .polyomino-main {
-    padding: 8px 4px 16px;
+    padding: 10px 6px 20px;
     width: 100%;
-    gap: 6px;
+    gap: 8px;
   }
 
   .board-toolbar {
-    gap: 6px;
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 8px;
+    padding: 8px 12px;
     width: 100%;
-    padding: 0 4px;
+    border-radius: 10px;
   }
-  .board-toolbar .btn { font-size: 11px; padding: 4px 8px; }
-
-  /* Larger touch targets */
-  .piece-library-item {
-    padding: 8px 6px;
-  }
-  .transform-controls .btn {
-    padding: 8px 10px;
-    font-size: 13px;
-  }
+  .board-toolbar .toolbar-sep { display: none; }
 
   .board-container {
     overflow: auto;
     max-width: 100vw;
     padding: 4px;
-    border-radius: var(--radius);
+    border-radius: 10px;
   }
 
-  .placement-hint {
-    display: none; /* too verbose for mobile */
-  }
+  .placement-hint { display: none; }
 
   .chess-iframe {
     height: 820px;
@@ -860,24 +893,178 @@ input:focus, select:focus {
   }
 }
 
-/* ── 3D Polycube ──────────────────────── */
+@media (max-width: 400px) {
+  .polyomino-sidebar {
+    width: 280px;
+    min-width: 280px;
+  }
+  .board-toolbar .btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  .size-input {
+    width: 42px;
+    font-size: 12px;
+  }
+  .polyomino-main {
+    padding: 6px 3px 16px;
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   3D Polycube Puzzle Studio
+   ══════════════════════════════════════════════════ */
 
 .polycube-layout {
   display: flex;
   min-height: calc(100vh - 52px - 60px);
   margin-top: -12px;
 }
+
+/* ── Sidebar ───────────────────────────── */
+
 .polycube-sidebar {
-  width: 260px;
-  min-width: 260px;
+  width: 290px;
+  min-width: 290px;
   background: var(--bg-card);
   border-right: 1px solid var(--border-light);
-  padding: 12px;
+  padding: 16px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 14px;
 }
+
+.polycube-sidebar .sidebar-section {
+  background: transparent;
+  padding: 0;
+}
+.polycube-sidebar .sidebar-section + .sidebar-section {
+  border-top: 1px solid var(--border-light);
+  padding-top: 14px;
+}
+
+.polycube-sidebar .sidebar-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── 3D Piece Library ──────────────────── */
+
+.polycube-sidebar .piece-library-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.polycube-sidebar .piece-library-item:hover {
+  background: var(--accent-light);
+}
+.polycube-sidebar .piece-library-item.active {
+  background: var(--accent-light);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.polycube-sidebar .piece-library-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+}
+.polycube-sidebar .piece-library-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.polycube-sidebar .piece-library-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+  background: var(--accent-light);
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+.polycube-sidebar .piece-library-delete {
+  font-size: 16px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: all 0.15s;
+}
+.polycube-sidebar .piece-library-item:hover .piece-library-delete { opacity: 1; }
+.polycube-sidebar .piece-library-delete:hover {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+}
+
+/* ── 3D Active Panel ───────────────────── */
+
+.polycube-sidebar .active-piece-name {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.polycube-sidebar .transform-controls {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.polycube-sidebar .transform-controls .btn { flex: 1; }
+.polycube-sidebar .active-piece-count {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* ── 3D Designer ───────────────────────── */
+
+.designer-name-input-wrap {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+.designer-name-input-wrap .designer-name-input {
+  flex: 1;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: var(--font);
+  background: var(--bg-card);
+  color: var(--text);
+}
+.designer-name-input-wrap .designer-name-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+/* ── 3D Main Area ──────────────────────── */
+
 .polycube-main {
   flex: 1;
   display: flex;
@@ -885,49 +1072,245 @@ input:focus, select:focus {
   background: #1a1a2e;
   position: relative;
 }
+
 .canvas3d-container {
   flex: 1;
   cursor: grab;
+  min-height: 400px;
 }
 .canvas3d-container:active { cursor: grabbing; }
 .canvas3d-container canvas { display: block; }
-.designer-name-input-wrap {
+
+/* ── 3D Toolbar (inside polycube-main) ─── */
+
+.polycube-main .board-toolbar {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(8px);
+  padding: 10px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.polycube-main .board-size-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.polycube-main .board-size-controls label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.polycube-main .size-input {
+  width: 42px;
+  padding: 4px 5px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font);
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-weight: 600;
+  transition: border-color 0.15s;
+}
+.polycube-main .size-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.polycube-main .board-action-controls {
   display: flex;
   gap: 4px;
-  margin-top: 6px;
+  align-items: center;
 }
-.designer-name-input-wrap .designer-name-input { flex: 1; }
 
-/* Mobile */
+/* ── 3D Hint ───────────────────────────── */
+
+.polycube-main .placement-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.3);
+}
+
+/* ── Buttons (polycube-scoped) ───────────── */
+
+/* Light sidebar buttons */
+.polycube-sidebar .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.polycube-sidebar .btn:hover {
+  background: var(--bg-input);
+  border-color: var(--text-muted);
+}
+.polycube-sidebar .btn:active {
+  transform: scale(0.97);
+}
+.polycube-sidebar .btn-sm {
+  padding: 5px 10px;
+  font-size: 11px;
+}
+.polycube-sidebar .btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.polycube-sidebar .btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.25);
+}
+.polycube-sidebar .btn-secondary {
+  background: var(--bg-input);
+  color: var(--text-secondary);
+}
+.polycube-sidebar .btn-secondary:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+/* Dark toolbar buttons */
+.polycube-main .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.85);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.polycube-main .btn:hover {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.25);
+}
+.polycube-main .btn:active {
+  transform: scale(0.97);
+}
+.polycube-main .btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.polycube-main .btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.35);
+}
+.polycube-main .btn-danger {
+  color: #ff6b6b;
+  border-color: rgba(255, 107, 107, 0.3);
+}
+.polycube-main .btn-danger:hover {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: #ff6b6b;
+}
+.polycube-main .btn-sm {
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+/* ── Responsive (Polycube) ─────────────── */
+
 @media (max-width: 800px) {
-  .polycube-layout { flex-direction: column; margin-top: 0; }
-  .polycube-sidebar {
-    width: 100%;
-    min-width: 100%;
-    max-height: 30vh;
-    border-right: none;
-    border-bottom: 1px solid var(--border-light);
+  .polycube-layout {
+    flex-direction: column;
+    margin-top: 0;
+    min-height: auto;
   }
-  .polycube-main { height: 60vh; }
-  .board-toolbar { padding: 4px 8px; }
-  .board-toolbar .btn { font-size: 10px; padding: 3px 6px; }
-}
 
-/* Extra small screens */
-@media (max-width: 400px) {
-  .polyomino-sidebar {
-    width: 260px;
-    min-width: 260px;
+  .polycube-sidebar {
+    position: fixed;
+    top: 52px;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    min-width: 300px;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: var(--shadow-lg);
+    overflow-y: auto;
+    padding: 14px;
+    gap: 12px;
   }
-  .board-toolbar .btn {
-    padding: 4px 8px;
+  .polycube-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    top: 52px;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 199;
+    backdrop-filter: blur(2px);
+  }
+  .sidebar-overlay.active { display: block; }
+
+  .polycube-main {
+    height: 65vh;
+    min-height: 400px;
+  }
+
+  .polycube-main .board-toolbar {
+    gap: 6px;
+    padding: 8px 10px;
+  }
+  .polycube-main .board-toolbar .btn {
     font-size: 10px;
+    padding: 4px 8px;
   }
-  .size-input {
-    width: 40px;
+  .polycube-main .size-input {
+    width: 36px;
     font-size: 11px;
   }
-  .polyomino-main {
-    padding: 4px 2px 12px;
+  .polycube-main .placement-hint {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .polycube-main .sidebar-toggle-btn {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 400px) {
+  .polycube-sidebar {
+    width: 280px;
+    min-width: 280px;
+  }
+  .polycube-main {
+    height: 55vh;
   }
 }

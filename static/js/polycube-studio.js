@@ -183,8 +183,9 @@ controls.update();
 const boardGroup = new THREE.Group(); scene.add(boardGroup);
 const piecesGroup = new THREE.Group(); scene.add(piecesGroup);
 const ghostGroup = new THREE.Group(); scene.add(ghostGroup);
-const designerGroup = new THREE.Group(); scene.add(designerGroup);
-designerGroup.position.set(7, 0, 0); // offset to the side of the board
+const designerGroup = new THREE.Group();
+designerGroup.position.set(boardState.sx + 2.5, 0, 0); // offset to the right of the board
+scene.add(designerGroup);
 
 // Raycaster
 const raycaster = new THREE.Raycaster();
@@ -325,6 +326,8 @@ function renderGhostPreview() {
 
 function renderDesigner() {
   designerGroup.clear();
+  // Position designer to the right of the board
+  designerGroup.position.set(boardState.sx + 2.5, 0, 0);
   const size = 4;
   // Base platform
   const baseGeo = new THREE.BoxGeometry(size + 0.2, 0.1, size + 0.2);
@@ -695,8 +698,59 @@ function init() {
   });
 
   // Resize
-  window.addEventListener('resize', () => { resize(); });
+  window.addEventListener('resize', () => {
+    resize();
+    if (window.innerWidth > 800) {
+      pcSidebarEl.classList.remove('open');
+      if (pcOverlayEl) pcOverlayEl.classList.remove('active');
+    }
+  });
   new ResizeObserver(() => resize()).observe(container);
+
+  // ── Mobile sidebar toggle ──
+  const pcSidebarEl = document.getElementById('pcSidebar');
+  let pcOverlayEl = null;
+
+  function openPcSidebar() {
+    pcSidebarEl.classList.add('open');
+    if (!pcOverlayEl) {
+      pcOverlayEl = document.createElement('div');
+      pcOverlayEl.className = 'sidebar-overlay';
+      document.getElementById('polycubeApp').appendChild(pcOverlayEl);
+      pcOverlayEl.addEventListener('click', closePcSidebar);
+    }
+    pcOverlayEl.classList.add('active');
+  }
+
+  function closePcSidebar() {
+    pcSidebarEl.classList.remove('open');
+    if (pcOverlayEl) pcOverlayEl.classList.remove('active');
+  }
+
+  function togglePcSidebar() {
+    if (pcSidebarEl.classList.contains('open')) {
+      closePcSidebar();
+    } else {
+      openPcSidebar();
+    }
+  }
+
+  const pcToggleBtn = document.getElementById('pcSidebarToggle');
+  if (pcToggleBtn) {
+    pcToggleBtn.addEventListener('click', togglePcSidebar);
+    // Show only on mobile
+    pcToggleBtn.style.display = window.innerWidth <= 800 ? 'inline-flex' : 'none';
+    window.addEventListener('resize', () => {
+      pcToggleBtn.style.display = window.innerWidth <= 800 ? 'inline-flex' : 'none';
+    });
+  }
+
+  // Close sidebar when selecting a piece on mobile
+  const origSelect3D = selectPiece3D;
+  selectPiece3D = function(pieceId) {
+    origSelect3D(pieceId);
+    if (window.innerWidth <= 800) closePcSidebar();
+  };
 
   // Animation loop
   function animate() {
