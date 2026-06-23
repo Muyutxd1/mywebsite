@@ -181,7 +181,23 @@ function loadLibrary() {
     const raw = localStorage.getItem(STORAGE_KEY_PIECES);
     if (raw) {
       const data = JSON.parse(raw);
-      if (Array.isArray(data) && data.length > 0) return data;
+      if (Array.isArray(data) && data.length > 0) {
+        // Migrate old builtin pieces to current bright colors
+        let migrated = false;
+        for (const piece of data) {
+          if (piece.id.startsWith('builtin_')) {
+            const def = DEFAULT_PIECES.find(d => d.id === piece.id);
+            if (def && piece.color !== def.color) {
+              piece.color = def.color;
+              migrated = true;
+            }
+          }
+        }
+        if (migrated) {
+          localStorage.setItem(STORAGE_KEY_PIECES, JSON.stringify(data));
+        }
+        return data;
+      }
     }
   } catch (e) { /* corrupt data, use defaults */ }
   // First-time: seed with default pieces
