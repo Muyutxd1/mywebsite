@@ -575,7 +575,7 @@ input:focus, select:focus {
   border-radius: var(--radius-sm);
   font-size: 13px;
   font-family: var(--font);
-  background: var(--bg-card);
+  background: var(--bg-input);
   color: var(--text);
 }
 .designer-name-input:focus {
@@ -667,7 +667,7 @@ input:focus, select:focus {
   font-size: 13px;
   font-family: var(--font);
   text-align: center;
-  background: var(--bg-card);
+  background: var(--bg-input);
   color: var(--text);
   font-weight: 600;
   transition: border-color 0.15s;
@@ -751,7 +751,7 @@ input:focus, select:focus {
   padding: 7px 16px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: var(--bg-card);
+  background: var(--bg-input);
   color: var(--text);
   font-size: 13px;
   font-weight: 500;
@@ -762,7 +762,7 @@ input:focus, select:focus {
   letter-spacing: 0.01em;
 }
 .polyomino-layout .btn:hover {
-  background: var(--bg-input);
+  background: var(--border);
   border-color: var(--text-muted);
 }
 .polyomino-layout .btn:active {
@@ -1054,7 +1054,7 @@ input:focus, select:focus {
   border-radius: var(--radius-sm);
   font-size: 13px;
   font-family: var(--font);
-  background: var(--bg-card);
+  background: var(--bg-input);
   color: var(--text);
 }
 .designer-name-input-wrap .designer-name-input:focus {
@@ -1151,7 +1151,7 @@ input:focus, select:focus {
   padding: 7px 14px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: var(--bg-card);
+  background: var(--bg-input);
   color: var(--text);
   font-size: 12px;
   font-weight: 500;
@@ -1161,7 +1161,7 @@ input:focus, select:focus {
   white-space: nowrap;
 }
 .polycube-sidebar .btn:hover {
-  background: var(--bg-input);
+  background: var(--border);
   border-color: var(--text-muted);
 }
 .polycube-sidebar .btn:active {
