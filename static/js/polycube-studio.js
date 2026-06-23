@@ -150,7 +150,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#1a1a2e');
 scene.fog = new THREE.Fog('#1a1a2e', 15, 40);
 
-const camera = new THREE.PerspectiveCamera(50, 2, 0.5, 60);
+const camera = new THREE.PerspectiveCamera(50, 2, 0.5, 100);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -175,7 +175,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.1;
 controls.minDistance = 3;
-controls.maxDistance = 25;
+controls.maxDistance = 60;
 
 function resetCamera() {
   const { sx, sy, sz } = boardState;
