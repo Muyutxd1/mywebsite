@@ -711,18 +711,19 @@ function saveDesignerPiece() {
    ═══════════════════════════════════════════ */
 
 function resize() {
-  let w = container.clientWidth;
-  let h = container.clientHeight;
-  if (!w || !h) {
-    const parent = container.parentElement;
-    if (parent) {
-      w = w || parent.clientWidth;
-      h = h || parent.clientHeight;
-    }
-  }
-  w = w || 800;
-  h = h || 500;
-  renderer.setSize(w, h, false);
+  // Use getBoundingClientRect which works even when CSS flex hasn't fully resolved
+  const rect = container.getBoundingClientRect();
+  let w = rect.width;
+  let h = rect.height;
+
+  // Fallback chain: container rect → window-based estimate → hard minimums
+  if (w <= 0) w = window.innerWidth - 300;   // minus sidebar
+  if (h <= 0) h = window.innerHeight - 200;  // minus nav/footer/toolbar/hint
+  if (w <= 0) w = 800;
+  if (h <= 0) h = 500;
+
+  // updateStyle=true (default) ensures canvas CSS matches the buffer size
+  renderer.setSize(w, h);
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
 }
@@ -741,15 +742,12 @@ function init() {
   document.getElementById('pcSizeY').value = boardState.sy;
   document.getElementById('pcSizeZ').value = boardState.sz;
 
-  // Delay initial render to ensure CSS layout is resolved
-  requestAnimationFrame(() => {
-    resize();
-    resetCamera();
-    renderAll();
-
-    // Update designer position to match the possibly-loaded board size
-    designerGroup.position.set(boardState.sx + 1.0, 0, 0);
-  });
+  // Render immediately — don't defer to requestAnimationFrame.
+  // (resize() uses getBoundingClientRect which works even before first paint.)
+  resize();
+  resetCamera();
+  renderAll();
+  designerGroup.position.set(boardState.sx + 1.0, 0, 0);
 
   // Use pointer events (more reliable than click)
   renderer.domElement.addEventListener('pointermove', onPointerMove);
