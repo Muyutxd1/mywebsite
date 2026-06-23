@@ -288,7 +288,7 @@ let cachedCellSize = null;
 function computeCellSize(rows, cols, maxWidth, maxHeight) {
   const cellW = Math.floor((maxWidth - 2) / cols);
   const cellH = Math.floor((maxHeight - 2) / rows);
-  return Math.max(12, Math.min(52, cellW, cellH));
+  return Math.max(14, Math.min(64, cellW, cellH));
 }
 
 function recalcCellSize() {
@@ -297,11 +297,11 @@ function recalcCellSize() {
   const isMobile = window.innerWidth <= 800;
   // On mobile use nearly full viewport width; desktop accounts for sidebar
   const maxW = isMobile
-    ? window.innerWidth - 16
-    : window.innerWidth - 300 - 56;  // sidebar 300px + main padding 28px*2
+    ? window.innerWidth - 20
+    : window.innerWidth - 360;  // sidebar 280 + padding 40 + board border/padding + buffer
   const maxH = isMobile
-    ? window.innerHeight - 200
-    : Math.min(window.innerHeight - 200, 750);
+    ? window.innerHeight - 180
+    : window.innerHeight - 220;
   cachedCellSize = computeCellSize(boardState.rows, boardState.cols, maxW, maxH);
 }
 
@@ -323,7 +323,7 @@ function renderBoard() {
   canvas.style.height = height + 'px';
 
   // Ensure container can scroll if canvas is larger than viewport
-  container.style.overflow = (height > window.innerHeight - 260 || width > (container.parentElement?.clientWidth || 800) - 32) ? 'auto' : 'hidden';
+  container.style.overflow = (height > window.innerHeight - 230 || width > container.clientWidth) ? 'auto' : 'hidden';
 
   const ctx = canvas.getContext('2d');
   const occupied = getOccupiedCells();
