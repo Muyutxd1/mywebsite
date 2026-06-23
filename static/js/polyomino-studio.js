@@ -288,7 +288,7 @@ let cachedCellSize = null;
 function computeCellSize(rows, cols, maxWidth, maxHeight) {
   const cellW = Math.floor((maxWidth - 2) / cols);
   const cellH = Math.floor((maxHeight - 2) / rows);
-  return Math.max(14, Math.min(64, cellW, cellH));
+  return Math.max(14, Math.min(48, cellW, cellH));
 }
 
 function recalcCellSize() {
@@ -301,7 +301,7 @@ function recalcCellSize() {
     : window.innerWidth - 360;  // sidebar 280 + padding 40 + board border/padding + buffer
   const maxH = isMobile
     ? window.innerHeight - 180
-    : window.innerHeight - 220;
+    : Math.min(window.innerHeight - 220, 650);
   cachedCellSize = computeCellSize(boardState.rows, boardState.cols, maxW, maxH);
 }
 
