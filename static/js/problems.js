@@ -12,7 +12,6 @@
   // Filters
   const $fComp = document.getElementById('fCompetition');
   const $fTopic = document.getElementById('fTopic');
-  const $fDiff = document.getElementById('fDifficulty');
   const $fYear = document.getElementById('fYear');
   const $fSearch = document.getElementById('fSearch');
 
@@ -80,14 +79,12 @@
   function applyFilters() {
     const comp = $fComp.value;
     const topic = $fTopic.value;
-    const diff = $fDiff.value;
     const year = $fYear.value;
     const search = $fSearch.value.toLowerCase().trim();
 
     filtered = allEntries.filter(e => {
       if (comp && e.competition !== comp) return false;
       if (topic && !(e.topics || []).includes(topic)) return false;
-      if (diff && e.difficulty !== diff) return false;
       if (year && String(e.year) !== year) return false;
       if (search) {
         const hay = [e.title, e.competition, ...(e.topics || [])].join(' ').toLowerCase();
@@ -101,7 +98,7 @@
     renderPage();
   }
 
-  [$fComp, $fTopic, $fDiff, $fYear].forEach(el => el.addEventListener('change', applyFilters));
+  [$fComp, $fTopic, $fYear].forEach(el => el.addEventListener('change', applyFilters));
   $fSearch.addEventListener('input', debounce(applyFilters, 200));
 
   /* ═══════════════════════════════════════
@@ -166,16 +163,13 @@
   function renderCard(entry, isRandom) {
     const topics = (entry.topics || []).filter(t => t !== '未分类');
     const tags = topics.map(t => `<span class="problem-tag">${esc(t)}</span>`).join('');
-    const diffClass = entry.difficulty === 'easy' ? 'diff-easy'
-                    : entry.difficulty === 'hard' ? 'diff-hard' : 'diff-medium';
-    const diffTag = `<span class="problem-tag ${diffClass}">${entry.difficulty_zh || '中'}</span>`;
-
+    const compName = entry.competition_zh || entry.competition.replace(/_/g, ' ');
     return `
       <div class="problem-card" data-pid="${esc(entry.id)}">
         <div class="problem-card-header">
-          <span class="problem-id">${esc(entry.competition)} · ${entry.year}</span>
-          <span class="problem-title">${esc(entry.id)}</span>
-          <span class="problem-tags">${diffTag}${tags}</span>
+          <span class="problem-id">${esc(compName)} · ${entry.year || '?'}</span>
+          <span class="problem-title">${esc(entry.title)}</span>
+          <span class="problem-tags">${tags}</span>
           <span class="problem-arrow">▼</span>
         </div>
         <div class="problem-card-body">

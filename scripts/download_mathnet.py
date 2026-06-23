@@ -1,26 +1,35 @@
 """
 Download MathNet problems from HuggingFace and convert to JSON for the website.
-MathNet: MIT CSAIL ICLR 2026 — 30,676 Olympiad problems, CC BY 4.0
-Repo: https://huggingface.co/datasets/ShadenA/MathNet
+MathNet v2: fixed field mapping — uses topics_flat, extracts year from competition string.
 """
 import json
 import os
-import sys
+import re
 from collections import defaultdict
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), '..', 'static', 'data', 'problems')
 
-# Competitions to download (most relevant for Chinese math competition users)
+# Config names must match EXACTLY what HuggingFace expects
 COMPETITIONS = [
-    "IMO",                              # International Mathematical Olympiad
-    "IMO_Shortlist",                    # IMO Shortlist
-    "China",                            # All Chinese competitions
+    "IMO",
+    "China",
     "Asia_Pacific_Mathematics_Olympiad_APMO",
-    "European_Girls_Mathematical_Olympiad_EGMO",
     "Romanian_Master_of_Mathematics_RMM",
-    "Balkan_Mathematical_Olympiad_BMO",
-    "USA",                              # USAMO, etc.
-    "Russian_National_Olympiad",
+    "United_States",
+    "Russia",
+    "Taiwan",
+    "Hong_Kong",
+    "Japan",
+    "South_Korea",
+    "Vietnam",
+    "Singapore",
+    "India",
+    "Iran",
+    "Balkan_Mathematical_Olympiad",
+    "European_Girls'_Mathematical_Olympiad_EGMO",
+    "Romania",
+    "Canada",
+    "United_Kingdom",   # might not exist, will SKIP gracefully
 ]
 
 TOPIC_MAP = {
@@ -30,113 +39,134 @@ TOPIC_MAP = {
     "Combinatorics": "组合",
 }
 
-DIFFICULTY_MAP = {
-    "easy": "易",
-    "medium": "中",
-    "hard": "难",
-    "very_hard": "极难",
+# Friendly display names
+COMPETITION_NAMES = {
+    "IMO": "IMO",
+    "China": "中国",
+    "Asia_Pacific_Mathematics_Olympiad_APMO": "APMO",
+    "Romanian_Master_of_Mathematics_RMM": "RMM",
+    "United_States": "美国",
+    "Russia": "俄罗斯",
+    "Taiwan": "台湾",
+    "Hong_Kong": "香港",
+    "Japan": "日本",
+    "South_Korea": "韩国",
+    "Vietnam": "越南",
+    "Singapore": "新加坡",
+    "India": "印度",
+    "Iran": "伊朗",
+    "Balkan_Mathematical_Olympiad": "Balkan MO",
+    "European_Girls'_Mathematical_Olympiad_EGMO": "EGMO",
+    "Romania": "罗马尼亚",
+    "Canada": "加拿大",
 }
 
 
-def simplify_topics(topics):
-    """Extract top-level topic categories."""
-    result = []
-    if not topics:
+def extract_year(competition_str):
+    """Extract 4-digit year from competition string like 'IMO 2006 Shortlisted Problems'."""
+    m = re.search(r'\b(19\d{2}|20\d{2})\b', str(competition_str))
+    if m:
+        return int(m.group(1))
+    return 0
+
+
+def simplify_topics(topics_flat):
+    """Extract top-level topic categories from hierarchical topic strings."""
+    if not topics_flat:
         return ["未分类"]
-    for t in topics:
-        if isinstance(t, str):
-            result.append(t)
-        elif isinstance(t, list):
-            result.append(t[0] if t else "未分类")
-    # Map to Chinese
-    mapped = []
-    for r in result:
+    result = set()
+    for t in topics_flat:
+        if not isinstance(t, str):
+            continue
+        # "Algebra > Sequences > Recurrence" → "Algebra"
+        top = t.split(">")[0].strip()
         for en, zh in TOPIC_MAP.items():
-            if en.lower() in r.lower():
-                mapped.append(zh)
+            if en.lower() in top.lower():
+                result.add(zh)
                 break
         else:
-            mapped.append(r)
-    return list(set(mapped)) if mapped else ["未分类"]
+            result.add(top)
+    return sorted(result) if result else ["未分类"]
 
 
-def safe_get(row, key, default=""):
-    """Safely get a field from a dataset row."""
-    val = row.get(key, default)
-    if val is None:
-        return default
-    return val
-
-
-def process_row(row, competition_name):
+def process_row(row, config_name, index):
     """Convert a MathNet row to our problem format."""
-    problem_md = safe_get(row, "problem_markdown")
-    solutions = safe_get(row, "solutions_markdown")
+    problem_md = row.get("problem_markdown", "")
+    if not problem_md:
+        return None
+
+    # Solutions
+    solutions = row.get("solutions_markdown", "")
     if isinstance(solutions, list):
         solutions = "\n\n---\n\n".join(s for s in solutions if s)
     elif not isinstance(solutions, str):
         solutions = ""
 
-    topics = safe_get(row, "topics")
-    if isinstance(topics, str):
-        topics = [topics]
+    # Topics from topics_flat
+    topics_flat = row.get("topics_flat", [])
+    if isinstance(topics_flat, str):
+        topics_flat = [topics_flat]
+    topics = simplify_topics(topics_flat)
 
-    year = safe_get(row, "year")
-    try:
-        year = int(year)
-    except (ValueError, TypeError):
-        year = 0
+    # Year from competition string
+    competition_str = row.get("competition", "")
+    year = extract_year(competition_str)
 
-    difficulty = safe_get(row, "difficulty", "medium")
-    if isinstance(difficulty, (int, float)):
-        if difficulty <= 2:
-            difficulty = "easy"
-        elif difficulty <= 3:
-            difficulty = "medium"
-        else:
-            difficulty = "hard"
+    # Language
+    language = row.get("language", "English")
+    if language == "English":
+        language = "en"
+    elif language == "Chinese":
+        language = "zh"
+    else:
+        language = language[:2].lower() if language else "en"
 
-    unique_id = safe_get(row, "unique_id", "")
-    language = safe_get(row, "language", "en")
+    # Problem type
+    prob_type = row.get("problem_type", "")
 
-    # Build a readable title
-    comp_short = competition_name.replace("_", " ")[:40]
-    title = f"{comp_short} {year}"
+    # Build descriptive ID: IMO-2006-001
+    comp_short = COMPETITION_NAMES.get(config_name, config_name[:12])
+    year_str = str(year) if year > 0 else "????"
+    pid = f"{comp_short}-{year_str}-{index:03d}"
+
+    # Build title
+    title = f"{comp_short} {year_str} #{index}"
 
     return {
-        "id": unique_id or f"{competition_name}-{year}-{hash(problem_md) & 0xFFFF:04x}",
+        "id": pid,
         "title": title,
-        "competition": competition_name,
+        "competition": config_name,
+        "competition_zh": COMPETITION_NAMES.get(config_name, config_name),
         "year": year,
         "language": language,
-        "difficulty": difficulty,
-        "difficulty_zh": DIFFICULTY_MAP.get(difficulty, "中"),
-        "topics": simplify_topics(topics),
-        "raw_topics": topics if isinstance(topics, list) else [topics],
+        "difficulty": "",
+        "difficulty_zh": "",
+        "topics": topics,
+        "problem_type": prob_type,
         "problem_md": problem_md,
         "solution_md": solutions,
     }
 
 
-def download_config(dataset_name, config, competition_name):
+def download_config(config_name):
     """Download a specific competition config from MathNet."""
     from datasets import load_dataset
 
-    print(f"  Downloading {competition_name}...", end=" ", flush=True)
+    print(f"  Downloading {config_name}...", end=" ", flush=True)
     try:
-        ds = load_dataset(dataset_name, config, split="train")
+        ds = load_dataset("ShadenA/MathNet", config_name, split="train")
     except Exception as e:
         print(f"SKIP: {e}")
         return []
 
     problems = []
-    for row in ds:
+    for i, row in enumerate(ds, 1):
         try:
-            p = process_row(row, competition_name)
-            if p["problem_md"]:
+            p = process_row(row, config_name, i)
+            if p:
                 problems.append(p)
         except Exception as e:
-            print(f"\n    WARN: error processing row: {e}")
+            print(f"\n    WARN row {i}: {e}")
             continue
 
     print(f"{len(problems)} problems")
@@ -146,29 +176,34 @@ def download_config(dataset_name, config, competition_name):
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
 
+    # Delete old data
+    for f in os.listdir(OUT_DIR):
+        if f.endswith('.json'):
+            os.remove(os.path.join(OUT_DIR, f))
+
     all_problems = []
     index_entries = []
     stats = defaultdict(int)
 
     for comp in COMPETITIONS:
-        problems = download_config("ShadenA/MathNet", comp, comp)
+        problems = download_config(comp)
         if not problems:
             continue
 
-        # Save per-competition file
         fname = f"{comp}.json"
         fpath = os.path.join(OUT_DIR, fname)
         with open(fpath, 'w', encoding='utf-8') as f:
             json.dump(problems, f, ensure_ascii=False)
 
-        print(f"    Saved {fpath} ({len(problems)} problems, {os.path.getsize(fpath)/1024:.0f} KB)")
+        size_kb = os.path.getsize(fpath) / 1024
+        print(f"    Saved {fname} ({len(problems)} problems, {size_kb:.0f} KB)")
 
-        # Build index entries (lightweight, no full problem text)
         for p in problems:
             index_entries.append({
                 "id": p["id"],
                 "title": p["title"],
                 "competition": p["competition"],
+                "competition_zh": p["competition_zh"],
                 "year": p["year"],
                 "difficulty": p["difficulty"],
                 "difficulty_zh": p["difficulty_zh"],
@@ -177,7 +212,8 @@ def main():
             })
             stats[p["competition"]] += 1
             for t in p["topics"]:
-                stats[f"topic:{t}"] += 1
+                if t != "未分类":
+                    stats[f"topic:{t}"] += 1
 
         all_problems.extend(problems)
 
@@ -186,19 +222,18 @@ def main():
     with open(index_path, 'w', encoding='utf-8') as f:
         json.dump({
             "total": len(all_problems),
-            "competitions": sorted(stats.keys(), key=lambda k: (-stats[k], k)),
+            "competitions": sorted([c for c in COMPETITIONS if stats.get(c)], key=lambda k: -stats[k]),
             "entries": index_entries,
         }, f, ensure_ascii=False)
 
     print(f"\n{'='*50}")
-    print(f"Total: {len(all_problems)} problems from {len([c for c in COMPETITIONS if stats[c]])} competitions")
+    print(f"Total: {len(all_problems)} problems from {sum(1 for c in COMPETITIONS if stats.get(c))} competitions")
     print(f"Index: {index_path} ({os.path.getsize(index_path)/1024:.0f} KB)")
 
-    # Print per-competition breakdown
-    for comp in sorted(stats.keys(), key=lambda k: -stats[k]):
+    for comp in sorted(stats, key=lambda k: -stats[k]):
         if not comp.startswith("topic:"):
             print(f"  {comp}: {stats[comp]}")
-    for comp in sorted(stats.keys(), key=lambda k: -stats[k]):
+    for comp in sorted(stats, key=lambda k: -stats[k]):
         if comp.startswith("topic:"):
             print(f"  {comp}: {stats[comp]}")
 
