@@ -172,11 +172,8 @@
           <p class="fx-p">${esc(c.interpretation)}</p>
         </div>`;
       }
-      // 仅取牌阵总结句（避免与每张牌重复）
-      const summary = parseSections(d.interpretation).filter((b) => !b.title)
-        .flatMap((b) => b.lines).filter((l) => /^[✨💫]/.test(l));
-      if (summary.length) html += '<div class="fx-reading">' +
-        summary.map((l) => `<p class="fx-p note">${esc(l)}</p>`).join('') + '</div>';
+      // 显示完整解读（含元素分析等所有章节）
+      html += renderReading(d.interpretation);
       setResult('r-tarot', html);
     },
 
