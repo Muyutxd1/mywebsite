@@ -227,6 +227,33 @@ class YijingCalculator:
                         self._add_yao_analysis(lines, pos, matched["id"])
                     lines.append('')
 
+            # Find 变卦 (changed hexagram) and interpret it
+            if changing_positions:
+                lines.append('')
+                lines.append('【变卦 · 发展趋向】')
+                # Build changed hexagram lines
+                changed_upper = orig_upper_pattern[:]
+                changed_lower = orig_lower_pattern[:]
+                for pos, detail in changing_positions:
+                    # Flip the line at given position (1-6, 1=bottom)
+                    if pos <= 3:
+                        idx = pos - 1  # 0-based in lower pattern
+                        changed_lower[idx] = 1 - changed_lower[idx]
+                    else:
+                        idx = pos - 4  # 0-based in upper pattern
+                        changed_upper[idx] = 1 - changed_upper[idx]
+
+                changed_matched = self._match_hexagram(changed_upper, changed_lower, hexagrams)
+                if changed_matched and changed_matched != matched:
+                    lines.append(f'动爻变化后得「{changed_matched["name"]}」——')
+                    lines.append(f'卦辞：{changed_matched.get("gua_ci", "")}')
+                    lines.append(f'卦义：{changed_matched.get("interpretation", "")}')
+                    if changed_matched.get('xiang_zhuan'):
+                        lines.append(f'象传：{changed_matched["xiang_zhuan"]}')
+                    lines.append('')
+                    lines.append('从本卦到变卦的转变，揭示了问题可能的演化方向。')
+                    lines.append('本卦是"因"，变卦是"果"——看清因果，方能趋吉避凶。')
+
         lines.append('')
         lines.append('─' * 20)
         lines.append('【占卜要义】')

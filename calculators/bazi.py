@@ -214,4 +214,53 @@ class BaziCalculator:
         }
         lines.append(advices.get(dm_wx, ''))
         lines.append('')
+        lines.append('【用神喜忌】')
+        self._find_yongshen(lines, dm_wx, balance, controlling_wx, generating_wx, wx_count)
+        lines.append('')
         lines.append('（注：以上为简略八字分析，详细命理需结合大运流年综合判断。仅供娱乐参考。）')
+
+    def _find_yongshen(self, lines, dm_wx, balance, controlling_wx, generating_wx, wx_count):
+        """Identify 用神 (useful god) and 忌神 (avoided god)."""
+        if balance >= 5:
+            # 身强 → 用克泄耗
+            yongshen_wx = controlling_wx.get(dm_wx, dm_wx)
+            jishen_wx = generating_wx.get(dm_wx, dm_wx)
+            strategy = '日主身强，宜"克泄耗"——用官杀制身、食伤泄秀、财星耗身。喜'
+        else:
+            # 身弱 → 用生扶
+            yongshen_wx = generating_wx.get(dm_wx, dm_wx)
+            jishen_wx = controlling_wx.get(dm_wx, dm_wx)
+            strategy = '日主身弱，宜"生扶"——用印星生身、比劫帮身。喜'
+
+        wx_traits = {
+            '木': '木主仁，属木的颜色（绿、青）、方位（东）、季节（春）对你有加持。',
+            '火': '火主礼，属火的颜色（红、紫）、方位（南）、季节（夏）对你有加持。',
+            '土': '土主信，属土的颜色（黄、棕）、方位（中）、季节（季末）对你有加持。',
+            '金': '金主义，属金的颜色（白、银）、方位（西）、季节（秋）对你有加持。',
+            '水': '水主智，属水的颜色（黑、蓝）、方位（北）、季节（冬）对你有加持。',
+        }
+
+        lines.append(f'{strategy}{yongshen_wx}。')
+        lines.append(f'用神（有利的五行）：{yongshen_wx}——日常生活中多接触属{yongshen_wx}的人事物。')
+        if yongshen_wx in wx_traits:
+            lines.append(f'{wx_traits[yongshen_wx]}')
+
+        # 忌神
+        all_wx = ['木','火','土','金','水']
+        jishen_list = [w for w in all_wx if w != yongshen_wx and w != dm_wx]
+        if jishen_wx and jishen_wx != yongshen_wx:
+            lines.append(f'忌神（不利的五行）：{jishen_wx}——需适度避免或转化。')
+        else:
+            weak_wx = min(wx_count, key=wx_count.get)
+            lines.append(f'八字中最弱的五行为{weak_wx}，适当补充即可。')
+
+        # 大运方向
+        lines.append('')
+        lines.append('【大运方向】')
+        lines.append('大运每十年一换，从月柱顺排或逆排。一生运势随大运起伏——')
+        if balance >= 5:
+            lines.append(f'身强之命，走克泄耗之运（{yongshen_wx}运）最为顺利。宜在{yongshen_wx}运中大胆开拓。')
+        else:
+            lines.append(f'身弱之命，走生扶之运（{yongshen_wx}运）最为顺利。宜在{yongshen_wx}运中稳扎稳打。')
+        lines.append('十年风水轮流转，顺运时当进取，逆运时当守成。知道了大运方向，')
+        lines.append('就能在适当的时候做适当的事——这正是八字的智慧所在。')

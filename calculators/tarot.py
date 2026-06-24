@@ -208,6 +208,53 @@ class TarotCalculator:
             elif major_count <= 3:
                 lines.append(f'牌阵中只有{major_count}张大阿卡纳——此事更多关乎日常生活层面，不必过于焦虑。')
 
+        # Element and number analysis for all spreads
+        lines.append('')
+        lines.append('【牌阵元素分析】')
+        # Count elements from card attributes
+        el_map = {'火': 0, '水': 0, '风': 0, '土': 0}
+        major_count = 0
+        for c in cards:
+            t = c.get('type', '')
+            if '大阿卡纳' in t:
+                major_count += 1
+            # Estimate element from card keywords/interpretation
+            interp = c.get('interpretation', '')
+            name = c.get('name_cn', '')
+            if any(w in interp for w in ['热情', '行动', '能量', '创造', '勇气']):
+                el_map['火'] += 1
+            elif any(w in interp for w in ['情感', '直觉', '敏感', '梦', '灵']):
+                el_map['水'] += 1
+            elif any(w in interp for w in ['思维', '沟通', '智', '学习', '计划']):
+                el_map['风'] += 1
+            elif any(w in interp for w in ['稳定', '物质', '安全', '财务', '工作']):
+                el_map['土'] += 1
+            else:
+                # Fallback: use card type
+                if '圣杯' in name or '杯' in name:
+                    el_map['水'] += 1
+                elif '宝剑' in name or '剑' in name:
+                    el_map['风'] += 1
+                elif '权杖' in name or '杖' in name:
+                    el_map['火'] += 1
+                elif '星币' in name or '币' in name or '五角' in name:
+                    el_map['土'] += 1
+
+        el_items = [(k, v) for k, v in el_map.items() if v > 0]
+        el_items.sort(key=lambda x: x[1], reverse=True)
+        if el_items:
+            strongest = el_items[0]
+            el_names = {'火': '🔥 火元素', '水': '💧 水元素', '风': '💨 风元素', '土': '🏔 土元素'}
+            el_meanings = {
+                '火': '火元素旺盛——此事需要行动力和勇气。勇敢迈出第一步，能量在你这边。',
+                '水': '水元素旺盛——此事关乎情感和直觉。信任你的感受，它们比理性更早知道答案。',
+                '风': '风元素旺盛——此事关乎思维和沟通。思考清晰、表达真诚是解决问题的钥匙。',
+                '土': '土元素旺盛——此事关乎现实和物质。脚踏实地、注重细节，结果水到渠成。',
+            }
+            lines.append(f'{el_names.get(strongest[0], "")}主导（{strongest[1]}张）。{el_meanings.get(strongest[0], "")}')
+        if major_count > 0:
+            lines.append(f'另有{major_count}张大阿卡纳——重大原型力量正在运行中。')
+
         lines.append('')
         lines.append('─' * 20)
         lines.append('✨ 塔罗牌是内在智慧的镜子，不是命运的铁律。你才是自己生命的书写者。')
