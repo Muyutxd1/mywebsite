@@ -135,38 +135,83 @@ class BaziCalculator:
 
         # Overall summary
         lines.append('')
+        lines.append('')
+        lines.append('─' * 24)
         lines.append('【综合批语】')
-        lines.append(self._overall_summary(pillars, day_master))
+        self._overall_summary(lines, pillars, day_master)
 
         return '\n'.join(lines)
 
-    def _overall_summary(self, pillars, day_master):
-        """Generate overall summary."""
+    def _overall_summary(self, lines, pillars, day_master):
+        """Generate comprehensive overall summary."""
         wx_count = pillars['wuxing_count']
-        most = max(wx_count, key=wx_count.get)
-        least = min(wx_count, key=wx_count.get)
-
         dm_wx = GAN_WUXING[day_master]
-
-        # Determine if day master is strong or weak
-        dm_count = wx_count[dm_wx]
         controlling_wx = {'木': '金', '火': '水', '土': '木', '金': '火', '水': '土'}
         generating_wx = {'木': '水', '火': '木', '土': '火', '金': '土', '水': '金'}
-
+        dm_count = wx_count[dm_wx]
         enemy_count = wx_count.get(controlling_wx.get(dm_wx, ''), 0)
         friend_count = wx_count.get(generating_wx.get(dm_wx, ''), 0)
-
         balance = dm_count + friend_count - enemy_count
 
+        lines.append('')
+        lines.append('【身强身弱】')
         if balance >= 5:
-            strength = '日主身强'
-            advice = '八字中同类五行偏多，日主身强。宜用克泄耗之法（官杀/食伤/财星），喜'
-            if controlling_wx.get(dm_wx):
-                advice += f'{controlling_wx[dm_wx]}来平衡。'
+            lines.append(f'日主{day_master}（{dm_wx}）身强。八字中同类五行偏多，')
+            lines.append(f'个性较为强势自主、抗压能力强。宜用克泄耗之法——')
+            use_wx = controlling_wx.get(dm_wx, '')
+            lines.append(f'喜{use_wx}来平衡，事业上适合发挥才智和创造力。')
         else:
-            strength = '日主身弱'
-            advice = '八字同类五行偏少，日主身弱。宜用生扶之法（印星/比劫），喜'
-            if generating_wx.get(dm_wx):
-                advice += f'{generating_wx[dm_wx]}和{dm_wx}来补足。'
+            lines.append(f'日主{day_master}（{dm_wx}）身弱。八字同类五行偏少，')
+            lines.append(f'个性较为温和、容易受人影响，但也更加灵活。宜用生扶之法——')
+            use_wx = generating_wx.get(dm_wx, '')
+            lines.append(f'喜{use_wx}和{dm_wx}来补足，事业上宜与人合作、借力而行。')
 
-        return f'{strength}。\n{advice}\n（注：以上仅为简略分析，详细命理解读需结合大运流年综合判断。仅供娱乐参考。）'
+        lines.append('')
+        lines.append('【性格特征】')
+        # Day master personality is already shown, add wuxing-based traits
+        wx_personality = {
+            '木': '有生长向上的精神，仁慈善良、爱好和平，但有时优柔寡断。',
+            '火': '热情外放、行动迅速，有感染力但容易急躁冲动。',
+            '土': '稳重诚信、可靠踏实，有包容力但偏保守固执。',
+            '金': '刚毅果断、正义感强，执行力强但有时过于刚硬、不懂变通。',
+            '水': '智慧灵活、适应力强，善于变通但易随波逐流、缺乏定性。',
+        }
+        lines.append(f'日主{dm_wx}命——{wx_personality.get(dm_wx, "")}')
+
+        lines.append('')
+        lines.append('【职业方向建议】')
+        career_wx = {
+            '木': '教育、文化、出版、医疗、园林、环保',
+            '火': '演艺、餐饮、能源、科技、设计、营销',
+            '土': '房地产、建筑、农业、管理、金融',
+            '金': '法律、金融、工程、军警、机械、珠宝',
+            '水': '传媒、物流、旅游、水产、咨询、玄学',
+        }
+        use_wx = controlling_wx.get(dm_wx, dm_wx) if balance >= 5 else generating_wx.get(dm_wx, dm_wx)
+        lines.append(f'适合五行属{use_wx}的行业：{career_wx.get(use_wx, "综合类")}。')
+        # Also suggest based on 十神
+        lines.append(f'也宜结合八字中最旺的十神方向发展。')
+
+        lines.append('')
+        lines.append('【人际关系】')
+        wx_relation = {
+            '木': '待人真诚如春风，人缘较好但需防过于心软。',
+            '火': '热情开朗易交友，但有时过于直接让人措手不及。',
+            '土': '忠厚可靠、朋友信赖你，但需主动拓展社交圈。',
+            '金': '重义气、朋友不多但个个真心，需注意不要太严肃。',
+            '水': '善于与各种人打交道，社交灵活但需保持真诚。',
+        }
+        lines.append(wx_relation.get(dm_wx, ''))
+
+        lines.append('')
+        lines.append('【人生忠告】')
+        advices = {
+            '木': '像大树一样向下扎根、向上生长。不求速成，但求稳健。',
+            '火': '你的热情是最大的财富，但偶尔需要"熄火"休息，给自己充电。',
+            '土': '稳重大气是你的名片，但有时候迈出一步才能看到更大的世界。',
+            '金': '刚毅是你的力量，但刚柔并济才能无坚不摧。',
+            '水': '上善若水，你的智慧在于变通，但需要为自己找一个"容器"——一个明确的方向。',
+        }
+        lines.append(advices.get(dm_wx, ''))
+        lines.append('')
+        lines.append('（注：以上为简略八字分析，详细命理需结合大运流年综合判断。仅供娱乐参考。）')
