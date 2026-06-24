@@ -439,6 +439,213 @@ input:focus, select:focus, textarea:focus {
   letter-spacing: 0.02em;
 }
 
+/* ── 灵占 · Fortunetelling (minimalist) ─────── */
+.fortune { max-width: 720px; margin: 0 auto; padding: 0 22px 40px; }
+
+.fx-head { text-align: center; padding: 60px 0 30px; }
+.fx-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px;
+}
+.fx-head h1 {
+  font-family: var(--font-display); font-size: 46px; font-weight: 800;
+  letter-spacing: 0.04em; line-height: 1;
+}
+.fx-head p { margin-top: 14px; font-size: 14px; color: var(--text-secondary); letter-spacing: 0.02em; }
+
+/* Tabs — quiet underline selector */
+.fx-tabs {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 2px;
+  border-bottom: 1px solid var(--border-light); margin-bottom: 30px;
+}
+.fx-tab {
+  padding: 12px 16px; border: none; background: none; cursor: pointer;
+  font-family: var(--font); font-size: 14.5px; font-weight: 600; color: var(--text-muted);
+  border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.18s, border-color 0.18s;
+}
+.fx-tab:hover { color: var(--text-secondary); }
+.fx-tab.is-active { color: var(--text); border-bottom-color: var(--text); }
+
+.fx-panel { display: none; }
+.fx-panel.is-active { display: block; animation: fxFade 0.3s ease; }
+@keyframes fxFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.fx-lead { font-size: 14px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 22px; }
+.fx-lead.small { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+
+/* Form */
+.fx-form { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; margin-bottom: 8px; }
+.fx-field { display: flex; flex-direction: column; gap: 7px; }
+.fx-field > span {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: var(--text-muted);
+  text-transform: uppercase;
+}
+.fx-field input, .fx-field select {
+  width: 110px; padding: 10px 13px; border: 1px solid var(--border); border-radius: 10px;
+  font-family: var(--font); font-size: 15px; background: var(--bg-card); color: var(--text); outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.fx-field.sm input, .fx-field.sm select { width: 78px; }
+.fx-field.wide select { width: 280px; }
+.fx-field input:focus, .fx-field select:focus {
+  border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light);
+}
+.fx-actions { display: flex; gap: 10px; }
+.fx-btn {
+  padding: 11px 28px; border: 1px solid var(--text); border-radius: 24px; cursor: pointer;
+  font-family: var(--font); font-size: 14px; font-weight: 600; background: var(--text); color: var(--bg-card);
+  transition: opacity 0.18s, background 0.18s, color 0.18s;
+}
+.fx-btn:hover { opacity: 0.85; }
+.fx-btn.ghost { background: transparent; color: var(--text-secondary); border-color: var(--border); }
+.fx-btn.ghost:hover { color: var(--text); border-color: var(--text-muted); opacity: 1; }
+
+/* 易经手动掷卦 */
+.fx-manual { margin-top: 18px; padding: 18px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-sunken); }
+.fx-manual-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.fx-manual-head #yj-step { font-weight: 700; font-size: 15px; }
+.fx-manual-tip { font-size: 12px; color: var(--text-muted); }
+.fx-coins { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.fx-coin {
+  display: flex; flex-direction: column; gap: 3px; padding: 12px; cursor: pointer;
+  border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card);
+  font-family: var(--font); font-size: 14px; font-weight: 600; color: var(--text); transition: border-color 0.15s, background 0.15s;
+}
+.fx-coin:hover { border-color: var(--accent); background: var(--accent-light); }
+.fx-coin small { font-size: 11px; font-weight: 400; color: var(--text-muted); }
+.fx-manual-log { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.fx-manual-log span { font-size: 12px; color: var(--text-secondary); background: var(--bg-input); padding: 2px 9px; border-radius: 10px; }
+
+/* Result shell */
+.fx-result { margin-top: 26px; }
+.fx-result:empty { display: none; }
+.fx-loading, .fx-error { padding: 28px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
+.fx-error { color: #c0564a; }
+
+.fx-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 24px; margin-bottom: 22px; box-shadow: var(--shadow-sm);
+}
+
+.fx-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.fx-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.fx-chip {
+  display: inline-block; font-size: 12px; font-weight: 600; color: var(--text-secondary);
+  border: 1px solid var(--border); border-radius: 14px; padding: 4px 12px;
+}
+.fx-chip.accent { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
+.fx-chip.flat { color: var(--text-muted); }
+
+/* 六爻 */
+.fx-hex { display: flex; flex-direction: column; gap: 7px; align-items: center; margin: 22px 0; }
+.fx-yao { display: flex; gap: 12px; justify-content: center; width: 160px; }
+.fx-yao .bar { display: block; height: 9px; background: var(--text); border-radius: 2px; flex: 1; }
+.fx-yao .bar.half { flex: 0 0 calc(50% - 6px); }
+.fx-yao.moving .bar { background: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+
+.fx-guas { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 16px 0 4px; }
+.fx-gua {
+  display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 92px;
+  padding: 12px; border: 1px solid var(--border-light); border-radius: 12px; background: var(--bg-sunken);
+}
+.fx-gua-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; }
+.fx-gua-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; }
+.fx-gua-sym { font-size: 15px; color: var(--text-secondary); }
+
+.fx-verdict {
+  margin-top: 16px; text-align: center; font-size: 14px; padding: 12px;
+  border-radius: 12px; border: 1px solid var(--border-light);
+}
+.fx-verdict b { font-size: 16px; }
+.fx-verdict span { display: block; margin-top: 4px; font-size: 12px; color: var(--text-muted); }
+.fx-verdict.good { background: rgba(63,154,109,0.08); border-color: rgba(63,154,109,0.3); }
+.fx-verdict.good b { color: #2f7d56; }
+.fx-verdict.warn { background: rgba(199,154,75,0.08); border-color: rgba(199,154,75,0.3); }
+.fx-verdict.warn b { color: #a07a2e; }
+.fx-verdict.bad { background: rgba(209,96,79,0.08); border-color: rgba(209,96,79,0.3); }
+.fx-verdict.bad b { color: #b8503f; }
+.fx-verdict.flat b { color: var(--text-secondary); }
+
+/* Table */
+.fx-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.fx-table th, .fx-table td { padding: 9px 8px; text-align: center; border-bottom: 1px solid var(--border-light); }
+.fx-table thead th { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.fx-table td.k { font-weight: 600; color: var(--text-secondary); text-align: left; font-size: 12px; }
+.fx-table small { font-size: 11px; color: var(--text-muted); }
+
+.fx-focus { text-align: center; padding: 16px; margin: 18px 0; background: var(--bg-sunken); border-radius: 12px; }
+.fx-focus span { font-size: 12px; color: var(--text-muted); }
+.fx-focus b { display: inline-block; font-family: var(--font-display); font-size: 28px; font-weight: 800; margin: 0 8px; vertical-align: middle; }
+.fx-focus em { font-size: 13px; color: var(--text-secondary); font-style: normal; }
+
+/* 五行 bars */
+.fx-bars { display: flex; flex-direction: column; gap: 8px; }
+.fx-bar { display: flex; align-items: center; gap: 10px; }
+.fx-bar .lab { width: 18px; font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+.fx-bar .track { flex: 1; height: 7px; background: var(--bg-input); border-radius: 4px; overflow: hidden; }
+.fx-bar .track i { display: block; height: 100%; border-radius: 4px; }
+.fx-bar .num { width: 16px; font-size: 12px; color: var(--text-muted); text-align: right; }
+
+/* 紫微 十二宫 */
+.fx-palaces { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin: 16px 0; }
+.fx-palace {
+  display: flex; flex-direction: column; gap: 4px; padding: 9px 8px; min-height: 56px;
+  border: 1px solid var(--border-light); border-radius: 9px; background: var(--bg-card);
+}
+.fx-palace .pn { font-size: 11px; font-weight: 700; color: var(--text-secondary); }
+.fx-palace .ps { font-size: 11.5px; color: var(--text); line-height: 1.4; }
+.fx-palace.ming { border-color: var(--accent); background: var(--accent-light); }
+.fx-palace.ming .pn { color: var(--accent); }
+.fx-palace.shen { border-color: var(--text-muted); }
+
+/* 塔罗 */
+.fx-tarot { border: 1px solid var(--border); border-left-width: 3px; border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; background: var(--bg-card); }
+.fx-tarot.up { border-left-color: var(--accent); }
+.fx-tarot.rev { border-left-color: #c0564a; }
+.fx-tarot-h { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.fx-tarot-h .pos { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.fx-tarot-h .nm { font-family: var(--font-display); font-size: 17px; font-weight: 700; }
+.fx-tarot-h .ori { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-left: auto; }
+.fx-tarot-t { font-size: 11px; color: var(--text-muted); margin: 4px 0 8px; }
+
+/* 占星 三巨头 */
+.fx-bigs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+.fx-big { text-align: center; padding: 16px 8px; border: 1px solid var(--border-light); border-radius: 12px; background: var(--bg-sunken); }
+.fx-big .bl { font-size: 13px; color: var(--text-secondary); }
+.fx-big b { display: block; font-family: var(--font-display); font-size: 19px; font-weight: 700; margin: 6px 0 2px; }
+.fx-big em { font-size: 11px; color: var(--text-muted); font-style: normal; }
+.fx-aspects { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+
+/* 解读分段 */
+.fx-reading { margin-top: 8px; }
+.fx-sec {
+  font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--text); margin: 22px 0 9px; padding-bottom: 6px; border-bottom: 1px solid var(--border-light);
+}
+.fx-reading .fx-sec:first-child { margin-top: 0; }
+.fx-p { font-size: 14.5px; line-height: 1.85; color: var(--text); margin: 7px 0; }
+.fx-p.note { color: var(--text-secondary); font-size: 13.5px; }
+
+.fx-foot { text-align: center; font-size: 12px; color: var(--text-muted); padding: 40px 0 8px; letter-spacing: 0.02em; }
+
+@media (max-width: 600px) {
+  .fortune { padding: 0 16px 32px; }
+  .fx-head { padding: 40px 0 22px; }
+  .fx-head h1 { font-size: 36px; }
+  .fx-tab { padding: 10px 11px; font-size: 13.5px; }
+  .fx-card { padding: 18px 16px; }
+  .fx-field input, .fx-field select { width: 100%; }
+  .fx-field { flex: 1 1 72px; }
+  .fx-field.wide { flex-basis: 100%; }
+  .fx-field.wide select { width: 100%; }
+  .fx-actions { flex-basis: 100%; }
+  .fx-btn { flex: 1; }
+  .fx-palaces { grid-template-columns: repeat(3, 1fr); }
+  .fx-bigs { gap: 7px; }
+  .fx-big { padding: 12px 4px; }
+  .fx-big b { font-size: 16px; }
+}
+
 /* ── Chess ─────────────────────────────────── */
 .chess-wrapper { display: flex; justify-content: center; padding: 24px 0; }
 .chess-wrapper iframe { border: none; border-radius: var(--radius); box-shadow: var(--shadow-md); }
