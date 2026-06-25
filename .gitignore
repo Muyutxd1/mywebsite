@@ -13,6 +13,3 @@ backend/data/shares/
 frontend/node_modules/
 frontend/dist/
 node_modules/
-
-# Built SPA served by Flask in prod (build locally or on server, do not track)
-backend/static_spa/
