@@ -19,7 +19,32 @@ mysite/
 生产：**单进程** gunicorn 跑 `backend/wsgi:app`，Flask 同时托管 `static_spa/` 静态产物和 `/api/*`。
 React Router 深链由 catch-all 兜底到 `index.html`。无需 Node 运行时（仅构建时需要）。
 
-## 一次性：构建前端 → 产出 static_spa
+## Render（本站使用 · 自动部署）
+
+Render 在推送到所连分支（通常 `main`）时自动构建+部署。本次结构变更后，需在
+**Render 控制台 → 你的服务 → Settings → Build & Deploy** 改两条命令
+（前端产物 `backend/static_spa/` 已随仓库提交，**Render 无需 Node**）：
+
+| 字段 | 值 |
+|---|---|
+| Root Directory | 留空（仓库根） |
+| Build Command | `pip install -r backend/requirements.txt` |
+| Start Command | `gunicorn --chdir backend -w 2 --timeout 60 -b 0.0.0.0:$PORT wsgi:app` |
+
+要点：
+- `$PORT` 由 Render 注入，必须绑 `0.0.0.0:$PORT`（旧的 `app.run(5000)` 仅本地用）。
+- `--chdir backend` 让 gunicorn 在 `backend/` 下跑，`wsgi:app` 即 `backend/wsgi.py` 的 `app`。
+- 免费 512MB 内存若吃紧，把 `-w 2` 降到 `-w 1`（题库会按需缓存解析过的大 JSON）。
+- 想让 Render 自行构建前端则需 Node 环境，不推荐——已提交产物即可。
+
+**上线顺序（避免一次失败部署）**：
+1. 先在 Render 改好上面两条命令并保存。
+2. 把 `rewrite-spa` 合并进 `main` 推送 → 触发自动部署。
+3. Render 构建(pip)→启动(gunicorn)→新站上线。失败则保留上一个成功版本，线上不中断。
+
+---
+
+## 一次性：构建前端 → 产出 static_spa（仅在你想自行构建时）
 需要 Node 18+（仅构建用）。二选一：
 
 **A. 在服务器上构建**（服务器有 Node）
