@@ -9,6 +9,10 @@ venv/
 # Runtime-generated share files
 backend/data/shares/
 
+# Local data backups
+*.old
+*.bak
+
 # Node / Vite frontend
 frontend/node_modules/
 frontend/dist/

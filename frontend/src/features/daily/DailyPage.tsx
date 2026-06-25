@@ -1,179 +1,143 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import type { CSSProperties } from 'react'
 import { PageLoader, ErrorState, useToast } from '@/components/ui'
-import { cn } from '@/lib/cn'
 import { useTodayQuote, useAllQuotes } from './useDailyQuotes'
 import { copyText, formatQuote } from './copy'
+import { catMeta } from './categories'
 import type { Quote } from './types'
 
-const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六']
-
-/** Chinese date line, e.g. '2026年6月25日 · 星期四', parsed from the API ISO date. */
-function formatDateLine(iso: string): string {
+const WEEK = ['日', '一', '二', '三', '四', '五', '六']
+function dateLine(iso: string): string {
   const d = new Date(`${iso}T00:00:00`)
   if (Number.isNaN(d.getTime())) return ''
-  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 · 星期${WEEKDAYS[d.getDay()]}`
+  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 · 星期${WEEK[d.getDay()]}`
 }
+
+const SERIF = '"Noto Serif SC","Source Han Serif SC","Songti SC","SimSun",serif'
 
 export default function DailyPage() {
   const toast = useToast()
   const today = useTodayQuote()
-
-  // Local "current index" — starts at today's deterministic pick. Navigation
-  // (next / random) walks the full list, lazily fetched on first interaction.
   const [index, setIndex] = useState<number | null>(null)
+  const [isToday, setIsToday] = useState(true)
+  const [anim, setAnim] = useState(0)
+
+  // Prefetch the full list so 换一句 is instant (dataset is tiny).
   const [wantList, setWantList] = useState(false)
+  useEffect(() => setWantList(true), [])
   const all = useAllQuotes(wantList)
 
-  // Seed the index from today's response once it arrives.
   useEffect(() => {
     if (today.data && index === null) setIndex(today.data.index)
   }, [today.data, index])
 
-  const total = all.data?.total ?? today.data?.total ?? 0
-
-  // Resolve the current quote: prefer the full list (post-navigation),
-  // fall back to today's quote before the list loads.
   const quote: Quote | undefined = useMemo(() => {
     if (all.data && index !== null) return all.data.quotes[index]
     return today.data?.quote
   }, [all.data, index, today.data])
 
-  const ensureList = useCallback(() => {
-    if (!wantList) setWantList(true)
-  }, [wantList])
+  const meta = catMeta(quote?.category)
 
-  const handleNext = useCallback(() => {
-    ensureList()
+  const random = useCallback(() => {
     const list = all.data?.quotes
-    if (!list || index === null) return
-    setIndex((i) => ((i ?? 0) + 1) % list.length)
-  }, [all.data, index, ensureList])
+    if (!list || list.length === 0) return
+    let n = Math.floor(Math.random() * list.length)
+    if (list.length > 1 && n === index) n = (n + 1) % list.length
+    setIndex(n)
+    setIsToday(false)
+    setAnim((a) => a + 1)
+  }, [all.data, index])
 
-  const handleRandom = useCallback(() => {
-    ensureList()
-    const list = all.data?.quotes
-    if (!list) return
-    setIndex(Math.floor(Math.random() * list.length))
-  }, [all.data, ensureList])
-
-  const handleCopy = useCallback(async () => {
+  const copy = useCallback(async () => {
     if (!quote) return
     const ok = await copyText(formatQuote(quote))
-    if (ok) toast('✅ 已复制', 'success')
-    else toast('复制失败', 'danger')
+    toast(ok ? '✦ 已复制' : '复制失败', ok ? 'success' : 'danger')
   }, [quote, toast])
 
-  if (today.isLoading) return <PageLoader label="加载今日一句…" />
+  if (today.isLoading) return <PageLoader label="正在翻开今天…" />
   if (today.isError || !quote) {
     return (
-      <div className="mx-auto max-w-[680px] px-4 py-16 sm:px-6">
-        <ErrorState
-          title="加载失败"
-          description="请稍后重试。"
-          onRetry={() => today.refetch()}
-        />
+      <div className="mx-auto max-w-xl px-6 py-20">
+        <ErrorState title="加载失败" description="请稍后重试。" onRetry={() => today.refetch()} />
       </div>
     )
   }
 
-  const dateLine = today.data ? formatDateLine(today.data.date) : ''
-  const navBusy = wantList && all.isLoading
+  const navBusy = all.isLoading
+  const total = all.data?.total ?? today.data?.total ?? 0
 
   return (
-    <div className="mx-auto max-w-[680px] px-4 py-12 text-center sm:px-6 sm:py-16">
-      {/* Eyebrow + title header (site pattern) */}
-      <header className="mb-10">
-        <p className="mb-2 text-xs font-medium uppercase tracking-[0.25em] text-accent/80">
-          Daily Quote
-        </p>
-        <h1 className="text-2xl font-bold sm:text-3xl">每日一句</h1>
-      </header>
-
-      {/* Chinese date line */}
-      {dateLine && (
-        <p className="mb-10 text-[13px] tracking-[0.08em] text-muted">{dateLine}</p>
-      )}
-
-      {/* Quote text with decorative opening quote mark behind it */}
-      <div className="relative px-4">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -left-2 -top-8 select-none font-serif text-[72px] leading-none text-accent/25 sm:-left-4"
-        >
-          &ldquo;
-        </span>
-        <p
-          className={cn(
-            'relative text-[22px] font-medium tracking-[0.03em] text-fg sm:text-2xl',
-            navBusy && 'opacity-50 transition-opacity',
-          )}
-          style={{ lineHeight: 1.8 }}
-        >
-          {quote.text}
-        </p>
-      </div>
-
-      {/* Accent separator */}
-      <div className="mx-auto my-7 h-0.5 w-10 rounded-full bg-accent/40" />
-
-      {/* Source + author */}
-      {quote.source && <p className="text-[15px] text-fg-soft">—— 《{quote.source}》</p>}
-      {quote.author && (
-        <p className="mt-1 text-sm italic text-muted">{quote.author}</p>
-      )}
-
-      {/* Action row — three pill buttons */}
-      <div className="mt-12 flex flex-wrap justify-center gap-3">
-        <PillButton onClick={handleNext} disabled={navBusy}>
-          🔄 换一句
-        </PillButton>
-        <PillButton onClick={handleRandom} disabled={navBusy}>
-          🎲 随机
-        </PillButton>
-        <PillButton onClick={handleCopy}>📋 复制</PillButton>
-      </div>
-
-      {all.isError && (
-        <p className="mt-4 text-xs text-danger">语录加载失败，请重试换一句</p>
-      )}
-
-      {/* Category tag pills */}
-      {quote.tag && (
-        <div className="mt-10 flex flex-wrap justify-center gap-2 opacity-70">
-          <span className="rounded-[10px] bg-surface-2 px-3 py-1 text-[11px] text-muted">
-            {quote.tag}
-          </span>
-        </div>
-      )}
-
-      {total > 0 && (
-        <p className="mt-8 text-[11px] text-faint">共 {total} 句</p>
-      )}
-    </div>
-  )
-}
-
-function PillButton({
-  children,
-  onClick,
-  disabled,
-}: {
-  children: React.ReactNode
-  onClick: () => void
-  disabled?: boolean
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={cn(
-        'rounded-full border border-border bg-surface px-6 py-2.5 text-sm text-fg-soft',
-        'transition-all duration-200 hover:border-accent hover:bg-surface-2 hover:text-accent',
-        'active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none',
-      )}
+    <div
+      className="relative flex min-h-[calc(100dvh-3.5rem)] items-center justify-center overflow-hidden px-5 py-16"
+      style={{ '--cat': meta.color } as CSSProperties}
     >
-      {children}
-    </button>
+      {/* ambient category-tinted orbs */}
+      <div className="cat-glow pointer-events-none absolute -top-16 left-[8%] h-72 w-72 rounded-full opacity-40 blur-2xl animate-[float_15s_ease-in-out_infinite]" />
+      <div className="cat-glow pointer-events-none absolute -bottom-10 right-[6%] h-80 w-80 rounded-full opacity-30 blur-3xl animate-[float_21s_ease-in-out_infinite_reverse]" />
+
+      <div className="relative w-full max-w-2xl text-center">
+        {/* date line */}
+        <p className="mb-12 text-sm tracking-[0.06em] text-muted">
+          {isToday ? '今天' : '此刻'} · {today.data ? dateLine(today.data.date) : ''}
+        </p>
+
+        {/* quote stage — re-animates on each change */}
+        <div key={anim} className="animate-[riseIn_0.55s_var(--ease-out)]">
+          <div className="relative">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -left-1 -top-14 select-none text-[110px] leading-none opacity-15 sm:-left-4"
+              style={{ color: 'var(--cat)', fontFamily: 'Georgia, serif' }}
+            >
+              &ldquo;
+            </span>
+            <p
+              className="relative mx-auto max-w-xl text-[26px] font-medium leading-[1.85] text-fg sm:text-[30px]"
+              style={{ fontFamily: SERIF }}
+            >
+              {quote.text}
+            </p>
+          </div>
+
+          {(quote.source || quote.author) && (
+            <p className="mt-8 text-[15px] text-fg-soft">
+              ——&nbsp;
+              {quote.source && <span>《{quote.source}》</span>}
+              {quote.source && quote.author && <span className="text-muted">&nbsp;·&nbsp;</span>}
+              {quote.author && <span className="text-muted">{quote.author}</span>}
+            </p>
+          )}
+
+          <div className="mt-7 flex justify-center">
+            <span className="cat-tag inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
+              <span aria-hidden>{meta.glyph}</span>
+              {quote.category ?? '语录'}
+            </span>
+          </div>
+        </div>
+
+        {/* actions */}
+        <div className="mt-14 flex items-center justify-center gap-3">
+          <button
+            onClick={random}
+            disabled={navBusy}
+            className="cat-btn inline-flex h-12 items-center gap-2 rounded-full px-7 text-[15px] font-medium active:scale-[0.98] disabled:opacity-50"
+          >
+            <span aria-hidden className="text-lg leading-none">↻</span>
+            {navBusy ? '载入中…' : '换一句'}
+          </button>
+          <button
+            onClick={copy}
+            className="inline-flex h-12 items-center rounded-full border border-border px-5 text-sm text-fg-soft transition-colors hover:border-fg-soft hover:text-fg"
+          >
+            复制
+          </button>
+        </div>
+
+        <p className="mt-10 text-xs text-faint">
+          {total} 句精选 · 歌词 · 诗词 · 电影 · 文学 · 哲思 · 语录
+        </p>
+      </div>
+    </div>
   )
 }

@@ -166,6 +166,26 @@
     background-clip: text;
     color: transparent;
   }
+
+  /* per-category dynamic accent (每日一句) — set --cat on an ancestor element */
+  .cat-glow {
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--cat, var(--color-accent)) 42%, transparent), transparent);
+  }
+  .cat-tag {
+    background: color-mix(in srgb, var(--cat, var(--color-accent)) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cat, var(--color-accent)) 30%, transparent);
+    color: var(--cat, var(--color-accent));
+  }
+  .cat-btn {
+    background: color-mix(in srgb, var(--cat, var(--color-accent)) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cat, var(--color-accent)) 38%, transparent);
+    color: var(--cat, var(--color-accent));
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  }
+  .cat-btn:hover {
+    background: color-mix(in srgb, var(--cat, var(--color-accent)) 24%, transparent);
+    box-shadow: 0 10px 36px -12px color-mix(in srgb, var(--cat, var(--color-accent)) 70%, transparent);
+  }
 }
 
 @keyframes fadeIn {
@@ -183,6 +203,10 @@
 @keyframes riseIn {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(12px, -20px); }
 }
 
 @media (prefers-reduced-motion: reduce) {

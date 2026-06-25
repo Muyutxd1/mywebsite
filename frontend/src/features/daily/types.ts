@@ -3,7 +3,7 @@ export interface Quote {
   text: string
   source?: string
   author?: string
-  tag?: string
+  category?: string
 }
 
 export interface TodayResponse {
