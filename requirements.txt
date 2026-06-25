@@ -1,0 +1,4 @@
+# Deploy shim — the real dependencies live in backend/requirements.txt.
+# This lets the default Render build command `pip install -r requirements.txt`
+# (run from the repo root) keep working after the backend/ restructure.
+-r backend/requirements.txt
