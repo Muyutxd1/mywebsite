@@ -1,0 +1,193 @@
+@import 'tailwindcss';
+
+/* ============================================================================
+   牧雨的小宇宙 — Design System tokens
+   Deep-space "ink + light" dark theme. Indigo/violet primary light, warm gold
+   for divination highlights, near-white body for dense math/reading comfort.
+   Data colors (wuxing / astrology elements / verdicts) are semantic + stable.
+   ========================================================================== */
+@theme {
+  /* fonts — fast system + CJK stack, no webfont (keep first paint instant) */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'PingFang SC', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans CJK SC',
+    sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code',
+    Consolas, 'Liberation Mono', monospace;
+
+  /* surfaces / backgrounds */
+  --color-bg: #0a0b12;
+  --color-bg-soft: #0e0f18;
+  --color-surface: #14161f;
+  --color-surface-2: #1b1e29;
+  --color-surface-3: #232735;
+  --color-border: #2a2f3e;
+  --color-border-soft: #20242f;
+
+  /* foreground */
+  --color-fg: #edeef4;
+  --color-fg-soft: #c9cdda;
+  --color-muted: #969cb0;
+  --color-faint: #6a7187;
+
+  /* brand accent — cosmic indigo/violet */
+  --color-accent: #8b7bff;
+  --color-accent-strong: #6f5cff;
+  --color-accent-soft: #211f3a;
+  --color-accent-fg: #ffffff;
+
+  /* secondary accents */
+  --color-cyan: #45d6e6;
+  --color-gold: #e7b455;
+  --color-rose: #ff7aa8;
+
+  /* status */
+  --color-success: #46d18a;
+  --color-warning: #f1b24a;
+  --color-danger: #f0616d;
+  --color-info: #5aa9ff;
+
+  /* fortune verdict ramp (吉→凶) */
+  --color-verdict-good: #46d18a;
+  --color-verdict-ok: #8ed16f;
+  --color-verdict-flat: #c9b15a;
+  --color-verdict-warn: #f1a44a;
+  --color-verdict-bad: #f0616d;
+
+  /* 五行 wuxing (fixed data colors) */
+  --color-wuxing-mu: #5bbf76;
+  --color-wuxing-huo: #ec5f5f;
+  --color-wuxing-tu: #cfa44e;
+  --color-wuxing-jin: #d8c887;
+  --color-wuxing-shui: #5aa0ef;
+
+  /* 占星 elements (火土风水) */
+  --color-elem-fire: #ec6a5a;
+  --color-elem-earth: #c7a24e;
+  --color-elem-air: #6fc1d8;
+  --color-elem-water: #5a8fef;
+
+  /* radii */
+  --radius-sm: 0.375rem;
+  --radius: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.5rem;
+
+  /* shadows + glow */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.4), 0 18px 40px -16px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 0 1px rgba(139, 123, 255, 0.25), 0 12px 40px -12px rgba(111, 92, 255, 0.45);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+  }
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+  }
+  /* ambient cosmic backdrop */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(900px 600px at 12% -8%, rgba(111, 92, 255, 0.16), transparent 60%),
+      radial-gradient(800px 600px at 95% 0%, rgba(69, 214, 230, 0.08), transparent 55%),
+      radial-gradient(700px 700px at 50% 120%, rgba(231, 180, 85, 0.06), transparent 60%);
+  }
+  ::selection {
+    background: rgba(139, 123, 255, 0.32);
+    color: #fff;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  /* thin dark scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+}
+
+/* shared composite utilities used across features */
+@layer components {
+  .glass {
+    background: color-mix(in srgb, var(--color-surface) 72%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--color-border-soft);
+  }
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+  .hairline {
+    border-color: var(--color-border-soft);
+  }
+  /* gradient text for display moments */
+  .text-cosmic {
+    background: linear-gradient(100deg, #c4bbff 0%, var(--color-accent) 42%, var(--color-cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
