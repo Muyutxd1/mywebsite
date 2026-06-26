@@ -127,10 +127,10 @@ function BrowseTab({
   onReset: () => void
   onPage: (p: number) => void
 }) {
-  // Default browse unit is the COMPETITION; pick one to drill into its problems.
-  const inCompetition = Boolean(filters.competition)
-  const listQuery = useProblemList(filters, page, inCompetition)
-  const compsQuery = useCompetitions(filters, !inCompetition)
+  // Default browse unit is the 竞赛系列 (normalized); pick one to drill into it.
+  const inSeries = Boolean(filters.series)
+  const listQuery = useProblemList(filters, page, inSeries)
+  const compsQuery = useCompetitions(filters, !inSeries)
   const data = listQuery.data
 
   return (
@@ -141,20 +141,20 @@ function BrowseTab({
         filters={filters}
         onChange={onFilterChange}
         onReset={onReset}
-        total={inCompetition ? data?.total ?? 0 : compsQuery.data?.total ?? 0}
+        total={inSeries ? data?.total ?? 0 : compsQuery.data?.total ?? 0}
         page={data?.page ?? page}
-        pages={inCompetition ? data?.pages ?? 0 : 0}
+        pages={inSeries ? data?.pages ?? 0 : 0}
         loading={
-          inCompetition
+          inSeries
             ? listQuery.isLoading || listQuery.isFetching
             : compsQuery.isLoading || compsQuery.isFetching
         }
       />
 
-      {inCompetition ? (
+      {inSeries ? (
         <div className="space-y-3">
           <button
-            onClick={() => onFilterChange({ competition: '' })}
+            onClick={() => onFilterChange({ series: '' })}
             className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent"
           >
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -162,7 +162,7 @@ function BrowseTab({
             </svg>
             返回竞赛列表
           </button>
-          <h2 className="text-lg font-bold">{filters.competition}</h2>
+          <h2 className="text-lg font-bold">{data?.items[0]?.competition_series || filters.series}</h2>
           {listQuery.isError ? (
             <ErrorState title="题目加载失败" description="请稍后重试。" onRetry={() => void listQuery.refetch()} />
           ) : !data ? (
@@ -182,7 +182,7 @@ function BrowseTab({
         <div className={compsQuery.isFetching ? 'opacity-60 transition-opacity' : 'transition-opacity'}>
           <CompetitionIndex
             groups={compsQuery.data.groups}
-            onSelect={(competition) => onFilterChange({ competition })}
+            onSelect={(series) => onFilterChange({ series })}
           />
         </div>
       )}

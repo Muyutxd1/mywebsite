@@ -1,0 +1,2038 @@
+{
+"assignments": [
+{
+"config": "China",
+"competition": "China Mathematical Competition",
+"series_en": "China_MC",
+"series_zh": "全国高中数学联赛"
+},
+{
+"config": "China",
+"competition": "China Girls' Mathematical Olympiad",
+"series_en": "CGMO",
+"series_zh": "中国女子数学奥林匹克（CGMO）"
+},
+{
+"config": "China",
+"competition": "China Western Mathematical Olympiad",
+"series_en": "China_Western_MO",
+"series_zh": "中国西部数学奥林匹克"
+},
+{
+"config": "China",
+"competition": "China National Team Selection Test",
+"series_en": "China_TST",
+"series_zh": "中国国家队选拔考试（CMO TST）"
+},
+{
+"config": "China",
+"competition": "China Mathematical Olympiad",
+"series_en": "CMO",
+"series_zh": "中国数学奥林匹克（CMO）"
+},
+{
+"config": "China",
+"competition": "China Southeastern Mathematical Olympiad",
+"series_en": "China_Southeastern",
+"series_zh": "中国东南地区数学奥林匹克"
+},
+{
+"config": "China",
+"competition": "Chinese Mathematical Olympiad",
+"series_en": "CMO",
+"series_zh": "中国数学奥林匹克（CMO）"
+},
+{
+"config": "China",
+"competition": "China Mathematical Competition (Complementary Test)",
+"series_en": "China_MC",
+"series_zh": "全国高中数学联赛"
+},
+{
+"config": "China",
+"competition": "International Mathematical Olympiad",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "China",
+"competition": "China Mathematical Competition (Hainan)",
+"series_en": "China_MC",
+"series_zh": "全国高中数学联赛"
+},
+{
+"config": "China",
+"competition": "China Mathematical Competition (Shaanxi)",
+"series_en": "China_MC",
+"series_zh": "全国高中数学联赛"
+},
+{
+"config": "China",
+"competition": "China Mathematical Competition (Extra Test)",
+"series_en": "China_MC",
+"series_zh": "全国高中数学联赛"
+},
+{
+"config": "China",
+"competition": "2025 International Mathematical Olympiad China National Team Selection Test",
+"series_en": "China_TST",
+"series_zh": "中国国家队选拔考试（CMO TST）"
+},
+{
+"config": "China",
+"competition": "2022 China Team Selection Test for IMO",
+"series_en": "China_TST",
+"series_zh": "中国国家队选拔考试（CMO TST）"
+},
+{
+"config": "China",
+"competition": "China-TST-2025A",
+"series_en": "China_TST",
+"series_zh": "中国国家队选拔考试（CMO TST）"
+},
+{
+"config": "China",
+"competition": "China Mathematical Competition (Jiangxi)",
+"series_en": "China_MC",
+"series_zh": "全国高中数学联赛"
+},
+{
+"config": "China",
+"competition": "2023 Chinese IMO National Team Selection Test",
+"series_en": "China_TST",
+"series_zh": "中国国家队选拔考试（CMO TST）"
+},
+{
+"config": "China",
+"competition": "The 65th IMO China National Team Selection Test",
+"series_en": "China_TST",
+"series_zh": "中国国家队选拔考试（CMO TST）"
+},
+{
+"config": "China",
+"competition": "China-TST-2023B",
+"series_en": "China_TST",
+"series_zh": "中国国家队选拔考试（CMO TST）"
+},
+{
+"config": "China",
+"competition": "China Western Invitational Mathematical Competition",
+"series_en": "China_Western_Invitational",
+"series_zh": "中国西部数学邀请赛"
+},
+{
+"config": "China",
+"competition": "2024 CGMO",
+"series_en": "CGMO",
+"series_zh": "中国女子数学奥林匹克（CGMO）"
+},
+{
+"config": "China",
+"competition": "22nd Chinese Girls' Mathematical Olympiad",
+"series_en": "CGMO",
+"series_zh": "中国女子数学奥林匹克（CGMO）"
+},
+{
+"config": "China",
+"competition": "2022 CGMO",
+"series_en": "CGMO",
+"series_zh": "中国女子数学奥林匹克（CGMO）"
+},
+{
+"config": "China",
+"competition": "China Team Selection Test",
+"series_en": "China_TST",
+"series_zh": "中国国家队选拔考试（CMO TST）"
+},
+{
+"config": "China",
+"competition": "2022 China Team Selection Test",
+"series_en": "China_TST",
+"series_zh": "中国国家队选拔考试（CMO TST）"
+},
+{
+"config": "China",
+"competition": "2024 CMO",
+"series_en": "CMO",
+"series_zh": "中国数学奥林匹克（CMO）"
+},
+{
+"config": "China",
+"competition": "2011 China Western Mathematical Olympiad",
+"series_en": "China_Western_MO",
+"series_zh": "中国西部数学奥林匹克"
+},
+{
+"config": "European_Girls'_Mathematical_Olympiad_EGMO",
+"competition": "EGMO",
+"series_en": "EGMO",
+"series_zh": "欧洲女子数学奥林匹克（EGMO）"
+},
+{
+"config": "European_Girls'_Mathematical_Olympiad_EGMO",
+"competition": "European Girls' Mathematical Olympiad",
+"series_en": "EGMO",
+"series_zh": "欧洲女子数学奥林匹克（EGMO）"
+},
+{
+"config": "European_Girls'_Mathematical_Olympiad_EGMO",
+"competition": "EGMO 2024",
+"series_en": "EGMO",
+"series_zh": "欧洲女子数学奥林匹克（EGMO）"
+},
+{
+"config": "European_Girls'_Mathematical_Olympiad_EGMO",
+"competition": "EGMO 2020",
+"series_en": "EGMO",
+"series_zh": "欧洲女子数学奥林匹克（EGMO）"
+},
+{
+"config": "European_Girls'_Mathematical_Olympiad_EGMO",
+"competition": "European Girls' Mathematical Olympiad 2012-Day 1 Solutions",
+"series_en": "EGMO",
+"series_zh": "欧洲女子数学奥林匹克（EGMO）"
+},
+{
+"config": "European_Girls'_Mathematical_Olympiad_EGMO",
+"competition": "EGMO 2023",
+"series_en": "EGMO",
+"series_zh": "欧洲女子数学奥林匹克（EGMO）"
+},
+{
+"config": "European_Girls'_Mathematical_Olympiad_EGMO",
+"competition": "EGMO2022",
+"series_en": "EGMO",
+"series_zh": "欧洲女子数学奥林匹克（EGMO）"
+},
+{
+"config": "European_Girls'_Mathematical_Olympiad_EGMO",
+"competition": "EGMO 2021",
+"series_en": "EGMO",
+"series_zh": "欧洲女子数学奥林匹克（EGMO）"
+},
+{
+"config": "IMO",
+"competition": "International Mathematical Olympiad",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "IMO 2019 Shortlisted Problems",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "IMO 2006 Shortlisted Problems",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "IMO2024 Shortlisted Problems",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "48th International Mathematical Olympiad Vietnam 2007 Shortlisted Problems with Solutions",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "IMO 2021 Shortlisted Problems",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "International Mathematical Olympiad Shortlist",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "International Mathematical Olympiad Shortlisted Problems",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "IMO Problem Shortlist",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "53rd International Mathematical Olympiad Shortlisted Problems with Solutions",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "49th International Mathematical Olympiad Spain",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "55th International Mathematical Olympiad Shortlist",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "IMO 2016 Shortlisted Problems",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "56th International Mathematical Olympiad Shortlisted Problems",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "51st IMO Shortlisted Problems",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "52nd International Mathematical Olympiad 2011 Shortlist",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "IMO Shortlisted Problems",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "IMO",
+"competition": "IMO 2020 Shortlisted Problems",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "Iran",
+"competition": "Iranian Mathematical Olympiad",
+"series_en": "Iran_NMO",
+"series_zh": "伊朗国家数学奥林匹克"
+},
+{
+"config": "Iran",
+"competition": "37th Iranian Mathematical Olympiad",
+"series_en": "Iran_NMO",
+"series_zh": "伊朗国家数学奥林匹克"
+},
+{
+"config": "Iran",
+"competition": "40th Iranian Mathematical Olympiad",
+"series_en": "Iran_NMO",
+"series_zh": "伊朗国家数学奥林匹克"
+},
+{
+"config": "Iran",
+"competition": "38th Iranian Mathematical Olympiad",
+"series_en": "Iran_NMO",
+"series_zh": "伊朗国家数学奥林匹克"
+},
+{
+"config": "Iran",
+"competition": "41th Iranian Mathematical Olympiad",
+"series_en": "Iran_NMO",
+"series_zh": "伊朗国家数学奥林匹克"
+},
+{
+"config": "Iran",
+"competition": "27th Iranian Mathematical Olympiad",
+"series_en": "Iran_NMO",
+"series_zh": "伊朗国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Romanian Mathematical Olympiad",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "75th Romanian Mathematical Olympiad",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "67th Romanian Mathematical Olympiad",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "65th Romanian Mathematical Olympiad",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "74th Romanian Mathematical Olympiad",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "66th ROMANIAN MATHEMATICAL OLYMPIAD",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 68th ROMANIAN MATHEMATICAL OLYMPIAD",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "2019 ROMANIAN MATHEMATICAL OLYMPIAD",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "62nd ROMANIAN MATHEMATICAL OLYMPIAD",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "75th NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "SHORTLISTED PROBLEMS FOR THE 68th NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "SHORTLISTED PROBLEMS FOR THE 73rd NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 73rd ROMANIAN MATHEMATICAL OLYMPIAD - FINAL ROUND",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Shortlisted problems for the 65th Romanian NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "74th NMO Shortlisted Problems",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "69th Romanian Mathematical Olympiad - Final Round",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională de Matematică",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 73rd ROMANIAN MATHEMATICAL OLYMPIAD - DISTRICT ROUND",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "67th NMO Shortlisted Problems",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "SHORTLISTED PROBLEMS FOR THE 2019 ROMANIAN NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Local Mathematical Competitions",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "75th NMO Selection Tests",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "2018 Romanian Mathematical Olympiad",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Shortlisted problems for the 2018 Romanian NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "SHORTLISTED PROBLEMS FOR THE 66th NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Shortlisted Problems for the Romanian NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Shortlisted Problems for the 64th NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "SHORTLISTED PROBLEMS FOR THE 62nd NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "64th Romanian Mathematical Olympiad - Final Round",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "69th NMO Selection Tests for JBMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "64th Romanian Mathematical Olympiad - District Round",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "NMO Selection Tests for the Balkan and International Mathematical Olympiads",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 68th NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "66th NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională de Matematică Etapa Naţională",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "69th NMO Selection Tests for BMO and IMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "65th NMO Selection Tests for BMO and IMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "64th NMO Selection Tests for the Balkan and International Mathematical Olympiads",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "66th NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 68th NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "67th NMO Selection Tests for JBMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "65th NMO Selection Tests for JBMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională GAZETA MATEMATICĂ",
+"series_en": "Romania_Gazeta",
+"series_zh": "数学公报全国竞赛（Gazeta Matematică）"
+},
+{
+"config": "Romania",
+"competition": "NMO Selection Tests for the Junior Balkan Mathematical Olympiad",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "67th NMO Selection Tests for BMO and IMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "SELECTION TESTS FOR THE 2019 BMO AND IMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "62nd NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Națională de Matematică",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "The Danube Mathematical Competition",
+"series_en": "Danube_MC",
+"series_zh": "多瑙河数学竞赛（Danube）"
+},
+{
+"config": "Romania",
+"competition": "Romanian Master of Mathematics",
+"series_en": "RMM",
+"series_zh": "罗马尼亚大师赛（RMM）"
+},
+{
+"config": "Romania",
+"competition": "Matematika tantárgyverseny Megyei szakasz",
+"series_en": "Romania_Hungarian",
+"series_zh": "罗马尼亚匈牙利语数学竞赛"
+},
+{
+"config": "Romania",
+"competition": "74th NMO Selection Tests for JBMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "62nd NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională de Matematică, Etapa Judeţeană şi a Municipiului Bucureşti",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Primul test de selecţie pentru OBMJ",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada de Matematică Etapa Locală",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională de Matematică Etapa Judeţeană şi a Municipiului Bucureşti",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Stars of Mathematics Competition",
+"series_en": "Romania_Stars",
+"series_zh": "数学之星竞赛（Stars of Mathematics）"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada europeana de matematica a fetelor",
+"series_en": "EGMO",
+"series_zh": "欧洲女子数学奥林匹克（EGMO）"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Națională de Matematică - Etapa Locală",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "OLIMPIADA DE MATEMATICĂ ETAPA LOCALĂ",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Eleventh STARS OF MATHEMATICS Competition",
+"series_en": "Romania_Stars",
+"series_zh": "数学之星竞赛（Stars of Mathematics）"
+},
+{
+"config": "Romania",
+"competition": "70th ROMANIAN MATHEMATICAL OLYMPIAD",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "2015 Ninth STARS OF MATHEMATICS Competition",
+"series_en": "Romania_Stars",
+"series_zh": "数学之星竞赛（Stars of Mathematics）"
+},
+{
+"config": "Romania",
+"competition": "THE 2014 DANUBE MATHEMATICAL COMPETITION",
+"series_en": "Danube_MC",
+"series_zh": "多瑙河数学竞赛（Danube）"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională de Matematică, Etapa Naţională",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Junior Balkan Mathematical Olympiad",
+"series_en": "JBMO",
+"series_zh": "初级巴尔干数学奥林匹克（JBMO）"
+},
+{
+"config": "Romania",
+"competition": "Eighteenth STARS OF MATHEMATICS Competition",
+"series_en": "Romania_Stars",
+"series_zh": "数学之星竞赛（Stars of Mathematics）"
+},
+{
+"config": "Romania",
+"competition": "64th NMO Selection Tests for the Junior Balkan Mathematical Olympiad",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "The DANUBE Mathematical Competition",
+"series_en": "Danube_MC",
+"series_zh": "多瑙河数学竞赛（Danube）"
+},
+{
+"config": "Romania",
+"competition": "THE Sixteenth STARS OF MATHEMATICS Competition",
+"series_en": "Romania_Stars",
+"series_zh": "数学之星竞赛（Stars of Mathematics）"
+},
+{
+"config": "Romania",
+"competition": "THE Fifteenth ROMANIAN MASTER OF MATHEMATICS",
+"series_en": "RMM",
+"series_zh": "罗马尼亚大师赛（RMM）"
+},
+{
+"config": "Romania",
+"competition": "Seventeenth Stars of Mathematics Competition",
+"series_en": "Romania_Stars",
+"series_zh": "数学之星竞赛（Stars of Mathematics）"
+},
+{
+"config": "Romania",
+"competition": "Seventeenth ROMANIAN MASTER OF MATHEMATICS",
+"series_en": "RMM",
+"series_zh": "罗马尼亚大师赛（RMM）"
+},
+{
+"config": "Romania",
+"competition": "SHORTLISTED PROBLEMS FOR THE 70th NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "RMC 2020",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Națională GAZETA MATEMATICĂ",
+"series_en": "Romania_Gazeta",
+"series_zh": "数学公报全国竞赛（Gazeta Matematică）"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Nationala de Matematica",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Eleventh Romanian Master of Mathematics",
+"series_en": "RMM",
+"series_zh": "罗马尼亚大师赛（RMM）"
+},
+{
+"config": "Romania",
+"competition": "Balkan Mathematical Olympiad",
+"series_en": "BMO",
+"series_zh": "巴尔干数学奥林匹克（BMO）"
+},
+{
+"config": "Romania",
+"competition": "2016 European Girls' Mathematical Olympiad",
+"series_en": "EGMO",
+"series_zh": "欧洲女子数学奥林匹克（EGMO）"
+},
+{
+"config": "Romania",
+"competition": "2011 Fourth ROMANIAN MASTER OF MATHEMATICS",
+"series_en": "RMM",
+"series_zh": "罗马尼亚大师赛（RMM）"
+},
+{
+"config": "Romania",
+"competition": "THE Tenth ROMANIAN MASTER OF MATHEMATICS",
+"series_en": "RMM",
+"series_zh": "罗马尼亚大师赛（RMM）"
+},
+{
+"config": "Romania",
+"competition": "THE 73rd NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD - FIRST SELECTION TEST",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 2015 Seventh ROMANIAN MASTER OF MATHEMATICS",
+"series_en": "RMM",
+"series_zh": "罗马尼亚大师赛（RMM）"
+},
+{
+"config": "Romania",
+"competition": "TESTUL 1",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Shortlisted problems for the 69th NMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Romania Olympiad",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada de Matematică - Etapa Locală",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada de Matematică",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Nationala de Matematica 2022 baraj 2 de selectie seniori",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "OLIMPIADA DE MATEMATICĂ - ETAPA LOCALĂ",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "2016 Eighth Romanian Master of Mathematics",
+"series_en": "RMM",
+"series_zh": "罗马尼亚大师赛（RMM）"
+},
+{
+"config": "Romania",
+"competition": "Twentieth IMAR Mathematical Competition",
+"series_en": "IMAR",
+"series_zh": "IMAR数学竞赛（罗马尼亚）"
+},
+{
+"config": "Romania",
+"competition": "The Tenth IMAR Mathematical Competition",
+"series_en": "IMAR",
+"series_zh": "IMAR数学竞赛（罗马尼亚）"
+},
+{
+"config": "Romania",
+"competition": "THE Eighteenth IMAR Mathematical Competition",
+"series_en": "IMAR",
+"series_zh": "IMAR数学竞赛（罗马尼亚）"
+},
+{
+"config": "Romania",
+"competition": "THE 73rd NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD - THIRD SELECTION TEST",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 73rd NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD - SECOND SELECTION TEST",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 73rd NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD - FOURTH SELECTION TEST",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 73rd NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS - SECOND SELECTION TEST",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 73rd NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS - FIRST SELECTION TEST",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "THE 2014 Twelfth IMAR MATHEMATICAL COMPETITION",
+"series_en": "IMAR",
+"series_zh": "IMAR数学竞赛（罗马尼亚）"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională de Matematică, Etapa judeţeană şi a municipiului Bucureşti",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională de Matematică Etapa Judeţeană",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională GAZETA MATEMATICĂ Etapa a III-a",
+"series_en": "Romania_Gazeta",
+"series_zh": "数学公报全国竞赛（Gazeta Matematică）"
+},
+{
+"config": "Romania",
+"competition": "Nineteenth IMAR Mathematical Competition",
+"series_en": "IMAR",
+"series_zh": "IMAR数学竞赛（罗马尼亚）"
+},
+{
+"config": "Romania",
+"competition": "IMAR Mathematical Competition",
+"series_en": "IMAR",
+"series_zh": "IMAR数学竞赛（罗马尼亚）"
+},
+{
+"config": "Romania",
+"competition": "Fifteenth IMAR Mathematical Competition",
+"series_en": "IMAR",
+"series_zh": "IMAR数学竞赛（罗马尼亚）"
+},
+{
+"config": "Romania",
+"competition": "BMO",
+"series_en": "BMO",
+"series_zh": "巴尔干数学奥林匹克（BMO）"
+},
+{
+"config": "Romania",
+"competition": "Al treilea test de selecţie pentru OBMJ Bucureşti",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Al treilea test de selecţie pentru OBMJ",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Al patrulea test de selecţie pentru OBMJ",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Al doilea test de selecţie pentru OBMJ",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Al cincilea test de selecţie pentru OBMJ",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "70th NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "69th Romanian Mathematical Olympiad",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "2015 Thirteenth IMAR Mathematical Competition",
+"series_en": "IMAR",
+"series_zh": "IMAR数学竞赛（罗马尼亚）"
+},
+{
+"config": "Romania",
+"competition": "2010 Fourth STARS OF MATHEMATICS COMPETITION",
+"series_en": "Romania_Stars",
+"series_zh": "数学之星竞赛（Stars of Mathematics）"
+},
+{
+"config": "Romania",
+"competition": "2010 Eighth IMAR MATHEMATICAL COMPETITION",
+"series_en": "IMAR",
+"series_zh": "IMAR数学竞赛（罗马尼亚）"
+},
+{
+"config": "Romania",
+"competition": "2010 DANUBE MATHEMATICAL COMPETITION",
+"series_en": "Danube_MC",
+"series_zh": "多瑙河数学竞赛（Danube）"
+},
+{
+"config": "Romania",
+"competition": "THE Tenth STARS OF MATHEMATICS COMPETITION",
+"series_en": "Romania_Stars",
+"series_zh": "数学之星竞赛（Stars of Mathematics）"
+},
+{
+"config": "Romania",
+"competition": "THE Fourteenth IMAR MATHEMATICAL COMPETITION",
+"series_en": "IMAR",
+"series_zh": "IMAR数学竞赛（罗马尼亚）"
+},
+{
+"config": "Romania",
+"competition": "THE DANUBE MATHEMATICAL COMPETITION",
+"series_en": "Danube_MC",
+"series_zh": "多瑙河数学竞赛（Danube）"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională GAZETA MATEMATICĂ Barajul 3",
+"series_en": "Romania_Gazeta",
+"series_zh": "数学公报全国竞赛（Gazeta Matematică）"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Natională de Matematică",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Bulgarian Mathematical Olympiad",
+"series_en": "Bulgaria_NMO",
+"series_zh": "保加利亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Al doilea test de selectie pentru OBMJ",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "74th NMO Selection Tests for BMO and IMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "53. Bulgarian Mathematical Olympiad",
+"series_en": "Bulgaria_NMO",
+"series_zh": "保加利亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "30th Balkan Mathematical Olympiad",
+"series_en": "BMO",
+"series_zh": "巴尔干数学奥林匹克（BMO）"
+},
+{
+"config": "Romania",
+"competition": "2015 Danube Mathematical Competition",
+"series_en": "Danube_MC",
+"series_zh": "多瑙河数学竞赛（Danube）"
+},
+{
+"config": "Romania",
+"competition": "2011 CLOCK-TOWER SCHOOL SENIORS COMPETITION",
+"series_en": "Romania_ClockTower",
+"series_zh": "钟楼学校竞赛（Clock-Tower School）"
+},
+{
+"config": "Romania",
+"competition": "SELECTION TESTS FOR THE 2019 JBMO",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Națională GAZETA MATEMATICĂ Etapa a III-a",
+"series_en": "Romania_Gazeta",
+"series_zh": "数学公报全国竞赛（Gazeta Matematică）"
+},
+{
+"config": "Romania",
+"competition": "Olimpiada Naţională de Matematică Primul baraj pentru Olimpiada Balcanică de Matematică pentru Juniori",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "OLIMPIADA NATIONALĂ DE MATEMATICĂ ETAPA LOCALĂ",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "70th NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "2011 CLOCK-TOWER SCHOOL JUNIORS COMPETITION",
+"series_en": "Romania_ClockTower",
+"series_zh": "钟楼学校竞赛（Clock-Tower School）"
+},
+{
+"config": "Romania",
+"competition": "THE 73rd NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS - FOURTH SELECTION TEST",
+"series_en": "Romania_NMO",
+"series_zh": "罗马尼亚国家数学奥林匹克"
+},
+{
+"config": "Romania",
+"competition": "28th BALKAN MATHEMATICAL OLYMPIAD",
+"series_en": "BMO",
+"series_zh": "巴尔干数学奥林匹克（BMO）"
+},
+{
+"config": "Romania",
+"competition": "2015 BALKAN MATHEMATICAL OLYMPIAD",
+"series_en": "BMO",
+"series_zh": "巴尔干数学奥林匹克（BMO）"
+},
+{
+"config": "United_States",
+"competition": "Harvard-MIT Mathematics Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Harvard-MIT Math Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT February",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "Harvard-MIT November Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT 2014",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "February 2017",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Bay Area Mathematical Olympiad",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2020",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "美国",
+"series_en": "US_other",
+"series_zh": "其他（未标注赛事）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2019",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2018",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2014",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2019",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2015",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2022",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT 2013",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2013",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "1st Annual Harvard-MIT November Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2021",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "USAMO",
+"series_en": "USAMO",
+"series_zh": "USAMO（美国数学奥林匹克）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest 4",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "AMC 12 A",
+"series_en": "AMC12",
+"series_zh": "AMC 12"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2023",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2023",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2018",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMO 2020",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest 2",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2024",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "13th Annual Harvard-MIT Mathematics Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest 1",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2015",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "AMC 10 A",
+"series_en": "AMC10",
+"series_zh": "AMC 10"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle: Monthly Contest 5",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2024",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle: Monthly Contest 2",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2022",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2016",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "USA TSTST",
+"series_en": "USA_TSTST",
+"series_zh": "美国国家队选拔预选考试（TSTST）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest 3",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "15th Annual Harvard-MIT Mathematics Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2024 Guts Round",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest 6",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "HMMT Spring 2021 Guts Round",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle: Monthly Contest 7",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "12th Annual Harvard-MIT Mathematics Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle: Monthly Contest 6",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest 8",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "Team Selection Test",
+"series_en": "USA_TST",
+"series_zh": "美国国家队选拔考试（TST）"
+},
+{
+"config": "United_States",
+"competition": "HMMT Spring 2021",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2016",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle: Monthly Contest 4",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "AIME II",
+"series_en": "AIME",
+"series_zh": "AIME（美国数学邀请赛）"
+},
+{
+"config": "United_States",
+"competition": "USA IMO",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2017",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMIC",
+"series_en": "HMIC",
+"series_zh": "哈佛-MIT邀请赛（HMIC）"
+},
+{
+"config": "United_States",
+"competition": "HMMT",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest 7",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "10th Annual Harvard-MIT Mathematics Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle: Monthly Contest 1",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest 5",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "AMC 12 B",
+"series_en": "AMC12",
+"series_zh": "AMC 12"
+},
+{
+"config": "United_States",
+"competition": "AMC 10 B",
+"series_en": "AMC10",
+"series_zh": "AMC 10"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2012",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2025",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMO",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Fall 2021 AMC 10 B",
+"series_en": "AMC10",
+"series_zh": "AMC 10"
+},
+{
+"config": "United_States",
+"competition": "BAMO",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "2024 AMC 12 B",
+"series_en": "AMC12",
+"series_zh": "AMC 12"
+},
+{
+"config": "United_States",
+"competition": "11th Annual Harvard-MIT Mathematics Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "2025 AIME I",
+"series_en": "AIME",
+"series_zh": "AIME（美国数学邀请赛）"
+},
+{
+"config": "United_States",
+"competition": "2022 AIME I",
+"series_en": "AIME",
+"series_zh": "AIME（美国数学邀请赛）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle: Monthly Contest 8",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "USA IMO TST",
+"series_en": "USA_TST",
+"series_zh": "美国国家队选拔考试（TST）"
+},
+{
+"config": "United_States",
+"competition": "USA IMO 2003",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "United_States",
+"competition": "IMO Team Selection Test",
+"series_en": "USA_TST",
+"series_zh": "美国国家队选拔考试（TST）"
+},
+{
+"config": "United_States",
+"competition": "Harvard-MIT Mathematics Tournament, Team Round A",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "IMO Team Selection Team Selection Test",
+"series_en": "USA_TSTST",
+"series_zh": "美国国家队选拔预选考试（TSTST）"
+},
+{
+"config": "United_States",
+"competition": "Harvard-MIT Mathematics Tournament, Team Round B",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT Spring 2021 Team Round",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT November 2021 Team Round",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2019 Team Round",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT February 2019 February 16, 2019",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "HMMT 1998",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "2nd Annual Harvard-MIT November Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "$12^{\\text {th }}$ Annual Harvard-MIT Mathematics Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "USA TST Selection Test for 67th IMO and 15th EGMO",
+"series_en": "USA_TSTST",
+"series_zh": "美国国家队选拔预选考试（TSTST）"
+},
+{
+"config": "United_States",
+"competition": "Team Selection Test 2009",
+"series_en": "USA_TST",
+"series_zh": "美国国家队选拔考试（TST）"
+},
+{
+"config": "United_States",
+"competition": "$10^{\\text {th }}$ Annual Harvard-MIT Mathematics Tournament",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "Team Selection Test Selection Test",
+"series_en": "USA_TSTST",
+"series_zh": "美国国家队选拔预选考试（TSTST）"
+},
+{
+"config": "United_States",
+"competition": "Team Selection Test 2010",
+"series_en": "USA_TST",
+"series_zh": "美国国家队选拔考试（TST）"
+},
+{
+"config": "United_States",
+"competition": "IMO",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "2021 AMC 10 B Fall",
+"series_en": "AMC10",
+"series_zh": "AMC 10"
+},
+{
+"config": "United_States",
+"competition": "TSTST",
+"series_en": "USA_TSTST",
+"series_zh": "美国国家队选拔预选考试（TSTST）"
+},
+{
+"config": "United_States",
+"competition": "HMMT 2002",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "25th Bay Area Mathematical Olympiad",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "19th Bay Area Mathematical Olympiad",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "USAMO 2010",
+"series_en": "USAMO",
+"series_zh": "USAMO（美国数学奥林匹克）"
+},
+{
+"config": "United_States",
+"competition": "TST2025",
+"series_en": "USA_TST",
+"series_zh": "美国国家队选拔考试（TST）"
+},
+{
+"config": "United_States",
+"competition": "TST",
+"series_en": "USA_TST",
+"series_zh": "美国国家队选拔考试（TST）"
+},
+{
+"config": "United_States",
+"competition": "16th United States of America Junior Mathematical Olympiad",
+"series_en": "USAJMO",
+"series_zh": "美国少年数学奥林匹克（USAJMO）"
+},
+{
+"config": "United_States",
+"competition": "13th Bay Area Mathematical Olympiad",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "USAMO 2009",
+"series_en": "USAMO",
+"series_zh": "USAMO（美国数学奥林匹克）"
+},
+{
+"config": "United_States",
+"competition": "IMO 2009",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "United_States",
+"competition": "HMMT Invitational Competition",
+"series_en": "HMIC",
+"series_zh": "哈佛-MIT邀请赛（HMIC）"
+},
+{
+"config": "United_States",
+"competition": "HMMT 2014 HMIC",
+"series_en": "HMIC",
+"series_zh": "哈佛-MIT邀请赛（HMIC）"
+},
+{
+"config": "United_States",
+"competition": "HMIC 2024",
+"series_en": "HMIC",
+"series_zh": "哈佛-MIT邀请赛（HMIC）"
+},
+{
+"config": "United_States",
+"competition": "HMIC 2023",
+"series_en": "HMIC",
+"series_zh": "哈佛-MIT邀请赛（HMIC）"
+},
+{
+"config": "United_States",
+"competition": "HMIC 2018",
+"series_en": "HMIC",
+"series_zh": "哈佛-MIT邀请赛（HMIC）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle: Monthly Contest 3",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Take-Home Contest #6",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Take-Home Contest #2",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest #7",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Monthly Contest #1",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "9th Bay Area Mathematical Olympiad",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "3rd Bay Area Mathematical Olympiad",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "11th Annual Harvard-MIT Mathematics Tournament - Team Round: B Division",
+"series_en": "HMMT",
+"series_zh": "HMMT（哈佛-MIT数学竞赛）"
+},
+{
+"config": "United_States",
+"competition": "USA TST",
+"series_en": "USA_TST",
+"series_zh": "美国国家队选拔考试（TST）"
+},
+{
+"config": "United_States",
+"competition": "RMM",
+"series_en": "RMM",
+"series_zh": "罗马尼亚大师赛（RMM）"
+},
+{
+"config": "United_States",
+"competition": "HMIC 2021",
+"series_en": "HMIC",
+"series_zh": "哈佛-MIT邀请赛（HMIC）"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Take-Home Contest #1",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "Berkeley Math Circle Take-Home Contest",
+"series_en": "Berkeley_MC",
+"series_zh": "伯克利数学圈"
+},
+{
+"config": "United_States",
+"competition": "5th Bay Area Mathematical Olympiad",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "2nd Bay Area Mathematical Olympiad",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "1st Bay Area Mathematical Olympiad",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "USAJMO",
+"series_en": "USAJMO",
+"series_zh": "美国少年数学奥林匹克（USAJMO）"
+},
+{
+"config": "United_States",
+"competition": "USA Junior MO",
+"series_en": "USAJMO",
+"series_zh": "美国少年数学奥林匹克（USAJMO）"
+},
+{
+"config": "United_States",
+"competition": "BAMO-8 and BAMO-12",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "AIME I",
+"series_en": "AIME",
+"series_zh": "AIME（美国数学邀请赛）"
+},
+{
+"config": "United_States",
+"competition": "United States of America — TST Selection Test",
+"series_en": "USA_TSTST",
+"series_zh": "美国国家队选拔预选考试（TSTST）"
+},
+{
+"config": "United_States",
+"competition": "USAMO 2021 Day I",
+"series_en": "USAMO",
+"series_zh": "USAMO（美国数学奥林匹克）"
+},
+{
+"config": "United_States",
+"competition": "BAMO-12",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+},
+{
+"config": "United_States",
+"competition": "2022 AIME II",
+"series_en": "AIME",
+"series_zh": "AIME（美国数学邀请赛）"
+},
+{
+"config": "United_States",
+"competition": "USA TST 2025",
+"series_en": "USA_TST",
+"series_zh": "美国国家队选拔考试（TST）"
+},
+{
+"config": "United_States",
+"competition": "International Mathematical Olympiad",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "United_States",
+"competition": "IMO 2008",
+"series_en": "IMO",
+"series_zh": "国际数学奥林匹克（IMO）"
+},
+{
+"config": "United_States",
+"competition": "BAMO-8",
+"series_en": "BAMO",
+"series_zh": "湾区数学奥林匹克（BAMO）"
+}
+]
+}

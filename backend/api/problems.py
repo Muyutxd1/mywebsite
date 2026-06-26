@@ -86,6 +86,11 @@ def _where(args, skip=()):
         clauses.append('p.competition = ?')
         params.append(competition)
 
+    series = args.get('series')
+    if series and 'series' not in skip:
+        clauses.append('p.series_key = ?')
+        params.append(series)
+
     year = args.get('year')
     if year == 'unknown':
         clauses.append('p.year IS NULL')
@@ -169,6 +174,8 @@ def _light(row):
         'country_zh': d['country_zh'],
         'config': d['config'],
         'competition': d['competition'],
+        'competition_series': d['competition_series'],
+        'series_key': d['series_key'],
         'year': d['year'],
         'year_source': d['year_source'],
         'problem_number': d['problem_number'],
@@ -318,36 +325,39 @@ def list_problems():
 
 @bp.route('/competitions')
 def competitions():
-    """Competition-grouped index honoring the active filters (except competition).
+    """Two-level browse index: 地区(config) -> 竞赛系列(series) -> problems.
 
-    Returns geo groups: [{config, country_zh, count, competitions:[{competition,
-    count, year_min, year_max, years_known, easy, medium, hard, elite}]}].
-    The "browse by competition" view's data source.
+    Honors the active filters (except competition/series). Returns geo groups:
+    [{config, country_zh, count, series:[{series_key, series_zh, count,
+      editions, year_min, year_max, years_known, easy, medium, hard, elite}]}].
+    Messy raw competition names are normalized into canonical series upstream.
     """
     conn = _db()
     if conn is None:
         return _unavailable()
-    where, params, _ = _where(request.args, skip={'competition'})
+    where, params, _ = _where(request.args, skip={'competition', 'series'})
     rows = conn.execute(
-        f"""SELECT config, country_zh, competition,
+        f"""SELECT config, country_zh, series_key, competition_series,
                    COUNT(*) n,
+                   COUNT(DISTINCT competition) editions,
                    MIN(year) ymin, MAX(year) ymax,
                    SUM(year IS NOT NULL) yk,
                    SUM(difficulty='easy') easy, SUM(difficulty='medium') medium,
                    SUM(difficulty='hard') hard, SUM(difficulty='elite') elite
             FROM problems p{where}
-            GROUP BY config, competition""",
+            GROUP BY config, series_key""",
         params).fetchall()
 
     groups = {}
     for r in rows:
         g = groups.setdefault(r['config'], {
             'config': r['config'], 'country_zh': r['country_zh'],
-            'count': 0, 'competitions': [],
+            'count': 0, 'series': [],
         })
         g['count'] += r['n']
-        g['competitions'].append({
-            'competition': r['competition'], 'count': r['n'],
+        g['series'].append({
+            'series_key': r['series_key'], 'series_zh': r['competition_series'],
+            'count': r['n'], 'editions': r['editions'],
             'year_min': r['ymin'], 'year_max': r['ymax'], 'years_known': r['yk'],
             'easy': r['easy'], 'medium': r['medium'],
             'hard': r['hard'], 'elite': r['elite'],
@@ -355,8 +365,7 @@ def competitions():
 
     out = sorted(groups.values(), key=lambda g: -g['count'])
     for g in out:
-        # most-populous competitions first within each geo
-        g['competitions'].sort(key=lambda c: -c['count'])
+        g['series'].sort(key=lambda s: -s['count'])
     return jsonify({'groups': out, 'total': sum(g['count'] for g in out)})
 
 

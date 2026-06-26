@@ -41,6 +41,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BACKEND = os.path.dirname(HERE)
 ROOT = os.path.dirname(BACKEND)
 DB_PATH = os.path.join(BACKEND, 'data', 'problems.db')
+SERIES_PATH = os.path.join(BACKEND, 'data', 'competition_series.json')
 IMAGES_DIR = os.path.join(ROOT, 'frontend', 'public', 'problem-images')
 IMAGE_URL_PREFIX = '/problem-images'
 
@@ -172,6 +173,8 @@ CREATE TABLE problems (
   country_zh    TEXT NOT NULL,
   competition   TEXT NOT NULL DEFAULT '',
   competition_raw TEXT NOT NULL DEFAULT '',
+  series_key    TEXT NOT NULL DEFAULT '',
+  competition_series TEXT NOT NULL DEFAULT '',
   year          INTEGER,
   year_source   TEXT,
   problem_number TEXT,
@@ -211,6 +214,7 @@ CREATE INDEX idx_p_config ON problems(config);
 CREATE INDEX idx_p_country ON problems(country_zh);
 CREATE INDEX idx_p_year ON problems(year);
 CREATE INDEX idx_p_competition ON problems(competition);
+CREATE INDEX idx_p_series ON problems(series_key);
 CREATE INDEX idx_p_difficulty ON problems(difficulty);
 CREATE INDEX idx_p_diffscore ON problems(difficulty_score);
 CREATE INDEX idx_p_ptype ON problems(problem_type);
@@ -226,6 +230,25 @@ CREATE VIRTUAL TABLE problems_fts USING fts5(
   content='problems', content_rowid='rowid', tokenize='trigram'
 );
 """
+
+
+def load_series():
+    """Load the competition->series map: {(config, competition): (key, zh)}.
+
+    Built by the normalize-competitions pass. Missing file => identity fallback
+    (each raw competition is its own series).
+    """
+    out = {}
+    if not os.path.exists(SERIES_PATH):
+        return out
+    with open(SERIES_PATH, encoding='utf-8') as f:
+        data = json.load(f)
+    for a in data.get('assignments', []):
+        cfg, comp = a.get('config'), a.get('competition')
+        if cfg is None or comp is None:
+            continue
+        out[(cfg, comp)] = (a.get('series_en') or comp, a.get('series_zh') or comp)
+    return out
 
 
 def load_enrichment(path):
@@ -258,7 +281,8 @@ def main():
     snap = snapshot_download(REPO, repo_type='dataset',
                              allow_patterns=[f'data/{c}/*.parquet' for c in CONFIGS])
     enrich = load_enrichment(args.enrichment)
-    print(f'enrichment rows: {len(enrich)}', flush=True)
+    series_map = load_series()
+    print(f'enrichment rows: {len(enrich)} | series map: {len(series_map)}', flush=True)
 
     if os.path.exists(DB_PATH):
         os.remove(DB_PATH)
@@ -287,6 +311,8 @@ def main():
                 country_zh = COUNTRY_ZH.get(country, config_zh)
                 competition = (r.get('competition') or '').strip()
                 comp_display = competition or country_zh
+                series_key, competition_series = series_map.get(
+                    (config, comp_display), (comp_display, comp_display))
 
                 # ---- images: write files + prep ext for ref rewrite ----
                 imgs = r.get('images') or []
@@ -341,14 +367,16 @@ def main():
                 con.execute(
                     """INSERT INTO problems
                        (id, source_id, config, country, country_zh, competition,
-                        competition_raw, year, year_source, problem_number,
+                        competition_raw, series_key, competition_series,
+                        year, year_source, problem_number,
                         problem_number_source, problem_md, final_answer,
                         has_solution, num_solutions, language, problem_type,
                         problem_type_zh, difficulty, difficulty_zh, difficulty_score,
                         difficulty_source, rationale_zh, has_images, num_images,
                         categories_json, search_solutions, search_categories)
-                       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                     (pid, sid, config, country, country_zh, comp_display, competition,
+                     series_key, competition_series,
                      year, ysrc, pnum, pnum_src, problem_md, r.get('final_answer'),
                      1 if sols else 0, len(sols), r.get('language'), ptype,
                      PROBLEM_TYPE_ZH.get(ptype), difficulty, difficulty_zh,

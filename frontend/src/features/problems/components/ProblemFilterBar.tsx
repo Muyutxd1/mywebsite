@@ -45,10 +45,6 @@ export function ProblemFilterBar({
   }
 
   // Cascading option sets.
-  const competitions = useMemo(
-    () => facets.competitions.filter((c) => !filters.config || c.config === filters.config),
-    [facets.competitions, filters.config],
-  )
   const level2 = useMemo(
     () => facets.level2.filter((c) => !filters.level1 || c.l1 === filters.level1),
     [facets.level2, filters.level1],
@@ -73,7 +69,7 @@ export function ProblemFilterBar({
   )
 
   const activeCount = [
-    filters.config, filters.competition, filters.level1, filters.level2,
+    filters.config, filters.series, filters.level1, filters.level2,
     filters.level3, filters.level4, filters.year, filters.difficulty,
     filters.problem_type,
   ].filter(Boolean).length
@@ -133,15 +129,6 @@ export function ProblemFilterBar({
 
       {/* secondary row */}
       <div className={cn('mt-3 flex-wrap items-end gap-2', more ? 'flex' : 'hidden lg:flex')}>
-        <Labeled label="赛事">
-          <Select className={selCls} value={filters.competition}
-            onChange={(e) => onChange({ competition: e.target.value })}>
-            <option value="">全部赛事</option>
-            {competitions.map((c) => (
-              <option key={c.value} value={c.value}>{c.value}（{c.count}）</option>
-            ))}
-          </Select>
-        </Labeled>
         <Labeled label="二级类">
           <Select className={selCls} value={filters.level2}
             onChange={(e) => onChange({ level2: e.target.value, level3: '', level4: '' })}>

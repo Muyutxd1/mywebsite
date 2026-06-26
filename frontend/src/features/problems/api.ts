@@ -60,9 +60,9 @@ export function useProblemList(filters: ProblemFilters, page: number, enabled = 
 }
 
 export function useCompetitions(filters: ProblemFilters, enabled = true) {
-  // competition + sort are irrelevant when listing competitions; blank them so
+  // competition/series/sort are irrelevant when listing series; blank them so
   // filtersToQuery drops them (it omits empty values).
-  const rest = { ...filters, competition: '', sort: '' }
+  const rest = { ...filters, competition: '', series: '', sort: '' }
   return useQuery({
     queryKey: ['problems', 'competitions', rest],
     queryFn: () =>

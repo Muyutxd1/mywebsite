@@ -40,6 +40,8 @@ export interface ProblemEntry {
   country_zh: string
   config: string
   competition: string
+  competition_series: string
+  series_key: string
   year: number | null
   year_source: string | null
   problem_number: string | null
@@ -71,10 +73,12 @@ export interface ProblemListResponse {
   pageSize: number
 }
 
-/** One competition within a geo group (browse-by-competition view). */
-export interface CompetitionInfo {
-  competition: string
+/** One competition SERIES within a geo group (the 2nd-level browse directory). */
+export interface SeriesInfo {
+  series_key: string
+  series_zh: string
   count: number
+  editions: number
   year_min: number | null
   year_max: number | null
   years_known: number
@@ -88,7 +92,7 @@ export interface CompetitionGroup {
   config: string
   country_zh: string
   count: number
-  competitions: CompetitionInfo[]
+  series: SeriesInfo[]
 }
 
 export interface CompetitionsResponse {
@@ -107,6 +111,7 @@ export type SortKey =
 export interface ProblemFilters {
   config: string
   competition: string
+  series: string
   level1: string
   level2: string
   level3: string
@@ -121,6 +126,7 @@ export interface ProblemFilters {
 export const EMPTY_FILTERS: ProblemFilters = {
   config: '',
   competition: '',
+  series: '',
   level1: '',
   level2: '',
   level3: '',

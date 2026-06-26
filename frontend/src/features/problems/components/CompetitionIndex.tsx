@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { cn } from '@/lib/cn'
-import type { CompetitionGroup, CompetitionInfo } from '../types'
+import type { CompetitionGroup, SeriesInfo } from '../types'
 
-/** Thin stacked bar of the difficulty mix within a competition. */
-function DifficultyBar({ c }: { c: CompetitionInfo }) {
-  const total = c.easy + c.medium + c.hard + c.elite
+/** Thin stacked bar of the difficulty mix within a series. */
+function DifficultyBar({ s }: { s: SeriesInfo }) {
+  const total = s.easy + s.medium + s.hard + s.elite
   if (!total) return null
   const seg = (n: number, cls: string, label: string) =>
     n > 0 && (
@@ -15,18 +15,18 @@ function DifficultyBar({ c }: { c: CompetitionInfo }) {
       />
     )
   return (
-    <div className="flex h-1.5 w-20 overflow-hidden rounded-full bg-surface-3 shrink-0">
-      {seg(c.easy, 'bg-success', '易')}
-      {seg(c.medium, 'bg-cyan', '中')}
-      {seg(c.hard, 'bg-warning', '难')}
-      {seg(c.elite, 'bg-danger', '极难')}
+    <div className="flex h-1.5 w-20 shrink-0 overflow-hidden rounded-full bg-surface-3">
+      {seg(s.easy, 'bg-success', '易')}
+      {seg(s.medium, 'bg-cyan', '中')}
+      {seg(s.hard, 'bg-warning', '难')}
+      {seg(s.elite, 'bg-danger', '极难')}
     </div>
   )
 }
 
-function yearLabel(c: CompetitionInfo): string | null {
-  if (!c.years_known || c.year_min == null) return null
-  return c.year_min === c.year_max ? String(c.year_min) : `${c.year_min}–${c.year_max}`
+function yearLabel(s: SeriesInfo): string | null {
+  if (!s.years_known || s.year_min == null) return null
+  return s.year_min === s.year_max ? String(s.year_min) : `${s.year_min}–${s.year_max}`
 }
 
 function Chevron({ open }: { open: boolean }) {
@@ -37,15 +37,14 @@ function Chevron({ open }: { open: boolean }) {
   )
 }
 
-/** Browse-by-competition: geo sections -> clickable competition rows. */
+/** Two-level browse: 地区 sections -> clickable 竞赛系列 rows. */
 export function CompetitionIndex({
   groups,
   onSelect,
 }: {
   groups: CompetitionGroup[]
-  onSelect: (competition: string) => void
+  onSelect: (seriesKey: string) => void
 }) {
-  // Expand the first group by default (or the sole group when a geo filter is on).
   const [open, setOpen] = useState<Record<string, boolean>>(
     groups.length ? { [groups[0].config]: true } : {},
   )
@@ -71,26 +70,29 @@ export function CompetitionIndex({
             >
               <Chevron open={isOpen} />
               <span className="font-semibold text-fg">{g.country_zh}</span>
-              <span className="text-xs text-muted">{g.competitions.length} 个竞赛 · {g.count} 题</span>
+              <span className="text-xs text-muted">{g.series.length} 个竞赛 · {g.count} 题</span>
             </button>
             {isOpen && (
               <ul className="divide-y divide-border-soft border-t border-border-soft">
-                {g.competitions.map((c) => {
-                  const yr = yearLabel(c)
+                {g.series.map((s) => {
+                  const yr = yearLabel(s)
                   return (
-                    <li key={c.competition}>
+                    <li key={s.series_key}>
                       <button
                         type="button"
-                        onClick={() => onSelect(c.competition)}
+                        onClick={() => onSelect(s.series_key)}
                         className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-surface-2"
                       >
-                        <span className="min-w-0 flex-1 truncate text-sm text-fg-soft" title={c.competition}>
-                          {c.competition}
+                        <span className="min-w-0 flex-1 truncate text-sm text-fg-soft" title={s.series_zh}>
+                          {s.series_zh}
                         </span>
+                        {s.editions > 1 && (
+                          <span className="shrink-0 text-xs text-faint">{s.editions} 届</span>
+                        )}
                         {yr && <span className="shrink-0 text-xs text-faint">{yr}</span>}
-                        <DifficultyBar c={c} />
+                        <DifficultyBar s={s} />
                         <span className="shrink-0 rounded-full bg-surface-3 px-2 py-0.5 text-xs font-medium text-muted">
-                          {c.count}
+                          {s.count}
                         </span>
                         <svg className="shrink-0 text-faint" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M9 6l6 6-6 6" />
