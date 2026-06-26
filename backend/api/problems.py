@@ -267,7 +267,9 @@ def facets():
     if not os.path.exists(_DB_PATH):
         return _unavailable()
     resp = jsonify(_facets_payload())
-    resp.headers['Cache-Control'] = 'public, max-age=3600'
+    # Revalidate every load: facets change when the DB is rebuilt (e.g. after
+    # difficulty enrichment). A long max-age would serve a stale shape/counts.
+    resp.headers['Cache-Control'] = 'no-cache'
     return resp
 
 

@@ -28,6 +28,22 @@ export function useFacets() {
     queryKey: ['problems', 'facets'],
     queryFn: () => apiGet<FacetsResponse>('/api/problems/facets'),
     staleTime: Infinity,
+    // Defensive normalization: guarantee every array exists so consumers can
+    // safely .map/.filter even if the response is stale/partial (a stale
+    // HTTP-cached facets payload from an older API shape would otherwise crash).
+    select: (d): FacetsResponse => ({
+      total: d?.total ?? 0,
+      countries: d?.countries ?? [],
+      competitions: d?.competitions ?? [],
+      years: d?.years ?? [],
+      yearUnknown: d?.yearUnknown ?? 0,
+      level1: d?.level1 ?? [],
+      level2: d?.level2 ?? [],
+      level3: d?.level3 ?? [],
+      level4: d?.level4 ?? [],
+      difficulties: d?.difficulties ?? [],
+      problemTypes: d?.problemTypes ?? [],
+    }),
   })
 }
 
