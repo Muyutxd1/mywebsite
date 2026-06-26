@@ -14,8 +14,8 @@ export function ProblemList({ items }: { items: ProblemEntry[] }) {
 
   return (
     <div className="flex flex-col gap-2.5">
-      {items.map((entry) => (
-        <ProblemCard key={entry.id} entry={entry} />
+      {items.map((p) => (
+        <ProblemCard key={p.id} p={p} />
       ))}
     </div>
   )

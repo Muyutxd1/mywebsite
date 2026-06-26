@@ -13,6 +13,7 @@ const KnowledgeBasePage = lazy(() => import('@/features/knowledge/KnowledgeBaseP
 const MdRenderPage = lazy(() => import('@/features/mdrender/MdRenderPage'))
 const SharePage = lazy(() => import('@/features/mdrender/SharePage'))
 const ProblemsPage = lazy(() => import('@/features/problems/ProblemsPage'))
+const ProblemDetailPage = lazy(() => import('@/features/problems/ProblemDetailPage'))
 const PolyominoPage = lazy(() => import('@/features/polyomino/PolyominoPage'))
 const PolycubePage = lazy(() => import('@/features/polycube/PolycubePage'))
 const AffinePage = lazy(() => import('@/features/affine/AffinePage'))
@@ -33,7 +34,7 @@ export function AppRouter() {
         <Route path="mdrender" element={<MdRenderPage />} />
         <Route path="share/:id" element={<SharePage />} />
         <Route path="problems" element={<ProblemsPage />} />
-        <Route path="problems/:id" element={<ProblemsPage />} />
+        <Route path="problems/:id" element={<ProblemDetailPage />} />
         <Route path="polyomino" element={<PolyominoPage />} />
         <Route path="polycube" element={<PolycubePage />} />
         <Route path="affine" element={<AffinePage />} />

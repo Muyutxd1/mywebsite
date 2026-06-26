@@ -8,6 +8,16 @@ import { queryClient } from '@/lib/queryClient'
 import { AppRouter } from '@/app/router'
 import { ToastProvider } from '@/components/ui/Toast'
 
+// This SPA ships no service worker. Defensively unregister any stale SW left by
+// a different project previously served on this origin (a common cause of a
+// "flash then white screen" when an old cached shell hijacks fetches).
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .getRegistrations()
+    .then((regs) => regs.forEach((r) => r.unregister()))
+    .catch(() => {})
+}
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
