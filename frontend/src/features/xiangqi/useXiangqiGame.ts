@@ -140,19 +140,21 @@ export function useXiangqiGame(): XiangqiApi {
     }
   }, [])
 
-  const requestAi = useCallback((fen: string, depth: number): Promise<Move | null> => {
+  const requestAi = useCallback((fen: string, maxDepth: number, timeMs: number): Promise<Move | null> => {
     const worker = workerRef.current
     if (!worker) {
-      // 回退：worker 不可用时在主线程计算；限制深度并让出一拍，尽量减少 UI 卡顿。
-      const d = Math.min(depth, 2)
+      // 回退：worker 不可用时在主线程计算；限制深度/时间并让出一拍，尽量减少 UI 卡顿。
       return new Promise((resolve) => {
-        setTimeout(() => resolve(getBestMove(new XiangqiGame(fen), d)), 0)
+        setTimeout(
+          () => resolve(getBestMove(new XiangqiGame(fen), { maxDepth: Math.min(maxDepth, 4), timeMs: Math.min(timeMs, 500) })),
+          0,
+        )
       })
     }
     return new Promise((resolve) => {
       const id = ++reqIdRef.current
       pendingRef.current.set(id, resolve)
-      const req: AiRequest = { id, fen, depth }
+      const req: AiRequest = { id, fen, maxDepth, timeMs }
       worker.postMessage(req)
     })
   }, [])
@@ -288,7 +290,7 @@ export function useXiangqiGame(): XiangqiApi {
     const fen = game.toFEN()
     const gen = genRef.current
     setAiThinking(true)
-    const move = await requestAi(fen, Math.min(level.depth, 3))
+    const move = await requestAi(fen, Math.min(level.depth, 8), 700)
     setAiThinking(false)
     if (gen !== genRef.current || gameRef.current.toFEN() !== fen) return
     if (move) {
@@ -355,7 +357,7 @@ export function useXiangqiGame(): XiangqiApi {
     void (async () => {
       // 让“思考中”先渲染。
       await new Promise((res) => setTimeout(res, 120))
-      const move = cancelled ? null : await requestAi(fen, level.depth)
+      const move = cancelled ? null : await requestAi(fen, level.depth, level.timeMs)
       aiBusyRef.current = false
       if (cancelled || gen !== genRef.current) return
       if (move) applyMove(move)

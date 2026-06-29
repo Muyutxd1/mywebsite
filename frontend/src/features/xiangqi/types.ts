@@ -34,25 +34,29 @@ export type GameOutcome =
 
 export type GameMode = 'pvp' | 'pvai'
 
-/** 难度 → minimax 搜索深度。 */
+/** 难度 → 迭代加深的最大深度与思考时间预算。 */
 export interface Level {
   id: string
   label: string
+  /** 最大迭代深度。 */
   depth: number
+  /** 思考时间预算（毫秒）。 */
+  timeMs: number
 }
 
 export const LEVELS: Level[] = [
-  { id: 'beginner', label: '入门', depth: 1 },
-  { id: 'easy', label: '简单', depth: 2 },
-  { id: 'medium', label: '中等', depth: 3 },
-  { id: 'hard', label: '困难', depth: 4 },
+  { id: 'beginner', label: '入门', depth: 2, timeMs: 200 },
+  { id: 'easy', label: '简单', depth: 4, timeMs: 450 },
+  { id: 'medium', label: '中等', depth: 6, timeMs: 1000 },
+  { id: 'hard', label: '困难', depth: 12, timeMs: 2800 },
 ]
 
 /** 工作线程消息。 */
 export interface AiRequest {
   id: number
   fen: string
-  depth: number
+  maxDepth: number
+  timeMs: number
 }
 
 export interface AiResponse {

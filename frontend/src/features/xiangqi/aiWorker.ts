@@ -5,11 +5,11 @@ import { getBestMove } from './ai'
 import type { AiRequest, AiResponse } from './types'
 
 self.onmessage = (e: MessageEvent<AiRequest>) => {
-  const { id, fen, depth } = e.data
+  const { id, fen, maxDepth, timeMs } = e.data
   let move = null
   try {
     const game = new XiangqiGame(fen)
-    move = getBestMove(game, depth)
+    move = getBestMove(game, { maxDepth, timeMs })
   } catch {
     move = null
   }

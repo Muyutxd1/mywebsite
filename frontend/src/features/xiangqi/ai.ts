@@ -1,10 +1,10 @@
-// 中国象棋 AI：negamax + alpha-beta + 静态搜索(吃子) + MVV-LVA 排序。
-// 评估 = 子力 + 位置表（红方视角，红正黑负）。
+// 中国象棋 AI：迭代加深 + alpha-beta + 空着裁剪 + 将军延伸 + 杀手/历史启发排序
+// + 带应将的静态搜索。评估 = 子力 + 位置表（红方视角，红正黑负）。
 import { XiangqiGame } from './engine'
-import type { Move, PieceType } from './types'
+import type { Color, Move, PieceType } from './types'
 
 const MATE = 1_000_000
-const NODE_CAP = 2_000_000
+const OPP: Record<Color, Color> = { r: 'b', b: 'r' }
 
 export const VALUE: Record<PieceType, number> = {
   k: 60000,
@@ -94,40 +94,74 @@ function evalForSide(game: XiangqiGame): number {
   return game.turn === 'r' ? evaluate(game) : -evaluate(game)
 }
 
-function orderMoves(moves: Move[]): Move[] {
-  return moves
-    .map((m) => ({
-      m,
-      // MVV-LVA：优先吃大子、用小子吃
-      s: m.captured ? VALUE[m.captured.type] * 10 - VALUE[game_pieceType(m)] : 0,
-    }))
-    .sort((a, b) => b.s - a.s)
-    .map((x) => x.m)
+function hasMajorMinor(game: XiangqiGame, color: Color): boolean {
+  for (let r = 0; r < 10; r++) {
+    for (let c = 0; c < 9; c++) {
+      const p = game.board[r][c]
+      if (p && p.color === color && (p.type === 'r' || p.type === 'h' || p.type === 'c')) return true
+    }
+  }
+  return false
 }
 
-// 取走子方棋子类型（用于排序时的攻击者价值）。排序在 make 之前调用，故直接读 from。
-let CURRENT: XiangqiGame
-function game_pieceType(m: Move): PieceType {
-  return CURRENT.board[m.from[0]][m.from[1]]?.type ?? 'p'
-}
-
+// ---- 搜索状态（每次 getBestMove 重置） ----
+const now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now())
 let nodes = 0
+let deadline = 0
+let stopped = false
+const history = new Int32Array(90 * 90)
+let killers: (Move | null)[][] = []
+
+const sq = (r: number, c: number) => r * 9 + c
+const hidx = (m: Move) => sq(m.from[0], m.from[1]) * 90 + sq(m.to[0], m.to[1])
+const sameMove = (a: Move, b: Move) =>
+  a.from[0] === b.from[0] && a.from[1] === b.from[1] && a.to[0] === b.to[0] && a.to[1] === b.to[1]
+
+function addKiller(ply: number, m: Move): void {
+  const k = killers[ply] || (killers[ply] = [null, null])
+  if (k[0] && sameMove(k[0], m)) return
+  k[1] = k[0]
+  k[0] = m
+}
+
+function orderMoves(game: XiangqiGame, moves: Move[], ply: number): Move[] {
+  const k = killers[ply]
+  const scored = moves.map((m) => {
+    let s: number
+    if (m.captured) {
+      s = 1_000_000 + VALUE[m.captured.type] * 16 - VALUE[game.board[m.from[0]][m.from[1]]!.type]
+    } else if (k && k[0] && sameMove(k[0], m)) {
+      s = 900_000
+    } else if (k && k[1] && sameMove(k[1], m)) {
+      s = 800_000
+    } else {
+      s = history[hidx(m)]
+    }
+    return { m, s }
+  })
+  scored.sort((a, b) => b.s - a.s)
+  return scored.map((x) => x.m)
+}
 
 function quiesce(game: XiangqiGame, alpha: number, beta: number, ply: number): number {
-  if (nodes > NODE_CAP) return evalForSide(game)
+  if (stopped) return 0
+  if ((++nodes & 2047) === 0 && now() > deadline) {
+    stopped = true
+    return 0
+  }
 
-  // 被将时不能“按兵不动”：必须搜索全部应将着法（含非吃子），无着即被将杀。
+  // 被将时必须搜全部应将着法（含非吃子），无着即被将杀。
   if (game.isInCheck(game.turn)) {
     const moves = game.generateLegalMoves(game.turn)
     if (moves.length === 0) return -MATE + ply
-    if (ply >= 8) return evalForSide(game)
+    if (ply >= 24) return evalForSide(game)
     let best = -Infinity
-    for (const m of orderMoves(moves)) {
-      nodes++
+    for (const m of orderMoves(game, moves, ply)) {
       game.makeMove(m)
-      const score = -quiesce(game, -beta, -alpha, ply + 1)
+      const s = -quiesce(game, -beta, -alpha, ply + 1)
       game.undoMove()
-      if (score > best) best = score
+      if (stopped) return 0
+      if (s > best) best = s
       if (best > alpha) alpha = best
       if (alpha >= beta) break
     }
@@ -135,76 +169,121 @@ function quiesce(game: XiangqiGame, alpha: number, beta: number, ply: number): n
   }
 
   const standPat = evalForSide(game)
-  if (ply >= 6) return standPat
+  if (ply >= 24) return standPat
   if (standPat >= beta) return beta
   if (standPat > alpha) alpha = standPat
 
-  const captures = game.generateLegalMoves(game.turn).filter((m) => m.captured)
-  for (const m of orderMoves(captures)) {
-    nodes++
+  // 只搜吃子，按 MVV-LVA 排序。
+  const caps = game
+    .generateLegalMoves(game.turn)
+    .filter((m) => m.captured)
+    .sort((a, b) => VALUE[b.captured!.type] - VALUE[a.captured!.type])
+  for (const m of caps) {
     game.makeMove(m)
-    const score = -quiesce(game, -beta, -alpha, ply + 1)
+    const s = -quiesce(game, -beta, -alpha, ply + 1)
     game.undoMove()
-    if (score >= beta) return beta
-    if (score > alpha) alpha = score
+    if (stopped) return 0
+    if (s >= beta) return beta
+    if (s > alpha) alpha = s
   }
   return alpha
 }
 
-function negamax(game: XiangqiGame, depth: number, alpha: number, beta: number, ply: number): number {
-  if (nodes > NODE_CAP) return evalForSide(game)
-  const moves = game.generateLegalMoves(game.turn)
-  if (moves.length === 0) return -MATE + ply // 无着可走（将死/困毙）均判负
+function negamax(game: XiangqiGame, depth: number, alpha: number, beta: number, ply: number, allowNull: boolean): number {
+  if (stopped) return 0
+  if ((++nodes & 2047) === 0 && now() > deadline) {
+    stopped = true
+    return 0
+  }
+
+  const inCheck = game.isInCheck(game.turn)
+  if (inCheck) depth++ // 将军延伸
+
   if (depth <= 0) return quiesce(game, alpha, beta, ply)
 
+  const moves = game.generateLegalMoves(game.turn)
+  if (moves.length === 0) return -MATE + ply
+
+  // 空着裁剪（非将军、有大子、非边缘深度）。
+  if (allowNull && depth >= 3 && !inCheck && Math.abs(beta) < MATE - 1000 && hasMajorMinor(game, game.turn)) {
+    const R = 2
+    game.turn = OPP[game.turn]
+    const s = -negamax(game, depth - 1 - R, -beta, -beta + 1, ply + 1, false)
+    game.turn = OPP[game.turn]
+    if (stopped) return 0
+    if (s >= beta) return beta
+  }
+
   let best = -Infinity
-  for (const m of orderMoves(moves)) {
-    nodes++
+  for (const m of orderMoves(game, moves, ply)) {
     game.makeMove(m)
-    const score = -negamax(game, depth - 1, -beta, -alpha, ply + 1)
+    const s = -negamax(game, depth - 1, -beta, -alpha, ply + 1, true)
     game.undoMove()
-    if (score > best) best = score
+    if (stopped) return 0
+    if (s > best) best = s
     if (best > alpha) alpha = best
-    if (alpha >= beta) break
+    if (alpha >= beta) {
+      if (!m.captured) {
+        addKiller(ply, m)
+        history[hidx(m)] += depth * depth
+      }
+      break
+    }
   }
   return best
 }
 
-/** 返回当前行棋方的最佳着法（轻微随机以避免每局雷同）；无着可走返回 null。 */
-export function getBestMove(game: XiangqiGame, depth: number): Move | null {
-  CURRENT = game
+export interface SearchLimits {
+  /** 最大迭代深度。 */
+  maxDepth: number
+  /** 思考时间预算（毫秒）。 */
+  timeMs: number
+}
+
+/** 迭代加深搜索，返回当前行棋方的最佳着法；无着可走返回 null。 */
+export function getBestMove(game: XiangqiGame, limits: SearchLimits): Move | null {
+  const rootMoves = game.generateLegalMoves(game.turn)
+  if (rootMoves.length === 0) return null
+
   nodes = 0
-  const moves = game.generateLegalMoves(game.turn)
-  if (moves.length === 0) return null
+  stopped = false
+  history.fill(0)
+  killers = []
+  deadline = now() + Math.max(50, limits.timeMs)
 
-  // 1) alpha-beta 找出最优着法（其分值是精确的 PV 值）。
-  const ordered = orderMoves(moves)
-  let alpha = -Infinity
-  const beta = Infinity
-  let bestScore = -Infinity
-  let bestMove: Move = ordered[0]
-  const rough: { m: Move; s: number }[] = []
-  for (const m of ordered) {
-    game.makeMove(m)
-    const score = -negamax(game, depth - 1, -beta, -alpha, 1)
-    game.undoMove()
-    rough.push({ m, s: score })
-    if (score > bestScore) {
-      bestScore = score
-      bestMove = m
+  let best: Move = rootMoves[0]
+  let bestScore = 0
+
+  for (let depth = 1; depth <= limits.maxDepth; depth++) {
+    let alpha = -Infinity
+    const beta = Infinity
+    let curBest: Move | null = null
+    let curScore = -Infinity
+
+    // 上一深度的最佳着法优先，其余按启发排序。
+    const ordered = orderMoves(game, rootMoves, 0)
+    ordered.sort((a, b) => (sameMove(a, best) ? -1 : sameMove(b, best) ? 1 : 0))
+
+    for (const m of ordered) {
+      game.makeMove(m)
+      const s = -negamax(game, depth - 1, -beta, -alpha, 1, true)
+      game.undoMove()
+      if (stopped) break
+      if (s > curScore) {
+        curScore = s
+        curBest = m
+      }
+      if (s > alpha) alpha = s
     }
-    if (score > alpha) alpha = score
+
+    if (stopped) break
+    if (curBest) {
+      best = curBest
+      bestScore = curScore
+    }
+    if (Math.abs(bestScore) > MATE - 1000) break // 已找到杀
+    if (now() > deadline) break
   }
 
-  // 2) 仅对“粗分（上界）接近最优”的少量候选用完整窗口复算精确分，
-  //    构建随机池（含精确最优着），既有变化又不会误选劣着。
-  const cands = rough.filter((x) => x.m !== bestMove && x.s >= bestScore - 15).slice(0, 6)
-  const pool: Move[] = [bestMove]
-  for (const { m } of cands) {
-    game.makeMove(m)
-    const s = -negamax(game, depth - 1, -Infinity, Infinity, 1)
-    game.undoMove()
-    if (s >= bestScore - 15) pool.push(m)
-  }
-  return pool[Math.floor(Math.random() * pool.length)]
+  return best
 }
