@@ -1,10 +1,10 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Button, ConfirmDialog } from '@/components/ui'
 import { cn } from '@/lib/cn'
 import { InversionCanvas } from './components/InversionCanvas'
 import type { InversionHandle } from './components/InversionCanvas'
 import { Sidebar } from './components/Sidebar'
-import type { Tool } from './types'
+import type { SelectionInfo, Tool } from './types'
 
 export default function InversionPage() {
   const engine = useRef<InversionHandle>(null)
@@ -14,6 +14,7 @@ export default function InversionPage() {
   // Mirror of cx/cy/R for the sliders' readouts (two-way synced with canvas).
   const [circle, setCircle] = useState({ cx: 0, cy: 0, R: 2 })
   const [hasSelection, setHasSelection] = useState(false)
+  const [selInfo, setSelInfo] = useState<SelectionInfo | null>(null)
   const [confirmClear, setConfirmClear] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -30,6 +31,16 @@ export default function InversionPage() {
 
   const onToolChange = useCallback((t: Tool) => setTool(t), [])
 
+  // 移动端抽屉：Esc 关闭。
+  useEffect(() => {
+    if (!drawerOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setDrawerOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [drawerOpen])
+
   const sidebar = (
     <Sidebar
       tool={tool}
@@ -45,6 +56,7 @@ export default function InversionPage() {
       onDelete={() => engine.current?.deleteSelected()}
       onClear={() => setConfirmClear(true)}
       hasSelection={hasSelection}
+      selInfo={selInfo}
     />
   )
 
@@ -83,6 +95,7 @@ export default function InversionPage() {
               onToolChange={onToolChange}
               onCircleChange={onCircleChange}
               onSelectionChange={setHasSelection}
+              onSelectionInfo={setSelInfo}
             />
           </div>
         </div>
@@ -140,6 +153,8 @@ function labelForTool(t: Tool): string {
       return '画点'
     case 'segment':
       return '画线段'
+    case 'line':
+      return '画直线'
     case 'circle':
       return '画圆'
     case 'invCenter':

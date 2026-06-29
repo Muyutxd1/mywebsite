@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Button, Slider } from '@/components/ui'
 import { cn } from '@/lib/cn'
-import type { Tool } from '../types'
+import type { SelectionInfo, Tool } from '../types'
 
 interface ToolDef {
   id: Tool
@@ -14,6 +14,7 @@ const TOOLS: ToolDef[] = [
   { id: 'select', key: 'V', label: '选择 / 移动', hint: '拖动点、圆心、半径手柄' },
   { id: 'point', key: 'P', label: '画点', hint: '单击放置一个点' },
   { id: 'segment', key: 'S', label: '画线段', hint: '两次单击确定端点' },
+  { id: 'line', key: 'L', label: '画直线', hint: '两次单击确定方向（无穷直线）' },
   { id: 'circle', key: 'C', label: '画圆', hint: '先点圆心，再点半径' },
   { id: 'invCenter', key: 'I', label: '反演中心', hint: '点击设圆心，拖动定半径' },
 ]
@@ -29,6 +30,7 @@ interface Props {
   onDelete: () => void
   onClear: () => void
   hasSelection: boolean
+  selInfo: SelectionInfo | null
 }
 
 export function Sidebar({
@@ -42,12 +44,13 @@ export function Sidebar({
   onDelete,
   onClear,
   hasSelection,
+  selInfo,
 }: Props) {
   return (
     <div className="flex flex-col gap-5">
       {/* Tools */}
       <section>
-        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-faint">工具</p>
+        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-muted">工具</p>
         <div className="flex flex-col gap-1.5">
           {TOOLS.map((t) => {
             const active = tool === t.id
@@ -64,12 +67,7 @@ export function Sidebar({
                 title={t.hint}
               >
                 <span className="font-medium">{t.label}</span>
-                <kbd
-                  className={cn(
-                    'rounded px-1.5 py-0.5 font-mono text-[10px]',
-                    active ? 'bg-accent/20 text-accent' : 'bg-surface-3 text-faint',
-                  )}
-                >
+                <kbd className={cn('rounded px-1.5 py-0.5 font-mono text-[10px]', active ? 'bg-accent/20 text-accent' : 'bg-surface-3 text-faint')}>
                   {t.key}
                 </kbd>
               </button>
@@ -78,37 +76,40 @@ export function Sidebar({
         </div>
       </section>
 
+      {/* Selected object → analytic image readout */}
+      <section
+        className={cn(
+          'rounded-xl border p-3',
+          selInfo?.special ? 'border-gold/40 bg-gold/5' : 'border-border-soft bg-surface-2',
+        )}
+      >
+        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-muted">反演结果</p>
+        {selInfo ? (
+          <div className="flex flex-col gap-1.5">
+            <div className="flex items-center gap-2">
+              <span className="rounded bg-surface-3 px-1.5 py-0.5 text-[11px] text-fg-soft">{selInfo.objLabel}</span>
+              <span className={cn('text-sm font-medium', selInfo.special ? 'text-gold' : 'text-fg')}>{selInfo.title}</span>
+            </div>
+            {selInfo.lines.map((l, i) => (
+              <p key={i} className="font-mono text-xs text-muted">
+                {l}
+              </p>
+            ))}
+            {selInfo.special && <p className="text-[11px] text-gold/80">穿过反演中心的特例</p>}
+          </div>
+        ) : (
+          <p className="text-xs text-muted">选中一个图形，查看它反演像的解析参数。</p>
+        )}
+      </section>
+
       {/* Inversion circle controls */}
       <section className="rounded-xl border border-border-soft bg-surface-2 p-3">
-        <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.2em] text-faint">反演圆</p>
+        <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.2em] text-muted">反演圆</p>
         <div className="flex flex-col gap-3">
-          <Slider
-            label="圆心 cx"
-            valueLabel={cx.toFixed(1)}
-            min={-8}
-            max={8}
-            step={0.1}
-            value={cx}
-            onChange={(e) => onCircleInput({ cx: parseFloat(e.target.value), cy, R })}
-          />
-          <Slider
-            label="圆心 cy"
-            valueLabel={cy.toFixed(1)}
-            min={-8}
-            max={8}
-            step={0.1}
-            value={cy}
-            onChange={(e) => onCircleInput({ cx, cy: parseFloat(e.target.value), R })}
-          />
-          <Slider
-            label="半径 R"
-            valueLabel={R.toFixed(1)}
-            min={0.2}
-            max={8}
-            step={0.1}
-            value={R}
-            onChange={(e) => onCircleInput({ cx, cy, R: parseFloat(e.target.value) })}
-          />
+          {/* 量程随当前值自动扩展，避免画布拖出范围后滑块与读数不一致、再拖时跳变。 */}
+          <Slider label="圆心 cx" valueLabel={cx.toFixed(1)} min={-Math.max(8, Math.abs(cx))} max={Math.max(8, Math.abs(cx))} step={0.1} value={cx} onChange={(e) => onCircleInput({ cx: parseFloat(e.target.value), cy, R })} />
+          <Slider label="圆心 cy" valueLabel={cy.toFixed(1)} min={-Math.max(8, Math.abs(cy))} max={Math.max(8, Math.abs(cy))} step={0.1} value={cy} onChange={(e) => onCircleInput({ cx, cy: parseFloat(e.target.value), R })} />
+          <Slider label="半径 R" valueLabel={R.toFixed(1)} min={0.2} max={Math.max(8, R)} step={0.1} value={R} onChange={(e) => onCircleInput({ cx, cy, R: parseFloat(e.target.value) })} />
         </div>
       </section>
 
@@ -116,15 +117,11 @@ export function Sidebar({
       <section className="flex flex-col gap-1.5">
         <Button variant="secondary" size="sm" onClick={onFit}>
           适配视图
-          <kbd className="ml-auto rounded bg-surface-3 px-1.5 py-0.5 font-mono text-[10px] text-faint">
-            F
-          </kbd>
+          <kbd className="ml-auto rounded bg-surface-3 px-1.5 py-0.5 font-mono text-[10px] text-faint">F</kbd>
         </Button>
         <Button variant="secondary" size="sm" onClick={onDelete} disabled={!hasSelection}>
           删除所选
-          <kbd className="ml-auto rounded bg-surface-3 px-1.5 py-0.5 font-mono text-[10px] text-faint">
-            Del
-          </kbd>
+          <kbd className="ml-auto rounded bg-surface-3 px-1.5 py-0.5 font-mono text-[10px] text-faint">Del</kbd>
         </Button>
         <Button variant="danger" size="sm" onClick={onClear}>
           清空全部
@@ -133,28 +130,29 @@ export function Sidebar({
 
       {/* Legend */}
       <section className="rounded-xl border border-border-soft bg-surface-2 p-3">
-        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-faint">图例</p>
+        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-muted">图例</p>
         <ul className="flex flex-col gap-1.5 text-xs text-fg-soft">
           <LegendRow color="#5aa9ff" label="原图形" />
           <LegendRow color="#f0616d" label="反演像" />
+          <LegendRow color="#e7b455" label="像（穿心特例）" />
           <LegendRow color="#a78bff" label="反演圆（虚线）" dashed />
         </ul>
       </section>
 
       {/* Shortcuts */}
       <section>
-        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-faint">快捷键</p>
+        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-muted">快捷键</p>
         <ul className="flex flex-col gap-1 text-[11px] leading-relaxed text-muted">
           <li>
-            <Kbd>V/P/S/C/I</Kbd> 切换工具
+            <Kbd>V/P/S/L/C/I</Kbd> 切换工具
           </li>
           <li>
             <Kbd>F</Kbd> 适配视图 · <Kbd>Esc</Kbd> 取消
           </li>
           <li>
-            <Kbd>Del</Kbd> / <Kbd>⌫</Kbd> 删除所选
+            <Kbd>Del</Kbd> 删除所选 · 滚轮缩放
           </li>
-          <li>滚轮缩放 · 右键 / 空白拖动平移 · 双指捏合缩放</li>
+          <li>右键 / 空白拖动平移 · 双指捏合缩放</li>
         </ul>
       </section>
     </div>
@@ -164,21 +162,12 @@ export function Sidebar({
 function LegendRow({ color, label, dashed }: { color: string; label: string; dashed?: boolean }) {
   return (
     <li className="flex items-center gap-2">
-      <span
-        className="inline-block h-0 w-6 shrink-0"
-        style={{
-          borderTop: `2.5px ${dashed ? 'dashed' : 'solid'} ${color}`,
-        }}
-      />
+      <span className="inline-block h-0 w-6 shrink-0" style={{ borderTop: `2.5px ${dashed ? 'dashed' : 'solid'} ${color}` }} />
       <span>{label}</span>
     </li>
   )
 }
 
 function Kbd({ children }: { children: ReactNode }) {
-  return (
-    <kbd className="rounded bg-surface-3 px-1 py-0.5 font-mono text-[10px] text-fg-soft">
-      {children}
-    </kbd>
-  )
+  return <kbd className="rounded bg-surface-3 px-1 py-0.5 font-mono text-[10px] text-fg-soft">{children}</kbd>
 }

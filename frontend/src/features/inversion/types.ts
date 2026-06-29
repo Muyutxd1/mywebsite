@@ -1,14 +1,13 @@
 import type { Pt } from './lib/inversionMath'
 
-/** Active tool. Default active = invCenter (matches legacy). */
-export type Tool = 'select' | 'point' | 'segment' | 'circle' | 'invCenter'
+/** 当前工具。默认 invCenter（先放反演圆）。 */
+export type Tool = 'select' | 'point' | 'segment' | 'line' | 'circle' | 'invCenter'
 
 export interface PointObj {
   type: 'point'
   id: number
   x: number
   y: number
-  label: string
 }
 
 export interface SegmentObj {
@@ -16,8 +15,14 @@ export interface SegmentObj {
   id: number
   p1: Pt
   p2: Pt
-  label1: string
-  label2: string
+}
+
+/** 由两点确定的无穷直线。 */
+export interface LineObj {
+  type: 'line'
+  id: number
+  p1: Pt
+  p2: Pt
 }
 
 export interface CircleObj {
@@ -27,22 +32,30 @@ export interface CircleObj {
   radius: number
 }
 
-export type SceneObject = PointObj | SegmentObj | CircleObj
+export type SceneObject = PointObj | SegmentObj | LineObj | CircleObj
 
-/** Current selection target. */
+/** 选中目标。 */
 export type Selection =
   | { type: 'object'; objId: number; sub?: 'p1' | 'p2' | 'center' }
   | { type: 'invCenter' }
   | { type: 'invRadius' }
   | null
 
-/** In-progress two-click construction. */
-export type Constructing = { p1: Pt } | { center: Pt } | null
+/** 两步构造中。 */
+export type Constructing = { p1: Pt; tool: 'segment' | 'line' } | { center: Pt } | null
 
-/** Active drag gesture. */
+/** 拖拽手势。 */
 export type Drag =
   | { type: 'pan'; sx: number; sy: number; scx: number; scy: number }
   | { type: 'resizeRadius' }
   | { type: 'moveInvCenter' }
   | { type: 'moveVertex'; objId: number; sub?: 'p1' | 'p2' | 'center' }
   | null
+
+/** 选中对象的像信息（传给侧栏读出）。 */
+export interface SelectionInfo {
+  objLabel: string
+  title: string
+  lines: string[]
+  special: boolean
+}
