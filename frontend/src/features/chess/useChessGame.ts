@@ -1,313 +1,487 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ChessGame, computeSAN } from './engine'
-import type { AiRequest, AiResponse, Color, Coord, GameMode, GameState, Move } from './types'
+import { Chess } from 'chess.js'
+import { StockfishEngine } from './stockfish'
+import { LEVELS } from './types'
+import type {
+  BoardPiece,
+  Color,
+  GameMode,
+  GameOutcome,
+  LegalTarget,
+  Level,
+  MoveRecord,
+  PromotionPiece,
+  Square,
+} from './types'
 
-/** Difficulty → search depth. */
-export const DIFFICULTY_DEPTH: Record<string, number> = { '1': 1, '2': 2, '3': 3 }
-
-interface PromotionPending {
-  move: Move
+export interface Snapshot {
+  fen: string
+  board: (BoardPiece | null)[][]
+  turn: Color
+  history: MoveRecord[]
+  inCheck: boolean
+  isGameOver: boolean
+  outcome: GameOutcome
+  /** 被将军一方的王所在格（无将军时为 null）。 */
+  checkSquare: Square | null
+  lastMove: { from: Square; to: Square } | null
 }
 
-export interface ChessGameApi {
-  // Board / state
-  board: (ReturnType<ChessGame['getPiece']>)[][]
-  turn: Color
-  state: GameState
-  inCheck: boolean
-  moveList: Move[]
-  fullMoveNumber: number
+export interface ChessGameApi extends Snapshot {
+  // 交互状态
+  selected: Square | null
+  legalTargets: LegalTarget[]
+  hint: { from: Square; to: Square } | null
+  pendingPromotion: { from: Square; to: Square } | null
 
-  // Interaction
-  selected: Coord | null
-  legalTargets: Move[]
-  hint: { from: Coord; to: Coord } | null
-  lastMove: { from: Coord; to: Coord } | null
-
-  // Mode / AI
+  // 设置 / AI
   mode: GameMode
-  difficulty: string
+  humanColor: Color
+  aiColor: Color
+  level: Level
+  levelId: string
+  orientation: Color
   aiThinking: boolean
-  canUndo: boolean
+  engineFailed: boolean
+  /** 当前人类是否可以操作棋盘。 */
+  interactive: boolean
 
-  // Promotion modal
-  promotion: PromotionPending | null
-
-  onSquareClick: (r: number, c: number) => void
-  resolvePromotion: (pieceType: 'Q' | 'R' | 'B' | 'N') => void
+  // 操作
+  onSquareClick: (sq: Square) => void
+  onDrop: (from: Square, to: Square) => void
+  resolvePromotion: (piece: PromotionPiece) => void
   cancelPromotion: () => void
   newGame: () => void
   undo: () => void
-  toggleMode: () => void
-  setDifficulty: (value: string) => void
-  showHint: () => void
+  requestHint: () => void
+  flipBoard: () => void
+  setMode: (m: GameMode) => void
+  setHumanColor: (c: Color) => void
+  setLevel: (id: string) => void
+  loadFen: (fen: string) => string | null
+  loadPgn: (pgn: string) => string | null
+  getFen: () => string
+  getPgn: () => string
+}
+
+function findKing(board: (BoardPiece | null)[][], color: Color): Square | null {
+  for (const row of board) {
+    for (const sq of row) {
+      if (sq && sq.type === 'k' && sq.color === color) return sq.square
+    }
+  }
+  return null
+}
+
+function readOutcome(chess: Chess): GameOutcome {
+  if (chess.isCheckmate()) return 'checkmate'
+  if (chess.isStalemate()) return 'stalemate'
+  if (chess.isInsufficientMaterial()) return 'draw-insufficient'
+  if (chess.isThreefoldRepetition()) return 'draw-repetition'
+  if (chess.isDraw()) return 'draw-fifty' // 其余和棋只剩五十回合规则
+  return 'playing'
+}
+
+function readSnapshot(chess: Chess): Snapshot {
+  const board = chess.board()
+  const verbose = chess.history({ verbose: true })
+  const history: MoveRecord[] = verbose.map((m) => ({
+    san: m.san,
+    from: m.from,
+    to: m.to,
+    color: m.color,
+    piece: m.piece,
+    captured: m.captured,
+    promotion: m.promotion,
+  }))
+  const last = history.length ? history[history.length - 1] : null
+  const inCheck = chess.isCheck()
+  return {
+    fen: chess.fen(),
+    board,
+    turn: chess.turn(),
+    history,
+    inCheck,
+    isGameOver: chess.isGameOver(),
+    outcome: readOutcome(chess),
+    checkSquare: inCheck ? findKing(board, chess.turn()) : null,
+    lastMove: last ? { from: last.from, to: last.to } : null,
+  }
 }
 
 export function useChessGame(): ChessGameApi {
-  const gameRef = useRef<ChessGame>(new ChessGame())
-  // A monotonically increasing tick to force re-render after mutating gameRef.
-  const [, force] = useState(0)
-  const rerender = useCallback(() => force((n) => n + 1), [])
+  const chessRef = useRef<Chess>(new Chess())
+  const [snap, setSnap] = useState<Snapshot>(() => readSnapshot(chessRef.current))
 
-  const [mode, setMode] = useState<GameMode>('pvp')
-  const [difficulty, setDifficultyState] = useState('2')
-  const [selected, setSelected] = useState<Coord | null>(null)
-  const [legalTargets, setLegalTargets] = useState<Move[]>([])
-  const [hint, setHint] = useState<{ from: Coord; to: Coord } | null>(null)
-  const [lastMove, setLastMove] = useState<{ from: Coord; to: Coord } | null>(null)
+  const [mode, setModeState] = useState<GameMode>('pvp')
+  const [humanColor, setHumanColorState] = useState<Color>('w')
+  const [levelId, setLevelId] = useState<string>('medium')
+  const [orientation, setOrientation] = useState<Color>('w')
+
+  const [selected, setSelected] = useState<Square | null>(null)
+  const [pendingPromotion, setPendingPromotion] = useState<{ from: Square; to: Square } | null>(null)
+  const [hint, setHint] = useState<{ from: Square; to: Square } | null>(null)
   const [aiThinking, setAiThinking] = useState(false)
-  const [promotion, setPromotion] = useState<PromotionPending | null>(null)
+  const [engineFailed, setEngineFailed] = useState(false)
 
-  // ---- Worker setup ----
-  const workerRef = useRef<Worker | null>(null)
-  const reqIdRef = useRef(0)
-  // Callbacks keyed by request id.
-  const pendingRef = useRef<Map<number, (move: Move | null) => void>>(new Map())
+  const level = LEVELS.find((l) => l.id === levelId) ?? LEVELS[2]
+  const aiColor: Color = humanColor === 'w' ? 'b' : 'w'
 
-  useEffect(() => {
-    const worker = new Worker(new URL('./aiWorker.ts', import.meta.url), { type: 'module' })
-    worker.onmessage = (e: MessageEvent<AiResponse>) => {
-      const cb = pendingRef.current.get(e.data.id)
-      if (cb) {
-        pendingRef.current.delete(e.data.id)
-        cb(e.data.move)
-      }
-    }
-    workerRef.current = worker
-    return () => {
-      worker.terminate()
-      workerRef.current = null
-      pendingRef.current.clear()
-    }
+  // 失效令牌：开新局 / 悔棋 / 载入局面时自增，作废在途的 AI / 提示搜索结果。
+  const genRef = useRef(0)
+  // 防止 AI 搜索重入。
+  const aiBusyRef = useRef(false)
+
+  const engineRef = useRef<StockfishEngine | null>(null)
+
+  const sync = useCallback(() => {
+    setSnap(readSnapshot(chessRef.current))
   }, [])
 
-  const requestAi = useCallback((kind: 'move' | 'hint', depth: number): Promise<Move | null> => {
-    return new Promise((resolve) => {
-      const worker = workerRef.current
-      if (!worker) {
-        resolve(null)
+  const legalTargets = useMemo<LegalTarget[]>(() => {
+    if (!selected) return []
+    const moves = chessRef.current.moves({ square: selected, verbose: true })
+    const seen = new Set<string>()
+    const out: LegalTarget[] = []
+    for (const m of moves) {
+      if (seen.has(m.to)) continue
+      seen.add(m.to)
+      out.push({ square: m.to, capture: m.captured != null })
+    }
+    return out
+    // snap.fen 变化即局面变化，需重算。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, snap.fen])
+
+  const doMove = useCallback(
+    (from: Square, to: Square, promotion?: PromotionPiece) => {
+      try {
+        chessRef.current.move({ from, to, promotion })
+      } catch {
         return
       }
-      const id = ++reqIdRef.current
-      pendingRef.current.set(id, resolve)
-      const game = gameRef.current
-      const req: AiRequest = {
-        id,
-        kind,
-        depth,
-        snapshot: { fen: game.toFEN(), positionCount: { ...game.positionCount } },
-      }
-      worker.postMessage(req)
-    })
-  }, [])
-
-  const aiDepth = DIFFICULTY_DEPTH[difficulty] ?? 2
-
-  // Run the AI for the current side (black in PvAI) and apply the move.
-  const runAiMove = useCallback(async () => {
-    setAiThinking(true)
-    setSelected(null)
-    setLegalTargets([])
-    setHint(null)
-    rerender()
-    // Small delay so the "thinking" indicator paints before the search posts.
-    await new Promise((r) => setTimeout(r, 150))
-    const move = await requestAi('move', aiDepth)
-    const game = gameRef.current
-    if (move) {
-      move.san = computeSAN(game, move)
-      setLastMove({ from: [...move.from] as Coord, to: [...move.to] as Coord })
-      game.makeMove(move)
-    }
-    setAiThinking(false)
-    rerender()
-  }, [aiDepth, requestAi, rerender])
-
-  const executeMove = useCallback(
-    (move: Move) => {
-      const game = gameRef.current
-      move.san = computeSAN(game, move)
-      setLastMove({ from: [...move.from] as Coord, to: [...move.to] as Coord })
-      game.makeMove(move)
       setSelected(null)
-      setLegalTargets([])
       setHint(null)
-      rerender()
-
-      if (game.getGameState() !== 'playing') return
-      if (mode === 'pvai' && game.turn === 'b') {
-        void runAiMove()
-      }
+      setPendingPromotion(null)
+      sync()
     },
-    [mode, rerender, runAiMove],
+    [sync],
   )
 
-  const selectPiece = useCallback(
-    (r: number, c: number) => {
-      const game = gameRef.current
-      setSelected([r, c])
-      setLegalTargets(game.generateLegalMoves(game.turn).filter((m) => m.from[0] === r && m.from[1] === c))
+  const applyUci = useCallback(
+    (uci: string) => {
+      const from = uci.slice(0, 2) as Square
+      const to = uci.slice(2, 4) as Square
+      const promotion = (uci.length > 4 ? uci[4] : undefined) as PromotionPiece | undefined
+      try {
+        chessRef.current.move({ from, to, promotion })
+      } catch {
+        return
+      }
+      setSelected(null)
       setHint(null)
-      rerender()
+      sync()
     },
-    [rerender],
+    [sync],
+  )
+
+  const tryMove = useCallback(
+    (from: Square, to: Square): boolean => {
+      const chess = chessRef.current
+      if (mode === 'pvai' && !engineFailed && chess.turn() !== humanColor) return false
+      const candidates = chess.moves({ square: from, verbose: true }).filter((m) => m.to === to)
+      if (candidates.length === 0) return false
+      if (candidates.some((m) => m.promotion)) {
+        setPendingPromotion({ from, to })
+        return true
+      }
+      doMove(from, to)
+      return true
+    },
+    [mode, humanColor, engineFailed, doMove],
   )
 
   const onSquareClick = useCallback(
-    (r: number, c: number) => {
-      if (aiThinking || promotion) return
-      const game = gameRef.current
-      if (game.getGameState() !== 'playing') return
-      if (mode === 'pvai' && game.turn === 'b') return
+    (sq: Square) => {
+      if (pendingPromotion || aiThinking) return
+      const chess = chessRef.current
+      if (chess.isGameOver()) return
+      if (mode === 'pvai' && !engineFailed && chess.turn() !== humanColor) return
 
-      const clickedPiece = game.board[r][c]
-
+      const piece = chess.get(sq)
       if (selected) {
-        const move = legalTargets.find((m) => m.to[0] === r && m.to[1] === c)
-        if (move) {
-          if (move.promotion) {
-            setPromotion({ move })
-            return
-          }
-          executeMove(move)
+        if (sq === selected) {
+          setSelected(null)
           return
         }
-        if (clickedPiece && game._pieceColor(clickedPiece) === game.turn) {
-          selectPiece(r, c)
-          return
+        if (tryMove(selected, sq)) return
+        // 非合法目标：点到己方子则改选，否则取消。
+        if (piece && piece.color === chess.turn()) {
+          setSelected(sq)
+          setHint(null)
+        } else {
+          setSelected(null)
         }
-        setSelected(null)
-        setLegalTargets([])
-        rerender()
         return
       }
-
-      if (clickedPiece && game._pieceColor(clickedPiece) === game.turn) {
-        selectPiece(r, c)
+      if (piece && piece.color === chess.turn()) {
+        setSelected(sq)
+        setHint(null)
       }
     },
-    [aiThinking, promotion, mode, selected, legalTargets, executeMove, selectPiece, rerender],
+    [selected, pendingPromotion, aiThinking, mode, humanColor, engineFailed, tryMove],
+  )
+
+  const onDrop = useCallback(
+    (from: Square, to: Square) => {
+      if (pendingPromotion || aiThinking) return
+      const chess = chessRef.current
+      if (chess.isGameOver()) return
+      if (mode === 'pvai' && !engineFailed && chess.turn() !== humanColor) return
+      if (from !== to) tryMove(from, to)
+      setSelected(null)
+    },
+    [pendingPromotion, aiThinking, mode, humanColor, engineFailed, tryMove],
   )
 
   const resolvePromotion = useCallback(
-    (pieceType: 'Q' | 'R' | 'B' | 'N') => {
-      if (!promotion) return
-      const game = gameRef.current
-      const color = game.turn
-      const promo = (color === 'w' ? pieceType : pieceType.toLowerCase()) as Move['promotion']
-      const move: Move = { ...promotion.move, promotion: promo }
-      setPromotion(null)
-      executeMove(move)
+    (piece: PromotionPiece) => {
+      if (!pendingPromotion) return
+      doMove(pendingPromotion.from, pendingPromotion.to, piece)
     },
-    [promotion, executeMove],
+    [pendingPromotion, doMove],
   )
 
   const cancelPromotion = useCallback(() => {
-    setPromotion(null)
+    setPendingPromotion(null)
     setSelected(null)
-    setLegalTargets([])
-    rerender()
-  }, [rerender])
+  }, [])
+
+  const resetTransient = useCallback(() => {
+    setSelected(null)
+    setHint(null)
+    setPendingPromotion(null)
+    setAiThinking(false)
+    aiBusyRef.current = false
+  }, [])
 
   const newGame = useCallback(() => {
-    gameRef.current = new ChessGame()
-    setSelected(null)
-    setLegalTargets([])
-    setHint(null)
-    setLastMove(null)
-    setAiThinking(false)
-    setPromotion(null)
-    rerender()
-  }, [rerender])
+    genRef.current++
+    engineRef.current?.stop()
+    engineRef.current?.newGame()
+    chessRef.current = new Chess()
+    resetTransient()
+    setOrientation(humanColor)
+    sync()
+  }, [sync, humanColor, resetTransient])
 
   const undo = useCallback(() => {
     if (aiThinking) return
-    const game = gameRef.current
-    if (mode === 'pvai') {
-      game.undoMove()
-      if (game.moveHistory.length > 0) game.undoMove()
-    } else {
-      game.undoMove()
+    const chess = chessRef.current
+    if (chess.history().length === 0) return
+    genRef.current++
+    engineRef.current?.stop()
+    chess.undo()
+    // 人机模式下退回到人类该走的局面（再撤一步对方的棋）；引擎失效降级为双方手动时按单步撤。
+    if (mode === 'pvai' && !engineFailed && chess.turn() !== humanColor && chess.history().length > 0) {
+      chess.undo()
     }
-    setSelected(null)
-    setLegalTargets([])
-    setHint(null)
-    setPromotion(null)
-    if (game.moveList.length > 0) {
-      const last = game.moveList[game.moveList.length - 1]
-      setLastMove({ from: [...last.from] as Coord, to: [...last.to] as Coord })
-    } else {
-      setLastMove(null)
-    }
-    rerender()
-  }, [aiThinking, mode, rerender])
+    resetTransient()
+    sync()
+  }, [aiThinking, mode, humanColor, engineFailed, resetTransient, sync])
 
-  const toggleMode = useCallback(() => {
-    setMode((prev) => {
-      const next = prev === 'pvp' ? 'pvai' : 'pvp'
-      // Switching into AI mode while it's black's turn → let AI move.
-      if (next === 'pvai' && gameRef.current.turn === 'b' && gameRef.current.getGameState() === 'playing') {
-        void runAiMove()
-      }
-      return next
-    })
-  }, [runAiMove])
-
-  const setDifficulty = useCallback((value: string) => setDifficultyState(value), [])
-
-  const showHint = useCallback(async () => {
-    if (aiThinking) return
-    const game = gameRef.current
-    if (game.getGameState() !== 'playing') return
+  const requestHint = useCallback(async () => {
+    if (aiThinking || pendingPromotion) return
+    const chess = chessRef.current
+    if (chess.isGameOver()) return
+    if (mode === 'pvai' && chess.turn() !== humanColor) return
+    const engine = engineRef.current
+    if (!engine) return
+    const fen = chess.fen()
+    const gen = genRef.current
     setAiThinking(true)
-    rerender()
-    const move = await requestAi('hint', Math.min(aiDepth, 2))
+    const uci = await engine.analyse(fen, { skill: 20, movetime: 500 })
     setAiThinking(false)
-    if (move) {
-      setHint({ from: [...move.from] as Coord, to: [...move.to] as Coord })
-      setSelected([...move.from] as Coord)
-      setLegalTargets(
-        game.generateLegalMoves(game.turn).filter((m) => m.from[0] === move.from[0] && m.from[1] === move.from[1]),
-      )
+    if (gen !== genRef.current || chessRef.current.fen() !== fen) return
+    if (uci) {
+      const from = uci.slice(0, 2) as Square
+      const to = uci.slice(2, 4) as Square
+      setHint({ from, to })
+      setSelected(from)
     }
-    rerender()
-  }, [aiThinking, aiDepth, requestAi, rerender])
+  }, [aiThinking, pendingPromotion, mode, humanColor])
 
-  const game = gameRef.current
-  const state = game.getGameState()
-  const inCheck = game.isInCheck(game.turn)
+  const flipBoard = useCallback(() => setOrientation((o) => (o === 'w' ? 'b' : 'w')), [])
+
+  const setMode = useCallback(
+    (m: GameMode) => {
+      genRef.current++
+      engineRef.current?.stop()
+      resetTransient()
+      setModeState(m)
+    },
+    [resetTransient],
+  )
+
+  const setHumanColor = useCallback(
+    (c: Color) => {
+      genRef.current++
+      engineRef.current?.stop()
+      resetTransient()
+      setHumanColorState(c)
+      setOrientation(c)
+    },
+    [resetTransient],
+  )
+
+  const setLevel = useCallback((id: string) => setLevelId(id), [])
+
+  const loadGame = useCallback(
+    (build: (chess: Chess) => void): string | null => {
+      const next = new Chess()
+      try {
+        build(next)
+      } catch {
+        return 'parse-error'
+      }
+      genRef.current++
+      engineRef.current?.stop()
+      engineRef.current?.newGame()
+      chessRef.current = next
+      resetTransient()
+      sync()
+      return null
+    },
+    [resetTransient, sync],
+  )
+
+  const loadFen = useCallback(
+    (fen: string): string | null => {
+      const trimmed = fen.trim()
+      if (!trimmed) return '请输入 FEN'
+      return loadGame((c) => c.load(trimmed)) === null ? null : 'FEN 格式不合法'
+    },
+    [loadGame],
+  )
+
+  const loadPgn = useCallback(
+    (pgn: string): string | null => {
+      const trimmed = pgn.trim()
+      if (!trimmed) return '请输入 PGN'
+      return loadGame((c) => c.loadPgn(trimmed)) === null ? null : 'PGN 解析失败'
+    },
+    [loadGame],
+  )
+
+  const getFen = useCallback(() => chessRef.current.fen(), [])
+  const getPgn = useCallback(() => chessRef.current.pgn(), [])
+
+  // 引擎生命周期。alive 守卫避免 StrictMode 下被销毁的引擎实例污染当前状态。
+  useEffect(() => {
+    const engine = new StockfishEngine()
+    engineRef.current = engine
+    let alive = true
+    engine.onError = () => {
+      if (alive) setEngineFailed(true)
+    }
+    engine.ready().then(
+      () => {
+        if (alive) setEngineFailed(false)
+      },
+      () => {
+        if (alive) setEngineFailed(true)
+      },
+    )
+    return () => {
+      alive = false
+      engine.dispose()
+      engineRef.current = null
+    }
+  }, [])
+
+  // 引擎判定失败时，务必解除“思考中”锁（失败可能发生在 await 期间，
+  // 而 AI 效果的 cancelled 分支会跳过 setAiThinking(false)），否则棋盘会卡死。
+  useEffect(() => {
+    if (engineFailed) {
+      setAiThinking(false)
+      aiBusyRef.current = false
+    }
+  }, [engineFailed])
+
+  // AI 走子：当轮到 AI 且对局进行中时，向引擎请求最佳走法并落子。
+  // 引擎不可用（engineFailed）时不接管：交由 interactive 放行人类操作（可一人对弈双方）。
+  useEffect(() => {
+    if (mode !== 'pvai' || engineFailed || snap.isGameOver || snap.turn !== aiColor) return
+    const engine = engineRef.current
+    if (!engine || aiBusyRef.current) return
+
+    aiBusyRef.current = true
+    setAiThinking(true)
+    const gen = genRef.current
+    let cancelled = false
+    void (async () => {
+      const uci = await engine.analyse(snap.fen, { skill: level.skill, movetime: level.movetime })
+      aiBusyRef.current = false
+      if (cancelled || gen !== genRef.current) return
+      if (uci) {
+        applyUci(uci)
+      } else {
+        // 进行中的局面却拿不到走法 ⇒ 引擎异常，降级为可手动续弈。
+        setEngineFailed(true)
+      }
+      setAiThinking(false)
+    })()
+
+    return () => {
+      cancelled = true
+      aiBusyRef.current = false
+      engine.stop()
+    }
+  }, [mode, engineFailed, aiColor, snap.turn, snap.fen, snap.isGameOver, level, applyUci])
+
+  const interactive =
+    !aiThinking &&
+    !snap.isGameOver &&
+    !pendingPromotion &&
+    (mode === 'pvp' || engineFailed || snap.turn === humanColor)
 
   return useMemo<ChessGameApi>(
     () => ({
-      board: game.board,
-      turn: game.turn,
-      state,
-      inCheck,
-      moveList: game.moveList,
-      fullMoveNumber: game.fullMoveNumber,
+      ...snap,
       selected,
       legalTargets,
       hint,
-      lastMove,
+      pendingPromotion,
       mode,
-      difficulty,
+      humanColor,
+      aiColor,
+      level,
+      levelId,
+      orientation,
       aiThinking,
-      canUndo: game.moveHistory.length > 0,
-      promotion,
+      engineFailed,
+      interactive,
       onSquareClick,
+      onDrop,
       resolvePromotion,
       cancelPromotion,
       newGame,
       undo,
-      toggleMode,
-      setDifficulty,
-      showHint,
+      requestHint,
+      flipBoard,
+      setMode,
+      setHumanColor,
+      setLevel,
+      loadFen,
+      loadPgn,
+      getFen,
+      getPgn,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
-      game.board, game.turn, state, inCheck, game.moveList, game.fullMoveNumber,
-      selected, legalTargets, hint, lastMove, mode, difficulty, aiThinking, promotion,
-      onSquareClick, resolvePromotion, cancelPromotion, newGame, undo, toggleMode, setDifficulty, showHint,
+      snap, selected, legalTargets, hint, pendingPromotion, mode, humanColor, aiColor, level, levelId,
+      orientation, aiThinking, engineFailed, interactive, onSquareClick, onDrop, resolvePromotion,
+      cancelPromotion, newGame, undo, requestHint, flipBoard, setMode, setHumanColor, setLevel,
+      loadFen, loadPgn, getFen, getPgn,
     ],
   )
 }

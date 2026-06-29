@@ -6,12 +6,18 @@ serves the pre-built Vite SPA from ./static_spa with a catch-all so React Router
 deep links resolve client-side. In development the Vite dev server (port 5173)
 serves the frontend and proxies /api/* to this app on port 5000.
 """
+import mimetypes
 import os
 
 from flask import Flask, abort, send_from_directory
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SPA_DIR = os.path.join(BASE_DIR, "static_spa")
+
+# Ensure WebAssembly streams correctly (the Stockfish chess engine ships a .wasm).
+# Some Windows registries map .wasm to the wrong type, which disables
+# WebAssembly.instantiateStreaming; pin the spec'd MIME so it stays on the fast path.
+mimetypes.add_type("application/wasm", ".wasm")
 
 
 def create_app():

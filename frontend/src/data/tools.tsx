@@ -269,7 +269,7 @@ export const tools: Tool[] = [
     slug: 'chess',
     path: '/chess',
     titleZh: '国际象棋',
-    description: '在线对弈 · 完整规则 · 简约界面',
+    description: '拖拽走子 · Stockfish 引擎 · FEN/PGN',
     cta: '开始对局',
     Icon: icons.chess,
     tone: 'neutral',

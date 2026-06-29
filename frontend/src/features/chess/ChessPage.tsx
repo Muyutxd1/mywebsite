@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react'
 import { Card } from '@/components/ui'
-import { ChessBoard } from './ChessBoard'
-import { GameControls } from './GameControls'
+import { Board } from './Board'
 import { StatusBar } from './StatusBar'
+import { Controls } from './Controls'
+import { Captured } from './Captured'
 import { MoveList } from './MoveList'
-import { PromotionModal } from './PromotionModal'
-import { GameEndOverlay } from './GameEndOverlay'
+import { TransferPanel } from './TransferPanel'
+import { GameOverDialog } from './GameOverDialog'
 import { useChessGame } from './useChessGame'
 
 export default function ChessPage() {
   const api = useChessGame()
-  const { state, mode, turn, moveList, promotion } = api
+  const [dismissed, setDismissed] = useState(false)
 
-  // Allow the user to dismiss the end overlay without ending the game state.
-  const [endDismissed, setEndDismissed] = useState(false)
+  // 新对局 / 局面变回进行中时，重新允许弹出结束对话框。
   useEffect(() => {
-    if (state === 'playing') setEndDismissed(false)
-  }, [state])
+    if (!api.isGameOver) setDismissed(false)
+  }, [api.isGameOver])
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
@@ -26,45 +26,49 @@ export default function ChessPage() {
           <span className="text-cosmic">♚ 国际象棋 ♔</span>
         </h1>
         <p className="mt-2 text-muted">
-          点击棋子查看合法走法，与好友对弈或挑战内置 AI（人机模式你执白先行）。
+          拖拽或点击走子，与好友对弈或挑战 Stockfish 引擎。支持悔棋、提示、走法记录与 FEN/PGN 导入导出。
         </p>
       </header>
 
-      <div className="flex flex-col items-start gap-6 lg:flex-row lg:justify-center">
-        {/* Board */}
-        <Card className="w-full max-w-fit self-center p-4 sm:p-5 lg:self-start">
-          <ChessBoard api={api} />
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-center">
+        <Card className="flex justify-center self-center p-3 sm:p-4 lg:self-start">
+          <Board
+            board={api.board}
+            orientation={api.orientation}
+            sideToMove={api.turn}
+            interactive={api.interactive}
+            selected={api.selected}
+            legalTargets={api.legalTargets}
+            lastMove={api.lastMove}
+            checkSquare={api.checkSquare}
+            hint={api.hint}
+            pendingPromotion={api.pendingPromotion}
+            onSquareClick={api.onSquareClick}
+            onDrop={api.onDrop}
+            onPromote={api.resolvePromotion}
+            onCancelPromotion={api.cancelPromotion}
+          />
         </Card>
 
-        {/* Sidebar */}
-        <aside className="flex w-full flex-col gap-3.5 lg:w-64">
+        <aside className="flex w-full flex-col gap-3 lg:w-72">
           <StatusBar api={api} />
-          <GameControls api={api} />
-          <MoveList moves={moveList} turn={turn} />
+          <Controls api={api} />
+          <Captured history={api.history} />
+          <MoveList history={api.history} />
+          <TransferPanel api={api} />
         </aside>
       </div>
 
-      <PromotionModal
-        open={!!promotion}
-        color={turn}
-        onSelect={api.resolvePromotion}
-        onCancel={api.cancelPromotion}
-      />
-
-      <GameEndOverlay
-        state={endDismissed ? 'playing' : state}
-        turn={turn}
+      <GameOverDialog
+        open={api.isGameOver && !dismissed}
+        outcome={api.outcome}
+        turn={api.turn}
         onNewGame={() => {
-          setEndDismissed(false)
+          setDismissed(false)
           api.newGame()
         }}
-        onClose={() => setEndDismissed(true)}
+        onClose={() => setDismissed(true)}
       />
-
-      {/* mode hint footnote */}
-      <p className="mt-6 text-center text-xs text-faint">
-        {mode === 'pvp' ? '当前：双人对战模式' : '当前：人机对战模式'}
-      </p>
     </div>
   )
 }
