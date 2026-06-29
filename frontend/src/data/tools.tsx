@@ -151,6 +151,17 @@ export const icons = {
         <line x1="7" y1="12" x2="17" y2="12" />
       </>,
     ),
+  xiangqi: (p: { className?: string }) =>
+    S(
+      p,
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="2.5" />
+        <line x1="3" y1="11" x2="21" y2="11" />
+        <line x1="3" y1="13" x2="21" y2="13" />
+        <circle cx="8" cy="7.5" r="2" />
+        <circle cx="16" cy="16.5" r="2" />
+      </>,
+    ),
 }
 
 export const tools: Tool[] = [
@@ -273,6 +284,15 @@ export const tools: Tool[] = [
     cta: '开始对局',
     Icon: icons.chess,
     tone: 'neutral',
+  },
+  {
+    slug: 'xiangqi',
+    path: '/xiangqi',
+    titleZh: '中国象棋',
+    description: '楚河汉界 · 人机对弈 · 中文记谱',
+    cta: '开始对局',
+    Icon: icons.xiangqi,
+    tone: 'gold',
   },
 ]
 

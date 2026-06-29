@@ -3,35 +3,34 @@ import { Card } from '@/components/ui'
 import { Board } from './Board'
 import { StatusBar } from './StatusBar'
 import { Controls } from './Controls'
-import { Captured } from './Captured'
 import { MoveList } from './MoveList'
 import { TransferPanel } from './TransferPanel'
 import { GameOverDialog } from './GameOverDialog'
-import { useChessGame } from './useChessGame'
+import { useXiangqiGame } from './useXiangqiGame'
 
-export default function ChessPage() {
-  const api = useChessGame()
+export default function XiangqiPage() {
+  const api = useXiangqiGame()
   const [dismissed, setDismissed] = useState(false)
+  const over = api.outcome !== 'playing'
 
-  // 新对局 / 局面变回进行中时，重新允许弹出结束对话框。
   useEffect(() => {
-    if (!api.isGameOver) setDismissed(false)
-  }, [api.isGameOver])
+    if (!over) setDismissed(false)
+  }, [over])
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
       <header className="mb-8">
         <p className="mb-2 text-xs font-medium uppercase tracking-[0.25em] text-accent/80">Game · 棋局</p>
         <h1 className="text-2xl font-bold sm:text-3xl">
-          <span className="text-cosmic">♚ 国际象棋 ♔</span>
+          <span className="text-cosmic">楚河 · 汉界</span>
         </h1>
         <p className="mt-2 text-muted">
-          拖拽或点击走子，与好友对弈或挑战 Stockfish 引擎。支持悔棋、提示、走法记录与 FEN/PGN 导入导出。
+          中国象棋 · 拖拽或点击走子，与好友对弈或挑战内置 AI。支持悔棋、提示、中文记谱与 FEN 导入导出。
         </p>
       </header>
 
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-center">
-        <Card className="flex w-full justify-center self-center p-3 sm:p-4 lg:w-[592px] lg:self-start">
+        <Card className="flex w-full justify-center self-center p-3 sm:p-4 lg:w-[512px] lg:self-start">
           <Board
             board={api.board}
             orientation={api.orientation}
@@ -40,27 +39,23 @@ export default function ChessPage() {
             selected={api.selected}
             legalTargets={api.legalTargets}
             lastMove={api.lastMove}
-            checkSquare={api.checkSquare}
+            checkGeneral={api.checkGeneral}
             hint={api.hint}
-            pendingPromotion={api.pendingPromotion}
-            onSquareClick={api.onSquareClick}
+            onPointClick={api.onPointClick}
             onDrop={api.onDrop}
-            onPromote={api.resolvePromotion}
-            onCancelPromotion={api.cancelPromotion}
           />
         </Card>
 
         <aside className="flex w-full flex-col gap-3 lg:w-72">
           <StatusBar api={api} />
           <Controls api={api} />
-          <Captured history={api.history} />
-          <MoveList history={api.history} />
+          <MoveList moveList={api.moveList} />
           <TransferPanel api={api} />
         </aside>
       </div>
 
       <GameOverDialog
-        open={api.isGameOver && !dismissed}
+        open={over && !dismissed}
         outcome={api.outcome}
         turn={api.turn}
         onNewGame={() => {

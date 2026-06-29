@@ -19,6 +19,7 @@ const PolycubePage = lazy(() => import('@/features/polycube/PolycubePage'))
 const AffinePage = lazy(() => import('@/features/affine/AffinePage'))
 const InversionPage = lazy(() => import('@/features/inversion/InversionPage'))
 const ChessPage = lazy(() => import('@/features/chess/ChessPage'))
+const XiangqiPage = lazy(() => import('@/features/xiangqi/XiangqiPage'))
 
 export function AppRouter() {
   return (
@@ -40,6 +41,7 @@ export function AppRouter() {
         <Route path="affine" element={<AffinePage />} />
         <Route path="inversion" element={<InversionPage />} />
         <Route path="chess" element={<ChessPage />} />
+        <Route path="xiangqi" element={<XiangqiPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
