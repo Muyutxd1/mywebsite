@@ -9,8 +9,9 @@ import datetime
 import functools
 import json
 import os
+import random
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, Response, jsonify, request
 
 from api import DATA_DIR
 
@@ -54,6 +55,25 @@ def quotes():
     qs = _load()
     resp = jsonify({"quotes": qs, "total": len(qs)})
     resp.headers["Cache-Control"] = "public, max-age=3600"
+    return resp
+
+
+@bp.get("/random")
+def random_quote():
+    """A random quote. ``?format=text`` returns plain text (one line, optional
+    attribution) for lightweight clients (e.g. the Kindle KUAL widget); default
+    returns JSON. Never cached — each call should differ."""
+    qs = _load()
+    q = random.choice(qs)
+    if request.args.get("format") == "text":
+        line = q["text"]
+        attrib = q.get("author") or q.get("source")
+        if attrib:
+            line += "\n—— " + attrib
+        resp = Response(line + "\n", mimetype="text/plain")
+    else:
+        resp = jsonify({"quote": q, "total": len(qs)})
+    resp.headers["Cache-Control"] = "no-store"
     return resp
 
 
