@@ -243,6 +243,34 @@ def sniff_ext(b):
     return 'png'
 
 
+MAX_IMG_WIDTH = 1400
+
+
+def save_optimized(b, path_noext):
+    """Save an image as size-capped webp (diagrams compress ~3x vs raw PNG).
+    Falls back to the raw bytes + sniffed ext when Pillow can't handle it.
+    Returns the extension actually written."""
+    try:
+        from io import BytesIO
+        from PIL import Image
+        im = Image.open(BytesIO(b))
+        if getattr(im, 'is_animated', False):
+            raise ValueError('animated')
+        if im.width > MAX_IMG_WIDTH:
+            im = im.resize(
+                (MAX_IMG_WIDTH, round(im.height * MAX_IMG_WIDTH / im.width)),
+                Image.LANCZOS)
+        if im.mode not in ('RGB', 'RGBA'):
+            im = im.convert('RGBA' if 'A' in im.mode or 'P' in im.mode else 'RGB')
+        im.save(path_noext + '.webp', 'WEBP', quality=88, method=6)
+        return 'webp'
+    except Exception:
+        ext = sniff_ext(b)
+        with open(f'{path_noext}.{ext}', 'wb') as fh:
+            fh.write(b)
+        return ext
+
+
 def rewrite_image_refs(text, pid, images):
     """Replace attached_image_N.png refs with served URLs. (no file IO here)"""
     if not text or not images:
@@ -501,20 +529,19 @@ def main():
                                      f'{comp_key!r} for {(config, competition_raw)}')
                 round_key = a.get('round_key')
 
-                # ---- images ----
+                # ---- images (optimized webp; _ext drives the md ref rewrite) ----
                 imgs = r.get('images') or []
                 for im in imgs:
                     b = im.get('bytes') or b''
-                    im['_ext'] = sniff_ext(b) if b else 'png'
+                    im['_ext'] = 'webp' if b else 'png'
                 if imgs and not args.no_images:
                     pdir = os.path.join(IMAGES_DIR, pid)
                     os.makedirs(pdir, exist_ok=True)
                     for i, im in enumerate(imgs):
                         b = im.get('bytes') or b''
                         if b:
-                            with open(os.path.join(pdir, f'{i + 1}.{im["_ext"]}'),
-                                      'wb') as fh:
-                                fh.write(b)
+                            im['_ext'] = save_optimized(
+                                b, os.path.join(pdir, str(i + 1)))
                             n_img_files += 1
 
                 raw_problem = r.get('problem_markdown') or ''

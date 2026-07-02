@@ -13,6 +13,7 @@ from flask import Flask, abort, send_from_directory
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SPA_DIR = os.path.join(BASE_DIR, "static_spa")
+PROBLEM_IMAGES_DIR = os.path.join(BASE_DIR, "data", "problem_images")
 
 # Ensure WebAssembly streams correctly (the Stockfish chess engine ships a .wasm).
 # Some Windows registries map .wasm to the wrong type, which disables
@@ -48,6 +49,13 @@ def create_app():
     @app.get("/api/health")
     def health():
         return {"status": "ok"}
+
+    # Problem-bank figures extracted by build_problems.py (immutable per build).
+    @app.get("/problem-images/<pid>/<fname>")
+    def problem_image(pid, fname):
+        return send_from_directory(
+            os.path.join(PROBLEM_IMAGES_DIR, pid), fname, max_age=30 * 86400
+        )
 
     # --- SPA host (prod) -------------------------------------------------------
     @app.route("/", defaults={"path": ""})
