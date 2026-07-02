@@ -58,6 +58,9 @@ export default function PolycubePage() {
   const [zInput, setZInput] = useState(String(board.sz))
   const [designerOpen, setDesignerOpen] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
+  // Mobile two-step placement: first tap parks a ghost preview here; confirm commits.
+  const [pendingTarget, setPendingTarget] = useState<Cell | null>(null)
   const [clearConfirm, setClearConfirm] = useState(false)
   const [pendingDelete, setPendingDelete] = useState<Piece | null>(null)
   const [resetKey, setResetKey] = useState(0)
@@ -93,16 +96,35 @@ export default function PolycubePage() {
     return [...ids].map((id) => library.find((p) => p.id === id)).filter((p): p is Piece => Boolean(p))
   }, [board.placements, library])
 
-  // 3D ghost (driven by the layer board's hovered cell).
+  // Where the pending (mobile) placement would actually land, given current rotation.
+  // Recomputed on rotate so the ghost preview follows live.
+  const pendingOrigin = useMemo(() => {
+    if (!active || !pendingTarget) return null
+    return findPlacementAt(board, library, active.pieceId, active.rotIdx, pendingTarget)
+  }, [active, pendingTarget, board, library])
+
+  // 3D ghost. Desktop: follows the layer board's hovered cell. Mobile: shows the
+  // pending tap-selected placement awaiting confirmation.
   const ghost = useMemo(() => {
-    if (!active || !activePiece || !hovered) return { cells: [] as [number, number, number][], valid: false }
+    const empty = { cells: [] as [number, number, number][], valid: false }
+    if (!active || !activePiece) return empty
     const cells = getTransformedCells(activePiece, active.rotIdx)
+    if (isMobile) {
+      if (!pendingTarget) return empty
+      // No valid fit → anchor the raw shape at the tapped cell and show it red.
+      const [ox, oy, oz] = pendingOrigin ?? pendingTarget
+      return {
+        cells: cells.map(([dx, dy, dz]) => [ox + dx, oy + dy, oz + dz] as [number, number, number]),
+        valid: pendingOrigin !== null,
+      }
+    }
+    if (!hovered) return empty
     const valid = isValidPlacement(board, library, activePiece.id, hovered.x, activeY, hovered.z, active.rotIdx)
     return {
       cells: cells.map(([dx, dy, dz]) => [hovered.x + dx, activeY + dy, hovered.z + dz] as [number, number, number]),
       valid,
     }
-  }, [active, activePiece, hovered, board, library, activeY])
+  }, [active, activePiece, hovered, board, library, activeY, isMobile, pendingTarget, pendingOrigin])
 
   // ── Selection / rotation ──
   const selectPiece = useCallback((id: string) => {
@@ -119,25 +141,35 @@ export default function PolycubePage() {
     setActive((a) => (a ? { ...a, rotIdx: (a.rotIdx + 1) % n } : a))
   }, [])
 
-  // ── Mobile tap-to-place on the 3D surface ──
+  // ── Mobile tap-to-place: tap parks a preview, ✓ (or tapping the same spot) commits ──
+  const commitPending = useCallback(() => {
+    if (!active || !pendingOrigin) return
+    setBoard((b) => ({
+      ...b,
+      placements: [
+        ...b.placements,
+        { pieceId: active.pieceId, ox: pendingOrigin[0], oy: pendingOrigin[1], oz: pendingOrigin[2], rotIdx: active.rotIdx },
+      ],
+    }))
+    setPendingTarget(null)
+  }, [active, pendingOrigin])
+
   const placeTarget = useCallback(
     (target: Cell) => {
       if (!active) return
-      const origin = findPlacementAt(board, library, active.pieceId, active.rotIdx, target)
-      if (!origin) {
-        toast('放不下：越界或与已有积木块重叠', 'danger')
+      if (pendingTarget && pendingTarget[0] === target[0] && pendingTarget[1] === target[1] && pendingTarget[2] === target[2]) {
+        if (pendingOrigin) commitPending()
+        else toast('放不下：越界或与已有积木块重叠', 'danger')
         return
       }
-      setBoard((b) => ({
-        ...b,
-        placements: [
-          ...b.placements,
-          { pieceId: active.pieceId, ox: origin[0], oy: origin[1], oz: origin[2], rotIdx: active.rotIdx },
-        ],
-      }))
+      setPendingTarget(target)
     },
-    [active, board, library, toast],
+    [active, pendingTarget, pendingOrigin, commitPending, toast],
   )
+  // Dropping the selection also drops the preview.
+  useEffect(() => {
+    if (!active) setPendingTarget(null)
+  }, [active])
   const removeCell = useCallback(
     (cell: Cell) => {
       const o = owners.get(`${cell[0]},${cell[1]},${cell[2]}`)
@@ -198,6 +230,7 @@ export default function PolycubePage() {
       if (removed > 0) toast(`棋盘缩小，移除了 ${removed} 个越界积木块`, 'danger')
       return { sx, sy, sz, placements }
     })
+    setPendingTarget(null)
     setResetKey((k) => k + 1)
   }, [xInput, yInput, zInput, board.sx, board.sy, board.sz, library, toast])
 
@@ -368,12 +401,6 @@ export default function PolycubePage() {
         </p>
       </header>
 
-      <div className="mb-4 lg:hidden">
-        <Button variant="secondary" onClick={() => setDrawerOpen(true)}>
-          打开积木库
-        </Button>
-      </div>
-
       <div className="flex gap-6">
         {/* Sidebar */}
         {drawerOpen && (
@@ -397,7 +424,61 @@ export default function PolycubePage() {
 
         {/* Main */}
         <main className="min-w-0 flex-1">
-          {/* Toolbar */}
+          {/* Toolbar — desktop keeps everything inline; mobile gets the essentials
+              plus a collapsible settings panel so the canvas stays near the top. */}
+          {isMobile ? (
+            <div className="mb-4 space-y-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <Button variant="secondary" onClick={() => setDrawerOpen(true)}>
+                  积木库
+                </Button>
+                <Button variant="ghost" onClick={undo} disabled={board.placements.length === 0}>
+                  撤销
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="text-danger hover:bg-danger/10"
+                  onClick={() => board.placements.length && setClearConfirm(true)}
+                  disabled={board.placements.length === 0}
+                >
+                  清空
+                </Button>
+                <Button variant="ghost" className="ml-auto" onClick={() => setSettingsOpen((o) => !o)}>
+                  设置 {settingsOpen ? '▴' : '▾'}
+                </Button>
+              </div>
+              {settingsOpen && (
+                <div className="flex flex-wrap items-end gap-3 rounded-xl border border-border-soft bg-surface p-3">
+                  <DimField label="X" value={xInput} onChange={setXInput} onEnter={commitDims} />
+                  <DimField label="Y(高)" value={yInput} onChange={setYInput} onEnter={commitDims} />
+                  <DimField label="Z" value={zInput} onChange={setZInput} onEnter={commitDims} />
+                  <Button variant="secondary" onClick={commitDims}>
+                    更新棋盘
+                  </Button>
+                  <label className="flex min-w-[160px] flex-1 flex-col gap-1">
+                    <span className="text-xs font-medium text-muted">透明度 {Math.round(opacity * 100)}%</span>
+                    <input
+                      type="range"
+                      min={10}
+                      max={100}
+                      value={Math.round(opacity * 100)}
+                      onChange={(e) => setOpacity(Number(e.target.value) / 100)}
+                      className="h-9 w-full accent-[var(--color-accent)]"
+                      title="调整方块透明度，便于查看内层"
+                    />
+                  </label>
+                  <div className="flex w-full gap-2">
+                    <Button variant="secondary" size="sm" className="flex-1" onClick={saveSession}>
+                      保存
+                    </Button>
+                    <Button variant="secondary" size="sm" className="flex-1" onClick={loadSession}>
+                      载入
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
           <div className="mb-4 flex flex-wrap items-end gap-3 rounded-xl border border-border-soft bg-surface p-3">
             <DimField label="X" value={xInput} onChange={setXInput} onEnter={commitDims} />
             <DimField label="Y(高)" value={yInput} onChange={setYInput} onEnter={commitDims} />
@@ -440,6 +521,7 @@ export default function PolycubePage() {
               </Button>
             </div>
           </div>
+          )}
 
           {isMobile ? (
             <div className="space-y-4">
@@ -461,23 +543,56 @@ export default function PolycubePage() {
                   >
                     积木库
                   </button>{' '}
-                  选一个积木块，再点下面 3D 直接放置；未选中时点方块可删除。
+                  选一个积木块，点 3D 出现预览，再确认落块；未选中时点方块可删除。
                 </div>
               )}
 
-              <div className="card h-[58vh] min-h-[360px] overflow-hidden p-0">
-                <CubeView3D
-                  board={board}
-                  library={library}
-                  activeY={activeY}
-                  ghost={ghost}
-                  resetKey={resetKey}
-                  opacity={opacity}
-                  interactive
-                  hasActive={!!active}
-                  onPlace={placeTarget}
-                  onRemove={removeCell}
-                />
+              <div className="relative">
+                <div className="card h-[58vh] min-h-[360px] overflow-hidden p-0">
+                  <CubeView3D
+                    board={board}
+                    library={library}
+                    activeY={activeY}
+                    ghost={ghost}
+                    resetKey={resetKey}
+                    opacity={opacity}
+                    interactive
+                    hasActive={!!active}
+                    onPlace={placeTarget}
+                    onRemove={removeCell}
+                  />
+                </div>
+                {/* Floating canvas controls — thumb-reachable, no scrolling to the toolbar. */}
+                <div className="absolute right-2 top-2 flex flex-col gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setResetKey((k) => k + 1)}
+                    title="重置视角"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border-soft bg-surface/85 text-lg backdrop-blur active:scale-95"
+                  >
+                    ⌖
+                  </button>
+                  <button
+                    type="button"
+                    onClick={undo}
+                    disabled={board.placements.length === 0}
+                    title="撤销"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border-soft bg-surface/85 text-lg backdrop-blur active:scale-95 disabled:opacity-40"
+                  >
+                    ↩
+                  </button>
+                </div>
+                {/* Pending placement confirm bar */}
+                {active && pendingTarget && (
+                  <div className="absolute inset-x-0 bottom-3 flex items-center justify-center gap-2">
+                    <Button size="sm" onClick={commitPending} disabled={!pendingOrigin}>
+                      {pendingOrigin ? '✓ 放置' : '放不下'}
+                    </Button>
+                    <Button size="sm" variant="secondary" onClick={() => setPendingTarget(null)}>
+                      ✕ 取消
+                    </Button>
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-wrap items-center gap-2 text-sm">
@@ -494,8 +609,8 @@ export default function PolycubePage() {
               </div>
 
               <p className="text-xs text-faint">
-                点方块顶 / 侧面 → 沿该面方向贴放 · 点地面 → 落到底层 · 取消选择后点方块即删除 ·
-                单指拖动旋转视角、双指缩放 · 点上方积木块预览循环切换朝向。
+                点方块面 / 地面 → 出现绿色预览 · 点 ✓（或再点同一处）确认落块 · 预览中可继续旋转、换落点 ·
+                未选积木时点方块删除 · 单指拖动旋转视角、双指缩放 · 点积木块预览循环换朝向。
               </p>
             </div>
           ) : (

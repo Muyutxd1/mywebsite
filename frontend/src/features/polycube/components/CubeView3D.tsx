@@ -165,7 +165,7 @@ function TapToPlace({
       down = null
       if (!d || multi) return
       const moved = Math.hypot(e.clientX - d.x, e.clientY - d.y)
-      if (moved > 8 || e.timeStamp - d.t > 700) return // drag / long-press → not a tap
+      if (moved > 12 || e.timeStamp - d.t > 700) return // drag / long-press → not a tap
 
       const { board: b, cells: cs, hasActive: act, onPlace: place, onRemove: remove } = state.current
       const rect = el.getBoundingClientRect()
