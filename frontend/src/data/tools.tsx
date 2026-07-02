@@ -180,7 +180,7 @@ export const tools: Tool[] = [
     path: '/problems',
     titleZh: '奥赛习题集',
     titleEn: 'Olympiad',
-    description: 'MathNet 开源题库 · IMO / 中国 / 美国 等 6 国 8265 题 · 全文检索 · 四级分类 · 难度分级',
+    description: 'MathNet 开源题库 · IMO / 中国 / 美国 等 18 个赛事体系 11433 题 · 中英对照 · 刷题练习 · 难度分级',
     cta: '开始刷题',
     Icon: icons.problems,
     tone: 'accent',

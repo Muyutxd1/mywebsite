@@ -1,32 +1,68 @@
-/** Response + filter contracts for the 奥赛习题集 (MathNet problem bank). */
+/** API contracts for the problem-bank v2 backend (backend/api/problems.py). */
 
+// ---------------------------------------------------------------------------
+// Registry / browse tree
+// ---------------------------------------------------------------------------
+export interface RoundInfo {
+  round_key: string
+  zh: string
+  count?: number
+  order?: number
+}
+
+export interface CompetitionSummary {
+  comp_key: string
+  name_zh: string
+  name_en: string
+  short: string | null
+  tier: 1 | 2 | 3 | 4
+  sort_rank: number
+  count: number
+  editions: number
+  year_min: number | null
+  year_max: number | null
+  years_known: number
+  diff: { easy: number; medium: number; hard: number; elite: number }
+  rounds: RoundInfo[]
+}
+
+export interface RegionGroup {
+  key: string
+  zh: string
+  order: number
+  count: number
+  competitions: CompetitionSummary[]
+}
+
+export interface RegistryResponse {
+  total: number
+  translated: { problems: number; full: number }
+  regions: RegionGroup[]
+}
+
+// ---------------------------------------------------------------------------
+// Facets (search page filter options)
+// ---------------------------------------------------------------------------
 export interface FacetOption {
   value: string
   label?: string
-  count?: number
+  count: number
 }
 
-/** Category facet option carrying its parent levels (for cascading selects). */
 export interface CategoryOption {
   value: string
-  l1?: string
-  l2?: string
-  count?: number
-}
-
-export interface CompetitionOption {
-  value: string
-  config: string
-  count?: number
+  l1?: string | null
+  l2?: string | null
+  count: number
 }
 
 export interface FacetsResponse {
   total: number
-  countries: FacetOption[] // value = config key, label = zh
-  competitions: CompetitionOption[]
+  regions: FacetOption[]
+  competitions: { comp_key: string; name_zh: string; region: string | null; tier: number | null; count: number }[]
   years: number[]
   yearUnknown: number
-  level1: FacetOption[]
+  level1: CategoryOption[]
   level2: CategoryOption[]
   level3: CategoryOption[]
   level4: CategoryOption[]
@@ -34,14 +70,38 @@ export interface FacetsResponse {
   problemTypes: FacetOption[]
 }
 
-/** A lightweight list row. */
+// ---------------------------------------------------------------------------
+// Competition matrix (single competition page)
+// ---------------------------------------------------------------------------
+export interface CompetitionMatrixResponse {
+  comp: {
+    comp_key: string
+    name_zh: string
+    name_en: string
+    short: string | null
+    region: string
+    region_zh: string
+    tier: number
+    rounds: RoundInfo[]
+    count: number
+  }
+  by_year: { year: number; count: number; rounds: RoundInfo[] }[]
+  unknown_year_count: number
+}
+
+// ---------------------------------------------------------------------------
+// Problem rows
+// ---------------------------------------------------------------------------
 export interface ProblemEntry {
   id: string
+  comp_key: string
+  comp_zh: string
+  comp_short: string | null
+  round_key: string | null
+  round_zh: string | null
+  region: string | null
+  tier: number
   country_zh: string
-  config: string
-  competition: string
-  competition_series: string
-  series_key: string
   year: number | null
   year_source: string | null
   problem_number: string | null
@@ -51,20 +111,40 @@ export interface ProblemEntry {
   difficulty_score: number | null
   problem_type: string | null
   problem_type_zh: string | null
-  has_solution: number
-  has_images: number
-  problem_md: string
+  has_solution: 0 | 1
+  num_solutions: number
+  has_images: 0 | 1
+  has_zh: 0 | 1
+  translated: 0 | 1
+  preview_en: string
+  preview_zh: string | null
+  snippet?: string | null
+  hit_lang?: 'zh' | 'en' | null
 }
 
-/** Full problem with statement + all solutions. */
+export interface SolutionPair {
+  md: string
+  zh: string | null
+}
+
 export interface FullProblem extends ProblemEntry {
+  problem_md: string
+  problem_zh: string | null
   final_answer: string | null
   language: string | null
   num_images: number
   rationale_zh: string | null
-  solutions: string[]
+  competition_raw: string
+  solutions: SolutionPair[]
 }
 
+export interface DailyProblem extends FullProblem {
+  date: string
+}
+
+// ---------------------------------------------------------------------------
+// List / ids / random / batch / context / stats
+// ---------------------------------------------------------------------------
 export interface ProblemListResponse {
   items: ProblemEntry[]
   total: number
@@ -73,67 +153,39 @@ export interface ProblemListResponse {
   pageSize: number
 }
 
-/** One competition SERIES within a geo group (the 2nd-level browse directory). */
-export interface SeriesInfo {
-  series_key: string
-  series_zh: string
-  count: number
-  editions: number
-  year_min: number | null
-  year_max: number | null
-  years_known: number
-  easy: number
-  medium: number
-  hard: number
-  elite: number
-}
-
-export interface CompetitionGroup {
-  config: string
-  country_zh: string
-  count: number
-  series: SeriesInfo[]
-}
-
-export interface CompetitionsResponse {
-  groups: CompetitionGroup[]
+export interface IdListResponse {
+  ids: string[]
   total: number
 }
 
-export type SortKey =
-  | 'relevance'
-  | 'year_desc'
-  | 'year_asc'
-  | 'difficulty_asc'
-  | 'difficulty_desc'
-
-/** Active filters — mirrored into the URL query string. */
-export interface ProblemFilters {
-  config: string
-  competition: string
-  series: string
-  level1: string
-  level2: string
-  level3: string
-  level4: string
-  year: string
-  difficulty: string
-  problem_type: string
-  q: string
-  sort: string
+export interface RandomIdsResponse {
+  seed: number
+  ids: string[]
+  total: number
 }
 
-export const EMPTY_FILTERS: ProblemFilters = {
-  config: '',
-  competition: '',
-  series: '',
-  level1: '',
-  level2: '',
-  level3: '',
-  level4: '',
-  year: '',
-  difficulty: '',
-  problem_type: '',
-  q: '',
-  sort: '',
+export interface BatchResponse {
+  items: ProblemEntry[]
+  missing: string[]
+}
+
+export interface ContextResponse {
+  index: number | null
+  total: number | null
+  prev: { id: string; headline: string } | null
+  next: { id: string; headline: string } | null
+}
+
+export interface StatsResponse {
+  total: number
+  byRegion: { label: string; count: number }[]
+  byTier: { label: number; count: number }[]
+  byComp: { label: string; count: number }[]
+  byTopic: { label: string; count: number }[]
+  byDifficulty: { label: string; count: number }[]
+  byType: { label: string | null; count: number }[]
+  withSolution: number
+  withImages: number
+  yearKnown: number
+  translatedPct: number
 }

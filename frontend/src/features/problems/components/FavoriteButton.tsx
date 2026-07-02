@@ -1,10 +1,10 @@
 import { cn } from '@/lib/cn'
-import { useIsFavorite, useProblemsStore } from '../store'
+import { useIsFavorite, usePracticeStore } from '../store/practice'
 
 /** A star toggle wired to the localStorage favorites store. */
 export function FavoriteButton({ id, className }: { id: string; className?: string }) {
   const active = useIsFavorite(id)
-  const toggle = useProblemsStore((s) => s.toggleFavorite)
+  const toggle = usePracticeStore((s) => s.toggleFavorite)
 
   return (
     <button
