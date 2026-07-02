@@ -17,12 +17,15 @@ export function ActivePiecePanel({
   active,
   usage,
   onRotate,
+  onCycle,
   onDeselect,
 }: {
   piece: Piece
   active: ActiveSelection
   usage: number
   onRotate: (axis: 'x' | 'y' | 'z', dir: 1 | -1) => void
+  /** Cycle through the 24 orientations one step — tap the preview. */
+  onCycle: () => void
   onDeselect: () => void
 }) {
   const cells = getTransformedCells(piece, active.rotIdx)
@@ -36,9 +39,15 @@ export function ActivePiecePanel({
         <span className="shrink-0 text-xs text-muted">朝向 {active.rotIdx + 1}/24</span>
       </div>
 
-      <div className="my-2.5 overflow-x-auto">
+      <button
+        type="button"
+        onClick={onCycle}
+        title="点击切换朝向"
+        className="my-2.5 flex w-full items-center gap-2 overflow-x-auto rounded-lg border border-border-soft bg-surface-2/60 p-1.5 transition-colors hover:border-accent/40 active:scale-[0.99]"
+      >
         <MiniLayers cells={cells} color={piece.color} cellPx={9} />
-      </div>
+        <span className="ml-auto shrink-0 pr-1 text-base text-muted">↻</span>
+      </button>
 
       <div className="grid grid-cols-3 gap-1">
         {ROT.map((r) => (

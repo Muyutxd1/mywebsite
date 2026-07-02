@@ -179,6 +179,31 @@ export function isValidPlacement(
   return true
 }
 
+/**
+ * Find a fully valid placement (in-bounds, no overlap) for a piece such that
+ * ONE of its cells lands on `target`. Tries each cell as the anchor and returns
+ * the first origin that validates, else null. Used by the mobile tap-to-place 3D
+ * surface, where `target` is the floor cell or the neighbour across a tapped face.
+ */
+export function findPlacementAt(
+  board: BoardState,
+  pieceLibrary: Piece[],
+  pieceId: string,
+  rotIdx: number,
+  target: Cell,
+): Cell | null {
+  const piece = pieceLibrary.find((p) => p.id === pieceId)
+  if (!piece) return null
+  const cells = getTransformedCells(piece, rotIdx)
+  for (const [dx, dy, dz] of cells) {
+    const origin: Cell = [target[0] - dx, target[1] - dy, target[2] - dz]
+    if (isValidPlacement(board, pieceLibrary, pieceId, origin[0], origin[1], origin[2], rotIdx)) {
+      return origin
+    }
+  }
+  return null
+}
+
 export function computePlacementOrigin(
   board: BoardState,
   pieceLibrary: Piece[],

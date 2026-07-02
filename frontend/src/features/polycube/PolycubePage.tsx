@@ -5,6 +5,8 @@ import {
   PALETTE,
   cellOwners,
   composeRotation,
+  findPlacementAt,
+  getAllRotations,
   getTransformedCells,
   isValidPlacement,
   loadBoardSession,
@@ -26,8 +28,23 @@ import type { ActiveSelection, HoveredCell } from './types'
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
 
+/** Matches Tailwind's `lg` breakpoint (≤ 1023px is the touch / mobile layout). */
+function useIsMobile() {
+  const [mobile, setMobile] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 1023px)').matches,
+  )
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 1023px)')
+    const onChange = () => setMobile(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+  return mobile
+}
+
 export default function PolycubePage() {
   const toast = useToast()
+  const isMobile = useIsMobile()
 
   const [library, setLibrary] = useState<Piece[]>(() => loadLibrary())
   const [board, setBoard] = useState<BoardState>(() => loadBoardSession())
@@ -44,11 +61,18 @@ export default function PolycubePage() {
   const [clearConfirm, setClearConfirm] = useState(false)
   const [pendingDelete, setPendingDelete] = useState<Piece | null>(null)
   const [resetKey, setResetKey] = useState(0)
+  const [opacity, setOpacity] = useState(() => {
+    const v = Number(localStorage.getItem('polycube_opacity'))
+    return v >= 0.1 && v <= 1 ? v : 1
+  })
   const fileRef = useRef<HTMLInputElement>(null)
 
   // Persist.
   useEffect(() => saveBoardSession(board), [board])
   useEffect(() => saveLibrary(library), [library])
+  useEffect(() => {
+    localStorage.setItem('polycube_opacity', String(opacity))
+  }, [opacity])
   // Keep the active layer inside the board.
   useEffect(() => setActiveY((y) => clamp(y, 0, board.sy - 1)), [board.sy])
 
@@ -89,6 +113,39 @@ export default function PolycubePage() {
   const rotateActive = useCallback((axis: 'x' | 'y' | 'z', dir: 1 | -1) => {
     setActive((a) => (a ? { ...a, rotIdx: composeRotation(a.rotIdx, axis, dir) } : a))
   }, [])
+  // Tap the active piece preview → step through the 24 orientations.
+  const cycleRot = useCallback(() => {
+    const n = getAllRotations().length
+    setActive((a) => (a ? { ...a, rotIdx: (a.rotIdx + 1) % n } : a))
+  }, [])
+
+  // ── Mobile tap-to-place on the 3D surface ──
+  const placeTarget = useCallback(
+    (target: Cell) => {
+      if (!active) return
+      const origin = findPlacementAt(board, library, active.pieceId, active.rotIdx, target)
+      if (!origin) {
+        toast('放不下：越界或与已有积木块重叠', 'danger')
+        return
+      }
+      setBoard((b) => ({
+        ...b,
+        placements: [
+          ...b.placements,
+          { pieceId: active.pieceId, ox: origin[0], oy: origin[1], oz: origin[2], rotIdx: active.rotIdx },
+        ],
+      }))
+    },
+    [active, board, library, toast],
+  )
+  const removeCell = useCallback(
+    (cell: Cell) => {
+      const o = owners.get(`${cell[0]},${cell[1]},${cell[2]}`)
+      if (!o) return
+      setBoard((b) => ({ ...b, placements: b.placements.filter((_, i) => i !== o.index) }))
+    },
+    [owners],
+  )
 
   // ── Placement / removal ──
   const placeAt = useCallback(
@@ -242,12 +299,13 @@ export default function PolycubePage() {
 
   const sidebar = (
     <div className="flex flex-col gap-4">
-      {active && activePiece && (
+      {!isMobile && active && activePiece && (
         <ActivePiecePanel
           piece={activePiece}
           active={active}
           usage={usage(active.pieceId)}
           onRotate={rotateActive}
+          onCycle={cycleRot}
           onDeselect={deselect}
         />
       )}
@@ -347,6 +405,18 @@ export default function PolycubePage() {
             <Button variant="secondary" onClick={commitDims}>
               更新棋盘
             </Button>
+            <label className="flex flex-col gap-1">
+              <span className="text-xs font-medium text-muted">透明度 {Math.round(opacity * 100)}%</span>
+              <input
+                type="range"
+                min={10}
+                max={100}
+                value={Math.round(opacity * 100)}
+                onChange={(e) => setOpacity(Number(e.target.value) / 100)}
+                className="h-9 w-24 accent-[var(--color-accent)]"
+                title="调整方块透明度，便于查看内层"
+              />
+            </label>
             <div className="ml-auto flex flex-wrap items-center gap-2">
               <Button variant="ghost" onClick={undo} disabled={board.placements.length === 0}>
                 撤销
@@ -371,6 +441,65 @@ export default function PolycubePage() {
             </div>
           </div>
 
+          {isMobile ? (
+            <div className="space-y-4">
+              {active && activePiece ? (
+                <ActivePiecePanel
+                  piece={activePiece}
+                  active={active}
+                  usage={usage(active.pieceId)}
+                  onRotate={rotateActive}
+                  onCycle={cycleRot}
+                  onDeselect={deselect}
+                />
+              ) : (
+                <div className="rounded-xl border border-border-soft bg-surface p-3 text-sm text-muted">
+                  点{' '}
+                  <button
+                    className="font-medium text-accent underline-offset-2 hover:underline"
+                    onClick={() => setDrawerOpen(true)}
+                  >
+                    积木库
+                  </button>{' '}
+                  选一个积木块，再点下面 3D 直接放置；未选中时点方块可删除。
+                </div>
+              )}
+
+              <div className="card h-[58vh] min-h-[360px] overflow-hidden p-0">
+                <CubeView3D
+                  board={board}
+                  library={library}
+                  activeY={activeY}
+                  ghost={ghost}
+                  resetKey={resetKey}
+                  opacity={opacity}
+                  interactive
+                  hasActive={!!active}
+                  onPlace={placeTarget}
+                  onRemove={removeCell}
+                />
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 text-sm">
+                <Badge tone={filled === total ? 'success' : 'neutral'}>
+                  已填 {filled} / {total}
+                </Badge>
+                <Badge tone="neutral">空 {total - filled}</Badge>
+                {legend.map((p) => (
+                  <Badge key={p.id} tone="neutral" className="gap-1.5">
+                    <span className="inline-block h-3 w-3 rounded-sm" style={{ background: p.color }} />
+                    {p.name} ({usage(p.id)})
+                  </Badge>
+                ))}
+              </div>
+
+              <p className="text-xs text-faint">
+                点方块顶 / 侧面 → 沿该面方向贴放 · 点地面 → 落到底层 · 取消选择后点方块即删除 ·
+                单指拖动旋转视角、双指缩放 · 点上方积木块预览循环切换朝向。
+              </p>
+            </div>
+          ) : (
+          <>
           <div className="grid gap-4 lg:grid-cols-2">
             {/* Layer editor */}
             <div>
@@ -421,7 +550,14 @@ export default function PolycubePage() {
 
             {/* 3D view */}
             <div className="card h-[360px] overflow-hidden p-0 lg:h-[460px]">
-              <CubeView3D board={board} library={library} activeY={activeY} ghost={ghost} resetKey={resetKey} />
+              <CubeView3D
+                board={board}
+                library={library}
+                activeY={activeY}
+                ghost={ghost}
+                resetKey={resetKey}
+                opacity={opacity}
+              />
             </div>
           </div>
 
@@ -437,6 +573,8 @@ export default function PolycubePage() {
             操作：左侧网格点击放置 / 点已填格移除 · 选中块后方向键旋转（↑↓绕X、←→绕Y、, .绕Z）· Esc 取消 · Ctrl+Z 撤销 ·
             右侧可拖动旋转视角、滚轮缩放。绿色=有效，红色=越界或重叠，紫框=该块在更高层。
           </p>
+          </>
+          )}
         </main>
       </div>
 
