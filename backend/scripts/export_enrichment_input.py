@@ -6,7 +6,12 @@ Output: backend/data/enrichment/input.jsonl
 
 Fields kept small: the problem statement is truncated and the solution is
 reduced to a length signal (a strong difficulty proxy) rather than full text.
+
+  py backend/scripts/export_enrichment_input.py                  # all rows
+  py backend/scripts/export_enrichment_input.py --missing-only   # only rows
+      with no difficulty yet (top-up pass for newly added configs)
 """
+import argparse
 import json
 import os
 import sqlite3
@@ -21,13 +26,21 @@ PROBLEM_TRUNC = 900
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--missing-only', action='store_true',
+                    help='only problems with no difficulty yet')
+    args = ap.parse_args()
+
     os.makedirs(OUT_DIR, exist_ok=True)
     con = sqlite3.connect(f'file:{DB}?mode=ro', uri=True)
     con.row_factory = sqlite3.Row
+    where = ' WHERE p.difficulty IS NULL' if args.missing_only else ''
     rows = con.execute(
-        "SELECT id, config, country_zh, competition, year, year_source, "
-        "problem_type, problem_md, has_solution, categories_json FROM problems "
-        "ORDER BY id").fetchall()
+        "SELECT p.id, p.country_zh, p.competition_raw, c.name_zh comp_zh, "
+        "c.name_en comp_en, c.tier, p.round_key, p.year, p.problem_type, "
+        "p.problem_md, p.has_solution, p.categories_json "
+        f"FROM problems p JOIN competitions c ON c.comp_key = p.comp_key{where} "
+        "ORDER BY p.id").fetchall()
 
     n = 0
     with open(OUT, 'w', encoding='utf-8') as f:
@@ -42,7 +55,11 @@ def main():
             obj = {
                 'id': d['id'],
                 'country_zh': d['country_zh'],
-                'competition': d['competition'],
+                'competition': d['comp_zh'],
+                'competition_en': d['comp_en'],
+                'competition_raw': d['competition_raw'],
+                'tier': d['tier'],
+                'round': d['round_key'],
                 'year': d['year'],
                 'year_known': bool(d['year']),
                 'problem_type': d['problem_type'],

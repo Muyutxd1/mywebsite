@@ -1,0 +1,86 @@
+[
+ {
+  "comp": "全国高中数学联合竞赛",
+  "difficulty": "easy",
+  "score": 15,
+  "rationale_zh": "对数复合函数单调区间，基础选择题。",
+  "problem": "The interval on which the function $f(x) = \\log_{\\frac{1}{2}}(x^2 - 2x - 3)$ is monotone increasing is ( ). (A) $(-\\infty, -1)$ (B) $(-\\infty, 1)$ (C) $(1, +\\infty)$ (D) $(3, +\\infty)$"
+ },
+ {
+  "comp": "全国高中数学联合竞赛",
+  "difficulty": "easy",
+  "score": 24,
+  "rationale_zh": "经典夹逼递推求值，套路填空。",
+  "problem": "It is given that $f(x)$ is a function defined on $\\mathbb{R}$, satisfying $f(1) = 1$, and for any $x \\in \\mathbb{R}$, $$ f(x+5) \\ge f(x)+5, $$ and $f(x+1) \\le f(x)+1$. If $g(x) = f(x)+1-x$, then $g(2002) = \\underline{\\hspace{2cm}}$."
+ },
+ {
+  "comp": "全国高中数学联合竞赛",
+  "difficulty": "easy",
+  "score": 14,
+  "rationale_zh": "原点到圆最近距离，秒解。",
+  "problem": "If real numbers $x$ and $y$ satisfy $(x+5)^2 + (y-12)^2 = 14^2$, then the minimum value of $x^2 + y^2$ is ( ). (A) 2 (B) 1 (C) $\\sqrt{3}$ (D) $\\sqrt{2}$"
+ },
+ {
+  "comp": "中国西部数学奥林匹克",
+  "difficulty": "medium",
+  "score": 40,
+  "rationale_zh": "四次式配方夹逼于相邻平方间，需技巧但标准。",
+  "problem": "Find all positive integers $n$ such that $$ n^4 - 4n^3 + 22n^2 - 36n + 18 $$ is a perfect square."
+ },
+ {
+  "comp": "中国女子数学奥林匹克（CGMO）",
+  "difficulty": "medium",
+  "score": 32,
+  "rationale_zh": "整除转线性组合，常规数论手法。",
+  "problem": "Find all positive integers $n$ such that $20n + 2$ can divide $2003n + 2002$. (posed by Wu Weichao)"
+ },
+ {
+  "comp": "全国高中数学联合竞赛",
+  "difficulty": "medium",
+  "score": 30,
+  "rationale_zh": "双曲线约束下求最值。",
+  "problem": "If $\\log_4(x+2y) + \\log_4(x-2y) = 1$, then the minimum value of $|x|-|y|$ is ____."
+ },
+ {
+  "comp": "全国高中数学联合竞赛",
+  "difficulty": "hard",
+  "score": 56,
+  "rationale_zh": "二试几何，外心垂心与等长构造，较繁。",
+  "problem": "As shown in the diagram, in $\\triangle ABC$, $\\angle A = 60^\\circ$, $AB > AC$, point $O$ is a circumcenter and $H$ is the intersection point of two altitudes $BE$ and $CF$. Points $M$ and $N$ are on the line segments $BH$ and $HF$ respectively, and satisfy $BM"
+ },
+ {
+  "comp": "全国高中数学联合竞赛",
+  "difficulty": "hard",
+  "score": 56,
+  "rationale_zh": "一试压轴，定二次函数再求最大m。",
+  "problem": "Suppose a quadratic function $f(x) = a x^2 + b x + c$ ($a, b, c \\in \\mathbb{R}$, and $a \\neq 0$) satisfies the following conditions: (1) When $x \\in \\mathbb{R}$, $f(x-4) = f(2-x)$ and $f(x) \\ge x$. (2) When $x \\in (0, 2)$, $f(x) \\le \\left(\\frac{x+1}{2}\\right)^"
+ },
+ {
+  "comp": "全国高中数学联合竞赛",
+  "difficulty": "hard",
+  "score": 60,
+  "rationale_zh": "二试，三根分布求判别式型最值。",
+  "problem": "There are real numbers $a$, $b$ and $c$ such that $f(x) = x^3 + a x^2 + b x + c$ has three real roots $x_1$, $x_2$ and $x_3$ satisfying $$ (1)\\quad x_2 - x_1 = \\lambda, $$ $$ (2)\\quad x_3 > \\frac{1}{2}(x_1 + x_2). $$ Find the maximum value of $\\frac{2a^3 + 27c"
+ },
+ {
+  "comp": "中国数学奥林匹克（CMO）",
+  "difficulty": "elite",
+  "score": 81,
+  "rationale_zh": "CMO几何，内心垂心共线充要，深难。",
+  "problem": "Suppose points $I$ and $H$ are the incenter and orthocenter of an acute triangle $ABC$ respectively, and points $B_1$ and $C_1$ are the midpoints of sides $AC$ and $AB$ respectively. It is known that ray $B_1I$ intersects side $AB$ at $B_2$ ($B_2 \\neq B$), and"
+ },
+ {
+  "comp": "中国数学奥林匹克（CMO）",
+  "difficulty": "elite",
+  "score": 83,
+  "rationale_zh": "CMO，复杂gcd条件求最大元数。",
+  "problem": "Suppose a set $S$ satisfies the following conditions: (1) every element in $S$ is a positive integer and not greater than $100$; (2) for any two different elements $a$ and $b$ in $S$, there is an element $c$ in $S$ such that the greatest common divisor of $a$ "
+ },
+ {
+  "comp": "中国数学奥林匹克（CMO）",
+  "difficulty": "elite",
+  "score": 81,
+  "rationale_zh": "CMO，tan积约束下cos和最小上界。",
+  "problem": "Given a positive integer $n$, find the least positive number $\\lambda$ such that $\\cos \\theta_1 + \\cos \\theta_2 + \\cdots + \\cos \\theta_n$ is not greater than $\\lambda$ provided $\\tan \\theta_1 \\cdot \\tan \\theta_2 \\cdot \\cdots \\cdot \\tan \\theta_n = 2^{\\frac{n}{2"
+ }
+]
