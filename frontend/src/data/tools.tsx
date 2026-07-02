@@ -162,6 +162,14 @@ export const icons = {
         <circle cx="16" cy="16.5" r="2" />
       </>,
     ),
+  darkroom: (p: { className?: string }) =>
+    S(
+      p,
+      <>
+        <path d="M12 3c1.5 3-2.5 4.5-1 8 .8 1.8 2.6 2 3.5.5.6 1 .9 2 .9 3a5.4 5.4 0 01-10.8 0c0-4.5 4.9-6.5 7.4-11.5z" />
+        <line x1="4" y1="21" x2="20" y2="21" />
+      </>,
+    ),
 }
 
 export const tools: Tool[] = [
@@ -293,6 +301,16 @@ export const tools: Tool[] = [
     cta: '开始对局',
     Icon: icons.xiangqi,
     tone: 'gold',
+  },
+  {
+    slug: 'darkroom',
+    path: '/darkroom',
+    titleZh: '小黑屋',
+    titleEn: 'A Dark Room',
+    description: '经典极简文字冒险 · 生火 → 村庄 → 世界 · 官方中文',
+    cta: '生火',
+    Icon: icons.darkroom,
+    tone: 'neutral',
   },
 ]
 

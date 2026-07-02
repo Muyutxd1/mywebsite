@@ -1,0 +1,1 @@
+import{j as r,c as n}from"./index-D5ulMITR.js";function c({className:s,...a}){return r.jsx("div",{className:n("card",s),...a})}function o({className:s,...a}){return r.jsx("div",{className:n("p-5 sm:p-6",s),...a})}export{c as C,o as a};
