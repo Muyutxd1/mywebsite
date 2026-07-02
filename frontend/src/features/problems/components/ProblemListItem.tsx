@@ -20,7 +20,8 @@ export function ProblemListItem({
   ctx,
 }: {
   problem: ProblemEntry
-  /** Query string forwarded as the detail page's prev/next context. */
+  /** Query string forwarded as the detail page's prev/next context.
+   *  An EMPTY string is meaningful (unfiltered browse = whole-library nav). */
   ctx?: string
 }) {
   const lang = useLang()
@@ -29,7 +30,10 @@ export function ProblemListItem({
     problem.snippet ||
     (lang === 'zh' && problem.preview_zh ? problem.preview_zh : problem.preview_en)
 
-  const to = ctx ? `/problems/${problem.id}?ctx=${encodeURIComponent(ctx)}` : `/problems/${problem.id}`
+  const to =
+    ctx !== undefined
+      ? `/problems/${problem.id}?ctx=${encodeURIComponent(ctx)}`
+      : `/problems/${problem.id}`
 
   return (
     <Link

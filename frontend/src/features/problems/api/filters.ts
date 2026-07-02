@@ -50,10 +50,11 @@ export function filtersToQuery(f: Partial<ProblemFilters>, extra?: Record<string
   return params.toString()
 }
 
-/** Stable cache key: sorted, empties dropped. */
+/** Stable cache key: sorted, empties dropped, values escaped so a q like
+ *  "a&comp=imo" can't collide with a genuinely different filter set. */
 export function filtersKey(f: Partial<ProblemFilters>): string {
   return FILTER_KEYS.filter((k) => f[k])
-    .map((k) => `${k}=${f[k]}`)
+    .map((k) => `${k}=${encodeURIComponent(String(f[k]))}`)
     .join('&')
 }
 
@@ -86,8 +87,11 @@ export function useUrlFilters() {
       const { page: nextPage, ...rest } = updates
       let filtersChanged = false
       for (const [k, v] of Object.entries(rest)) {
+        const oldV = next.get(k) ?? ''
+        const newV = v ? String(v) : ''
+        if (oldV === newV) continue // same-value clicks must not reset the page
         filtersChanged = true
-        if (v) next.set(k, String(v))
+        if (newV) next.set(k, newV)
         else next.delete(k)
       }
       if (nextPage !== undefined) {

@@ -1,12 +1,14 @@
 import { EMPTY_FILTERS, parseFilters, type ProblemFilters } from '../api/filters'
 import type { PracticeSession, RecordResult, SessionRecordEntry } from '../store/practice'
 
-/** The practice-run URL carries the whole session skeleton: f/mode/seed/n/sid. */
+/** The practice-run URL carries the whole session skeleton: f/mode/seed/n/sk/sid. */
 export interface SessionParams {
   f: string
   mode: 'seq' | 'random'
   seed: number
   n: number
+  /** skip-solved was applied when the id list was resolved */
+  sk: boolean
   sid: string
 }
 
@@ -18,12 +20,26 @@ export function newSeed(): number {
   return (Math.floor(Math.random() * 900000) + 100000) | 0
 }
 
+/** Deterministic Fisher–Yates over a 31-bit LCG — same seed, same order,
+ *  shared by session creation and URL-only session rebuild. */
+export function seededShuffle(ids: string[], seed: number): string[] {
+  let s = seed || 1
+  const rand = () => ((s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x80000000)
+  const out = [...ids]
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1))
+    ;[out[i], out[j]] = [out[j], out[i]]
+  }
+  return out
+}
+
 export function sessionToQuery(p: SessionParams): string {
   const sp = new URLSearchParams()
   if (p.f) sp.set('f', p.f)
   sp.set('mode', p.mode)
   if (p.mode === 'random') sp.set('seed', String(p.seed))
   if (p.n) sp.set('n', String(p.n))
+  if (p.sk) sp.set('sk', '1')
   sp.set('sid', p.sid)
   return sp.toString()
 }
@@ -37,6 +53,7 @@ export function sessionFromQuery(sp: URLSearchParams): SessionParams | null {
     mode,
     seed: parseInt(sp.get('seed') || '0', 10) || 0,
     n: parseInt(sp.get('n') || '0', 10) || 0,
+    sk: sp.get('sk') === '1',
     sid,
   }
 }

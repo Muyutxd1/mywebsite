@@ -125,14 +125,21 @@ export const usePracticeStore = create<PracticeState>()(
             record: { ...sess.record, [entry.id]: entry },
             cursor: cursor ?? sess.cursor,
           }
-          return { sessions: { ...s.sessions, [sid]: next } }
+          return {
+            sessions: { ...s.sessions, [sid]: next },
+            // activity bumps the LRU so an in-progress session can't be evicted
+            sessionOrder: [sid, ...s.sessionOrder.filter((x) => x !== sid)],
+          }
         }),
 
       setCursor: (sid, cursor) =>
         set((s) => {
           const sess = s.sessions[sid]
           if (!sess || sess.cursor === cursor) return s
-          return { sessions: { ...s.sessions, [sid]: { ...sess, cursor } } }
+          return {
+            sessions: { ...s.sessions, [sid]: { ...sess, cursor } },
+            sessionOrder: [sid, ...s.sessionOrder.filter((x) => x !== sid)],
+          }
         }),
 
       finishSession: (sid) =>

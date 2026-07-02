@@ -31,6 +31,7 @@ import os
 import random as _random
 import re
 import sqlite3
+import zlib
 
 from datetime import date
 
@@ -76,10 +77,22 @@ def _unavailable():
 
 
 # --------------------------------------------------------------------------- #
-# Competition registry cache (DB is immutable per deployment).
+# Registry / facets caches, keyed on the DB file's mtime so a hot rebuild
+# (translations/enrichment merged, no server restart) invalidates them.
 # --------------------------------------------------------------------------- #
-@functools.lru_cache(maxsize=1)
+def _db_stamp():
+    try:
+        return os.path.getmtime(_DB_PATH)
+    except OSError:
+        return None
+
+
 def _comps():
+    return _comps_cached(_db_stamp())
+
+
+@functools.lru_cache(maxsize=2)
+def _comps_cached(_stamp):
     """{comp_key: {name_zh, name_en, short, region, region_zh, tier,
                    sort_rank, rounds: [..], round_zh: {round_key: zh}}}"""
     conn = sqlite3.connect(f'file:{_DB_PATH}?mode=ro', uri=True,
@@ -102,6 +115,23 @@ def _comps():
 # Filter / search WHERE-clause builder (shared by list/ids/random/context).
 # --------------------------------------------------------------------------- #
 _FTS_STRIP = re.compile(r'["()*]')
+
+
+@functools.lru_cache(maxsize=64)
+def _solution_hits(_stamp, q):
+    """Problem ids whose solutions contain q — the one genuinely slow scan
+    (~30MB of LIKE, seconds). Cached per query text so paging / prev-next /
+    count reuse it instead of rescanning; returned as JSON for json_each()."""
+    conn = sqlite3.connect(f'file:{_DB_PATH}?mode=ro', uri=True,
+                           check_same_thread=False)
+    try:
+        like = f'%{q}%'
+        ids = [r[0] for r in conn.execute(
+            'SELECT DISTINCT problem_id FROM solutions '
+            'WHERE solution_md LIKE ? OR solution_zh LIKE ?', (like, like))]
+        return json.dumps(ids)
+    finally:
+        conn.close()
 
 
 def _where(args, skip=()):
@@ -134,10 +164,12 @@ def _where(args, skip=()):
     tier_max = args.get('tier_max')
     if tier_max:
         try:
-            clauses.append('p.tier <= ?')
-            params.append(int(tier_max))
+            v = int(tier_max)
         except (TypeError, ValueError):
-            params and params.pop()
+            v = None
+        if v is not None:
+            clauses.append('p.tier <= ?')
+            params.append(v)
 
     year = args.get('year')
     if year == 'unknown':
@@ -179,36 +211,37 @@ def _where(args, skip=()):
             'WHERE pc.problem_id = p.id AND ' + ' AND '.join(cat_clauses) + ')')
         params.extend(cat_params)
 
-    # Full-text / substring search.
+    # Full-text / substring search. Queries that strip down to nothing for
+    # FTS (e.g. all special characters) fall back to the literal LIKE path
+    # rather than silently dropping the filter.
     fts_match = None
     q = (args.get('q') or '').strip()
     if q and 'q' not in skip:
         sol_scan = args.get('qscope') == 'all'
         like = f'%{q}%'
-        if len(q) >= 3:
-            cleaned = _FTS_STRIP.sub(' ', q).strip()
-            if cleaned:
-                fts_match = '"' + cleaned.replace('"', '') + '"'
-                fts_clause = ('p.rowid IN (SELECT rowid FROM problems_fts '
-                              'WHERE problems_fts MATCH ?)')
-                if sol_scan:
-                    clauses.append(
-                        f'({fts_clause} OR EXISTS (SELECT 1 FROM solutions s '
-                        'WHERE s.problem_id = p.id AND (s.solution_md LIKE ? '
-                        'OR s.solution_zh LIKE ?)))')
-                    params.extend([fts_match, like, like])
-                else:
-                    clauses.append(fts_clause)
-                    params.append(fts_match)
+        # Solution hits come from the per-query cached scan (see
+        # _solution_hits): the LIKE over ~30MB of solution text runs once per
+        # query text, then paging / count / prev-next reuse the id set.
+        sol_clause = 'p.id IN (SELECT value FROM json_each(?))'
+        sol_param = _solution_hits(_db_stamp(), q) if sol_scan else None
+        cleaned = _FTS_STRIP.sub(' ', q).strip() if len(q) >= 3 else ''
+        if cleaned:
+            fts_match = '"' + cleaned.replace('"', '') + '"'
+            fts_clause = ('p.rowid IN (SELECT rowid FROM problems_fts '
+                          'WHERE problems_fts MATCH ?)')
+            if sol_scan:
+                clauses.append(f'({fts_clause} OR {sol_clause})')
+                params.extend([fts_match, sol_param])
+            else:
+                clauses.append(fts_clause)
+                params.append(fts_match)
         else:
             base = ('p.problem_md LIKE ? OR p.problem_zh LIKE ? '
                     'OR p.competition_raw LIKE ? OR p.categories_json LIKE ?')
             base_params = [like, like, like, like]
             if sol_scan:
-                base += (' OR EXISTS (SELECT 1 FROM solutions s WHERE '
-                         's.problem_id = p.id AND (s.solution_md LIKE ? '
-                         'OR s.solution_zh LIKE ?))')
-                base_params += [like, like]
+                base += f' OR {sol_clause}'
+                base_params.append(sol_param)
             clauses.append(f'({base})')
             params.extend(base_params)
 
@@ -226,14 +259,33 @@ _SORTS = {
 }
 
 
-def _order_clause(args, fts_match):
-    """Return (order_sql, order_params). Relevance only makes sense with FTS."""
+def _is_relevance(args, fts_match):
     sort = args.get('sort') or ('relevance' if fts_match else 'default')
-    if sort == 'relevance' and fts_match:
-        return (f'(SELECT {_BM25} FROM problems_fts '
-                'WHERE problems_fts.rowid = p.rowid AND problems_fts MATCH ?), '
-                'p.browse_rank', [fts_match])
-    return _SORTS.get(sort, _SORTS['default']), []
+    return sort == 'relevance' and bool(fts_match)
+
+
+def _order_clause(args, fts_match=None):
+    """SQL ORDER BY for the non-relevance sorts."""
+    sort = args.get('sort') or 'default'
+    return _SORTS.get(sort, _SORTS['default'])
+
+
+def _relevance_ids(conn, where, params, fts_match):
+    """Full result-id list ordered by bm25 relevance, computed in two cheap
+    passes + a Python sort. Every SQL formulation of this join (LEFT JOIN on
+    the MATCH subquery, correlated scalar subquery) degenerated into an
+    unindexed nested loop over 11k x hits rows (~8s); fetching scores (0.05s)
+    and members (0.03s) separately and sorting in Python is ~100x faster.
+    bm25 is negative (smaller = more relevant); non-FTS rows (solution-only
+    hits under qscope=all) sort last, tie-broken by browse_rank."""
+    scores = dict(conn.execute(
+        f'SELECT rowid, {_BM25} FROM problems_fts WHERE problems_fts MATCH ?',
+        (fts_match,)).fetchall())
+    rows = conn.execute(
+        f'SELECT p.rowid, p.id, p.browse_rank FROM problems p{where}',
+        params).fetchall()
+    ordered = sorted(rows, key=lambda r: (scores.get(r[0], 1e9), r[2]))
+    return [r[1] for r in ordered]
 
 
 # --------------------------------------------------------------------------- #
@@ -325,8 +377,12 @@ def _full(conn, row):
 # --------------------------------------------------------------------------- #
 # Browse tree + filter facets.
 # --------------------------------------------------------------------------- #
-@functools.lru_cache(maxsize=1)
 def _registry_payload():
+    return _registry_payload_cached(_db_stamp())
+
+
+@functools.lru_cache(maxsize=2)
+def _registry_payload_cached(_stamp):
     conn = sqlite3.connect(f'file:{_DB_PATH}?mode=ro', uri=True,
                            check_same_thread=False)
     conn.row_factory = sqlite3.Row
@@ -409,8 +465,12 @@ def registry():
     return resp
 
 
-@functools.lru_cache(maxsize=1)
 def _facets_payload():
+    return _facets_payload_cached(_db_stamp())
+
+
+@functools.lru_cache(maxsize=2)
+def _facets_payload_cached(_stamp):
     conn = sqlite3.connect(f'file:{_DB_PATH}?mode=ro', uri=True,
                            check_same_thread=False)
     conn.row_factory = sqlite3.Row
@@ -447,10 +507,10 @@ def _facets_payload():
             'FROM problem_categories WHERE l3 IS NOT NULL '
             'GROUP BY l3, l1_zh, l2_zh ORDER BY n DESC')]
         level4 = [{'value': r['l4'], 'l1': r['l1_zh'], 'l2': r['l2_zh'],
-                   'count': r['n']} for r in rows(
-            'SELECT l4, l1_zh, l2_zh, COUNT(DISTINCT problem_id) n '
+                   'l3': r['l3'], 'count': r['n']} for r in rows(
+            'SELECT l4, l1_zh, l2_zh, l3, COUNT(DISTINCT problem_id) n '
             'FROM problem_categories WHERE l4 IS NOT NULL '
-            'GROUP BY l4, l1_zh, l2_zh ORDER BY n DESC')]
+            'GROUP BY l4, l1_zh, l2_zh, l3 ORDER BY n DESC')]
         difficulties = [
             {'value': r['difficulty'], 'label': r['difficulty_zh'], 'count': r['n']}
             for r in rows('SELECT difficulty, difficulty_zh, COUNT(*) n '
@@ -551,16 +611,26 @@ def list_problems():
     except (TypeError, ValueError):
         page_size = 20
 
-    total = conn.execute(
-        f'SELECT COUNT(*) n FROM problems p{where}', params).fetchone()['n']
-    pages = (total + page_size - 1) // page_size if total else 0
-
-    order, order_params = _order_clause(args, fts_match)
     offset = (page - 1) * page_size
-    rows = conn.execute(
-        f'SELECT * FROM problems p{where} ORDER BY {order} LIMIT ? OFFSET ?',
-        params + order_params + [page_size, offset]).fetchall()
+    if _is_relevance(args, fts_match):
+        ids = _relevance_ids(conn, where, params, fts_match)
+        total = len(ids)
+        page_ids = ids[offset:offset + page_size]
+        marks = ','.join('?' * len(page_ids))
+        by_id = {r['id']: r for r in conn.execute(
+            f'SELECT * FROM problems p WHERE id IN ({marks})', page_ids)} \
+            if page_ids else {}
+        rows = [by_id[i] for i in page_ids if i in by_id]
+    else:
+        total = conn.execute(
+            f'SELECT COUNT(*) n FROM problems p{where}', params).fetchone()['n']
+        order = _order_clause(args)
+        rows = conn.execute(
+            f'SELECT p.* FROM problems p{where} '
+            f'ORDER BY {order} LIMIT ? OFFSET ?',
+            params + [page_size, offset]).fetchall()
 
+    pages = (total + page_size - 1) // page_size if total else 0
     return jsonify({
         'items': [_light(r, q=q or None) for r in rows],
         'total': total, 'page': page, 'pages': pages, 'pageSize': page_size,
@@ -579,12 +649,15 @@ def id_list():
         limit = min(max(1, int(args.get('limit', 500))), 500)
     except (TypeError, ValueError):
         limit = 500
+    if _is_relevance(args, fts_match):
+        ids = _relevance_ids(conn, where, params, fts_match)
+        return jsonify({'ids': ids[:limit], 'total': len(ids)})
     total = conn.execute(
         f'SELECT COUNT(*) n FROM problems p{where}', params).fetchone()['n']
-    order, order_params = _order_clause(args, fts_match)
+    order = _order_clause(args)
     rows = conn.execute(
         f'SELECT p.id FROM problems p{where} ORDER BY {order} LIMIT ?',
-        params + order_params + [limit]).fetchall()
+        params + [limit]).fetchall()
     return jsonify({'ids': [r['id'] for r in rows], 'total': total})
 
 
@@ -621,6 +694,7 @@ def batch():
     """Light rows for an explicit id list (favorites / review sets).
 
     Preserves input order; unknown ids are reported in `missing`.
+    Hard cap 200 ids per call (explicit 400, never silent truncation).
     """
     conn = _db()
     if conn is None:
@@ -629,7 +703,9 @@ def batch():
     ids = body.get('ids')
     if not isinstance(ids, list) or not ids:
         return jsonify({'error': 'ids: non-empty list required'}), 400
-    ids = [str(i) for i in ids[:200]]
+    if len(ids) > 200:
+        return jsonify({'error': 'ids: at most 200 allowed'}), 400
+    ids = [str(i) for i in ids]
     marks = ','.join('?' * len(ids))
     rows = conn.execute(
         f'SELECT * FROM problems p WHERE id IN ({marks})', ids).fetchall()
@@ -653,7 +729,9 @@ def daily_problem():
         return _unavailable()
     d = request.args.get('date') or date.today().isoformat()
     # Deterministic per-day pick among solved, non-elite, tier<=3 problems.
-    seed = sum(ord(c) for c in d) * 2654435761 % (2 ** 32)
+    # crc32 over the whole string: a char-sum seed collides for same-digit-sum
+    # dates (07-12 / 07-21 / 07-30 would all share one problem).
+    seed = zlib.crc32(d.encode('utf-8'))
     pool = conn.execute(
         f'SELECT COUNT(*) n FROM problems WHERE {_DAILY_POOL}').fetchone()['n']
     if not pool:
@@ -725,31 +803,45 @@ def context(problem_id):
         return _unavailable()
     args = request.args
     where, params, fts_match, _q = _where(args)
-    order, order_params = _order_clause(args, fts_match)
 
-    sql = (f'WITH ordered AS (SELECT p.id, ROW_NUMBER() OVER '
-           f'(ORDER BY {order}) rn FROM problems p{where}) ')
-    row = conn.execute(sql + 'SELECT rn FROM ordered WHERE id = ?',
-                       params + order_params + [problem_id]).fetchone()
+    def neighbor(pid):
+        if not pid:
+            return None
+        r = conn.execute('SELECT * FROM problems p WHERE id = ?',
+                         (pid,)).fetchone()
+        return {'id': pid, 'headline': _headline(dict(r))} if r else None
+
+    if _is_relevance(args, fts_match):
+        ids = _relevance_ids(conn, where, params, fts_match)
+        try:
+            i = ids.index(problem_id)
+        except ValueError:
+            return jsonify({'index': None, 'total': None,
+                            'prev': None, 'next': None})
+        return jsonify({
+            'index': i + 1, 'total': len(ids),
+            'prev': neighbor(ids[i - 1] if i > 0 else None),
+            'next': neighbor(ids[i + 1] if i + 1 < len(ids) else None),
+        })
+
+    order = _order_clause(args)
+    # Single pass: rank + neighbors + total come out of one window scan.
+    row = conn.execute(
+        f'''WITH ordered AS (
+              SELECT p.id,
+                     ROW_NUMBER() OVER (ORDER BY {order}) rn,
+                     LAG(p.id)  OVER (ORDER BY {order}) prev_id,
+                     LEAD(p.id) OVER (ORDER BY {order}) next_id,
+                     COUNT(*)   OVER () total
+              FROM problems p{where})
+            SELECT rn, prev_id, next_id, total FROM ordered WHERE id = ?''',
+        params + [problem_id]).fetchone()
     if row is None:
         return jsonify({'index': None, 'total': None,
                         'prev': None, 'next': None})
-    rn = row['rn']
-    total = conn.execute(
-        f'SELECT COUNT(*) n FROM problems p{where}', params).fetchone()['n']
-    neighbors = conn.execute(
-        sql + 'SELECT o.rn, p.* FROM ordered o JOIN problems p ON p.id = o.id '
-        'WHERE o.rn IN (?, ?)',
-        params + order_params + [rn - 1, rn + 1]).fetchall()
-    prev = nxt = None
-    for r in neighbors:
-        d = dict(r)
-        item = {'id': d['id'], 'headline': _headline(d)}
-        if d['rn'] == rn - 1:
-            prev = item
-        elif d['rn'] == rn + 1:
-            nxt = item
-    return jsonify({'index': rn, 'total': total, 'prev': prev, 'next': nxt})
+    return jsonify({'index': row['rn'], 'total': row['total'],
+                    'prev': neighbor(row['prev_id']),
+                    'next': neighbor(row['next_id'])})
 
 
 @bp.route('/<problem_id>')

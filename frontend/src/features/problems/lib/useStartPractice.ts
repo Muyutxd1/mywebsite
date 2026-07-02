@@ -5,7 +5,7 @@ import { apiGet } from '@/lib/api'
 import type { IdListResponse, RandomIdsResponse } from '../types'
 import type { PracticeSetup } from '../components/PracticeSetupSheet'
 import { usePracticeStore } from '../store/practice'
-import { idSetIds, isIdSet, newSeed, newSid, sessionToQuery } from './session'
+import { idSetIds, isIdSet, newSeed, newSid, seededShuffle, sessionToQuery } from './session'
 
 const BASE = '/api/problems'
 
@@ -34,16 +34,7 @@ export function useStartPractice() {
       let ids: string[]
       if (isIdSet(f)) {
         ids = idSetIds(f)
-        if (setup.mode === 'random') {
-          // deterministic client shuffle for explicit review sets
-          let s = seed
-          const rand = () => ((s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x80000000)
-          ids = [...ids]
-          for (let i = ids.length - 1; i > 0; i--) {
-            const j = Math.floor(rand() * (i + 1))
-            ;[ids[i], ids[j]] = [ids[j], ids[i]]
-          }
-        }
+        if (setup.mode === 'random') ids = seededShuffle(ids, seed)
       } else if (setup.mode === 'random') {
         const res = await qc.fetchQuery({
           queryKey: ['problems', 'random', f, seed, 500],
@@ -81,7 +72,9 @@ export function useStartPractice() {
         record: {},
         startedAt: Date.now(),
       })
-      navigate(`/problems/practice/run?${sessionToQuery({ f, mode: setup.mode, seed, n: setup.n, sid })}`)
+      navigate(
+        `/problems/practice/run?${sessionToQuery({ f, mode: setup.mode, seed, n: setup.n, sk: setup.skipSolved, sid })}`,
+      )
     },
     [navigate, qc],
   )

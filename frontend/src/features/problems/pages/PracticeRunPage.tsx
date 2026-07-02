@@ -10,7 +10,7 @@ import { ProblemView } from '../components/ProblemView'
 import { PracticeSummaryView } from '../components/PracticeSummaryView'
 import { problemHeadline } from '../data/labels'
 import {
-  idSetIds, isIdSet, newSid, sessionFromQuery, sessionToQuery,
+  idSetIds, isIdSet, seededShuffle, sessionFromQuery,
 } from '../lib/session'
 import { useStartPractice } from '../lib/useStartPractice'
 import {
@@ -43,6 +43,8 @@ export default function PracticeRunPage() {
         let ids: string[]
         if (isIdSet(params.f)) {
           ids = idSetIds(params.f)
+          // replay the same deterministic shuffle session creation applied
+          if (params.mode === 'random') ids = seededShuffle(ids, params.seed)
         } else if (params.mode === 'random') {
           const res = await qc.fetchQuery({
             queryKey: ['problems', 'random', params.f, params.seed, 500],
@@ -60,6 +62,12 @@ export default function PracticeRunPage() {
             staleTime: Infinity,
           })
           ids = res.ids
+        }
+        if (params.sk) {
+          // mirror the skip-solved filter (against THIS user's progress)
+          const progress = usePracticeStore.getState().progress
+          const remaining = ids.filter((id) => progress[id]?.status !== 'solved')
+          if (remaining.length > 0) ids = remaining
         }
         if (params.n > 0) ids = ids.slice(0, params.n)
         if (cancelled || ids.length === 0) {
@@ -113,6 +121,12 @@ function Player({ session, onExit }: { session: PracticeSession; onExit: () => v
   const finished = cursor >= ids.length
   const currentId = finished ? undefined : ids[cursor]
 
+  // Belt-and-braces: the advance timer can be unmounted before it fires on
+  // the last answer; stamp finishedAt whenever the summary actually shows.
+  useEffect(() => {
+    if (finished && !session.finishedAt) usePracticeStore.getState().finishSession(sid)
+  }, [finished, session.finishedAt, sid])
+
   const { data: problem, isLoading, isError, refetch } = useProblem(currentId)
   const prefetch = usePrefetchProblem()
   useEffect(() => prefetch(ids[cursor + 1]), [cursor, ids, prefetch])
@@ -143,9 +157,13 @@ function Player({ session, onExit }: { session: PracticeSession; onExit: () => v
       sid,
       { id: currentId, result, revealed: revealedRef.current, ts: Date.now(), snap },
     )
-    // brief pause so the button state registers, then advance
+    // Brief pause so the button state registers, then advance — but only if
+    // the user hasn't already navigated away from the answered problem.
+    const answeredCursor = cursor
     advanceTimer.current = window.setTimeout(() => {
-      const next = cursor + 1
+      const sess = store.getState().sessions[sid]
+      if (!sess || sess.cursor !== answeredCursor) return
+      const next = answeredCursor + 1
       store.getState().setCursor(sid, next)
       if (next >= ids.length) store.getState().finishSession(sid)
       window.scrollTo({ top: 0 })

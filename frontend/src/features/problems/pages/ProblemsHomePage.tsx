@@ -40,7 +40,8 @@ function ContinueCard() {
   const active = order.map((sid) => sessions[sid]).find((s) => s && !s.finishedAt)
   if (!active) return null
   const url = `/problems/practice/run?${sessionToQuery({
-    f: active.f, mode: active.mode, seed: active.seed, n: active.n, sid: active.sid,
+    f: active.f, mode: active.mode, seed: active.seed, n: active.n,
+    sk: false, sid: active.sid,
   })}`
   return (
     <Link

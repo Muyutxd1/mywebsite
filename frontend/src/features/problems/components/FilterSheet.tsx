@@ -81,7 +81,9 @@ function CategoryDrill({
         .map((o) => ({ value: o.value, count: o.count }))
     if (!draft.level4)
       return facets.level4
-        .filter((o) => o.l1 === draft.level1 && o.l2 === draft.level2)
+        .filter(
+          (o) => o.l1 === draft.level1 && o.l2 === draft.level2 && o.l3 === draft.level3,
+        )
         .map((o) => ({ value: o.value, count: o.count }))
     return []
   }, [facets, draft.level1, draft.level2, draft.level3, draft.level4])

@@ -158,6 +158,26 @@ def load_registry():
     return reg, comps, regions
 
 
+def other_key_for(config, comps, others_by_config):
+    """The catch-all comp for a config. Prefer the registry comp that this
+    config's own assignments already use; otherwise synthesize one in-memory,
+    so an upstream data update with new raw names never kills the build."""
+    ck = others_by_config.get(config)
+    if ck and ck in comps:
+        return ck
+    slug = re.sub(r'[^a-z0-9]+', '_', config.lower()).strip('_')[:24]
+    ck = f'{slug}_other'
+    if ck not in comps:
+        comps[ck] = {
+            'comp_key': ck,
+            'name_en': f'{config} (unspecified source)',
+            'name_zh': f'{CONFIG_COUNTRY_ZH.get(config, config)} · 未标注来源',
+            'short': None, 'region': 'asia',
+            'tier': 4, 'sort_rank': 99, 'rounds': [],
+        }
+    return ck
+
+
 def load_assignments():
     with open(ASSIGN_PATH, encoding='utf-8') as f:
         data = json.load(f)
@@ -482,13 +502,22 @@ def main():
     print(f'registry: {len(comps)} comps | assignments: {len(assignments)} | '
           f'enrichment: {len(enrich)} | translations: {len(translations)}', flush=True)
 
+    # Per-config catch-all comps, resolved (or synthesized) up front so the
+    # competitions table always contains every key the row loop can emit.
+    others_by_config = {}
+    for (cfg, _comp), a in assignments.items():
+        if a['comp_key'].endswith('_other'):
+            others_by_config.setdefault(cfg, a['comp_key'])
+    for config in CONFIGS:
+        other_key_for(config, comps, others_by_config)
+
     if os.path.exists(DB_PATH):
         os.remove(DB_PATH)
     con = sqlite3.connect(DB_PATH)
     con.executescript('PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL;')
     con.executescript(SCHEMA)
 
-    for c in registry['competitions']:
+    for c in comps.values():
         region = regions[c['region']]
         con.execute(
             'INSERT INTO competitions VALUES (?,?,?,?,?,?,?,?,?,?)',
@@ -520,7 +549,7 @@ def main():
                 if a is None:
                     unmapped[(config, competition_raw)] = \
                         unmapped.get((config, competition_raw), 0) + 1
-                    a = {'comp_key': f'{prefix.lower()}_other',
+                    a = {'comp_key': other_key_for(config, comps, others_by_config),
                          'round_key': None, 'fixed_year': None}
                 comp_key = a['comp_key']
                 comp_def = comps.get(comp_key)
@@ -531,11 +560,18 @@ def main():
 
                 # ---- images (optimized webp; _ext drives the md ref rewrite) ----
                 imgs = r.get('images') or []
-                for im in imgs:
+                pdir = os.path.join(IMAGES_DIR, pid)
+                for i, im in enumerate(imgs):
                     b = im.get('bytes') or b''
                     im['_ext'] = 'webp' if b else 'png'
+                    if args.no_images:
+                        # dev fast path: keep refs pointing at whatever a prior
+                        # full build actually wrote (webp, or a fallback ext)
+                        for ext in ('webp', 'png', 'jpg', 'gif'):
+                            if os.path.exists(os.path.join(pdir, f'{i + 1}.{ext}')):
+                                im['_ext'] = ext
+                                break
                 if imgs and not args.no_images:
-                    pdir = os.path.join(IMAGES_DIR, pid)
                     os.makedirs(pdir, exist_ok=True)
                     for i, im in enumerate(imgs):
                         b = im.get('bytes') or b''

@@ -8,7 +8,8 @@ function SessionRow({ session }: { session: PracticeSession }) {
   const counts = countResults(sessionEntries(session))
   const done = Boolean(session.finishedAt)
   const url = `/problems/practice/run?${sessionToQuery({
-    f: session.f, mode: session.mode, seed: session.seed, n: session.n, sid: session.sid,
+    f: session.f, mode: session.mode, seed: session.seed, n: session.n,
+    sk: false, sid: session.sid,
   })}`
 
   return (

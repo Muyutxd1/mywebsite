@@ -53,6 +53,7 @@ export interface CategoryOption {
   value: string
   l1?: string | null
   l2?: string | null
+  l3?: string | null
   count: number
 }
 
