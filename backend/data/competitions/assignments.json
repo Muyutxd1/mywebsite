@@ -1,0 +1,4736 @@
+{
+ "assignments": [
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "原始名为空，按 config 归属 APMO"
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "APMO",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "APMO 1989",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 1989,
+   "note": ""
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "APMO 1991",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 1991,
+   "note": ""
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "APMO 1993",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 1993,
+   "note": ""
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "APMO 1994",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 1994,
+   "note": ""
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "APMO 2016",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 2016,
+   "note": ""
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "APMO 2021",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 2021,
+   "note": ""
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "APMO 2025",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 2025,
+   "note": ""
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "XI APMO",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 1999,
+   "note": "XI=第11届，1988+11=1999；样题含'1999 terms'佐证"
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "XIV APMO",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 2002,
+   "note": "XIV=第14届，1988+14=2002"
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "XIX Asian Pacific Mathematics Olympiad",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 2007,
+   "note": "XIX=第19届，1988+19=2007"
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "XV APMO",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 2003,
+   "note": "XV=第15届，1988+15=2003"
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "XVII APMO - March, 2005",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 2005,
+   "note": "名字含明确年份2005，与第17届换算一致"
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "XX Asian Pacific Mathematics Olympiad",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 2008,
+   "note": "XX=第20届，1988+20=2008"
+  },
+  {
+   "config": "Asia_Pacific_Mathematics_Olympiad_APMO",
+   "competition": "XXI Asian Pacific Mathematics Olympiad",
+   "comp_key": "apmo",
+   "round_key": null,
+   "fixed_year": 2009,
+   "note": "XXI=第21届，1988+21=2009"
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "41st Balkan Mathematical Olympiad",
+   "comp_key": "balkan_mo",
+   "round_key": null,
+   "fixed_year": 2024,
+   "note": "第41届=1983+41=2024；count=19 超正赛4题，疑为备选题打包但名字未标"
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "42nd Balkan Mathematical Olympiad",
+   "comp_key": "balkan_mo",
+   "round_key": null,
+   "fixed_year": 2025,
+   "note": "第42届=1983+42=2025"
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "BMO 2010 Shortlist",
+   "comp_key": "balkan_mo",
+   "round_key": "shortlist",
+   "fixed_year": 2010,
+   "note": ""
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "BMO 2016 Short List Final",
+   "comp_key": "balkan_mo",
+   "round_key": "shortlist",
+   "fixed_year": 2016,
+   "note": ""
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "BMO 2017",
+   "comp_key": "balkan_mo",
+   "round_key": null,
+   "fixed_year": 2017,
+   "note": "config 下 BMO=Balkan（非英国BMO）；名字无轮次信息，但 count=21 远超正赛4题，疑为2017备选题"
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "BMO 2019 Shortlist",
+   "comp_key": "balkan_mo",
+   "round_key": "shortlist",
+   "fixed_year": 2019,
+   "note": ""
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "BMO 2022 shortlist",
+   "comp_key": "balkan_mo",
+   "round_key": "shortlist",
+   "fixed_year": 2022,
+   "note": ""
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "BMO 2023 Short List",
+   "comp_key": "balkan_mo",
+   "round_key": "shortlist",
+   "fixed_year": 2023,
+   "note": ""
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "BMO Short List",
+   "comp_key": "balkan_mo",
+   "round_key": "shortlist",
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "Balkan 2012 shortlist",
+   "comp_key": "balkan_mo",
+   "round_key": "shortlist",
+   "fixed_year": 2012,
+   "note": ""
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "Balkan Mathematical Olympiad",
+   "comp_key": "balkan_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年（count=61）"
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "Balkan Mathematical Olympiad Shortlist",
+   "comp_key": "balkan_mo",
+   "round_key": "shortlist",
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "Balkan Mathematical Olympiad Shortlisted Problems",
+   "comp_key": "balkan_mo",
+   "round_key": "shortlist",
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "Balkan_Mathematical_Olympiad",
+   "competition": "shortlistBMO 2011",
+   "comp_key": "balkan_mo",
+   "round_key": "shortlist",
+   "fixed_year": 2011,
+   "note": "原始名粘连，即 BMO 2011 Shortlist"
+  },
+  {
+   "config": "Canada",
+   "competition": "2003 CMO",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2003,
+   "note": "名字含明确年份"
+  },
+  {
+   "config": "Canada",
+   "competition": "38th Canadian Mathematical Olympiad",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2006,
+   "note": "第38届，按首届1969换算：1968+38=2006"
+  },
+  {
+   "config": "Canada",
+   "competition": "40th Canadian Mathematical Olympiad",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2008,
+   "note": "第40届，按首届1969换算：1968+40=2008"
+  },
+  {
+   "config": "Canada",
+   "competition": "CANADIAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "全大写变体；无年份"
+  },
+  {
+   "config": "Canada",
+   "competition": "CMO",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "缩写CMO在Canada config下即加拿大数学奥林匹克；无年份"
+  },
+  {
+   "config": "Canada",
+   "competition": "CMO 2017",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2017,
+   "note": "年份取自名字"
+  },
+  {
+   "config": "Canada",
+   "competition": "CMO 2023",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2023,
+   "note": "年份取自名字"
+  },
+  {
+   "config": "Canada",
+   "competition": "Canadian Mathematical Olympiad",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份信息，覆盖多年"
+  },
+  {
+   "config": "Canada",
+   "competition": "Canadian Mathematics Olympiad",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "拼写变体（Mathematics）；无年份"
+  },
+  {
+   "config": "Canada",
+   "competition": "Kanada",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "德语来源写法，无年份（样题为CMO 2016风格的2016黑板平均数题，但名字本身无年份，不猜）"
+  },
+  {
+   "config": "Canada",
+   "competition": "Kanada 2010",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2010,
+   "note": "德语来源写法；年份取自名字"
+  },
+  {
+   "config": "Canada",
+   "competition": "Kanada 2011",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2011,
+   "note": "Kanada为德语来源写法，即加拿大CMO；年份取自名字"
+  },
+  {
+   "config": "Canada",
+   "competition": "Kanada 2012",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2012,
+   "note": "德语来源写法（样题含法语原文，确系CMO官方双语卷）；年份取自名字"
+  },
+  {
+   "config": "Canada",
+   "competition": "Kanada 2014",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2014,
+   "note": "德语来源写法；年份取自名字"
+  },
+  {
+   "config": "Canada",
+   "competition": "Kanada 2015",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2015,
+   "note": "德语来源写法；年份取自名字"
+  },
+  {
+   "config": "Canada",
+   "competition": "Sun Life Financial Canadian Mathematical Olympiad",
+   "comp_key": "canada_mo",
+   "round_key": null,
+   "fixed_year": 2012,
+   "note": "Sun Life为2009-2019年间CMO冠名赞助商；该名下仅1题，与本批 Kanada 2012 样题完全同题（x^2+xy^2+xyz^2>=4xyz-4，CMO 2012第1题），故定2012"
+  },
+  {
+   "config": "China",
+   "competition": "2011 China Western Mathematical Olympiad",
+   "comp_key": "china_western_mo",
+   "round_key": null,
+   "fixed_year": 2011
+  },
+  {
+   "config": "China",
+   "competition": "2022 CGMO",
+   "comp_key": "china_girls_mo",
+   "round_key": null,
+   "fixed_year": 2022
+  },
+  {
+   "config": "China",
+   "competition": "2022 China Team Selection Test",
+   "comp_key": "china_tst",
+   "round_key": null,
+   "fixed_year": 2022
+  },
+  {
+   "config": "China",
+   "competition": "2022 China Team Selection Test for IMO",
+   "comp_key": "china_tst",
+   "round_key": null,
+   "fixed_year": 2022
+  },
+  {
+   "config": "China",
+   "competition": "2023 Chinese IMO National Team Selection Test",
+   "comp_key": "china_tst",
+   "round_key": null,
+   "fixed_year": 2023
+  },
+  {
+   "config": "China",
+   "competition": "2024 CGMO",
+   "comp_key": "china_girls_mo",
+   "round_key": null,
+   "fixed_year": 2024
+  },
+  {
+   "config": "China",
+   "competition": "2024 CMO",
+   "comp_key": "china_mo",
+   "round_key": null,
+   "fixed_year": 2024
+  },
+  {
+   "config": "China",
+   "competition": "2025 International Mathematical Olympiad China National Team Selection Test",
+   "comp_key": "china_tst",
+   "round_key": null,
+   "fixed_year": 2025
+  },
+  {
+   "config": "China",
+   "competition": "22nd Chinese Girls' Mathematical Olympiad",
+   "comp_key": "china_girls_mo",
+   "round_key": null,
+   "fixed_year": 2023,
+   "note": "CGMO首届2002年，第22届=2001+22=2023"
+  },
+  {
+   "config": "China",
+   "competition": "China Girls' Mathematical Olympiad",
+   "comp_key": "china_girls_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "China",
+   "competition": "China Mathematical Competition",
+   "comp_key": "china_mc",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "未区分一试/加试，轮次留空"
+  },
+  {
+   "config": "China",
+   "competition": "China Mathematical Competition (Complementary Test)",
+   "comp_key": "china_mc",
+   "round_key": "extra",
+   "fixed_year": null,
+   "note": "Complementary Test即加试"
+  },
+  {
+   "config": "China",
+   "competition": "China Mathematical Competition (Extra Test)",
+   "comp_key": "china_mc",
+   "round_key": "extra",
+   "fixed_year": null
+  },
+  {
+   "config": "China",
+   "competition": "China Mathematical Competition (Hainan)",
+   "comp_key": "china_mc",
+   "round_key": "provincial",
+   "fixed_year": null,
+   "note": "省级预赛（海南），省名不保留"
+  },
+  {
+   "config": "China",
+   "competition": "China Mathematical Competition (Jiangxi)",
+   "comp_key": "china_mc",
+   "round_key": "provincial",
+   "fixed_year": null,
+   "note": "省级预赛（江西），省名不保留"
+  },
+  {
+   "config": "China",
+   "competition": "China Mathematical Competition (Shaanxi)",
+   "comp_key": "china_mc",
+   "round_key": "provincial",
+   "fixed_year": null,
+   "note": "省级预赛（陕西），省名不保留"
+  },
+  {
+   "config": "China",
+   "competition": "China Mathematical Olympiad",
+   "comp_key": "china_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "China",
+   "competition": "China National Team Selection Test",
+   "comp_key": "china_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "China",
+   "competition": "China Southeastern Mathematical Olympiad",
+   "comp_key": "china_southeast_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "China",
+   "competition": "China Team Selection Test",
+   "comp_key": "china_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "China",
+   "competition": "China Western Invitational Mathematical Competition",
+   "comp_key": "china_western_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "中国西部数学邀请赛与中国西部数学奥林匹克为同一赛事的不同时期名称"
+  },
+  {
+   "config": "China",
+   "competition": "China Western Mathematical Olympiad",
+   "comp_key": "china_western_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "China",
+   "competition": "China-TST-2023B",
+   "comp_key": "china_tst",
+   "round_key": null,
+   "fixed_year": 2023,
+   "note": "尾缀B为该年多场选拔中的批次B，未建独立round"
+  },
+  {
+   "config": "China",
+   "competition": "China-TST-2025A",
+   "comp_key": "china_tst",
+   "round_key": null,
+   "fixed_year": 2025,
+   "note": "尾缀A为该年多场选拔中的批次A，未建独立round"
+  },
+  {
+   "config": "China",
+   "competition": "Chinese Mathematical Olympiad",
+   "comp_key": "china_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "与China Mathematical Olympiad同为CMO的英文异名"
+  },
+  {
+   "config": "China",
+   "competition": "International Mathematical Olympiad",
+   "comp_key": "imo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "国际赛事出现在China config，归全局imo"
+  },
+  {
+   "config": "China",
+   "competition": "The 65th IMO China National Team Selection Test",
+   "comp_key": "china_tst",
+   "round_key": null,
+   "fixed_year": 2024,
+   "note": "序数指向IMO届次：第65届IMO=1959+65=2024，中国TST于当年举行"
+  },
+  {
+   "config": "European_Girls'_Mathematical_Olympiad_EGMO",
+   "competition": "",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "原始名为空，按 config 归属 EGMO"
+  },
+  {
+   "config": "European_Girls'_Mathematical_Olympiad_EGMO",
+   "competition": "EGMO",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "European_Girls'_Mathematical_Olympiad_EGMO",
+   "competition": "EGMO 2020",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": 2020,
+   "note": ""
+  },
+  {
+   "config": "European_Girls'_Mathematical_Olympiad_EGMO",
+   "competition": "EGMO 2021",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": 2021,
+   "note": ""
+  },
+  {
+   "config": "European_Girls'_Mathematical_Olympiad_EGMO",
+   "competition": "EGMO 2023",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": 2023,
+   "note": ""
+  },
+  {
+   "config": "European_Girls'_Mathematical_Olympiad_EGMO",
+   "competition": "EGMO 2024",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": 2024,
+   "note": ""
+  },
+  {
+   "config": "European_Girls'_Mathematical_Olympiad_EGMO",
+   "competition": "EGMO2022",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": 2022,
+   "note": "名字含年份2022（无空格粘连）"
+  },
+  {
+   "config": "European_Girls'_Mathematical_Olympiad_EGMO",
+   "competition": "European Girls' Mathematical Olympiad",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "European_Girls'_Mathematical_Olympiad_EGMO",
+   "competition": "European Girls' Mathematical Olympiad 2012-Day 1 Solutions",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": 2012,
+   "note": "Day 1，EGMO 未建 day 轮次故 round_key=null"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "",
+   "comp_key": "hongkong_other",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "原始名为空，样题为函数方程证明题，无法确定归属"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "1997-2023 IMO HK TST",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "名称覆盖1997-2023多年，年份留空待逐题补"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "CHKMO",
+   "comp_key": "hongkong_cmo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "HKG TST",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "HONG KONG PRELIMINARY SELECTION CONTEST",
+   "comp_key": "hongkong_prelim",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "全大写异写，同香港IMO预选赛"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "Hong Kong Preliminary Selection Contest",
+   "comp_key": "hongkong_prelim",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "Hong Kong Team Selection Test 1",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": "test1",
+   "fixed_year": null
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "Hong Kong Team Selection Test 2",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": "test2",
+   "fixed_year": null
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "HongKong 2022-23 IMO Selection Tests",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": null,
+   "fixed_year": 2022,
+   "note": "2022-23赛季取起始年2022"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "IMO HK TST",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "IMO Preliminary Selection Contest — Hong Kong",
+   "comp_key": "hongkong_prelim",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "Pre-IMO 2017 Mock Exam",
+   "comp_key": "hongkong_other",
+   "round_key": null,
+   "fixed_year": 2017,
+   "note": "IMO赛前模拟考（训练题性质），非正式选拔，归兜底"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "Test 1",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": "test1",
+   "fixed_year": null,
+   "note": "样题id(06ch)紧邻HKG TST/CHKMO段，推断为TST第一次选拔卷"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "The 26th Hong Kong (China) Mathematical Olympiad",
+   "comp_key": "hongkong_cmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "CHKMO首届年份不确知（约1998/99），不换算，宁缺毋滥"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "The Seventeenth Hong Kong (China) Mathematical Olympiad",
+   "comp_key": "hongkong_cmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "CHKMO首届年份不确知，不换算"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "The Sixteenth Hong Kong (China) Mathematical Olympiad",
+   "comp_key": "hongkong_cmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "CHKMO首届年份不确知，不换算"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "The Twenty-fifth Hong Kong (China) Mathematical Olympiad",
+   "comp_key": "hongkong_cmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "CHKMO首届年份不确知，不换算"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "Year 2008",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": null,
+   "fixed_year": 2008,
+   "note": "同「Year 2016」，由文档上下文推断为该年IMO HK TST"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "Year 2012",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": null,
+   "fixed_year": 2012,
+   "note": "同「Year 2016」，由文档上下文推断为该年IMO HK TST"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "Year 2016",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": null,
+   "fixed_year": 2016,
+   "note": "「Year YYYY」为香港汇编文档中按年排列的年度小节，与显式标注的TST/CHKMO条目交错，由上下文推断为该年IMO HK TST"
+  },
+  {
+   "config": "Hong_Kong",
+   "competition": "Year 2021",
+   "comp_key": "hongkong_imo_tst",
+   "round_key": null,
+   "fixed_year": 2021,
+   "note": "同「Year 2016」，由文档上下文推断为该年IMO HK TST"
+  },
+  {
+   "config": "IMO",
+   "competition": "48th International Mathematical Olympiad Vietnam 2007 Shortlisted Problems with Solutions",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2007,
+   "note": "名字含明确年份2007，与第48届换算(1959+48)一致"
+  },
+  {
+   "config": "IMO",
+   "competition": "49th International Mathematical Olympiad Spain",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2008,
+   "note": "第49届=1959+49=2008（西班牙马德里佐证）；count=18 超正赛6题且样题为 ISL 2008 题，归 shortlist"
+  },
+  {
+   "config": "IMO",
+   "competition": "51st IMO Shortlisted Problems",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2010,
+   "note": "第51届=1959+51=2010"
+  },
+  {
+   "config": "IMO",
+   "competition": "52nd International Mathematical Olympiad 2011 Shortlist",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2011,
+   "note": "名字含明确年份2011，与第52届换算一致"
+  },
+  {
+   "config": "IMO",
+   "competition": "53rd International Mathematical Olympiad Shortlisted Problems with Solutions",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2012,
+   "note": "第53届=1959+53=2012"
+  },
+  {
+   "config": "IMO",
+   "competition": "55th International Mathematical Olympiad Shortlist",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2014,
+   "note": "第55届=1959+55=2014"
+  },
+  {
+   "config": "IMO",
+   "competition": "56th International Mathematical Olympiad Shortlisted Problems",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2015,
+   "note": "第56届=1959+56=2015"
+  },
+  {
+   "config": "IMO",
+   "competition": "IMO 2006 Shortlisted Problems",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2006,
+   "note": ""
+  },
+  {
+   "config": "IMO",
+   "competition": "IMO 2016 Shortlisted Problems",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2016,
+   "note": ""
+  },
+  {
+   "config": "IMO",
+   "competition": "IMO 2019 Shortlisted Problems",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2019,
+   "note": ""
+  },
+  {
+   "config": "IMO",
+   "competition": "IMO 2020 Shortlisted Problems",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2020,
+   "note": ""
+  },
+  {
+   "config": "IMO",
+   "competition": "IMO 2021 Shortlisted Problems",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2021,
+   "note": ""
+  },
+  {
+   "config": "IMO",
+   "competition": "IMO Problem Shortlist",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "IMO",
+   "competition": "IMO Shortlisted Problems",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "IMO",
+   "competition": "IMO2024 Shortlisted Problems",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": 2024,
+   "note": "名字含年份2024（无空格粘连）"
+  },
+  {
+   "config": "IMO",
+   "competition": "International Mathematical Olympiad",
+   "comp_key": "imo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "IMO 正赛题，无年份，覆盖多年"
+  },
+  {
+   "config": "IMO",
+   "competition": "International Mathematical Olympiad Shortlist",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "IMO",
+   "competition": "International Mathematical Olympiad Shortlisted Problems",
+   "comp_key": "imo_shortlist",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "India",
+   "competition": "EGMO TST",
+   "comp_key": "india_egmo_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份、轮次不明"
+  },
+  {
+   "config": "India",
+   "competition": "EGMO TST Day 1",
+   "comp_key": "india_egmo_tst",
+   "round_key": "day1",
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "India",
+   "competition": "EGMO TST Day 2",
+   "comp_key": "india_egmo_tst",
+   "round_key": "day2",
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "India",
+   "competition": "IMO TST",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "印度config下的IMO TST，无年份"
+  },
+  {
+   "config": "India",
+   "competition": "IMO TST Day 1",
+   "comp_key": "india_tst",
+   "round_key": "day1",
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "India",
+   "competition": "IMO TST Day 2",
+   "comp_key": "india_tst",
+   "round_key": "day2",
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "India",
+   "competition": "IMO TST Day 3",
+   "comp_key": "india_tst",
+   "round_key": "day3",
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "India",
+   "competition": "IMO TST Day 4",
+   "comp_key": "india_tst",
+   "round_key": "day4",
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "India",
+   "competition": "IMOTC Practice Test 1",
+   "comp_key": "india_imotc",
+   "round_key": "test1",
+   "fixed_year": null,
+   "note": "IMO集训营练习赛，无年份"
+  },
+  {
+   "config": "India",
+   "competition": "IMOTC Practice Test 2",
+   "comp_key": "india_imotc",
+   "round_key": "test2",
+   "fixed_year": null,
+   "note": "IMO集训营练习赛，无年份"
+  },
+  {
+   "config": "India",
+   "competition": "IMO_TSTs_India",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "India",
+   "competition": "IND_National",
+   "comp_key": "india_inmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "IND_National=印度国家级奥赛，归INMO，无年份"
+  },
+  {
+   "config": "India",
+   "competition": "IND_TSExams",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "TS Exams=选拔考试，无年份"
+  },
+  {
+   "config": "India",
+   "competition": "INMO",
+   "comp_key": "india_inmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "India",
+   "competition": "INMO 2004",
+   "comp_key": "india_inmo",
+   "round_key": null,
+   "fixed_year": 2004,
+   "note": ""
+  },
+  {
+   "config": "India",
+   "competition": "INMO-2017",
+   "comp_key": "india_inmo",
+   "round_key": null,
+   "fixed_year": 2017,
+   "note": ""
+  },
+  {
+   "config": "India",
+   "competition": "INMO_2023",
+   "comp_key": "india_inmo",
+   "round_key": null,
+   "fixed_year": 2023,
+   "note": "年份取自名字"
+  },
+  {
+   "config": "India",
+   "competition": "India_2017",
+   "comp_key": "india_other",
+   "round_key": null,
+   "fixed_year": 2017,
+   "note": "仅'India 2017'，无法区分INMO/TST，归兜底"
+  },
+  {
+   "config": "India",
+   "competition": "Indian National Mathematical Olympiad",
+   "comp_key": "india_inmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "India",
+   "competition": "Indija TS",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "India",
+   "competition": "Indija TS 2006",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": 2006,
+   "note": "Indija TS=塞尔维亚语'印度TST'"
+  },
+  {
+   "config": "India",
+   "competition": "Indija TS 2007",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": 2007,
+   "note": "Indija TS=塞尔维亚语'印度TST'"
+  },
+  {
+   "config": "India",
+   "competition": "Indija TS 2008",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": 2008,
+   "note": "Indija TS=塞尔维亚语'印度TST'"
+  },
+  {
+   "config": "India",
+   "competition": "Indija TS 2009",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": 2009,
+   "note": "Indija TS=塞尔维亚语'印度TST'"
+  },
+  {
+   "config": "India",
+   "competition": "Indija TS 2010",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": 2010,
+   "note": "Indija TS=塞尔维亚语'印度TST'"
+  },
+  {
+   "config": "India",
+   "competition": "Indija TS 2012",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": 2012,
+   "note": "Indija TS=塞尔维亚语'印度TST'"
+  },
+  {
+   "config": "India",
+   "competition": "Indija TS 2013",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": 2013,
+   "note": "Indija TS=塞尔维亚语'印度TST'"
+  },
+  {
+   "config": "India",
+   "competition": "Indija TS 2016",
+   "comp_key": "india_tst",
+   "round_key": null,
+   "fixed_year": 2016,
+   "note": "Indija TS=塞尔维亚语'印度TST'"
+  },
+  {
+   "config": "India",
+   "competition": "Indija mo 2011",
+   "comp_key": "india_inmo",
+   "round_key": null,
+   "fixed_year": 2011,
+   "note": "Indija mo=塞语'印度MO'，按国家奥赛INMO归类"
+  },
+  {
+   "config": "Iran",
+   "competition": "27th Iranian Mathematical Olympiad",
+   "comp_key": "iran_mo",
+   "round_key": null,
+   "fixed_year": 2009,
+   "note": "首届1983：1982+27=2009"
+  },
+  {
+   "config": "Iran",
+   "competition": "37th Iranian Mathematical Olympiad",
+   "comp_key": "iran_mo",
+   "round_key": null,
+   "fixed_year": 2019,
+   "note": "首届1983：1982+37=2019"
+  },
+  {
+   "config": "Iran",
+   "competition": "38th Iranian Mathematical Olympiad",
+   "comp_key": "iran_mo",
+   "round_key": null,
+   "fixed_year": 2020,
+   "note": "首届1983：1982+38=2020"
+  },
+  {
+   "config": "Iran",
+   "competition": "40th Iranian Mathematical Olympiad",
+   "comp_key": "iran_mo",
+   "round_key": null,
+   "fixed_year": 2022,
+   "note": "首届1983：1982+40=2022"
+  },
+  {
+   "config": "Iran",
+   "competition": "41th Iranian Mathematical Olympiad",
+   "comp_key": "iran_mo",
+   "round_key": null,
+   "fixed_year": 2023,
+   "note": "首届1983：1982+41=2023"
+  },
+  {
+   "config": "Iran",
+   "competition": "Iranian Mathematical Olympiad",
+   "comp_key": "iran_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "Japan",
+   "competition": "2019 Japan Mathematical Olympiad First Stage",
+   "comp_key": "japan_mo",
+   "round_key": "first",
+   "fixed_year": 2019,
+   "note": "First Stage=预选"
+  },
+  {
+   "config": "Japan",
+   "competition": "2019 Japanese Mathematical Olympiad, Final Round",
+   "comp_key": "japan_mo",
+   "round_key": "final",
+   "fixed_year": 2019
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan 2007",
+   "comp_key": "japan_mo",
+   "round_key": null,
+   "fixed_year": 2007,
+   "note": "Japan config 下裸名+年份，按惯例指当年 JMO（18题≈预选12+本选5），轮次不明"
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan 2013 Final Round",
+   "comp_key": "japan_mo",
+   "round_key": "final",
+   "fixed_year": 2013
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan 2013 Initial Round",
+   "comp_key": "japan_mo",
+   "round_key": "first",
+   "fixed_year": 2013
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan 2015",
+   "comp_key": "japan_mo",
+   "round_key": null,
+   "fixed_year": 2015,
+   "note": "裸名+年份，按惯例指JMO 2015，轮次不明"
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan 2022",
+   "comp_key": "japan_mo",
+   "round_key": null,
+   "fixed_year": 2022,
+   "note": "裸名+年份，按惯例指JMO 2022，轮次不明"
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan Junior Mathematical Olympiad",
+   "comp_key": "japan_junior_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份、无轮次信息"
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan Junior Mathematical Olympiad First Round",
+   "comp_key": "japan_junior_mo",
+   "round_key": "first",
+   "fixed_year": null
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan Mathematical Olympiad",
+   "comp_key": "japan_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份、无轮次信息"
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan Mathematical Olympiad Final Round",
+   "comp_key": "japan_mo",
+   "round_key": "final",
+   "fixed_year": null
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan Mathematical Olympiad First Round",
+   "comp_key": "japan_mo",
+   "round_key": "first",
+   "fixed_year": null
+  },
+  {
+   "config": "Japan",
+   "competition": "Japan Mathematical Olympiad Initial Round",
+   "comp_key": "japan_mo",
+   "round_key": "first",
+   "fixed_year": null,
+   "note": "Initial Round=First Round=预选"
+  },
+  {
+   "config": "Japan",
+   "competition": "Japanese Junior Mathematical Olympiad",
+   "comp_key": "japan_junior_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Japan",
+   "competition": "Japanese Mathematical Olympiad",
+   "comp_key": "japan_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Japan",
+   "competition": "The 16th Japanese Mathematical Olympiad - The Final Round",
+   "comp_key": "japan_mo",
+   "round_key": "final",
+   "fixed_year": 2006,
+   "note": "第16回JMO=2006，本选"
+  },
+  {
+   "config": "Japan",
+   "competition": "The 16th Japanese Mathematical Olympiad - The First Round",
+   "comp_key": "japan_mo",
+   "round_key": "first",
+   "fixed_year": 2006,
+   "note": "第16回JMO=1990+16=2006，预选"
+  },
+  {
+   "config": "Japan",
+   "competition": "The 35th Japanese Mathematical Olympiad",
+   "comp_key": "japan_mo",
+   "round_key": null,
+   "fixed_year": 2025,
+   "note": "第35回JMO=1990+35=2025"
+  },
+  {
+   "config": "Japan",
+   "competition": "The 4th Japanese Junior Mathematical Olympiad",
+   "comp_key": "japan_junior_mo",
+   "round_key": null,
+   "fixed_year": 2006,
+   "note": "第4回JJMO=2002+4=2006（JJMO首届2003）"
+  },
+  {
+   "config": "Romania",
+   "competition": "2010 DANUBE MATHEMATICAL COMPETITION",
+   "comp_key": "danube_mc",
+   "round_key": null,
+   "fixed_year": 2010
+  },
+  {
+   "config": "Romania",
+   "competition": "2010 Eighth IMAR MATHEMATICAL COMPETITION",
+   "comp_key": "imar_mc",
+   "round_key": null,
+   "fixed_year": 2010
+  },
+  {
+   "config": "Romania",
+   "competition": "2010 Fourth STARS OF MATHEMATICS COMPETITION",
+   "comp_key": "stars_of_mathematics",
+   "round_key": null,
+   "fixed_year": 2010
+  },
+  {
+   "config": "Romania",
+   "competition": "2011 CLOCK-TOWER SCHOOL JUNIORS COMPETITION",
+   "comp_key": "clock_tower_school",
+   "round_key": "junior",
+   "fixed_year": 2011
+  },
+  {
+   "config": "Romania",
+   "competition": "2011 CLOCK-TOWER SCHOOL SENIORS COMPETITION",
+   "comp_key": "clock_tower_school",
+   "round_key": "senior",
+   "fixed_year": 2011
+  },
+  {
+   "config": "Romania",
+   "competition": "2011 Fourth ROMANIAN MASTER OF MATHEMATICS",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": 2011
+  },
+  {
+   "config": "Romania",
+   "competition": "2015 BALKAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "balkan_mo",
+   "round_key": null,
+   "fixed_year": 2015
+  },
+  {
+   "config": "Romania",
+   "competition": "2015 Danube Mathematical Competition",
+   "comp_key": "danube_mc",
+   "round_key": null,
+   "fixed_year": 2015
+  },
+  {
+   "config": "Romania",
+   "competition": "2015 Ninth STARS OF MATHEMATICS Competition",
+   "comp_key": "stars_of_mathematics",
+   "round_key": null,
+   "fixed_year": 2015
+  },
+  {
+   "config": "Romania",
+   "competition": "2015 Thirteenth IMAR Mathematical Competition",
+   "comp_key": "imar_mc",
+   "round_key": null,
+   "fixed_year": 2015
+  },
+  {
+   "config": "Romania",
+   "competition": "2016 Eighth Romanian Master of Mathematics",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": 2016
+  },
+  {
+   "config": "Romania",
+   "competition": "2016 European Girls' Mathematical Olympiad",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": 2016
+  },
+  {
+   "config": "Romania",
+   "competition": "2018 Romanian Mathematical Olympiad",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2018
+  },
+  {
+   "config": "Romania",
+   "competition": "2019 ROMANIAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2019
+  },
+  {
+   "config": "Romania",
+   "competition": "28th BALKAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "balkan_mo",
+   "round_key": null,
+   "fixed_year": 2011
+  },
+  {
+   "config": "Romania",
+   "competition": "30th Balkan Mathematical Olympiad",
+   "comp_key": "balkan_mo",
+   "round_key": null,
+   "fixed_year": 2013
+  },
+  {
+   "config": "Romania",
+   "competition": "53. Bulgarian Mathematical Olympiad",
+   "comp_key": "bulgaria_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "保加利亚MO首届年份不确定，第53届未换算；样题为罗语翻译"
+  },
+  {
+   "config": "Romania",
+   "competition": "62nd NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2011
+  },
+  {
+   "config": "Romania",
+   "competition": "62nd NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": 2011
+  },
+  {
+   "config": "Romania",
+   "competition": "62nd ROMANIAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2011
+  },
+  {
+   "config": "Romania",
+   "competition": "64th NMO Selection Tests for the Balkan and International Mathematical Olympiads",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2013
+  },
+  {
+   "config": "Romania",
+   "competition": "64th NMO Selection Tests for the Junior Balkan Mathematical Olympiad",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": 2013
+  },
+  {
+   "config": "Romania",
+   "competition": "64th Romanian Mathematical Olympiad - District Round",
+   "comp_key": "romania_nmo",
+   "round_key": "district",
+   "fixed_year": 2013
+  },
+  {
+   "config": "Romania",
+   "competition": "64th Romanian Mathematical Olympiad - Final Round",
+   "comp_key": "romania_nmo",
+   "round_key": "national",
+   "fixed_year": 2013
+  },
+  {
+   "config": "Romania",
+   "competition": "65th NMO Selection Tests for BMO and IMO",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2014
+  },
+  {
+   "config": "Romania",
+   "competition": "65th NMO Selection Tests for JBMO",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": 2014
+  },
+  {
+   "config": "Romania",
+   "competition": "65th Romanian Mathematical Olympiad",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2014
+  },
+  {
+   "config": "Romania",
+   "competition": "66th NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2015
+  },
+  {
+   "config": "Romania",
+   "competition": "66th NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": 2015
+  },
+  {
+   "config": "Romania",
+   "competition": "66th ROMANIAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2015
+  },
+  {
+   "config": "Romania",
+   "competition": "67th NMO Selection Tests for BMO and IMO",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2016
+  },
+  {
+   "config": "Romania",
+   "competition": "67th NMO Selection Tests for JBMO",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": 2016
+  },
+  {
+   "config": "Romania",
+   "competition": "67th NMO Shortlisted Problems",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2016
+  },
+  {
+   "config": "Romania",
+   "competition": "67th Romanian Mathematical Olympiad",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2016
+  },
+  {
+   "config": "Romania",
+   "competition": "69th NMO Selection Tests for BMO and IMO",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2018
+  },
+  {
+   "config": "Romania",
+   "competition": "69th NMO Selection Tests for JBMO",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": 2018
+  },
+  {
+   "config": "Romania",
+   "competition": "69th Romanian Mathematical Olympiad",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2018
+  },
+  {
+   "config": "Romania",
+   "competition": "69th Romanian Mathematical Olympiad - Final Round",
+   "comp_key": "romania_nmo",
+   "round_key": "national",
+   "fixed_year": 2018
+  },
+  {
+   "config": "Romania",
+   "competition": "70th NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2019
+  },
+  {
+   "config": "Romania",
+   "competition": "70th NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": 2019
+  },
+  {
+   "config": "Romania",
+   "competition": "70th ROMANIAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2019
+  },
+  {
+   "config": "Romania",
+   "competition": "74th NMO Selection Tests for BMO and IMO",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2023
+  },
+  {
+   "config": "Romania",
+   "competition": "74th NMO Selection Tests for JBMO",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": 2023
+  },
+  {
+   "config": "Romania",
+   "competition": "74th NMO Shortlisted Problems",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2023
+  },
+  {
+   "config": "Romania",
+   "competition": "74th Romanian Mathematical Olympiad",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2023
+  },
+  {
+   "config": "Romania",
+   "competition": "75th NMO",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2024
+  },
+  {
+   "config": "Romania",
+   "competition": "75th NMO Selection Tests",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2024,
+   "note": "未区分BMO/IMO与JBMO选拔，可能混有初级组测试"
+  },
+  {
+   "config": "Romania",
+   "competition": "75th Romanian Mathematical Olympiad",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2024
+  },
+  {
+   "config": "Romania",
+   "competition": "Al cincilea test de selecţie pentru OBMJ",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test5",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Al doilea test de selectie pentru OBMJ",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test2",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Al doilea test de selecţie pentru OBMJ",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test2",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Al patrulea test de selecţie pentru OBMJ",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test4",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Al treilea test de selecţie pentru OBMJ",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test3",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Al treilea test de selecţie pentru OBMJ Bucureşti",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test3",
+   "fixed_year": null,
+   "note": "布加勒斯特考区的JBMO第3次选拔"
+  },
+  {
+   "config": "Romania",
+   "competition": "BMO",
+   "comp_key": "balkan_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "样题为巴尔干MO赛题的罗语翻译，BMO此处指Balkan MO"
+  },
+  {
+   "config": "Romania",
+   "competition": "Balkan Mathematical Olympiad",
+   "comp_key": "balkan_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Bulgarian Mathematical Olympiad",
+   "comp_key": "bulgaria_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "样题为罗语翻译的保加利亚MO赛题"
+  },
+  {
+   "config": "Romania",
+   "competition": "Eighteenth STARS OF MATHEMATICS Competition",
+   "comp_key": "stars_of_mathematics",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "若逐年举办应为2024，但疫情期间是否停办不确定，不换算"
+  },
+  {
+   "config": "Romania",
+   "competition": "Eleventh Romanian Master of Mathematics",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": 2019,
+   "note": "RMM第11届=2019（2012年停办，N≥5时年份=2008+N）"
+  },
+  {
+   "config": "Romania",
+   "competition": "Eleventh STARS OF MATHEMATICS Competition",
+   "comp_key": "stars_of_mathematics",
+   "round_key": null,
+   "fixed_year": 2017,
+   "note": "按4th=2010/9th=2015的年届规则换算，11th=2017"
+  },
+  {
+   "config": "Romania",
+   "competition": "Fifteenth IMAR Mathematical Competition",
+   "comp_key": "imar_mc",
+   "round_key": null,
+   "fixed_year": 2017,
+   "note": "按13th=2015顺延，15th=2017"
+  },
+  {
+   "config": "Romania",
+   "competition": "IMAR Mathematical Competition",
+   "comp_key": "imar_mc",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Junior Balkan Mathematical Olympiad",
+   "comp_key": "jbmo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Local Mathematical Competitions",
+   "comp_key": "romania_other",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "各地地方竞赛合集标签，无具体赛事名，归入未标注"
+  },
+  {
+   "config": "Romania",
+   "competition": "Matematika tantárgyverseny Megyei szakasz",
+   "comp_key": "romania_nmo",
+   "round_key": "district",
+   "fixed_year": null,
+   "note": "匈牙利语名：罗马尼亚匈语学校的数学学科竞赛县级赛段（Megyei=Județeană），视为NMO县级轮"
+  },
+  {
+   "config": "Romania",
+   "competition": "NMO Selection Tests for the Balkan and International Mathematical Olympiads",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "NMO Selection Tests for the Junior Balkan Mathematical Olympiad",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Nineteenth IMAR Mathematical Competition",
+   "comp_key": "imar_mc",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "若逐年举办应为2021，疫情期间是否停办不确定，不换算"
+  },
+  {
+   "config": "Romania",
+   "competition": "OLIMPIADA DE MATEMATICĂ - ETAPA LOCALĂ",
+   "comp_key": "romania_nmo",
+   "round_key": "local",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "OLIMPIADA DE MATEMATICĂ ETAPA LOCALĂ",
+   "comp_key": "romania_nmo",
+   "round_key": "local",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "OLIMPIADA NATIONALĂ DE MATEMATICĂ ETAPA LOCALĂ",
+   "comp_key": "romania_nmo",
+   "round_key": "local",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Nationala de Matematica",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Nationala de Matematica 2022 baraj 2 de selectie seniori",
+   "comp_key": "romania_tst",
+   "round_key": "test2",
+   "fixed_year": 2022,
+   "note": "seniori=高级组（BMO/IMO选拔）第2次baraj"
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Natională de Matematică",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională GAZETA MATEMATICĂ",
+   "comp_key": "romania_onm_gazeta",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "2020-2021疫情替代NMO的全国奥赛，名称无年份"
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională GAZETA MATEMATICĂ Barajul 3",
+   "comp_key": "romania_onm_gazeta",
+   "round_key": "baraj3",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională GAZETA MATEMATICĂ Etapa a III-a",
+   "comp_key": "romania_onm_gazeta",
+   "round_key": "stage3",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională de Matematică",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională de Matematică Etapa Judeţeană",
+   "comp_key": "romania_nmo",
+   "round_key": "district",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională de Matematică Etapa Judeţeană şi a Municipiului Bucureşti",
+   "comp_key": "romania_nmo",
+   "round_key": "district",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională de Matematică Etapa Naţională",
+   "comp_key": "romania_nmo",
+   "round_key": "national",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională de Matematică Primul baraj pentru Olimpiada Balcanică de Matematică pentru Juniori",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test1",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională de Matematică, Etapa Judeţeană şi a Municipiului Bucureşti",
+   "comp_key": "romania_nmo",
+   "round_key": "district",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională de Matematică, Etapa Naţională",
+   "comp_key": "romania_nmo",
+   "round_key": "national",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Naţională de Matematică, Etapa judeţeană şi a municipiului Bucureşti",
+   "comp_key": "romania_nmo",
+   "round_key": "district",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Națională GAZETA MATEMATICĂ",
+   "comp_key": "romania_onm_gazeta",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Națională GAZETA MATEMATICĂ Etapa a III-a",
+   "comp_key": "romania_onm_gazeta",
+   "round_key": "stage3",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Națională de Matematică",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada Națională de Matematică - Etapa Locală",
+   "comp_key": "romania_nmo",
+   "round_key": "local",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada de Matematică",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada de Matematică - Etapa Locală",
+   "comp_key": "romania_nmo",
+   "round_key": "local",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada de Matematică Etapa Locală",
+   "comp_key": "romania_nmo",
+   "round_key": "local",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Olimpiada europeana de matematica a fetelor",
+   "comp_key": "egmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "罗语名即EGMO"
+  },
+  {
+   "config": "Romania",
+   "competition": "Primul test de selecţie pentru OBMJ",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test1",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "RMC 2020",
+   "comp_key": "romania_other",
+   "round_key": null,
+   "fixed_year": 2020,
+   "note": "RMC疑为Romanian Mathematical Competitions年刊合集，具体赛事不明"
+  },
+  {
+   "config": "Romania",
+   "competition": "Romania Olympiad",
+   "comp_key": "romania_other",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "标签泛泛，样题实为IMO 2013 P2的罗语翻译，来源不明"
+  },
+  {
+   "config": "Romania",
+   "competition": "Romanian Master of Mathematics",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Romanian Mathematical Olympiad",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "SELECTION TESTS FOR THE 2019 BMO AND IMO",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2019
+  },
+  {
+   "config": "Romania",
+   "competition": "SELECTION TESTS FOR THE 2019 JBMO",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": 2019
+  },
+  {
+   "config": "Romania",
+   "competition": "SHORTLISTED PROBLEMS FOR THE 2019 ROMANIAN NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2019
+  },
+  {
+   "config": "Romania",
+   "competition": "SHORTLISTED PROBLEMS FOR THE 62nd NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2011
+  },
+  {
+   "config": "Romania",
+   "competition": "SHORTLISTED PROBLEMS FOR THE 66th NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2015
+  },
+  {
+   "config": "Romania",
+   "competition": "SHORTLISTED PROBLEMS FOR THE 68th NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2017
+  },
+  {
+   "config": "Romania",
+   "competition": "SHORTLISTED PROBLEMS FOR THE 70th NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2019
+  },
+  {
+   "config": "Romania",
+   "competition": "SHORTLISTED PROBLEMS FOR THE 73rd NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2022
+  },
+  {
+   "config": "Romania",
+   "competition": "Seventeenth ROMANIAN MASTER OF MATHEMATICS",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": 2025,
+   "note": "RMM第17届=2025（N≥5时年份=2008+N）"
+  },
+  {
+   "config": "Romania",
+   "competition": "Seventeenth Stars of Mathematics Competition",
+   "comp_key": "stars_of_mathematics",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "若逐年举办应为2023，疫情期间是否停办不确定，不换算"
+  },
+  {
+   "config": "Romania",
+   "competition": "Shortlisted Problems for the 64th NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2013
+  },
+  {
+   "config": "Romania",
+   "competition": "Shortlisted Problems for the Romanian NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "Shortlisted problems for the 2018 Romanian NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2018
+  },
+  {
+   "config": "Romania",
+   "competition": "Shortlisted problems for the 65th Romanian NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2014
+  },
+  {
+   "config": "Romania",
+   "competition": "Shortlisted problems for the 69th NMO",
+   "comp_key": "romania_nmo",
+   "round_key": "shortlist",
+   "fixed_year": 2018
+  },
+  {
+   "config": "Romania",
+   "competition": "Stars of Mathematics Competition",
+   "comp_key": "stars_of_mathematics",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "TESTUL 1",
+   "comp_key": "romania_other",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "仅有『TESTUL 1』（第1场测试），样题为罗语不等式题，无法确定所属选拔赛"
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 2014 DANUBE MATHEMATICAL COMPETITION",
+   "comp_key": "danube_mc",
+   "round_key": null,
+   "fixed_year": 2014
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 2014 Twelfth IMAR MATHEMATICAL COMPETITION",
+   "comp_key": "imar_mc",
+   "round_key": null,
+   "fixed_year": 2014
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 2015 Seventh ROMANIAN MASTER OF MATHEMATICS",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": 2015
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 68th NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS",
+   "comp_key": "romania_tst",
+   "round_key": null,
+   "fixed_year": 2017
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 68th NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": null,
+   "fixed_year": 2017
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 68th ROMANIAN MATHEMATICAL OLYMPIAD",
+   "comp_key": "romania_nmo",
+   "round_key": null,
+   "fixed_year": 2017
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 73rd NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS - FIRST SELECTION TEST",
+   "comp_key": "romania_tst",
+   "round_key": "test1",
+   "fixed_year": 2022
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 73rd NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS - FOURTH SELECTION TEST",
+   "comp_key": "romania_tst",
+   "round_key": "test4",
+   "fixed_year": 2022
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 73rd NMO SELECTION TESTS FOR THE BALKAN AND INTERNATIONAL MATHEMATICAL OLYMPIADS - SECOND SELECTION TEST",
+   "comp_key": "romania_tst",
+   "round_key": "test2",
+   "fixed_year": 2022
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 73rd NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD - FIRST SELECTION TEST",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test1",
+   "fixed_year": 2022
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 73rd NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD - FOURTH SELECTION TEST",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test4",
+   "fixed_year": 2022
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 73rd NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD - SECOND SELECTION TEST",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test2",
+   "fixed_year": 2022
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 73rd NMO SELECTION TESTS FOR THE JUNIOR BALKAN MATHEMATICAL OLYMPIAD - THIRD SELECTION TEST",
+   "comp_key": "romania_jbmo_tst",
+   "round_key": "test3",
+   "fixed_year": 2022
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 73rd ROMANIAN MATHEMATICAL OLYMPIAD - DISTRICT ROUND",
+   "comp_key": "romania_nmo",
+   "round_key": "district",
+   "fixed_year": 2022
+  },
+  {
+   "config": "Romania",
+   "competition": "THE 73rd ROMANIAN MATHEMATICAL OLYMPIAD - FINAL ROUND",
+   "comp_key": "romania_nmo",
+   "round_key": "national",
+   "fixed_year": 2022
+  },
+  {
+   "config": "Romania",
+   "competition": "THE DANUBE MATHEMATICAL COMPETITION",
+   "comp_key": "danube_mc",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "THE Eighteenth IMAR Mathematical Competition",
+   "comp_key": "imar_mc",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "若逐年举办应为2020，疫情期间是否停办不确定，不换算"
+  },
+  {
+   "config": "Romania",
+   "competition": "THE Fifteenth ROMANIAN MASTER OF MATHEMATICS",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": 2023,
+   "note": "RMM第15届=2023（N≥5时年份=2008+N）"
+  },
+  {
+   "config": "Romania",
+   "competition": "THE Fourteenth IMAR MATHEMATICAL COMPETITION",
+   "comp_key": "imar_mc",
+   "round_key": null,
+   "fixed_year": 2016,
+   "note": "按13th=2015顺延，14th=2016"
+  },
+  {
+   "config": "Romania",
+   "competition": "THE Sixteenth STARS OF MATHEMATICS Competition",
+   "comp_key": "stars_of_mathematics",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "若逐年举办应为2022，疫情期间是否停办不确定，不换算"
+  },
+  {
+   "config": "Romania",
+   "competition": "THE Tenth ROMANIAN MASTER OF MATHEMATICS",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": 2018,
+   "note": "RMM第10届=2018（N≥5时年份=2008+N）"
+  },
+  {
+   "config": "Romania",
+   "competition": "THE Tenth STARS OF MATHEMATICS COMPETITION",
+   "comp_key": "stars_of_mathematics",
+   "round_key": null,
+   "fixed_year": 2016,
+   "note": "按9th=2015顺延，10th=2016"
+  },
+  {
+   "config": "Romania",
+   "competition": "The DANUBE Mathematical Competition",
+   "comp_key": "danube_mc",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "The Danube Mathematical Competition",
+   "comp_key": "danube_mc",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Romania",
+   "competition": "The Tenth IMAR Mathematical Competition",
+   "comp_key": "imar_mc",
+   "round_key": null,
+   "fixed_year": 2012,
+   "note": "按8th=2010/12th=2014内插，10th=2012"
+  },
+  {
+   "config": "Romania",
+   "competition": "Twentieth IMAR Mathematical Competition",
+   "comp_key": "imar_mc",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "若逐年举办应为2022，疫情期间是否停办不确定，不换算"
+  },
+  {
+   "config": "Romanian_Master_of_Mathematics_RMM",
+   "competition": "Romanian Master of Mathematics Competition",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "Romanian_Master_of_Mathematics_RMM",
+   "competition": "Romanian Master of Mathematics Competition Day 1",
+   "comp_key": "rmm",
+   "round_key": "day1",
+   "fixed_year": null,
+   "note": "无年份"
+  },
+  {
+   "config": "Romanian_Master_of_Mathematics_RMM",
+   "competition": "The 6th Romanian Master of Mathematics Competition",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": 2013,
+   "note": "第6届=2007+6=2013；样题为 RMM 2013 第3题（圆内接四边形 P/Q/R），佐证"
+  },
+  {
+   "config": "Romanian_Master_of_Mathematics_RMM",
+   "competition": "The 7th Romanian Master of Mathematics Competition",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": 2015,
+   "note": "RMM 2014年停办，第7届=2015；样题（正n边形博弈）与 RMM 2015 相符"
+  },
+  {
+   "config": "Russia",
+   "competition": "Euler olympiad",
+   "comp_key": "russia_euler",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "俄罗斯欧拉奥林匹克（8年级全国赛），独立于全俄奥赛；无年份信息"
+  },
+  {
+   "config": "Russia",
+   "competition": "Final round",
+   "comp_key": "russia_mo",
+   "round_key": "final",
+   "fixed_year": null,
+   "note": "名字只给了轮次（决赛轮），Russia config下属全俄奥赛；无年份"
+  },
+  {
+   "config": "Russia",
+   "competition": "LI Всероссийская математическая олимпиада школьников",
+   "comp_key": "russia_mo",
+   "round_key": null,
+   "fixed_year": 2025,
+   "note": "俄语原名'第51届全俄中学生数学奥林匹克'；LI=51届=2025，已由 olympiads.mccme.ru/vmo/2025 官方材料直接证实"
+  },
+  {
+   "config": "Russia",
+   "competition": "Regional round",
+   "comp_key": "russia_mo",
+   "round_key": "regional",
+   "fixed_year": null,
+   "note": "名字只给了轮次（大区轮），Russia config下属全俄奥赛；无年份"
+  },
+  {
+   "config": "Russia",
+   "competition": "Russian Mathematical Olympiad",
+   "comp_key": "russia_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "Russia",
+   "competition": "Russian mathematical olympiad",
+   "comp_key": "russia_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "大小写变体；无年份"
+  },
+  {
+   "config": "Russia",
+   "competition": "XL Russian mathematical olympiad",
+   "comp_key": "russia_mo",
+   "round_key": null,
+   "fixed_year": 2014,
+   "note": "罗马数字XL=40届，按 年份=1974+N 换算得2014（编号规则经LI=2025官方材料核实）；85题应含多年级多轮，轮次不明"
+  },
+  {
+   "config": "Russia",
+   "competition": "XLIII Russian mathematical olympiad",
+   "comp_key": "russia_mo",
+   "round_key": null,
+   "fixed_year": 2017,
+   "note": "罗马数字XLIII=43届，1974+43=2017（编号规则经LI=2025官方材料核实）"
+  },
+  {
+   "config": "Singapore",
+   "competition": "Singapore International Mathematical Olympiad",
+   "comp_key": "singapore_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "SIMO=新加坡IMO国家队项目，通常指选拔/训练试题，按TST归类"
+  },
+  {
+   "config": "Singapore",
+   "competition": "Singapore International Mathematical Olympiad Committee National Team Selection Test",
+   "comp_key": "singapore_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "SIMO委员会国家队选拔试，无年份"
+  },
+  {
+   "config": "Singapore",
+   "competition": "Singapore Mathematical Olympiad",
+   "comp_key": "singapore_smo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "Singapore",
+   "competition": "Singapore Mathematical Olympiad (SMO)",
+   "comp_key": "singapore_smo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "Singapore",
+   "competition": "Singapore Mathematical Olympiad (SMO) 2011",
+   "comp_key": "singapore_smo",
+   "round_key": null,
+   "fixed_year": 2011,
+   "note": "年份取自名字"
+  },
+  {
+   "config": "Singapore",
+   "competition": "Singapur",
+   "comp_key": "singapore_other",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "仅国名（塞语'新加坡'），无法确定具体赛事"
+  },
+  {
+   "config": "Singapore",
+   "competition": "Singapur 2015",
+   "comp_key": "singapore_other",
+   "round_key": null,
+   "fixed_year": 2015,
+   "note": "仅国名+年份，无法确定具体赛事"
+  },
+  {
+   "config": "South_Korea",
+   "competition": "20th Korean Mathematical Olympiad Final Round",
+   "comp_key": "korea_mo",
+   "round_key": "final",
+   "fixed_year": null,
+   "note": "第20届；KMO决赛轮在届次起始年的次年春举行，届次→公历年映射不定，不猜"
+  },
+  {
+   "config": "South_Korea",
+   "competition": "22nd Korean Mathematical Olympiad Final Round",
+   "comp_key": "korea_mo",
+   "round_key": "final",
+   "fixed_year": null,
+   "note": "第22届，届次→公历年映射不定，不猜"
+  },
+  {
+   "config": "South_Korea",
+   "competition": "23rd Korean Mathematical Olympiad Final Round",
+   "comp_key": "korea_mo",
+   "round_key": "final",
+   "fixed_year": null,
+   "note": "第23届，届次→公历年映射不定，不猜"
+  },
+  {
+   "config": "South_Korea",
+   "competition": "24th Korean Mathematical Olympiad Final Round",
+   "comp_key": "korea_mo",
+   "round_key": "final",
+   "fixed_year": null,
+   "note": "第24届，届次→公历年映射不定，不猜"
+  },
+  {
+   "config": "South_Korea",
+   "competition": "25th Korean Mathematical Olympiad Final Round",
+   "comp_key": "korea_mo",
+   "round_key": "final",
+   "fixed_year": null,
+   "note": "第25届，届次→公历年映射不定，不猜"
+  },
+  {
+   "config": "South_Korea",
+   "competition": "Korean Mathematical Olympiad",
+   "comp_key": "korea_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "South_Korea",
+   "competition": "Korean Mathematical Olympiad Final Round",
+   "comp_key": "korea_mo",
+   "round_key": "final",
+   "fixed_year": null
+  },
+  {
+   "config": "South_Korea",
+   "competition": "The 26th Korean Mathematical Olympiad Final Round",
+   "comp_key": "korea_mo",
+   "round_key": "final",
+   "fixed_year": null,
+   "note": "第26届，届次→公历年映射不定，不猜"
+  },
+  {
+   "config": "South_Korea",
+   "competition": "The 36th KOREAN MATHEMATICAL OLYMPIAD Final Round",
+   "comp_key": "korea_mo",
+   "round_key": "final",
+   "fixed_year": null,
+   "note": "第36届（全大写变体），届次→公历年映射不定，不猜"
+  },
+  {
+   "config": "South_Korea",
+   "competition": "The 37th Korean Mathematical Olympiad Final Round",
+   "comp_key": "korea_mo",
+   "round_key": "final",
+   "fixed_year": null,
+   "note": "第37届，届次→公历年映射不定，不猜"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "14-2J-M1",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2014,
+   "note": "缩写：14=2014, 2J=第二阶段, M1=模拟竞赛(一)；样题id与2014批次相邻佐证"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2014 IMO Training Camp Stage 3 Mock Competition (1)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2014,
+   "note": "卷别：模拟竞赛(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2014 International Mathematical Olympiad Second Stage Training Camp",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2014,
+   "note": "英文名，即2014第二階段選訓營"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2015 Math Olympiad Second Stage Training Camp",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2015,
+   "note": "英文名，即2015第二階段選訓營"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2018 數學奧林匹亞競賽第二階段選訓營, 模擬競賽(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2018,
+   "note": "卷别：模拟竞赛(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2018 數學奧林匹亞競賽第二階段選訓營, 模擬競賽(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2018,
+   "note": "卷别：模拟竞赛(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2018 數學奧林匹亞競賽第二階段選訓營, 獨立研究(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2018,
+   "note": "卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2018 數學奧林匹亞競賽第二階段選訓營, 獨立研究(三)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2018,
+   "note": "卷别：独立研究(三)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2018 數學奧林匹亞競賽第二階段選訓營, 獨立研究(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2018,
+   "note": "卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2020 Taiwan IMO 1J",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2020,
+   "note": "1J即第一階段选训营（Taiwan TST 2020 Round 1）"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2020 Taiwan IMO 2J",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2020,
+   "note": "2J即第二階段选训营"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2020 Taiwan IMO 3J",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2020,
+   "note": "3J即第三階段选训营"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2021 年台灣數學奧林匹亞考試試題",
+   "comp_key": "taiwan_tmo",
+   "round_key": null,
+   "fixed_year": 2021,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2021 數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2021,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2021 數學奧林匹亞競賽第三階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2021,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2021 數學奧林匹亞競賽第二階段選訓營, 國際競賽實作 (二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2021,
+   "note": "卷别：国际竞赛实作(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2021 數學奧林匹亞競賽第二階段選訓營, 國際競賽實作(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2021,
+   "note": "卷别：国际竞赛实作(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2021 數學奧林匹亞競賽第二階段選訓營, 獨立研究 (一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2021,
+   "note": "卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2021 數學奧林匹亞競賽第二階段選訓營, 獨立研究(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2021,
+   "note": "卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第一階段培訓營, 國際競賽實作 (二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2022,
+   "note": "卷别：国际竞赛实作(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第一階段培訓營, 國際競賽實作(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2022,
+   "note": "「培訓營」为「選訓營」同义变体；卷别：国际竞赛实作(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第一階段培訓營, 獨立研究(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第一階段培訓營, 獨立研究(三)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(三)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第一階段培訓營, 獨立研究(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2022,
+   "note": "培訓營=選訓營变体；卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第一階段選訓營, 國際競賽實作(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2022,
+   "note": "卷别：国际竞赛实作(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第一階段選訓營, 國際競賽實作(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2022,
+   "note": "卷别：国际竞赛实作(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第一階段選訓營, 獨立研究 (二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第一階段選訓營, 獨立研究(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第三階段選訓營, 國際競賽實作(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2022,
+   "note": "卷别：国际竞赛实作(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第三階段選訓營, 國際競賽實作(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2022,
+   "note": "卷别：国际竞赛实作(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第三階段選訓營, 獨立研究 (二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第三階段選訓營, 獨立研究(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第二階段培訓營, 國際競賽實作(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2022,
+   "note": "卷别：国际竞赛实作(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第二階段培訓營, 國際競賽實作(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2022,
+   "note": "卷别：国际竞赛实作(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第二階段培訓營, 獨立研究 (三)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(三)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第二階段培訓營, 獨立研究 (二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第二階段培訓營, 獨立研究(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第二階段選訓營, 國際競賽實作(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2022,
+   "note": "卷别：国际竞赛实作(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第二階段選訓營, 獨立研究 (二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第二階段選訓營, 獨立研究(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2022,
+   "note": "卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第二階段選訓營,國際競賽實作(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2022,
+   "note": "卷别：国际竞赛实作(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第五階段培訓營, 國際競賽實作(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage5",
+   "fixed_year": 2022,
+   "note": "第五阶段培训营；卷别：国际竞赛实作(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2022 數學奧林匹亞競賽第五階段培訓營, 國際競賽實作(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage5",
+   "fixed_year": 2022,
+   "note": "第五阶段培训营；卷别：国际竞赛实作(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2023 年台灣數學奧林匹亞考試",
+   "comp_key": "taiwan_tmo",
+   "round_key": null,
+   "fixed_year": 2023,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2023 數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2023,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2023 數學奧林匹亞競賽第三階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2023,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "2023 數學奧林匹亞競賽第二階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2023,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "APMO Taiwan Preliminary Round 1",
+   "comp_key": "taiwan_apmo_prelim",
+   "round_key": "round1",
+   "fixed_year": null,
+   "note": "名称无年份；样题含2024^2024但不据此猜年"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "APMO Taiwan Preliminary Round 2",
+   "comp_key": "taiwan_apmo_prelim",
+   "round_key": "round2",
+   "fixed_year": null,
+   "note": "名称无年份"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 1J, Independent Study 1",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": null,
+   "note": "1J=第一阶段；无年份；卷别：独立研究1"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 1J, Independent Study 2",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": null,
+   "note": "1J=第一阶段；无年份；卷别：独立研究2"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 1J, Mock Exam 1",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": null,
+   "note": "1J=第一阶段；无年份；卷别：模拟竞赛1"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 1J, Mock Exam 2",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": null,
+   "note": "1J=第一阶段；无年份；卷别：模拟竞赛2"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 2J, Independent Study 1",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": null,
+   "note": "2J=第二阶段；无年份；卷别：独立研究1"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 2J, Independent Study 2",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": null,
+   "note": "2J=第二阶段；无年份；卷别：独立研究2"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 2J, Mock Exam 1",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": null,
+   "note": "2J=第二阶段；无年份；卷别：模拟竞赛1"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 2J, Mock Exam 2",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": null,
+   "note": "2J=第二阶段；无年份；卷别：模拟竞赛2"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 3J, Independent Study 1",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": null,
+   "note": "3J=第三阶段；无年份；卷别：独立研究1"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 3J, Independent Study 2",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": null,
+   "note": "3J=第三阶段；无年份；卷别：独立研究2"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 3J, Mock Exam 1",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": null,
+   "note": "3J=第三阶段；无年份；卷别：模拟竞赛1"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "IMO 3J, Mock Exam 2",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": null,
+   "note": "3J=第三阶段；无年份；卷别：模拟竞赛2；样题含2^2024提示2024但不猜"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "Taiwan Mathematical Olympiad",
+   "comp_key": "taiwan_tmo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "无年份，覆盖多年"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二0一三數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2013,
+   "note": "年份为中文数字混ASCII零：二0一三=2013"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二0一三數學奧林匹亞競賽第二階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2013,
+   "note": "年份为中文数字混ASCII零：二0一三=2013"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2011,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營,模擬競賽(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2011,
+   "note": "卷别：模拟竞赛(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營,模擬競賽(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2011,
+   "note": "卷别：模拟竞赛(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營,獨立研究(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2011,
+   "note": "卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營,獨立研究(三)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2011,
+   "note": "卷别：独立研究(三)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營,獨立研究(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2011,
+   "note": "卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一一數學奧林匹亞競賽第三階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2011,
+   "note": "中文数字年份二〇一一=2011"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一一數學奧林匹亞競賽第二階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2011,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一七數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2017,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一七數學奧林匹亞競賽第三階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2017,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一七數學奧林匹亞競賽第二階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2017,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一三數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2013,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一三數學奧林匹亞競賽第三階段選訓營, 模擬競賽(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2013,
+   "note": "卷别：模拟竞赛(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一三數學奧林匹亞競賽第三階段選訓營, 獨立研究 (三)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2013,
+   "note": "卷别：独立研究(三)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一三數學奧林匹亞競賽第三階段選訓營, 獨立研究 (二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2013,
+   "note": "卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一三數學奧林匹亞競賽第三階段選訓營, 獨立研究(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2013,
+   "note": "卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一三數學奧林匹亞競賽第三階段選訓營,模擬競賽(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2013,
+   "note": "卷别：模拟竞赛(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一三數學奧林匹亞競賽第二階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2013,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一九數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2019,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一九數學奧林匹亞競賽第三階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2019,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一九數學奧林匹亞競賽第二階段選訓營, 獨立研究 (三)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2019,
+   "note": "卷别：独立研究(三)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一九數學奧林匹亞競賽第二階段選訓營, 獨立研究(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2019,
+   "note": "卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一九數學奧林匹亞競賽第二階段選訓營,模擬競賽(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2019,
+   "note": "卷别：模拟竞赛(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一九數學奧林匹亞競賽第二階段選訓營,模擬競賽(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2019,
+   "note": "卷别：模拟竞赛(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一九數學奧林匹亞競賽第二階段選訓營，獨立研究（一）",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2019,
+   "note": "全角标点变体；卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一二數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2012,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一二數學奧林匹亞競賽第三階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2012,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一二數學奧林匹亞競賽第二階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2012,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一五數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2015,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一五數學奧林匹亞競賽第三階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2015,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一八數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2018,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一八數學奧林匹亞競賽第三階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2018,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一六數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2016,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一六數學奧林匹亞競賽第三階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2016,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一六數學奧林匹亞競賽第二階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2016,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一四年國際數學奧林匹亞競賽第三階段選訓營 獨立研究(一)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": 2014,
+   "note": "卷别：独立研究(一)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一四年國際數學奧林匹亞競賽第二階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2014,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一四年國際數學奧林匹亞競賽第二階段選訓營 模擬競賽(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2014,
+   "note": "卷别：模拟竞赛(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一四年國際數學奧林匹亞競賽第二階段選訓營 獨立研究(三)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2014,
+   "note": "卷别：独立研究(三)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一四年國際數學奧林匹亞競賽第二階段選訓營 獨立研究(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": 2014,
+   "note": "卷别：独立研究(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "二〇一四數學奧林匹亞競賽第一階段選訓營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage1",
+   "fixed_year": 2014,
+   "note": ""
+  },
+  {
+   "config": "Taiwan",
+   "competition": "國際奧林匹亞競賽第三次訓練營",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage3",
+   "fixed_year": null,
+   "note": "「第三次訓練營」视为第三阶段；名称无年份（样题id落在2022批次附近但不猜）"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "國際數學奧林匹亞競賽第二階段選訓營 模擬競賽(二)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": null,
+   "note": "名称无年份（样题id落在2014批次附近但不猜）；卷别：模拟竞赛(二)"
+  },
+  {
+   "config": "Taiwan",
+   "competition": "國際數學奧林匹亞競賽第二階段選訓營 獨立研究(三)",
+   "comp_key": "taiwan_imo_camp",
+   "round_key": "stage2",
+   "fixed_year": null,
+   "note": "名称无年份（样题id落在2014批次附近但不猜）；卷别：独立研究(三)"
+  },
+  {
+   "config": "United_States",
+   "competition": "",
+   "comp_key": "usa_other",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "空名，样题无法判定来源"
+  },
+  {
+   "config": "United_States",
+   "competition": "$10^{\\text {th }}$ Annual Harvard-MIT Mathematics Tournament",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2007,
+   "note": "二月赛第N届=1997+N，10届=2007"
+  },
+  {
+   "config": "United_States",
+   "competition": "$12^{\\text {th }}$ Annual Harvard-MIT Mathematics Tournament",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2009,
+   "note": "二月赛第N届=1997+N，12届=2009"
+  },
+  {
+   "config": "United_States",
+   "competition": "10th Annual Harvard-MIT Mathematics Tournament",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2007,
+   "note": "二月赛第N届=1997+N，10届=2007"
+  },
+  {
+   "config": "United_States",
+   "competition": "11th Annual Harvard-MIT Mathematics Tournament",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2008,
+   "note": "二月赛第N届=1997+N，11届=2008"
+  },
+  {
+   "config": "United_States",
+   "competition": "11th Annual Harvard-MIT Mathematics Tournament - Team Round: B Division",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2008,
+   "note": "二月赛第N届=1997+N，11届=2008；Team Round B 组别"
+  },
+  {
+   "config": "United_States",
+   "competition": "12th Annual Harvard-MIT Mathematics Tournament",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2009,
+   "note": "二月赛第N届=1997+N，12届=2009"
+  },
+  {
+   "config": "United_States",
+   "competition": "13th Annual Harvard-MIT Mathematics Tournament",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2010,
+   "note": "二月赛第N届=1997+N，13届=2010"
+  },
+  {
+   "config": "United_States",
+   "competition": "13th Bay Area Mathematical Olympiad",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": 2011,
+   "note": "BAMO 第N届=1998+N，13届=2011"
+  },
+  {
+   "config": "United_States",
+   "competition": "15th Annual Harvard-MIT Mathematics Tournament",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2012,
+   "note": "二月赛第N届=1997+N，15届=2012"
+  },
+  {
+   "config": "United_States",
+   "competition": "16th United States of America Junior Mathematical Olympiad",
+   "comp_key": "usajmo",
+   "round_key": null,
+   "fixed_year": 2025,
+   "note": "USAJMO 第N届=2009+N，16届=2025"
+  },
+  {
+   "config": "United_States",
+   "competition": "19th Bay Area Mathematical Olympiad",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": 2017,
+   "note": "BAMO 第N届=1998+N，19届=2017"
+  },
+  {
+   "config": "United_States",
+   "competition": "1st Annual Harvard-MIT November Tournament",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2010,
+   "note": "HMMT 十一月赛首届=2010"
+  },
+  {
+   "config": "United_States",
+   "competition": "1st Bay Area Mathematical Olympiad",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": 1999,
+   "note": "BAMO 首届=1999"
+  },
+  {
+   "config": "United_States",
+   "competition": "2021 AMC 10 B Fall",
+   "comp_key": "amc10",
+   "round_key": "fall_b",
+   "fixed_year": 2021
+  },
+  {
+   "config": "United_States",
+   "competition": "2022 AIME I",
+   "comp_key": "aime",
+   "round_key": "i",
+   "fixed_year": 2022
+  },
+  {
+   "config": "United_States",
+   "competition": "2022 AIME II",
+   "comp_key": "aime",
+   "round_key": "ii",
+   "fixed_year": 2022
+  },
+  {
+   "config": "United_States",
+   "competition": "2024 AMC 12 B",
+   "comp_key": "amc12",
+   "round_key": "b",
+   "fixed_year": 2024
+  },
+  {
+   "config": "United_States",
+   "competition": "2025 AIME I",
+   "comp_key": "aime",
+   "round_key": "i",
+   "fixed_year": 2025
+  },
+  {
+   "config": "United_States",
+   "competition": "25th Bay Area Mathematical Olympiad",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": 2023,
+   "note": "BAMO 第N届=1998+N，25届=2023"
+  },
+  {
+   "config": "United_States",
+   "competition": "2nd Annual Harvard-MIT November Tournament",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2011,
+   "note": "十一月赛第N届=2009+N，2届=2011"
+  },
+  {
+   "config": "United_States",
+   "competition": "2nd Bay Area Mathematical Olympiad",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": 2000,
+   "note": "BAMO 第N届=1998+N，2届=2000"
+  },
+  {
+   "config": "United_States",
+   "competition": "3rd Bay Area Mathematical Olympiad",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": 2001,
+   "note": "BAMO 第N届=1998+N，3届=2001"
+  },
+  {
+   "config": "United_States",
+   "competition": "5th Bay Area Mathematical Olympiad",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": 2003,
+   "note": "BAMO 第N届=1998+N，5届=2003"
+  },
+  {
+   "config": "United_States",
+   "competition": "9th Bay Area Mathematical Olympiad",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": 2007,
+   "note": "BAMO 第N届=1998+N，9届=2007"
+  },
+  {
+   "config": "United_States",
+   "competition": "AIME I",
+   "comp_key": "aime",
+   "round_key": "i",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "AIME II",
+   "comp_key": "aime",
+   "round_key": "ii",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "AMC 10 A",
+   "comp_key": "amc10",
+   "round_key": "a",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "AMC 10 B",
+   "comp_key": "amc10",
+   "round_key": "b",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "AMC 12 A",
+   "comp_key": "amc12",
+   "round_key": "a",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "AMC 12 B",
+   "comp_key": "amc12",
+   "round_key": "b",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "BAMO",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "BAMO-12",
+   "comp_key": "bamo",
+   "round_key": "bamo12",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "BAMO-8",
+   "comp_key": "bamo",
+   "round_key": "bamo8",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "BAMO-8 and BAMO-12",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "同时含 BAMO-8 与 BAMO-12 两卷，轮次不定"
+  },
+  {
+   "config": "United_States",
+   "competition": "Bay Area Mathematical Olympiad",
+   "comp_key": "bamo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle",
+   "comp_key": "berkeley_mc",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest #1",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第1期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest #7",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第7期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest 1",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第1期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest 2",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第2期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest 3",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第3期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest 4",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第4期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest 5",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第5期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest 6",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第6期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest 7",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第7期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Monthly Contest 8",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第8期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Take-Home Contest",
+   "comp_key": "berkeley_mc",
+   "round_key": "take_home",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Take-Home Contest #1",
+   "comp_key": "berkeley_mc",
+   "round_key": "take_home",
+   "fixed_year": null,
+   "note": "带回家赛第1期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Take-Home Contest #2",
+   "comp_key": "berkeley_mc",
+   "round_key": "take_home",
+   "fixed_year": null,
+   "note": "带回家赛第2期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle Take-Home Contest #6",
+   "comp_key": "berkeley_mc",
+   "round_key": "take_home",
+   "fixed_year": null,
+   "note": "带回家赛第6期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle: Monthly Contest 1",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第1期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle: Monthly Contest 2",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第2期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle: Monthly Contest 3",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第3期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle: Monthly Contest 4",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第4期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle: Monthly Contest 5",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第5期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle: Monthly Contest 6",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第6期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle: Monthly Contest 7",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第7期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Berkeley Math Circle: Monthly Contest 8",
+   "comp_key": "berkeley_mc",
+   "round_key": "monthly",
+   "fixed_year": null,
+   "note": "月赛第8期"
+  },
+  {
+   "config": "United_States",
+   "competition": "Fall 2021 AMC 10 B",
+   "comp_key": "amc10",
+   "round_key": "fall_b",
+   "fixed_year": 2021
+  },
+  {
+   "config": "United_States",
+   "competition": "February 2017",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2017,
+   "note": "名字仅为 February 2017，但题量(72)与样题均符合 HMMT February 2017"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMIC",
+   "comp_key": "hmic",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "HMIC 2018",
+   "comp_key": "hmic",
+   "round_key": null,
+   "fixed_year": 2018
+  },
+  {
+   "config": "United_States",
+   "competition": "HMIC 2021",
+   "comp_key": "hmic",
+   "round_key": null,
+   "fixed_year": 2021
+  },
+  {
+   "config": "United_States",
+   "competition": "HMIC 2023",
+   "comp_key": "hmic",
+   "round_key": null,
+   "fixed_year": 2023
+  },
+  {
+   "config": "United_States",
+   "competition": "HMIC 2024",
+   "comp_key": "hmic",
+   "round_key": null,
+   "fixed_year": 2024
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMO",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": null,
+   "note": "HMMO 为十一月赛线上版名称（已知仅 2020 年使用，但名字无年份，不猜）"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMO 2020",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2020,
+   "note": "HMMO 为 2020 年十一月赛的线上替代（Harvard-MIT Math Olympiad）"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT",
+   "comp_key": "hmmt",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT 1998",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 1998,
+   "note": "1998 年仅有二月赛"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT 2002",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2002,
+   "note": "2002 年仅有二月赛"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT 2013",
+   "comp_key": "hmmt",
+   "round_key": null,
+   "fixed_year": 2013,
+   "note": "未区分二月/十一月场"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT 2014",
+   "comp_key": "hmmt",
+   "round_key": null,
+   "fixed_year": 2014,
+   "note": "未区分二月/十一月场"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT 2014 HMIC",
+   "comp_key": "hmic",
+   "round_key": null,
+   "fixed_year": 2014
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2015",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2015
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2016",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2016
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2018",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2018
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2019",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2019
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2019 February 16, 2019",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2019
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2019 Team Round",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2019,
+   "note": "Team Round 为场内环节"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2020",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2020
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2022",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2022
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2023",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2023
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2024",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2024
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2024 Guts Round",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2024,
+   "note": "Guts Round 为场内环节"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT February 2025",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2025
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT Invitational Competition",
+   "comp_key": "hmic",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2012",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2012
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2013",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2013
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2014",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2014
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2015",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2015
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2016",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2016
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2017",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2017
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2018",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2018
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2019",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2019
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2021",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2021
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2021 Team Round",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2021,
+   "note": "Team Round 为场内环节"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2022",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2022
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2023",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2023
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT November 2024",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": 2024
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT Spring 2021",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2021,
+   "note": "Spring 2021 为 2021 年二月赛线上版"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT Spring 2021 Guts Round",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2021,
+   "note": "Spring 2021 为 2021 年二月赛线上版；Guts Round 为场内环节"
+  },
+  {
+   "config": "United_States",
+   "competition": "HMMT Spring 2021 Team Round",
+   "comp_key": "hmmt",
+   "round_key": "february",
+   "fixed_year": 2021,
+   "note": "Spring 2021 为 2021 年二月赛线上版；Team Round 为场内环节"
+  },
+  {
+   "config": "United_States",
+   "competition": "Harvard-MIT Math Tournament",
+   "comp_key": "hmmt",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "Harvard-MIT Mathematics Tournament",
+   "comp_key": "hmmt",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "Harvard-MIT Mathematics Tournament, Team Round A",
+   "comp_key": "hmmt",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "Team Round A 组别，届次不明"
+  },
+  {
+   "config": "United_States",
+   "competition": "Harvard-MIT Mathematics Tournament, Team Round B",
+   "comp_key": "hmmt",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "Team Round B 组别，届次不明"
+  },
+  {
+   "config": "United_States",
+   "competition": "Harvard-MIT November Tournament",
+   "comp_key": "hmmt",
+   "round_key": "november",
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "IMO",
+   "comp_key": "imo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "IMO 2008",
+   "comp_key": "imo",
+   "round_key": null,
+   "fixed_year": 2008
+  },
+  {
+   "config": "United_States",
+   "competition": "IMO 2009",
+   "comp_key": "imo",
+   "round_key": null,
+   "fixed_year": 2009
+  },
+  {
+   "config": "United_States",
+   "competition": "IMO Team Selection Team Selection Test",
+   "comp_key": "usa_tstst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "名字为 TSTST（Team Selection Test Selection Test）的变体展开"
+  },
+  {
+   "config": "United_States",
+   "competition": "IMO Team Selection Test",
+   "comp_key": "usa_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "International Mathematical Olympiad",
+   "comp_key": "imo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "RMM",
+   "comp_key": "rmm",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "TST",
+   "comp_key": "usa_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "美国 config 中的 TST，归 usa_tst"
+  },
+  {
+   "config": "United_States",
+   "competition": "TST2025",
+   "comp_key": "usa_tst",
+   "round_key": null,
+   "fixed_year": 2025
+  },
+  {
+   "config": "United_States",
+   "competition": "TSTST",
+   "comp_key": "usa_tstst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "Team Selection Test",
+   "comp_key": "usa_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "Team Selection Test 2009",
+   "comp_key": "usa_tst",
+   "round_key": null,
+   "fixed_year": 2009
+  },
+  {
+   "config": "United_States",
+   "competition": "Team Selection Test 2010",
+   "comp_key": "usa_tst",
+   "round_key": null,
+   "fixed_year": 2010
+  },
+  {
+   "config": "United_States",
+   "competition": "Team Selection Test Selection Test",
+   "comp_key": "usa_tstst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "USA IMO",
+   "comp_key": "imo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "美国 config 中的 IMO 题，归全局 imo"
+  },
+  {
+   "config": "United_States",
+   "competition": "USA IMO 2003",
+   "comp_key": "imo",
+   "round_key": null,
+   "fixed_year": 2003,
+   "note": "IMO 2003，归全局 imo"
+  },
+  {
+   "config": "United_States",
+   "competition": "USA IMO TST",
+   "comp_key": "usa_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "USA Junior MO",
+   "comp_key": "usajmo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "USA TST",
+   "comp_key": "usa_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "USA TST 2025",
+   "comp_key": "usa_tst",
+   "round_key": null,
+   "fixed_year": 2025
+  },
+  {
+   "config": "United_States",
+   "competition": "USA TST Selection Test for 67th IMO and 15th EGMO",
+   "comp_key": "usa_tstst",
+   "round_key": null,
+   "fixed_year": 2025,
+   "note": "TSTST 于夏季举行选拔次年队伍：67th IMO=2026（IMO 第N届 N≥22 时=1959+N），故考试年=2025"
+  },
+  {
+   "config": "United_States",
+   "competition": "USA TSTST",
+   "comp_key": "usa_tstst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "USAJMO",
+   "comp_key": "usajmo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "USAMO",
+   "comp_key": "usamo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "United_States",
+   "competition": "USAMO 2009",
+   "comp_key": "usamo",
+   "round_key": null,
+   "fixed_year": 2009
+  },
+  {
+   "config": "United_States",
+   "competition": "USAMO 2010",
+   "comp_key": "usamo",
+   "round_key": null,
+   "fixed_year": 2010
+  },
+  {
+   "config": "United_States",
+   "competition": "USAMO 2021 Day I",
+   "comp_key": "usamo",
+   "round_key": "day1",
+   "fixed_year": 2021
+  },
+  {
+   "config": "United_States",
+   "competition": "United States of America — TST Selection Test",
+   "comp_key": "usa_tstst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "TSTST；样题与 'USA TST Selection Test for 67th IMO and 15th EGMO' 相同但本名无届次，不猜年份"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "2003 Vietnamese Mathematical Olympiad",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": 2003
+  },
+  {
+   "config": "Vietnam",
+   "competition": "CONTEST FOR THE SELECTION OF VIETNAMESE INTERNATIONAL MATHEMATICAL OLYMPIAD TEAM",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Vietnam",
+   "competition": "IMO 2015 Team Selection Tests",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": 2015,
+   "note": "2015年IMO的越南选拔"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "IMO Team Selection Test",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Vietnam",
+   "competition": "IMO2011 Selection",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": 2011,
+   "note": "2011年IMO选拔（Vietnam TST 2011）"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Kì thi chọn học sinh vào Đội tuyển Quốc gia Dự thi IMO",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "越南语原名：选拔进入IMO国家队的考试，即Vietnam TST"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "MOCK TEST FOR VMO",
+   "comp_key": "vietnam_other",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "VMO模拟题/训练题，非正式赛事，归兜底"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "THE 2002 VIETNAMESE MATHEMATICAL OLYMPIAD",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": 2002
+  },
+  {
+   "config": "Vietnam",
+   "competition": "TST",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "Vietnam config 下的裸 TST，即越南IMO选拔"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Team selection tests",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Team selection tests 2021",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": 2021
+  },
+  {
+   "config": "Vietnam",
+   "competition": "VIETNAMESE MATHEMATICAL COMPETITION FOR TEAM SELECTION",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Vietnam",
+   "competition": "VIETNAMESE MATHEMATICAL OLYMPIAD",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "全大写变体"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "VMO",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Vietnam",
+   "competition": "VN IMO Booklet",
+   "comp_key": "vietnam_other",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "越南IMO集训小册子/训练资料，非正式赛事，归兜底"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vietnam Mathematical Olympiad",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vietnam Mathematical Olympiad 2015",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": 2015
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vietnamese MO",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vietnamese MO 2021",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": 2021
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vietnamese Mathematical Competitions",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": null,
+   "note": "题集类名称，收录VMO真题（样题为VMO风格），归入VMO"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vietnamese Mathematical Olympiad",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vietnamese Team Selection Contest for the 44th IMO",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": 2003,
+   "note": "第44届IMO=1959+44=2003（N≥22规则），选拔赛同年举行"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vietnamese Team Selection Test for IMO",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vietnamese Team Selection for IMO",
+   "comp_key": "vietnam_tst",
+   "round_key": null,
+   "fixed_year": null
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vijetnam 2006",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": 2006,
+   "note": "Vijetnam=Vietnam，指VMO 2006"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vijetnam 2007",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": 2007,
+   "note": "Vijetnam=Vietnam，指VMO 2007"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vijetnam 2008",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": 2008,
+   "note": "Vijetnam 为塞尔维亚-克罗地亚语拼写的 Vietnam，指VMO 2008"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vijetnam 2009",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": 2009,
+   "note": "Vijetnam=Vietnam，指VMO 2009"
+  },
+  {
+   "config": "Vietnam",
+   "competition": "Vijetnam 2011",
+   "comp_key": "vietnam_mo",
+   "round_key": null,
+   "fixed_year": 2011,
+   "note": "Vijetnam=Vietnam 的外语拼写，指VMO 2011"
+  }
+ ]
+}

@@ -1,0 +1,1007 @@
+{
+ "version": 2,
+ "regions": [
+  {
+   "key": "china",
+   "zh": "中国",
+   "order": 1
+  },
+  {
+   "key": "intl",
+   "zh": "国际赛事",
+   "order": 2
+  },
+  {
+   "key": "na",
+   "zh": "北美",
+   "order": 3
+  },
+  {
+   "key": "asia",
+   "zh": "亚洲",
+   "order": 4
+  },
+  {
+   "key": "europe",
+   "zh": "欧洲",
+   "order": 5
+  }
+ ],
+ "competitions": [
+  {
+   "comp_key": "hongkong_cmo",
+   "name_en": "Hong Kong (China) Mathematical Olympiad",
+   "name_zh": "香港（中国）数学奥林匹克（CHKMO）",
+   "short": "CHKMO",
+   "region": "asia",
+   "tier": 2
+  },
+  {
+   "comp_key": "hongkong_imo_tst",
+   "name_en": "Hong Kong IMO Team Selection Test",
+   "name_zh": "香港IMO代表队选拔考试",
+   "short": "HK TST",
+   "region": "asia",
+   "tier": 2,
+   "rounds": [
+    {
+     "round_key": "test1",
+     "zh": "第一次选拔",
+     "order": 1
+    },
+    {
+     "round_key": "test2",
+     "zh": "第二次选拔",
+     "order": 2
+    }
+   ]
+  },
+  {
+   "comp_key": "india_egmo_tst",
+   "name_en": "India EGMO Team Selection Test",
+   "name_zh": "印度EGMO代表队选拔考试",
+   "short": "India EGMO TST",
+   "region": "asia",
+   "tier": 2,
+   "rounds": [
+    {
+     "round_key": "day1",
+     "zh": "第一天",
+     "order": 1
+    },
+    {
+     "round_key": "day2",
+     "zh": "第二天",
+     "order": 2
+    }
+   ]
+  },
+  {
+   "comp_key": "india_inmo",
+   "name_en": "Indian National Mathematical Olympiad",
+   "name_zh": "印度国家数学奥林匹克（INMO）",
+   "short": "INMO",
+   "region": "asia",
+   "tier": 2
+  },
+  {
+   "comp_key": "india_tst",
+   "name_en": "India IMO Team Selection Test",
+   "name_zh": "印度IMO代表队选拔考试",
+   "short": "India TST",
+   "region": "asia",
+   "tier": 2,
+   "rounds": [
+    {
+     "round_key": "day1",
+     "zh": "第一天",
+     "order": 1
+    },
+    {
+     "round_key": "day2",
+     "zh": "第二天",
+     "order": 2
+    },
+    {
+     "round_key": "day3",
+     "zh": "第三天",
+     "order": 3
+    },
+    {
+     "round_key": "day4",
+     "zh": "第四天",
+     "order": 4
+    }
+   ]
+  },
+  {
+   "comp_key": "iran_mo",
+   "name_en": "Iranian Mathematical Olympiad",
+   "name_zh": "伊朗数学奥林匹克",
+   "short": "Iran MO",
+   "region": "asia",
+   "tier": 2,
+   "edition_rule": {
+    "first_edition_year": 1983,
+    "note": "首届1983年，第N届对应公历年 = 1982 + N"
+   }
+  },
+  {
+   "comp_key": "japan_junior_mo",
+   "name_en": "Japan Junior Mathematical Olympiad",
+   "name_zh": "日本初中数学奥林匹克",
+   "short": "JJMO",
+   "region": "asia",
+   "tier": 2,
+   "rounds": [
+    {
+     "round_key": "first",
+     "zh": "预选（第一轮）",
+     "order": 1
+    },
+    {
+     "round_key": "final",
+     "zh": "本选（决赛轮）",
+     "order": 2
+    }
+   ],
+   "edition_rule": {
+    "first_edition_year": 2003,
+    "note": "首届2003年，每年一届：第N回JJMO对应公历年 = 2002 + N（如第4回=2006）。"
+   }
+  },
+  {
+   "comp_key": "japan_mo",
+   "name_en": "Japan Mathematical Olympiad",
+   "name_zh": "日本数学奥林匹克",
+   "short": "JMO",
+   "region": "asia",
+   "tier": 2,
+   "rounds": [
+    {
+     "round_key": "first",
+     "zh": "预选（第一轮）",
+     "order": 1
+    },
+    {
+     "round_key": "final",
+     "zh": "本选（决赛轮）",
+     "order": 2
+    }
+   ],
+   "edition_rule": {
+    "first_edition_year": 1991,
+    "note": "首届1991年，每年一届无中断：第N回JMO对应公历年 = 1990 + N（如第16回=2006，第35回=2025）。预选1月、本选2月，均在同一公历年内。"
+   }
+  },
+  {
+   "comp_key": "korea_mo",
+   "name_en": "Korean Mathematical Olympiad",
+   "name_zh": "韩国数学奥林匹克",
+   "short": "KMO",
+   "region": "asia",
+   "tier": 2,
+   "rounds": [
+    {
+     "round_key": "first",
+     "zh": "第一轮",
+     "order": 1
+    },
+    {
+     "round_key": "final",
+     "zh": "决赛轮（FKMO）",
+     "order": 2
+    }
+   ],
+   "edition_rule": {
+    "first_edition_year": 1987,
+    "note": "首届1987年。但KMO第一轮在当年秋季、决赛轮（FKMO）在次年春季举行，「第N届决赛轮」对应的公历年映射存在±1年歧义，故本次序数届次一律不换算为 fixed_year，留待按题 enrichment 补充。"
+   }
+  },
+  {
+   "comp_key": "singapore_smo",
+   "name_en": "Singapore Mathematical Olympiad",
+   "name_zh": "新加坡数学奥林匹克（SMO）",
+   "short": "SMO",
+   "region": "asia",
+   "tier": 2
+  },
+  {
+   "comp_key": "singapore_tst",
+   "name_en": "Singapore IMO National Team Selection Test",
+   "name_zh": "新加坡IMO代表队选拔考试",
+   "short": "Singapore TST",
+   "region": "asia",
+   "tier": 2
+  },
+  {
+   "comp_key": "taiwan_imo_camp",
+   "name_en": "Taiwan IMO Team Selection and Training Camp",
+   "name_zh": "台湾国际数学奥林匹亚代表队选训营（台湾TST）",
+   "short": "Taiwan TST",
+   "region": "asia",
+   "tier": 2,
+   "rounds": [
+    {
+     "round_key": "stage1",
+     "zh": "第一阶段",
+     "order": 1
+    },
+    {
+     "round_key": "stage2",
+     "zh": "第二阶段",
+     "order": 2
+    },
+    {
+     "round_key": "stage3",
+     "zh": "第三阶段",
+     "order": 3
+    },
+    {
+     "round_key": "stage5",
+     "zh": "第五阶段",
+     "order": 5
+    }
+   ]
+  },
+  {
+   "comp_key": "taiwan_tmo",
+   "name_en": "Taiwan Mathematical Olympiad",
+   "name_zh": "台湾数学奥林匹亚（TMO）",
+   "short": "TMO",
+   "region": "asia",
+   "tier": 2
+  },
+  {
+   "comp_key": "vietnam_mo",
+   "name_en": "Vietnam Mathematical Olympiad",
+   "name_zh": "越南数学奥林匹克",
+   "short": "VMO",
+   "region": "asia",
+   "tier": 2,
+   "rounds": [],
+   "edition_rule": {
+    "first_edition_year": 1962,
+    "note": "首届1962年；本批原始名中未出现序数届次，年份仅取名字中的显式公历年。"
+   }
+  },
+  {
+   "comp_key": "vietnam_tst",
+   "name_en": "Vietnam IMO Team Selection Test",
+   "name_zh": "越南IMO国家队选拔考试",
+   "short": "Vietnam TST",
+   "region": "asia",
+   "tier": 2,
+   "rounds": [],
+   "edition_rule": {
+    "first_edition_year": 1979,
+    "note": "越南IMO代表队选拔赛；含「第N届IMO」字样时按 IMO 规则换算（IMO 首届1959、1980停办，N≥22 时 year=1959+N），选拔赛与该届IMO同年举行。"
+   }
+  },
+  {
+   "comp_key": "hongkong_prelim",
+   "name_en": "IMO Preliminary Selection Contest Hong Kong",
+   "name_zh": "香港IMO预选赛",
+   "short": "HK预选",
+   "region": "asia",
+   "tier": 3
+  },
+  {
+   "comp_key": "taiwan_apmo_prelim",
+   "name_en": "APMO Taiwan Preliminary Round",
+   "name_zh": "亚太数学奥林匹亚台湾初选",
+   "short": "APMO台湾初选",
+   "region": "asia",
+   "tier": 3,
+   "rounds": [
+    {
+     "round_key": "round1",
+     "zh": "第一轮",
+     "order": 1
+    },
+    {
+     "round_key": "round2",
+     "zh": "第二轮",
+     "order": 2
+    }
+   ]
+  },
+  {
+   "comp_key": "hongkong_other",
+   "name_en": "Hong Kong (unattributed)",
+   "name_zh": "香港 · 未标注来源",
+   "region": "asia",
+   "tier": 4
+  },
+  {
+   "comp_key": "india_imotc",
+   "name_en": "India IMO Training Camp Practice Tests",
+   "name_zh": "印度IMO集训营练习赛（IMOTC）",
+   "short": "IMOTC",
+   "region": "asia",
+   "tier": 4,
+   "rounds": [
+    {
+     "round_key": "test1",
+     "zh": "练习赛一",
+     "order": 1
+    },
+    {
+     "round_key": "test2",
+     "zh": "练习赛二",
+     "order": 2
+    }
+   ]
+  },
+  {
+   "comp_key": "india_other",
+   "name_en": "India (unspecified)",
+   "name_zh": "印度 · 未标注来源",
+   "short": "India",
+   "region": "asia",
+   "tier": 4
+  },
+  {
+   "comp_key": "singapore_other",
+   "name_en": "Singapore (unspecified)",
+   "name_zh": "新加坡 · 未标注来源",
+   "short": "Singapore",
+   "region": "asia",
+   "tier": 4
+  },
+  {
+   "comp_key": "taiwan_other",
+   "name_en": "Taiwan (unspecified source)",
+   "name_zh": "台湾 · 未标注来源",
+   "short": "台湾其他",
+   "region": "asia",
+   "tier": 4
+  },
+  {
+   "comp_key": "vietnam_other",
+   "name_en": "Vietnam (unattributed / training material)",
+   "name_zh": "越南 · 未标注来源",
+   "short": "VN other",
+   "region": "asia",
+   "tier": 4,
+   "rounds": []
+  },
+  {
+   "comp_key": "china_mo",
+   "name_en": "China Mathematical Olympiad",
+   "name_zh": "中国数学奥林匹克（CMO）",
+   "short": "CMO",
+   "region": "china",
+   "tier": 2
+  },
+  {
+   "comp_key": "china_tst",
+   "name_en": "China IMO National Team Selection Test",
+   "name_zh": "IMO中国国家队选拔考试",
+   "short": "中国TST",
+   "region": "china",
+   "tier": 2
+  },
+  {
+   "comp_key": "china_girls_mo",
+   "name_en": "China Girls' Mathematical Olympiad",
+   "name_zh": "中国女子数学奥林匹克（CGMO）",
+   "short": "CGMO",
+   "region": "china",
+   "tier": 3,
+   "edition_rule": {
+    "first_edition_year": 2002,
+    "note": "首届2002年（珠海），第N届年份=2001+N"
+   }
+  },
+  {
+   "comp_key": "china_mc",
+   "name_en": "China Mathematical Competition (National High School Mathematics Joint Competition)",
+   "name_zh": "全国高中数学联合竞赛",
+   "short": "高联",
+   "region": "china",
+   "tier": 3,
+   "rounds": [
+    {
+     "round_key": "first",
+     "zh": "一试",
+     "order": 1
+    },
+    {
+     "round_key": "extra",
+     "zh": "加试（二试）",
+     "order": 2
+    },
+    {
+     "round_key": "provincial",
+     "zh": "省级预赛",
+     "order": 0
+    }
+   ]
+  },
+  {
+   "comp_key": "china_southeast_mo",
+   "name_en": "China Southeastern Mathematical Olympiad",
+   "name_zh": "中国东南地区数学奥林匹克",
+   "short": "东南MO",
+   "region": "china",
+   "tier": 3
+  },
+  {
+   "comp_key": "china_western_mo",
+   "name_en": "China Western Mathematical Olympiad",
+   "name_zh": "中国西部数学奥林匹克",
+   "short": "西部MO",
+   "region": "china",
+   "tier": 3
+  },
+  {
+   "comp_key": "bulgaria_mo",
+   "name_en": "Bulgarian Mathematical Olympiad",
+   "name_zh": "保加利亚数学奥林匹克",
+   "short": "Bulgarian MO",
+   "region": "europe",
+   "tier": 2,
+   "edition_rule": {
+    "note": "届次-年份换算需确知首届年份，暂不确定，序数届次未换算"
+   }
+  },
+  {
+   "comp_key": "romania_jbmo_tst",
+   "name_en": "Romania JBMO Team Selection Tests",
+   "name_zh": "罗马尼亚JBMO选拔考试",
+   "short": "Romania JBMO TST",
+   "region": "europe",
+   "tier": 2,
+   "edition_rule": {
+    "first_edition_year": 1950,
+    "note": "沿用NMO届数编号，第N届NMO选拔=公历(1949+N)年"
+   },
+   "rounds": [
+    {
+     "round_key": "test1",
+     "zh": "第一次选拔",
+     "order": 1
+    },
+    {
+     "round_key": "test2",
+     "zh": "第二次选拔",
+     "order": 2
+    },
+    {
+     "round_key": "test3",
+     "zh": "第三次选拔",
+     "order": 3
+    },
+    {
+     "round_key": "test4",
+     "zh": "第四次选拔",
+     "order": 4
+    },
+    {
+     "round_key": "test5",
+     "zh": "第五次选拔",
+     "order": 5
+    }
+   ]
+  },
+  {
+   "comp_key": "romania_nmo",
+   "name_en": "Romanian National Mathematical Olympiad",
+   "name_zh": "罗马尼亚国家数学奥林匹克",
+   "short": "Romanian NMO",
+   "region": "europe",
+   "tier": 2,
+   "edition_rule": {
+    "first_edition_year": 1950,
+    "note": "首届1950年，第N届=公历(1949+N)年；2020-2021疫情期间由Gazeta Matematică承办的届次计入编号，故70th=2019、73rd=2022、75th=2024均与数据吻合"
+   },
+   "rounds": [
+    {
+     "round_key": "local",
+     "zh": "地方赛（Etapa Locală）",
+     "order": 1
+    },
+    {
+     "round_key": "district",
+     "zh": "县级赛（Etapa Județeană，含布加勒斯特市）",
+     "order": 2
+    },
+    {
+     "round_key": "national",
+     "zh": "全国决赛（Etapa Națională）",
+     "order": 3
+    },
+    {
+     "round_key": "shortlist",
+     "zh": "候选题",
+     "order": 4
+    }
+   ]
+  },
+  {
+   "comp_key": "romania_onm_gazeta",
+   "name_en": "Olimpiada Nationala Gazeta Matematica",
+   "name_zh": "罗马尼亚国家数学奥林匹克（Gazeta Matematică承办）",
+   "short": "ONM Gazeta",
+   "region": "europe",
+   "tier": 2,
+   "edition_rule": {
+    "note": "2020-2021疫情期间替代正式NMO、由《Gazeta Matematică》组织的全国奥赛；名称中无年份"
+   },
+   "rounds": [
+    {
+     "round_key": "stage3",
+     "zh": "第三阶段（Etapa a III-a）",
+     "order": 1
+    },
+    {
+     "round_key": "baraj3",
+     "zh": "第三次选拔（Barajul 3）",
+     "order": 2
+    }
+   ]
+  },
+  {
+   "comp_key": "romania_tst",
+   "name_en": "Romania Team Selection Tests (BMO & IMO)",
+   "name_zh": "罗马尼亚国家队选拔考试（BMO/IMO）",
+   "short": "Romania TST",
+   "region": "europe",
+   "tier": 2,
+   "edition_rule": {
+    "first_edition_year": 1950,
+    "note": "沿用NMO届数编号，第N届NMO选拔=公历(1949+N)年"
+   },
+   "rounds": [
+    {
+     "round_key": "test1",
+     "zh": "第一次选拔",
+     "order": 1
+    },
+    {
+     "round_key": "test2",
+     "zh": "第二次选拔",
+     "order": 2
+    },
+    {
+     "round_key": "test3",
+     "zh": "第三次选拔",
+     "order": 3
+    },
+    {
+     "round_key": "test4",
+     "zh": "第四次选拔",
+     "order": 4
+    }
+   ]
+  },
+  {
+   "comp_key": "russia_mo",
+   "name_en": "All-Russian Mathematical Olympiad",
+   "name_zh": "全俄数学奥林匹克",
+   "short": "ARO / ВсОШ",
+   "region": "europe",
+   "tier": 2,
+   "rounds": [
+    {
+     "round_key": "regional",
+     "zh": "大区轮（Региональный этап）",
+     "order": 1
+    },
+    {
+     "round_key": "final",
+     "zh": "决赛轮（Заключительный этап）",
+     "order": 2
+    }
+   ],
+   "edition_rule": {
+    "first_edition_year": 1975,
+    "note": "现行届次编号满足 年份 = 1974 + N：已核实 LI(51届)大区轮为2025年1-2月、LII(52届)为2026（olympiads.mccme.ru/vmo 官方材料）；故 XL=2014、XLIII=2017"
+   }
+  },
+  {
+   "comp_key": "russia_euler",
+   "name_en": "Leonhard Euler Olympiad",
+   "name_zh": "欧拉数学奥林匹克（俄罗斯，面向八年级）",
+   "short": "Euler Olympiad",
+   "region": "europe",
+   "tier": 3,
+   "edition_rule": {
+    "first_edition_year": 2009,
+    "note": "2008/09学年创办，作为全俄奥赛取消低年级组后面向8年级的全国性奥赛；原始名无届次/年份信息故未换算"
+   }
+  },
+  {
+   "comp_key": "clock_tower_school",
+   "name_en": "Clock-Tower School Competition",
+   "name_zh": "钟楼学校数学竞赛（勒姆尼库沃尔恰）",
+   "short": "Clock-Tower",
+   "region": "europe",
+   "tier": 4,
+   "rounds": [
+    {
+     "round_key": "junior",
+     "zh": "初级组",
+     "order": 1
+    },
+    {
+     "round_key": "senior",
+     "zh": "高级组",
+     "order": 2
+    }
+   ]
+  },
+  {
+   "comp_key": "danube_mc",
+   "name_en": "Danube Mathematical Competition",
+   "name_zh": "多瑙河数学竞赛",
+   "short": "Danube MC",
+   "region": "europe",
+   "tier": 4
+  },
+  {
+   "comp_key": "imar_mc",
+   "name_en": "IMAR Mathematical Competition",
+   "name_zh": "IMAR数学竞赛（罗马尼亚科学院数学研究所）",
+   "short": "IMAR",
+   "region": "europe",
+   "tier": 4,
+   "edition_rule": {
+    "first_edition_year": 2003,
+    "note": "按数据8th=2010、12th=2014、13th=2015推得第N届=公历(2002+N)年；2020年疫情后届次是否连续不确定，远届次未换算"
+   }
+  },
+  {
+   "comp_key": "romania_other",
+   "name_en": "Romania (unspecified source)",
+   "name_zh": "罗马尼亚 · 未标注来源",
+   "short": "RO other",
+   "region": "europe",
+   "tier": 4
+  },
+  {
+   "comp_key": "stars_of_mathematics",
+   "name_en": "Stars of Mathematics Competition",
+   "name_zh": "数学之星竞赛（布加勒斯特）",
+   "short": "Stars of Math",
+   "region": "europe",
+   "tier": 4,
+   "edition_rule": {
+    "first_edition_year": 2007,
+    "note": "按数据4th=2010、9th=2015推得第N届=公历(2006+N)年；2020年疫情后是否连年举办不确定，远届次未换算"
+   }
+  },
+  {
+   "comp_key": "apmo",
+   "name_en": "Asian Pacific Mathematics Olympiad",
+   "name_zh": "亚太数学奥林匹克（APMO）",
+   "short": "APMO",
+   "region": "intl",
+   "tier": 1,
+   "edition_rule": {
+    "first_edition_year": 1989,
+    "note": "第1届1989年，每年一届：year=1988+N；罗马数字届次（XI=11）同规则换算"
+   }
+  },
+  {
+   "comp_key": "balkan_mo",
+   "name_en": "Balkan Mathematical Olympiad",
+   "name_zh": "巴尔干数学奥林匹克（Balkan MO）",
+   "short": "BMO",
+   "region": "intl",
+   "tier": 1,
+   "rounds": [
+    {
+     "round_key": "shortlist",
+     "zh": "备选题",
+     "order": 2
+    }
+   ],
+   "edition_rule": {
+    "first_edition_year": 1984,
+    "note": "第1届1984年（雅典），每年一届：year=1983+N"
+   }
+  },
+  {
+   "comp_key": "egmo",
+   "name_en": "European Girls' Mathematical Olympiad",
+   "name_zh": "欧洲女子数学奥林匹克（EGMO）",
+   "short": "EGMO",
+   "region": "intl",
+   "tier": 1,
+   "edition_rule": {
+    "first_edition_year": 2012,
+    "note": "第1届2012年，此后每年一届：year=2011+N"
+   }
+  },
+  {
+   "comp_key": "imo",
+   "name_en": "International Mathematical Olympiad",
+   "name_zh": "国际数学奥林匹克（IMO）",
+   "short": "IMO",
+   "region": "intl",
+   "tier": 1,
+   "edition_rule": {
+    "first_edition_year": 1959,
+    "note": "第1届1959年，1980年停办一次；N≤21时 year=1958+N，N≥22时 year=1959+N"
+   }
+  },
+  {
+   "comp_key": "imo_shortlist",
+   "name_en": "IMO Shortlist",
+   "name_zh": "国际数学奥林匹克候选题（IMO Shortlist）",
+   "short": "ISL",
+   "region": "intl",
+   "tier": 1,
+   "edition_rule": {
+    "first_edition_year": 1959,
+    "note": "届次年份换算与 IMO 相同：1980年停办；N≤21时 year=1958+N，N≥22时 year=1959+N"
+   }
+  },
+  {
+   "comp_key": "rmm",
+   "name_en": "Romanian Master of Mathematics",
+   "name_zh": "罗马尼亚数学大师赛（RMM）",
+   "short": "RMM",
+   "region": "intl",
+   "tier": 1,
+   "rounds": [
+    {
+     "round_key": "day1",
+     "zh": "第一天",
+     "order": 1
+    },
+    {
+     "round_key": "day2",
+     "zh": "第二天",
+     "order": 2
+    }
+   ],
+   "edition_rule": {
+    "first_edition_year": 2008,
+    "note": "第1届2008年，2014年停办一次：N≤6时 year=2007+N，N≥7时 year=2008+N"
+   }
+  },
+  {
+   "comp_key": "jbmo",
+   "name_en": "Junior Balkan Mathematical Olympiad",
+   "name_zh": "少年巴尔干数学奥林匹克（JBMO）",
+   "short": "JBMO",
+   "region": "intl",
+   "tier": 3
+  },
+  {
+   "comp_key": "canada_mo",
+   "name_en": "Canadian Mathematical Olympiad",
+   "name_zh": "加拿大数学奥林匹克",
+   "short": "CMO (加拿大)",
+   "region": "na",
+   "tier": 2,
+   "edition_rule": {
+    "first_edition_year": 1969,
+    "note": "首届1969年，每年一届无中断：第N届年份 = 1968 + N（如38th=2006、40th=2008）"
+   }
+  },
+  {
+   "comp_key": "usa_tst",
+   "name_en": "United States IMO Team Selection Test",
+   "name_zh": "美国IMO国家队选拔考试（TST）",
+   "short": "USA TST",
+   "region": "na",
+   "tier": 2
+  },
+  {
+   "comp_key": "usa_tstst",
+   "name_en": "United States Team Selection Test Selection Test",
+   "name_zh": "美国国家队选拔资格考试（TSTST）",
+   "short": "USA TSTST",
+   "region": "na",
+   "tier": 2,
+   "edition_rule": {
+    "first_edition_year": 2011,
+    "note": "TSTST 于每年夏季举行，选拔进入次年 IMO 周期 TST 组的选手；名字若以目标 IMO 届次标注，考试年份=该届 IMO 年份-1"
+   }
+  },
+  {
+   "comp_key": "usajmo",
+   "name_en": "United States of America Junior Mathematical Olympiad",
+   "name_zh": "美国初级数学奥林匹克（USAJMO）",
+   "short": "USAJMO",
+   "region": "na",
+   "tier": 2,
+   "edition_rule": {
+    "first_edition_year": 2010,
+    "note": "第1届=2010年，第N届=2009+N"
+   }
+  },
+  {
+   "comp_key": "usamo",
+   "name_en": "United States of America Mathematical Olympiad",
+   "name_zh": "美国数学奥林匹克（USAMO）",
+   "short": "USAMO",
+   "region": "na",
+   "tier": 2,
+   "rounds": [
+    {
+     "round_key": "day1",
+     "zh": "第一天",
+     "order": 1
+    },
+    {
+     "round_key": "day2",
+     "zh": "第二天",
+     "order": 2
+    }
+   ],
+   "edition_rule": {
+    "first_edition_year": 1972,
+    "note": "第1届=1972年，第N届=1971+N"
+   }
+  },
+  {
+   "comp_key": "aime",
+   "name_en": "American Invitational Mathematics Examination",
+   "name_zh": "美国数学邀请赛（AIME）",
+   "short": "AIME",
+   "region": "na",
+   "tier": 3,
+   "rounds": [
+    {
+     "round_key": "i",
+     "zh": "第一场（I）",
+     "order": 1
+    },
+    {
+     "round_key": "ii",
+     "zh": "第二场（II）",
+     "order": 2
+    }
+   ]
+  },
+  {
+   "comp_key": "amc10",
+   "name_en": "American Mathematics Competitions 10",
+   "name_zh": "美国数学竞赛（AMC 10）",
+   "short": "AMC 10",
+   "region": "na",
+   "tier": 3,
+   "rounds": [
+    {
+     "round_key": "a",
+     "zh": "A卷",
+     "order": 1
+    },
+    {
+     "round_key": "b",
+     "zh": "B卷",
+     "order": 2
+    },
+    {
+     "round_key": "fall_a",
+     "zh": "秋季A卷",
+     "order": 3
+    },
+    {
+     "round_key": "fall_b",
+     "zh": "秋季B卷",
+     "order": 4
+    }
+   ]
+  },
+  {
+   "comp_key": "amc12",
+   "name_en": "American Mathematics Competitions 12",
+   "name_zh": "美国数学竞赛（AMC 12）",
+   "short": "AMC 12",
+   "region": "na",
+   "tier": 3,
+   "rounds": [
+    {
+     "round_key": "a",
+     "zh": "A卷",
+     "order": 1
+    },
+    {
+     "round_key": "b",
+     "zh": "B卷",
+     "order": 2
+    },
+    {
+     "round_key": "fall_a",
+     "zh": "秋季A卷",
+     "order": 3
+    },
+    {
+     "round_key": "fall_b",
+     "zh": "秋季B卷",
+     "order": 4
+    }
+   ]
+  },
+  {
+   "comp_key": "bamo",
+   "name_en": "Bay Area Mathematical Olympiad",
+   "name_zh": "湾区数学奥林匹克（BAMO）",
+   "short": "BAMO",
+   "region": "na",
+   "tier": 4,
+   "rounds": [
+    {
+     "round_key": "bamo8",
+     "zh": "BAMO-8（初中卷）",
+     "order": 1
+    },
+    {
+     "round_key": "bamo12",
+     "zh": "BAMO-12（高中卷）",
+     "order": 2
+    }
+   ],
+   "edition_rule": {
+    "first_edition_year": 1999,
+    "note": "第1届=1999年，第N届=1998+N"
+   }
+  },
+  {
+   "comp_key": "berkeley_mc",
+   "name_en": "Berkeley Math Circle Contests",
+   "name_zh": "伯克利数学圈竞赛（Berkeley Math Circle）",
+   "short": "Berkeley MC",
+   "region": "na",
+   "tier": 4,
+   "rounds": [
+    {
+     "round_key": "monthly",
+     "zh": "月赛（Monthly Contest）",
+     "order": 1
+    },
+    {
+     "round_key": "take_home",
+     "zh": "带回家赛（Take-Home Contest）",
+     "order": 2
+    }
+   ]
+  },
+  {
+   "comp_key": "hmic",
+   "name_en": "Harvard-MIT Invitational Competition",
+   "name_zh": "哈佛-MIT邀请赛（HMIC）",
+   "short": "HMIC",
+   "region": "na",
+   "tier": 4
+  },
+  {
+   "comp_key": "hmmt",
+   "name_en": "Harvard-MIT Mathematics Tournament",
+   "name_zh": "哈佛-MIT数学竞赛（HMMT）",
+   "short": "HMMT",
+   "region": "na",
+   "tier": 4,
+   "rounds": [
+    {
+     "round_key": "february",
+     "zh": "二月赛",
+     "order": 1
+    },
+    {
+     "round_key": "november",
+     "zh": "十一月赛",
+     "order": 2
+    }
+   ],
+   "edition_rule": {
+    "first_edition_year": 1998,
+    "note": "二月赛（Annual 主赛）第1届=1998年，第N届=1997+N；十一月赛第1届=2010年，第N届=2009+N。2020年11月线上版称 HMMO，2021年2月线上版称 HMMT Spring 2021"
+   }
+  },
+  {
+   "comp_key": "usa_other",
+   "name_en": "United States — Unlabeled",
+   "name_zh": "美国 · 未标注来源",
+   "short": "USA Other",
+   "region": "na",
+   "tier": 4
+  }
+ ]
+}
