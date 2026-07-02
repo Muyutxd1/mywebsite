@@ -2,6 +2,8 @@
 Merge per-batch enrichment shards into a single validated enrichment.jsonl that
 ``build_problems.py`` consumes. Idempotent; last-write-wins per id.
 
+  seed:   backend/data/enrichment/enrichment.jsonl (existing merged output —
+          shards are gitignored and may be gone, so never start from empty)
   shards: backend/data/enrichment/shards/shard_*.jsonl
   output: backend/data/enrichment/enrichment.jsonl
 
@@ -34,6 +36,21 @@ def band_for_score(score):
 
 def main():
     merged = {}
+    # Seed from the existing merged sidecar so a shard-less rerun (fresh
+    # worktree: shards are gitignored) never wipes prior enrichment.
+    if os.path.exists(OUT):
+        with open(OUT, encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    o = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if o.get('id'):
+                    merged[o['id']] = o
+    n_seed = len(merged)
     n_files = 0
     for path in sorted(glob.glob(os.path.join(SHARDS, 'shard_*.jsonl'))):
         n_files += 1
@@ -80,7 +97,8 @@ def main():
     dist = Counter(r['difficulty'] for r in merged.values())
     yrs = sum(1 for r in merged.values() if 'year' in r)
     pns = sum(1 for r in merged.values() if 'problem_number' in r)
-    print(f'merged {len(merged)} ratings from {n_files} shards -> {OUT}')
+    print(f'merged {len(merged)} ratings ({n_seed} seeded + shards from '
+          f'{n_files} files) -> {OUT}')
     print(f'  difficulty: {dict(dist)}')
     print(f'  llm-filled years: {yrs} | problem_numbers: {pns}')
 

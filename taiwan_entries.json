@@ -1,0 +1,1576 @@
+[
+ {
+  "config": "Taiwan",
+  "competition": "2023 數學奧林匹亞競賽第一階段選訓營",
+  "count": 14,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gh4",
+   "0gh7",
+   "0gha"
+  ],
+  "sample_text": "令 $Q_{>1}$ 為所有大於 1 的有理數所成的集合。假設函數 $f: Q_{>1} \\to \\mathbb{Z}$ 滿足 $$ f(q) = \\begin{cases} q - 3 & \\text{若 } q \\text{ 為整數,} \\\\ \\lceil q \\rceil - 3 + f\\le"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一一數學奧林匹亞競賽第三階段選訓營",
+  "count": 13,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g5e",
+   "0g5f",
+   "0g5g"
+  ],
+  "sample_text": "$f(x_1, \\dots, x_n)$ 為次數小於 $n$ 的整係數多項式, 證明滿足 $$ f(x_1, \\dots, x_n) \\equiv 0 \\pmod{13} $$ 的有序 $n$-元組 $(x_1, \\dots, x_n)$ 的個數必為 13 的倍數, 其中 $0 \\le x_i \\l"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2023 數學奧林匹亞競賽第二階段選訓營",
+  "count": 13,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gh2",
+   "0gh6",
+   "0gh9"
+  ],
+  "sample_text": "死靈法師和聖騎士在一個 $666 \\times 666$ 的方陣上大戰。方陣上原本空無一物。每一回合，死靈法師先在方陣上指定一格，並在以該格為中心的 $3 \\times 3$ 範圍內的所有格子（至多九格）各增加一隻骷髏，然後聖騎士指定方陣上任意四格，並從這四格中各消滅一隻骷髏（格子中的骷髏數是非負整"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一二數學奧林匹亞競賽第一階段選訓營",
+  "count": 12,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g67",
+   "0g6e",
+   "0g6g"
+  ],
+  "sample_text": "設 $O$ 為銳角 $\\triangle ABC$ 外接圓之圓心，直線 $AO$ 交 $BC$ 於一點 $D$。分別在邊 $AB$ 及 $AC$ 上各取一點 $E, F$，使得 $ED = BD$ 且 $DF = CD$。試證：$EF \\parallel BC$。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一二數學奧林匹亞競賽第二階段選訓營",
+  "count": 12,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g68",
+   "0g69",
+   "0g6c"
+  ],
+  "sample_text": "設 $S = \\{1, 2, \\dots, 2012\\}$。求滿足下列條件之函數 $f : S \\to S$ 的個數。 (1) $f$ 為一對一且映成函數。 (2) 對於所有數字 $1 \\le a \\le 2012$，皆會有 $f(a) + f^{-1}(a) = 2013$，其中 $f^{-1}$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一五數學奧林匹亞競賽第一階段選訓營",
+  "count": 12,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g8w",
+   "0g92",
+   "0g93"
+  ],
+  "sample_text": "試求所有正整數對 $(x, y)$, 滿足 $$ \\sqrt[3]{7x^2 - 13xy + 7y^2} = |x - y| + 1. $$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一七數學奧林匹亞競賽第三階段選訓營",
+  "count": 12,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gal",
+   "0gao",
+   "0gat"
+  ],
+  "sample_text": "令 $n \\ge 5$ 為一與 $6$ 互質的正整數。我們將一個正 $n$ 邊形的 $n$ 個頂點，各塗上三種顏色中的一種，使得被塗上每種顏色的頂點數都是奇數。試證：我們必可從這 $n$ 個頂點中找出三個點，它們的顏色都不相同，且此三點的連線構成等腰三角形。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一七數學奧林匹亞競賽第二階段選訓營",
+  "count": 12,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gam",
+   "0gan",
+   "0gap"
+  ],
+  "sample_text": "試求所有映成函數 $f: Z \\to Z$ 使得對任意整數 $x, y, z$ $$ f(xyz + xf(y) + yf(z) + zf(x)) = f(x)f(y)f(z) \\text{ 成立。} $$ 註：此處 $Z$ 表示所有整數所成的集合。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一七數學奧林匹亞競賽第一階段選訓營",
+  "count": 12,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gaq",
+   "0gar",
+   "0gau"
+  ],
+  "sample_text": "定義 $f_k(n)$ 為正整數 $n$ 的所有正因數之 $k$ 次方總和, 也就是 $$ f_k(n) := \\sum_{m|n, m>0} m^k. $$ 試找出所有正整數對 $(a, b)$, 使得 $f_a(n) \\mid f_b(n)$ 對於所有正整數 $n$ 均成立。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一八數學奧林匹亞競賽第一階段選訓營",
+  "count": 12,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gbm",
+   "0gbr",
+   "0gbt"
+  ],
+  "sample_text": "平面上有一 $\\triangle ABC$ 及一點 $O$, $X$ 在射線 $AC$ 上。取點 $X_1$ 在射線 $BA$ 上，使得 $AX = AX_1$，且 $A$ 位於 $B$ 與 $X_1$ 之間。再取點 $X_2$ 在射線 $BC$ 上使得 $\\overline{XX_2} \\para"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一八數學奧林匹亞競賽第三階段選訓營",
+  "count": 12,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gbn",
+   "0gbp",
+   "0gbs"
+  ],
+  "sample_text": "令 $p$ 為一質數。在以下遊戲中, 艾德與阿飛輪流進行各自的回合。輪到某人的回合時, 他先從 $\\{0, 1, \\dots, p-1\\}$ 裡還沒被任何一方選過的數字中選一個當作 $i$, 接著再從 $\\{0, 1, 2, \\dots, 9\\}$ 中選一個元素當作 $a_i$。艾德先進行回合。等 "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一九數學奧林匹亞競賽第三階段選訓營",
+  "count": 12,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gcl",
+   "0gcm",
+   "0gcn"
+  ],
+  "sample_text": "平面上給定三角形 $ABC$ 及一點 $P$。令 $\\triangle ABC$, $\\triangle BPC$, $\\triangle CPA$, $\\triangle APB$ 的外接圓圓心分別為點 $O$, $D$, $E$, $F$。設直線 $BC$ 與 $EF$ 交於點 $T$，而點 $"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一九數學奧林匹亞競賽第一階段選訓營",
+  "count": 12,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gcp",
+   "0gcs",
+   "0gct"
+  ],
+  "sample_text": "設三角形 $ABC$ 的垂心為 $H$, 外接圓為 $\\Gamma$。取點 $P$ 為 $\\Gamma$ 上異於 $A$, $B$, $C$ 的一點, 並令 $M$ 為線段 $HP$ 的中點。分別在直線 $BC$, $CA$, $AB$ 上取點 $D$, $E$, $F$ 使得 $AP \\paral"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一一數學奧林匹亞競賽第二階段選訓營",
+  "count": 11,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g56",
+   "0g58",
+   "0g5a"
+  ],
+  "sample_text": "$\\triangle ABC$ 中有一點 $O$, 令 $AO$, $BO$, $CO$ 的延長線分別交 $BC$, $CA$, $AB$ 於 $A_1$, $B_1$, $C_1$。證明：$O$ 在 $\\triangle A_1B_1C_1$ 的中位三角形內。（中位三角形是指各邊中點連線所成的三角"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一二數學奧林匹亞競賽第三階段選訓營",
+  "count": 11,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g66",
+   "0g6a",
+   "0g6b"
+  ],
+  "sample_text": "有一個 $m \\times m$ 個單位方格構成的桌子, 在某些單位方格的中心點有一隻螞蟻。從時間 $0$ 開始, 每隻螞蟻都沿著一個平行於方格邊的方向, 以速率 $1$ 前進。過程中若有螞蟻相遇: (i) 如果是兩隻正面相遇, 則它們會一起順時針轉彎 $90^\\circ$, 然後繼續以速率 $1$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2015 Math Olympiad Second Stage Training Camp",
+  "count": 11,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g8x",
+   "0g8y",
+   "0g91"
+  ],
+  "sample_text": "設數列 $\\{a_n\\}$ 滿足 $a_{n+1} = a_n^3 + 103,\\ n = 1, 2, \\dots$。 試證: 至多存在一個正整數 $n$, 使得 $a_n$ 為完全平方數。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一六數學奧林匹亞競賽第一階段選訓營",
+  "count": 11,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g9s",
+   "0g9u",
+   "0g9y"
+  ],
+  "sample_text": "設函數 $f: [0, \\infty) \\to [0, \\infty)$ 滿足： (1) $\\forall x, y \\ge 0$, 有 $f(x)f(y) \\le y^2 f(\\frac{x}{2}) + x^2 f(\\frac{y}{2})$; (2) $\\forall 0 \\le x \\le "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一六數學奧林匹亞競賽第三階段選訓營",
+  "count": 11,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g9t",
+   "0g9v",
+   "0g9x"
+  ],
+  "sample_text": "已知正實數 $x, y, z$ 滿足 $x + y + z = 1$ 的正實數。試求使不等式 $$ \\frac{x^2 y^2}{1-z} + \\frac{y^2 z^2}{1-x} + \\frac{z^2 x^2}{1-y} \\le k - 3xyz $$ 恆成立的實數 $k$ 的最小值。 Let"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2021 數學奧林匹亞競賽第一階段選訓營",
+  "count": 11,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0ge3",
+   "0ge6",
+   "0ge9"
+  ],
+  "sample_text": "有 110 個品種的天竺鼠各 110 隻，排成一個 110 × 110 的方陣。試求最大的正整數 $n$，使得不論天竺鼠們如何排列，我們都可以找到一直列或一橫條的 110 隻天竺鼠包含至少 $n$ 個不同品種。 There are 110 guinea pigs for each of the 11"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2021 數學奧林匹亞競賽第三階段選訓營",
+  "count": 11,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0ge4",
+   "0ge5",
+   "0ge8"
+  ],
+  "sample_text": "找出所有符合下列三個條件且定義在正整數上的非負整數值函數 $f$: (1) 存在至少一個 $n$，有 $f(n) \\neq 0$; (2) 對於所有正整數 $x$ 和 $y$，有 $f(xy) = f(x) + f(y)$; (3) 有無窮多個正整數 $n$ 對於所有 $k < n$ 有 $f(k)"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一四數學奧林匹亞競賽第一階段選訓營",
+  "count": 10,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g84",
+   "0g85",
+   "0g87"
+  ],
+  "sample_text": "已知 $a, b, c$ 為正實數, 試證不等式 $$ 3(a + b + c) \\geq 8\\sqrt[3]{abc} + \\sqrt[3]{\\frac{a^3 + b^3 + c^3}{3}} $$ Let $a, b, c$ be positive real numbers. Prove th"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2023 數學奧林匹亞競賽第三階段選訓營",
+  "count": 10,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gh3",
+   "0gh5",
+   "0gh8"
+  ],
+  "sample_text": "在銳角三角形 $ABC$ 中, 令點 $F$ 是通過 $A$ 的高的垂足, 而點 $P$ 位於線段 $AF$ 上。過點 $P$ 分別作平行 $AC$ 和 $AB$ 的直線, 設它們分別交 $BC$ 於點 $D$ 和 $E$。在圓 $ABD$ 及圓 $ACE$ 上分別取點 $X \\neq A$, $Y"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二0一三數學奧林匹亞競賽第一階段選訓營",
+  "count": 8,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g76",
+   "0g78",
+   "0g79"
+  ],
+  "sample_text": "由正整數 $37$ 開始，依序在各項的前方加一數字 $5$，形成下面的數列： $37$, $537$, $5537$, $55537$, $555537$, ... 請問此數列中有多少項是質數？"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一五數學奧林匹亞競賽第三階段選訓營",
+  "count": 8,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g8z",
+   "0g90",
+   "0g95"
+  ],
+  "sample_text": "已知 $x, y$ 為滿足 $x + y = 1$ 的正實數, $n$ 為大於或等於 $2$ 的整數。試證: $$ \\frac{x^n}{x+y^3} + \\frac{y^n}{x^3+y} \\geq \\frac{2^{4-n}}{5}. $$ Let $x, y$ be positive real"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一六數學奧林匹亞競賽第二階段選訓營",
+  "count": 8,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g9r",
+   "0g9w",
+   "0ga1"
+  ],
+  "sample_text": "Let $O$ be the circumcenter of triangle $ABC$, and $\\omega$ be the circumcircle of triangle $BOC$. Line $AO$ intersects with circle $\\omega$ again at "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一三數學奧林匹亞競賽第一階段選訓營",
+  "count": 7,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g77",
+   "0g7d",
+   "0g7l"
+  ],
+  "sample_text": "設 $P$ 為銳角三角形 $ABC$ 內部一點，且 $P$ 到三頂點的距離分別為 $d_A, d_B, d_C$，到三邊的垂直距離分別為 $d_1, d_2, d_3$。試證： $$ d_A + d_B + d_C \\geq 2(d_1 + d_2 + d_3). $$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一三數學奧林匹亞競賽第二階段選訓營",
+  "count": 7,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g7f",
+   "0g7g",
+   "0g7n"
+  ],
+  "sample_text": "設實數 $a_1, a_2, \\dots, a_n$ ($n \\ge 2$) 滿足 $-1 < a_1, a_2, \\dots, a_n < 1$, 且 $\\sum_{k=1}^n a_k^2 \\ge 1$。 試證： $$ \\sum_{i<j} \\left( \\frac{1}{1-a_i^2} + "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2020 Taiwan IMO 1J",
+  "count": 7,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gdl",
+   "0gdr",
+   "0gds"
+  ],
+  "sample_text": "設實數 $a, b, c, d$ 滿足 $$ (a + c)(b + d) = \\sqrt{2}(ac - 2bd - 1). $$ 試證： $$ (ab - 1)^2 + (bc - 1)^2 + (cd - 1)^2 + (da - 1)^2 + (ac - 1)^2 + (2bd + 1)^2"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2020 Taiwan IMO 2J",
+  "count": 6,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gdk",
+   "0gdn",
+   "0gdo"
+  ],
+  "sample_text": "是否存在正整數 $m$, 可以讓等式 $$ (a^3 - a)(b^3 - b) = mc^2. $$ 有無窮多組滿足 $a \\neq b$ 的正整數解 $(a, b, c)$? Does there exist a positive integer $m$ for which the equati"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2020 Taiwan IMO 3J",
+  "count": 6,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gdm",
+   "0gdp",
+   "0gdq"
+  ],
+  "sample_text": "證明：存在一個正實數 $c > 0$，會使得有無窮多組正整數 $(n, N)$ 滿足下列條件： (a) $N > c \\cdot 2^{k} n \\log(n)$，其中 $k$ 為 $N$ 的質因數個數； (b) 對 $N$ 的任一質因數 $p$，設 $e$ 為 $N$ 的標準質因數分解中 $p$ "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "APMO Taiwan Preliminary Round 1",
+  "count": 6,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gih",
+   "0gii",
+   "0gis"
+  ],
+  "sample_text": "$2024^{2024}$ divided by $102$ leaves a remainder of **3** **4** **5**. $2024^{2024}$ 除以 $102$ 的餘數是③④⑤。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2021 年台灣數學奧林匹亞考試試題",
+  "count": 5,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gf2",
+   "0gf3",
+   "0gf4"
+  ],
+  "sample_text": "試求滿足下列條件的最大正整數 $K$: 任給有限多個長度皆為 1 的閉區間 $A_1, A_2, \\dots, A_N$ ($N$ 為任意正整數)。若其聯集為 $[0, 2021]$, 則我們必定可以在 $A_1, \\dots, A_N$ 中找到 $K$ 個兩兩交集皆為空集合的區間。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "國際奧林匹亞競賽第三次訓練營",
+  "count": 5,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gfa",
+   "0gfe",
+   "0gfh"
+  ],
+  "sample_text": "從集合 $S=\\{1,2,3, ..., 2024\\}$ 中，取出 1000 個數而造出具有 1000 個元素的子集 $T$，而 $T$ 的最小元素是 $k$，求 $k$ 的期望值。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2023 年台灣數學奧林匹亞考試",
+  "count": 5,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gi3",
+   "0gi4",
+   "0gi5"
+  ],
+  "sample_text": "令 $n$ 與 $m$ 為正整數。托兒所的老師用 $n \\times m$ 塊正方形巧拼，排成一個 $n \\times m$ 的長方形區域。每塊巧拼上有一個嬰兒，各自面向正方形的某一個邊。老師一拍手，所有嬰兒就同時往其面對的方向前進一塊巧拼，之後所有嬰兒原地順時鐘轉 90 度。若一個嬰兒爬出 $n "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "APMO Taiwan Preliminary Round 2",
+  "count": 5,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gia",
+   "0gic",
+   "0gik"
+  ],
+  "sample_text": "Let $f(x)$ be a polynomial with real coefficients such that the inequality $$ x + 1 \\le f(x) \\le 3x^2 - 5x + 4 $$ holds for all real numbers $x$. Find"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "Taiwan Mathematical Olympiad",
+  "count": 5,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gib",
+   "0gid",
+   "0gil"
+  ],
+  "sample_text": "令 $n$ 與 $k$ 為正整數。寶寶用 $n^2$ 個數字積木拼成一個 $n \\times n$ 的方陣，每塊積木都是一個不超過 $k$ 的正整數。路過的奶爸一看，發現： 1. 方陣上每一橫列的數字都可以視為以最左方數字為首項的等差數列，且其公差都不同； 2. 方陣上每一直排的數字都可以視為以最上"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2021 數學奧林匹亞競賽第二階段選訓營, 獨立研究 (一)",
+  "count": 4,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gel",
+   "0gem",
+   "0geo"
+  ],
+  "sample_text": "證明：若三個非零相異複數 $\\alpha_1, \\alpha_2, \\alpha_3$ 在複數平面上不共線，且滿足 $\\alpha_1+\\alpha_2+\\alpha_3 = 0$，則 $$ \\sum_{i=1}^{3} \\left( \\frac{|\\alpha_{i+1} - \\alpha_{i+"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2021 數學奧林匹亞競賽第二階段選訓營, 獨立研究(二)",
+  "count": 4,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0get",
+   "0gev",
+   "0gex"
+  ],
+  "sample_text": "For every positive integer $N$, determine the smallest real number $b_N$ such that, for all real $x$, $$ \\sqrt[N]{\\frac{x^{2N} + 1}{2}} \\le b_N(x - 1)"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第三階段選訓營, 獨立研究(一)",
+  "count": 4,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0ggg",
+   "0ggi",
+   "0ggk"
+  ],
+  "sample_text": "令 $a_1, a_2, \\dots, a_n$ 為滿足 $a_1 + a_2 + \\dots + a_n = 1$ 的正實數 ($n \\ge 2$)。證明： $$ \\sum_{k=2}^{n} \\frac{a_k}{1 - a_k} (a_1 + a_2 + \\dots + a_{k-1})^2 "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第二階段選訓營, 獨立研究 (二)",
+  "count": 4,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0ggq",
+   "0ggv",
+   "0ggw"
+  ],
+  "sample_text": "令 $\\mathbb{R}^+$ 為全體正實數所成的集合。找出所有函數 $f: \\mathbb{R}^+ \\to \\mathbb{R}^+$ 使得 $$ f(x + y^2 f(y)) = f(1 + y f(x)) f(x) $$ 對所有正實數 $x, y$ 恆成立。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第三階段選訓營, 獨立研究 (二)",
+  "count": 4,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0ggr",
+   "0ggt",
+   "0ggy"
+  ],
+  "sample_text": "令 $\\mathbb{R}$ 代表所有實數所成的集合。試確定所有單射函數 $f: \\mathbb{R} \\to \\mathbb{R}$ 使得 $$ (f(a) - f(b))(f(b) - f(c))(f(c) - f(a)) = f(ab^2 + bc^2 + ca^2) - f(a^2b + b"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第一階段選訓營, 獨立研究 (二)",
+  "count": 4,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0ggs",
+   "0ggu",
+   "0ggx"
+  ],
+  "sample_text": "已知實數數列 $a_1, a_2, \\dots$ 滿足下列性質： i. 存在正整數 $N$ 使得 $a_n = 1$ 對所有 $n \\ge N$ 都成立； ii. 對所有 $n \\ge 2$ 都有 $$ a_n \\le a_{n-1} + 2^{-n} a_{2n}. $$ 證明：$a_n > 1 "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 3J, Independent Study 1",
+  "count": 4,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gj4",
+   "0gj9",
+   "0gja"
+  ],
+  "sample_text": "設 $a_1, a_2, \\dots, a_{123}$ 為滿足下列條件的正整數： • $a_1, a_2, \\dots, a_{123}$ 是 $1, 2, \\dots, 123$ 的一種排列 • $|a_1 - a_2|, |a_2 - a_3|, \\dots, |a_{122} - a_{12"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 2J, Independent Study 1",
+  "count": 4,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gj5",
+   "0gj8",
+   "0gjb"
+  ],
+  "sample_text": "定義費氏數: $F_0 = 0, F_1 = 1, F_2 = 1$, 且 $F_{n+2} = F_{n+1} + F_n$ 對所有正整數 $n$ 均成立。 證明存在一個正整數 $N$ 滿足下列性質：對於任意非常數的、長度為 $N$ 的正整數等差數列, 其中必有一項, 當其寫成若干個費氏數之和時,"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 1J, Independent Study 1",
+  "count": 4,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gj6",
+   "0gj7",
+   "0gjc"
+  ],
+  "sample_text": "令 $x$ 與 $y$ 為滿足 $x + y = 2$ 的正實數。證明 $$ 2 + xy(1 + xy) \\geq 2x^y + 2y^x. $$ Let $x$ and $y$ be positive real numbers such that $x + y = 2$. Prove that "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 1J, Independent Study 2",
+  "count": 4,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gjh",
+   "0gjl",
+   "0gjn"
+  ],
+  "sample_text": "給定一個整數的有限集 $S$，是否總是存在一個整係數多項式 $f(x)$，使得對於所有整數 $x$，$f(x)$ 為完全平方數若且唯若 $x \\in S$？ Fix a finite set $S$ of integers. Is there a polynomial $f(x)$ of integ"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 2J, Independent Study 2",
+  "count": 4,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gji",
+   "0gjk",
+   "0gjo"
+  ],
+  "sample_text": "記所有正實數所成的集合為 $\\mathbb{R}_+$。試找出所有函數 $f : \\mathbb{R}_+ \\to \\mathbb{R}_+$, 使得 $$ f(xy + x + y) + f\\left(\\frac{1}{x}\\right) f\\left(\\frac{1}{y}\\right) = 1"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 3J, Independent Study 2",
+  "count": 4,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gjj",
+   "0gjm",
+   "0gjp"
+  ],
+  "sample_text": "證明存在常數 $D > 0$ 滿足以下性質：對於所有正整數 $m$ 與 $N = \\frac{m(m+1)}{2}$，存在 $1, 2, \\dots, N$ 的三種排列 $a_1, a_2, \\dots, a_N; b_1, b_2, \\dots, b_N; c_1, c_2, \\dots, c_N"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營,模擬競賽(一)",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g5b",
+   "0g5n",
+   "0g5w"
+  ],
+  "sample_text": "設 $k$ 為一給定實數。試找出所有從實數映至實數的函數 $f(x)$ 滿足對任意實數 $x, y$, 均有 $$ f(x) + (f(y))^2 = k f(x + y^2). $$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營,模擬競賽(二)",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g5z",
+   "0g61",
+   "0g64"
+  ],
+  "sample_text": "試求最小正整數 $n$ 滿足下列條件： 存在一組相異的正整數 $s_1, s_2, \\dots, s_n$ 使得 $$ (1 - \\frac{1}{s_1})(1 - \\frac{1}{s_2})\\cdots(1 - \\frac{1}{s_n}) = \\frac{17}{670}. $$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一三數學奧林匹亞競賽第三階段選訓營,模擬競賽(一)",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g7c",
+   "0g7p",
+   "0g7t"
+  ],
+  "sample_text": "設四邊形 $ABCD$ 外接一圓, 兩對角線 $AC$ 與 $BD$ 交於 $E$ 點。令射線 $DA$ 與射線 $CB$ 交於 $F$ 點; $G$ 為平面上一點使得 $ECGD$ 為平行四邊形; $H$ 點為 $E$ 點對直線 $AD$ 的反射點。試證: $D, H, F, G$ 四點共圓。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一三數學奧林匹亞競賽第三階段選訓營, 模擬競賽(二)",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g7v",
+   "0g7y",
+   "0g83"
+  ],
+  "sample_text": "令 $\\mathbb{Z}$ 和 $\\mathbb{Q}$ 分別為整數與有理數所形成的集合。對於 $\\mathbb{Q}$ 的子集合 $X, Y$, 定義 $X + Y$ 為: $$ X + Y := \\{x + y \\mid x \\in X, y \\in Y\\}. $$ (a) 試問能否將 $\\m"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "14-2J-M1",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g8b",
+   "0g8l",
+   "0g8o"
+  ],
+  "sample_text": "設 $\\omega$ 為三角形 $ABC$ 的外接圓。令 $AB$ 邊的中點為 $M$, $AC$ 邊的中點為 $N$, 並令 $\\omega$ 上不含 $A$ 點的 $BC$ 弧的中點為 $T$。設三角形 $AMT$ 的外接圓與 $AC$ 邊的中垂線交於 $X$ 點, 三角形 $ANT$ 的外接圓"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2014 IMO Training Camp Stage 3 Mock Competition (1)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g8d",
+   "0g8k",
+   "0g8p"
+  ],
+  "sample_text": "令 $R$ 表示實數所成的集合。定義集合 $S = \\{1, -1\\}$ 與函數 $sign : R \\to S$ 如下： $$ sign(x) = \\begin{cases} 1 & \\text{if } x \\ge 0; \\\\ -1 & \\text{if } x < 0. \\end{cases}"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2018 數學奧林匹亞競賽第二階段選訓營, 模擬競賽(一)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gbl",
+   "0gc7",
+   "0gcb"
+  ],
+  "sample_text": "平面上有 $\\triangle ABC$ 及一點 $O$, $\\Gamma$ 為 $\\triangle ABC$ 的外接圓。設直線 $CO$ 與直線 $AB$ 交於點 $D$, 直線 $BO$ 與直線 $CA$ 交於點 $E$。設直線 $AO$ 與 $\\Gamma$ 再交於點 $F$。令點 $I$ "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2018 數學奧林匹亞競賽第二階段選訓營, 模擬競賽(二)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gcd",
+   "0gcf",
+   "0gci"
+  ],
+  "sample_text": "一個長方形 $\\mathcal{R}$, 其各邊邊長皆為奇整數。我們將之分割為若干個小的長方形, 使得每個小長方形的各邊邊長皆為正整數。證明其中至少有一個小長方形, 它和 $\\mathcal{R}$ 各邊的距離的奇偶性相同。 (在此, 一個小長方形到 $\\mathcal{R}$ 某一邊 $L$ 的距"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一九數學奧林匹亞競賽第二階段選訓營,模擬競賽(一)",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gcr",
+   "0gd2",
+   "0gda"
+  ],
+  "sample_text": "給定一個由若干個正整數所成的集合 $S$，試證下列兩個敍述至少有一成立： (1) 存在 $S$ 中的相異有限子集合 $F$ 與 $G$ 使得 $$ \\sum_{x \\in F} \\frac{1}{x} = \\sum_{x \\in G} \\frac{1}{x}; $$ (2) 存在一正有理數 $r <"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一九數學奧林匹亞競賽第二階段選訓營,模擬競賽(二)",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gdd",
+   "0gde",
+   "0gdj"
+  ],
+  "sample_text": "老趙當兵太無聊了, 因此他在地上畫了 $n + 1$ 個格子排成一列 ($n$ 為正整數), 從左至右依序編號為第 0 格到第 $n$ 格。起始的時候, 第 0 格有 $n$ 顆石頭, 其他格子則都是空的。在每一回合, 老趙先選擇一格非空的格子, 假設其中有 $k$ 顆石頭。接著, 他從選定的格子中"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2021 數學奧林匹亞競賽第二階段選訓營, 國際競賽實作 (二)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gec",
+   "0gee",
+   "0geh"
+  ],
+  "sample_text": "設 $\\triangle ABC$ 為等腰三角形, 其中 $BC = CA$, 且設 $D$ 為邊 $AB$ 內部的一點, 滿足 $AD < DB$。在邊 $BC$ 與 $CA$ 上分別取點 $P$ 與 $Q$ 滿足 $\\angle DPB = \\angle DQA = 90^\\circ$。設線段 "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第一階段選訓營, 國際競賽實作(一)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gf8",
+   "0gfq",
+   "0gg1"
+  ],
+  "sample_text": "三角形 $ABC$ 中，令點 $B'$, $C'$ 分別為邊 $AC$ 及 $AB$ 的中點，而點 $H$ 為通過頂點 $A$ 的高的垂足。證明：三角形 $AB'C'$，$BC'H$ 及 $B'CH$ 的外接圓共於一點 $I$，且直線 $HI$ 平分線段 $B'C'$。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第一階段培訓營, 國際競賽實作(一)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gfb",
+   "0gfu",
+   "0gfz"
+  ],
+  "sample_text": "設 $n$ 為正整數。試決定所有函數 $f : \\mathbb{R} \\to \\mathbb{R}$，滿足 $$ (f(x))^n f(x + y) = (f(x))^{n+1} + x^n f(y) $$ 對所有的實數 $x, y$ 均成立。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第三階段選訓營, 國際競賽實作(一)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gfc",
+   "0gft",
+   "0gfy"
+  ],
+  "sample_text": "設四邊形 $ABCD$ 內接於一圓 $\\Omega$。過點 $D$ 與 $\\Omega$ 相切的直線分別交射線 $BA$, $BC$ 於點 $E$, $F$。於三角形 $ABC$ 內部選取一點 $T$ 使得 $TE \\parallel CD$ 且 $TF \\parallel AD$。設點 $K$ 異"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第二階段選訓營, 國際競賽實作(一)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gff",
+   "0gfm",
+   "0gfx"
+  ],
+  "sample_text": "給定正整數 $n$。設 $S$ 為坐標平面上 $x$ 坐標及 $y$ 坐標皆小於 $2n$ 的非負整數的點所成的集合 (所以 $S$ 共包含 $4n^2$ 個點)。假設 $\\mathcal{F}$ 為 $n^2$ 個四邊形所成的集合, 其中每個四邊形的所有頂點都在 $S$ 內, 並且 $S$ 裡的每"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第二階段培訓營, 國際競賽實作(二)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gg2",
+   "0ggb",
+   "0ggd"
+  ],
+  "sample_text": "令正方形 $ABCD$ 的內切圓為 $\\Gamma$。設點 $M$ 為線段 $CD$ 的中點, 點 $P$ 為線段 $AB$ 上異於 $B$ 的一點。設點 $E$ 為圓 $\\Gamma$ 上異於 $M$ 的一點, 且直線 $DP$ 平行於直線 $EM$。設直線 $CP$ 與 $AD$ 交於點 $F$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第一階段選訓營, 國際競賽實作(二)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gg3",
+   "0ggc",
+   "0gge"
+  ],
+  "sample_text": "證明：對於 $\\{1, 2, 3, ..., 5^{505}\\}$ 的任一個恰有 $2022$ 個元素的子集 $A$，必存在三個元素 $a, b, c$ 滿足 $a < b < c$ 和 $c + 2a > 3b$。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第五階段培訓營, 國際競賽實作(二)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gg6",
+   "0gg9",
+   "0ggf"
+  ],
+  "sample_text": "設 $p$ 為奇質數。證明整數 $$ 1! + 2! + 3! + \\cdots + p! - \\left\\lfloor \\frac{(p-1)!}{e} \\right\\rfloor $$ 必能被 $p$ 整除。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第二階段選訓營, 獨立研究(一)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0ggh",
+   "0ggm",
+   "0ggo"
+  ],
+  "sample_text": "一個獵人和一隻隱形的兔子在整點座標平面 $\\mathbb{Z}^2 := \\{(x, y) : x, y \\in \\mathbb{Z}\\}$ 上玩遊戲 ($\\mathbb{Z}$ 為所有整數所成的集合)。遊戲開始前, 獵人先用有限多種顏色, 將 $\\mathbb{Z}^2$ 中的每個點各塗上恰一個顏"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第一階段選訓營, 獨立研究(一)",
+  "count": 3,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0ggj",
+   "0ggl",
+   "0ggn"
+  ],
+  "sample_text": "令 $n \\ge 3$ 為一正整數。一個正整數 $m \\ge n+1$ 被稱為 $n$ 色數, 若且唯若我們可以將正 $m$ 邊形的每一個頂點塗成 $n$ 色中的其中一個顏色, 使得這個正 $m$ 邊形的任何連續 $n+1$ 個頂點都包含全部 $n$ 種顏色。 證明對於任何 $n \\ge 3$, 非"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 2J, Mock Exam 1",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gi8",
+   "0gie",
+   "0gim"
+  ],
+  "sample_text": "給定三角形 $ABC$。設 $BPCQ$ 為一平行四邊形 ($P$ 不在 $BC$ 上)。令 $U$ 為 $CA$ 與 $BP$ 的交點，$V$ 為 $AB$ 與 $CP$ 的交點，$X$ 為 $CA$ 與三角形 $ABQ$ 的外接圓異於 $A$ 的交點，$Y$ 為 $AB$ 與三角形 $ACQ$ "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 1J, Mock Exam 1",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gi9",
+   "0gif",
+   "0gin"
+  ],
+  "sample_text": "設圓內接四邊形 $ABCD$ 的外接圓為 $\\omega$, 半徑為 $r$ 且對角線 $AC$ 和 $BD$ 相交於 $P$。 假設 $AD = DP$, $S$ 為從 $P$ 到 $AB$ 的垂足而點 $Q$ 位於直線 $SP$ 上, 使得 $PQ = r$ 且 $S, P, Q$ 依序位於直線"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 3J, Mock Exam 2",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gio",
+   "0gix",
+   "0gj1"
+  ],
+  "sample_text": "試求最大的正整數 $L$ 使得存在正整數數列 $a_1, a_2, \\dots, a_L$ 滿足： (a) 數列中的每一項都小於或等於 $2^{2024}$； (b) 不存在連續子數列 $a_i, a_{i+1}, \\dots, a_j$ (其中 $1 \\le i \\le j \\le L$) 使得我"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 2J, Mock Exam 2",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gip",
+   "0giz",
+   "0gj2"
+  ],
+  "sample_text": "令 $n$ 為正整數。我們稱一個嚴格遞增的等差數列 $x_0, x_1, \\dots, x_n$ 為 $n$-數列，若且唯若存在正整數 $a_1, a_2, \\dots, a_n, b_1, b_2, \\dots, b_n$，滿足 $$ x_0 = a_1 \\times a_2 \\times a_3"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 1J, Mock Exam 2",
+  "count": 3,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0giq",
+   "0giv",
+   "0gj0"
+  ],
+  "sample_text": "找出所有 $p$ 為質數的正整數數對 $(a, p)$，使得 $p^a + a^4$ 為完全平方數。 Determine all pairs $(a, p)$ of positive integers with $p$ prime such that $p^a + a^4$ is a perfect"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營,獨立研究(三)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g59",
+   "0g5q"
+  ],
+  "sample_text": "令 $n$ 是大於 1 的正整數且 $p$ 為一質數使得 $n$ 能整除 $p-1$ 且 $p$ 能整除 $n^3-1$。 試證: $4p-3$ 是一完全平方數。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營,獨立研究(一)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g5d",
+   "0g5p"
+  ],
+  "sample_text": "在 $\\triangle ABC$ 的邊 $BC$ 的延長線取一點 $D$ 使得 $CD = AC$。$\\triangle ACD$ 的外接圓與以 $BC$ 為直徑的圓交於 $C$, $P$ 兩點，直線 $BP$ 與 $AC$ 交於 $E$，直線 $CP$ 與 $AB$ 交於 $F$。求證：$D$,"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一三數學奧林匹亞競賽第三階段選訓營, 獨立研究 (三)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g75",
+   "0g7o"
+  ],
+  "sample_text": "決定所有的整數 $m \\ge 2$ 使得所有的 $n, \\frac{m}{3} \\le n \\le \\frac{m}{2}$, 整除二項係數 $\\binom{n}{m-2n}$。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一三數學奧林匹亞競賽第三階段選訓營, 獨立研究 (二)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g7b",
+   "0g7k"
+  ],
+  "sample_text": "設四邊形 $ABCD$ 有內切圓, 其圓心為 $I$。令對角線 $AC$, $BD$ 相交於 $E$ 點。 若 $AD$, $BC$, $EI$ 三線段的中點共線, 試證 $AB = CD$。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一三數學奧林匹亞競賽第三階段選訓營, 獨立研究(一)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g7e",
+   "0g7i"
+  ],
+  "sample_text": "已知 $m \\ge 0$, $f(x) = x^2 + \\sqrt{mx} + m + 1$。試證: 對任意正實數 $x_1, x_2, \\dots, x_n$, $$ f(\\sqrt[n]{x_1 \\cdots x_n}) \\le \\sqrt[n]{f(x_1)f(x_2)\\cdots f(x_n"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "國際數學奧林匹亞競賽第二階段選訓營 獨立研究(三)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g88",
+   "0g8h"
+  ],
+  "sample_text": "令 $a_i > 0, i = 1, 2, \\dots, n, \\sum_{i=1}^{n} a_i = 1$. 試證：對任意正整數 $k$, $$ (a_1^k + \\frac{1}{a_1^k})(a_2^k + \\frac{1}{a_2^k})\\cdots(a_n^k + \\frac{1}{a"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一四年國際數學奧林匹亞競賽第三階段選訓營 獨立研究(一)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g89",
+   "0g8i"
+  ],
+  "sample_text": "給定 $6 \\times 6$ 的方格，並記第一列六個方格座標為 $(1,1), (1,2), \\cdots, (1,6)$，其餘類推。對於任意的 $k = 0,1,\\cdots,5$，滿足 $i-j \\equiv k \\pmod 6$ 的六個格子 $(i,j)$ 稱為在同一條對角線上（故共有六條對"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一四年國際數學奧林匹亞競賽第二階段選訓營 獨立研究(三)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g8e",
+   "0g8g"
+  ],
+  "sample_text": "正整數 $x_1, x_2, \\dots, x_n$ ($n \\ge 4$) 依序排列在圓周上，使得任意 $x_i$ 的左右鄰居之數字和會是 $x_i$ 本身的倍數，也就是分數 $$ \\frac{x_{i-1} + x_{i+1}}{x_i} = k_i. $$ 是一個整數，其中指定 $x_0 = "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "國際數學奧林匹亞競賽第二階段選訓營 模擬競賽(二)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g8r",
+   "0g8u"
+  ],
+  "sample_text": "瘋狂科學家無意間在他的實驗室發現了一種叫瓜克的新粒子。兩個瓜克可以組成一個瓜克對；一個瓜克可以同時和很多瓜克組成瓜克對。此外，他發現他可以進行以下兩種動作： (1) 如果有一個瓜克和奇數個其他瓜克組成瓜克對，則他可以將這個瓜克消滅。 (2) 將整個實驗室裡的瓜克複製，也就是說，每個瓜克 $I$ 都會"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2018 數學奧林匹亞競賽第二階段選訓營, 獨立研究(一)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gbo",
+   "0gc1"
+  ],
+  "sample_text": "已知正整數 $a_1, a_2, \\dots, a_n$ ($a_1 < a_2 < \\dots < a_n$), $k$ 為正實數且 $k \\ge 1$. 試證： $$ \\sum_{i=1}^{n} a_i^{2k+1} \\ge \\left( \\sum_{i=1}^{n} a_i^k \\right"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2018 數學奧林匹亞競賽第二階段選訓營, 獨立研究(二)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gbq",
+   "0gbx"
+  ],
+  "sample_text": "設 $A$, $B$, $C$ 分別為 $\\triangle A'B'C'$ 的邊 $B'C'$, $C'A'$, $A'B'$ 的中點。設點 $P$ 位於 $\\triangle ABC$ 內部, $AP$, $BP$, $CP$ 分別與 $BC$, $CA$, $AB$ 交於點 $P_a$, $P"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2018 數學奧林匹亞競賽第二階段選訓營, 獨立研究(三)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gbv",
+   "0gc0"
+  ],
+  "sample_text": "已知正整數 $n$ 的所有因數除了 1 以外都不是完全平方數。 試證: 不存在任何互質的正整數 $x$ 和 $y$, 使得 $x^n + y^n$ 是 $(x + y)^3$ 的倍數。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一九數學奧林匹亞競賽第二階段選訓營, 獨立研究(二)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gco",
+   "0gd1"
+  ],
+  "sample_text": "令 $Q_{>0}$ 表示所有正有理數所成之集合。試求所有函數 $f: Q_{>0} \\to Q_{>0}$ 滿足 $$ f(x^2 f(y)^2) = f(x)^2 f(y), \\text{ 對所有 } x, y \\in Q_{>0} \\text{ 均成立.} $$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一九數學奧林匹亞競賽第二階段選訓營, 獨立研究 (三)",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gcu",
+   "0gcy"
+  ],
+  "sample_text": "平面上給定一個半徑為 $1$ 的圓 $\\omega$。對於一組三角形所成的集合 $T$, 如果滿足下列兩條件: (i) $T$ 中的每一個三角形都內接於 $\\omega$, (ii) $T$ 中任兩個三角形都沒有共同內部點, 就說 $T$ 是好棒棒。 試決定所有的正實數 $t$, 使得對於每一個正整"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2021 數學奧林匹亞競賽第二階段選訓營, 國際競賽實作(一)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0ge7",
+   "0gea"
+  ],
+  "sample_text": "設 $S$ 為一個有 $n \\ge 3$ 個正整數的集合，且集合中任兩相異數字之總和都不在 $S$ 中。證明必可將 $S$ 中的元素排成 $a_1, a_2, \\dots, a_n$，使得對於所有 $i = 2, 3, \\dots, n-1$，$a_{i-1} + a_{i+1}$ 和 $a_{i-"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第一階段培訓營, 獨立研究(二)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gf7",
+   "0gfw"
+  ],
+  "sample_text": "給定一個大於 $1$ 的正整數 $N$。甲乙兩人進行下面遊戲： (1) 甲說一個正整數 $A$。 (2) 乙說一個正整數 $B > 1$，其中 $B$ 必須是 $A$ 的因數或是 $A$ 的倍數。 (3) 甲從 $B-1$, $B$, $B+1$ 中說一個數作為新的 $A$。 遊戲以下輪流進行步驟 "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第二階段培訓營, 獨立研究 (二)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gf9",
+   "0gfv"
+  ],
+  "sample_text": "坐標平面上兩坐標皆為整數的點稱為格子點。以下考慮的三角形，其頂點皆為格子點。一個合法的動作，係指將這樣的三角形的其中一個頂點，沿著與其對邊平行的方向移到另一個格子點的操作。證明若兩個三角形有相同的面積，則必存在一系列合法的動作，將其中一個變成另外一個。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第一階段培訓營, 獨立研究(一)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gfd",
+   "0gfp"
+  ],
+  "sample_text": "證明不等式 $$ 2(a^3 + b^3 + c^3) + abc + ab + bc + ca \\ge 2(a^2b + b^2c + c^2a) + a^2 + b^2 + c^2 + a + b + c $$ 對任意非負實數 $a$, $b$, $c$ 恆成立。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第一階段培訓營, 獨立研究(三)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gfg",
+   "0gfr"
+  ],
+  "sample_text": "證明：對任意正實數 $a, b$ 及任意正整數 $n$, 不等式 $$ (a+b)^n - a^n - b^n \\ge \\frac{2^n-2}{2^{n-2}} \\cdot ab(a+b)^{n-2}. $$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第二階段培訓營, 國際競賽實作(一)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gfi",
+   "0gg0"
+  ],
+  "sample_text": "給定正整數 $n \\ge 3$，並在圓上標了 $n$ 個點。安娜與艾莎進行以下遊戲：從安娜開始，兩人輪流從還沒用過的點中選三個點畫三角形，並不得通過已經畫好的三角形的任一邊；首先不能畫滿足條件的三角形的人判輸，另一人判贏。請問誰有必勝策略？ (答案得與 $n$ 有關。)"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第二階段培訓營, 獨立研究(一)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gfj",
+   "0gfl"
+  ],
+  "sample_text": "設 $a, b$ 為實數, 並考慮函數 $f(x) = ax + b + \\frac{9}{x}$。證明: 在區間 $[1, 9]$ 中存在一數 $x_0$ 滿足 $|f(x_0)| \\ge 2$。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第二階段選訓營,國際競賽實作(二)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gg4",
+   "0gg8"
+  ],
+  "sample_text": "愛莉拿到一個有理數 $r > 1$ 和一條直線, 直線有兩個點 $B \\neq R$, 而 $R$ 上放著一個紅色的珠子, $B$ 上放著一個藍色的珠子。愛莉用這些東西來玩一個單人遊戲。每一回合, 她選定一個整數 $k$ (不一定為正) 和一個珠子來移動。如果這個珠子在位置 $X$, 而另外一個珠子"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第三階段選訓營, 國際競賽實作(二)",
+  "count": 2,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gg5",
+   "0gg7"
+  ],
+  "sample_text": "令 $\\mathcal{X}$ 為正整數集 $\\mathbb{N}$ 的所有非空子集 (不一定有限) 所組成的集合。試求所有函數 $f: \\mathcal{X} \\to \\mathbb{R}^+$ 滿足以下性質： (i) 若 $S \\subseteq T$ 皆為 $\\mathbb{N}$ 的非空子集"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "IMO 3J, Mock Exam 1",
+  "count": 2,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gig",
+   "0gij"
+  ],
+  "sample_text": "設三角形 $ABC$ 的內心為 $I$，內切圓為 $\\omega$。令 $E, F$ 為 $\\omega$ 與 $CA, AB$ 的切點，$X, Y$ 為三角形 $BIC$ 的外接圓與 $\\omega$ 的交點。在 $BC$ 上取一點 $T$ 使得 $\\angle AIT$ 為直角。令 $G$ 為 "
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營",
+  "count": 1,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g57"
+  ],
+  "sample_text": "已知 $a, b, c, d$ 為非負實數, 試求滿足下列方程組的解 $(a, b, c, d)$: $$ a^2(b+c)(b+c+d) = \\sqrt{b+c}\\sqrt[3]{b+c+d} $$ $$ b^2(c+d)(c+d+a) = \\sqrt{c+d}\\sqrt[3]{c+d+a} $$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一一數學奧林匹亞競賽第一階段選訓營,獨立研究(二)",
+  "count": 1,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g5r"
+  ],
+  "sample_text": "已知圓 $O_1$ 與圓 $O_2$ 外切於點 $T$, 一直線與圓 $O_2$ 相切於點 $X$, 與圓 $O_1$ 交於點 $A, B$ 且點 $B$ 在線段 $AX$ 的內部, 直線 $XT$ 與圓 $O_1$ 交於另一點 $S$。$C$ 是不包含點 $A, B$ 的 $TS$ 上的一點, 過"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二0一三數學奧林匹亞競賽第二階段選訓營",
+  "count": 1,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g7a"
+  ],
+  "sample_text": "設點 $H$ 為 $\\triangle ABC$ 的垂心，且點 $P$ 是 $\\triangle ABC$ 外接圓上異於頂點 $A$, $B$, $C$ 的任意點。令點 $E$, $F$ 分別是 $P$ 對 $BC$, $AB$ 邊的垂足。試證：直線 $EF$ 平分線段 $PH$。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2014 International Mathematical Olympiad Second Stage Training Camp",
+  "count": 1,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g86"
+  ],
+  "sample_text": "令 $n$ 是一正整數且令 $a_1, \\cdots, a_{n-1}$ 為任意實數。定義數列 $u_0, \\cdots, u_n$ 與 $v_0, \\cdots, v_n$ 如下： $$ u_0 = u_1 = v_0 = v_1 = 1,\\ u_{k+1} = u_k + a_k u_{k-1}"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一四年國際數學奧林匹亞競賽第二階段選訓營 獨立研究(二)",
+  "count": 1,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g8a"
+  ],
+  "sample_text": "在凸六邊形 $ABCDEF$ 中, $AB \\parallel DE$, $BC \\parallel EF$, $CD \\parallel FA$, 以及 $$ AB + DE = BC + EF = CD + FA. $$ 將邊 $AB$, $BC$, $DE$, $EF$ 的中點分別記為 $A_"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一四年國際數學奧林匹亞競賽第二階段選訓營",
+  "count": 1,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g8c"
+  ],
+  "sample_text": "設△ABC的內心與外心分別為$I$與$O$。作直線$L$使與$BC$邊平行，並與△$ABC$的內切圓相切。設$L$與$IO$交於$X$點，另取$L$上的一點$Y$使得$YI$垂直於$IO$。證明$A, X, O, Y$四點共圓。 Let $I$ and $O$ be the incenter and"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一四年國際數學奧林匹亞競賽第二階段選訓營 模擬競賽(二)",
+  "count": 1,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0g8v"
+  ],
+  "sample_text": "甲、乙兩人在實數線上玩以下的著色遊戲。甲有一桶顏料共四單位, 其中 $p$ 單位的顏料剛好可以塗滿一個長度為 $p$ 的閉區間。每回合, 甲先指定一個正整數 $m$, 並給乙 $\\frac{1}{2^m}$ 單位的顏料。接著, 乙選一個正整數 $k$, 並將 $\\frac{k}{2^m}$ 到 $\\"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "二〇一九數學奧林匹亞競賽第二階段選訓營，獨立研究（一）",
+  "count": 1,
+  "year_explicit": false,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gcw"
+  ],
+  "sample_text": "已知 $a, b, c, d$ 為正實數且滿足 $a + b + c + d = 4$。試證： $$ \\sum_{\\text{cyc}} \\frac{3a^3}{a^2 + ab + b^2} + \\sum_{\\text{cyc}} \\frac{2ab}{a+b} \\geq 8. $$"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第五階段培訓營, 國際競賽實作(一)",
+  "count": 1,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gfk"
+  ],
+  "sample_text": "設三角形 $ABC$ 外接圓為 $\\omega$。點 $K$, $L$, $M$ 分別位於邊 $AB$, $BC$, $CA$ 上, 且滿足 $CM \\cdot CL = AM \\cdot BL$。射線 $LK$ 交直線 $AC$ 於點 $P$。設圓 $\\omega$ 與三角形 $KMP$ 外接圓的"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第二階段培訓營, 獨立研究 (三)",
+  "count": 1,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gfs"
+  ],
+  "sample_text": "設 $r \\ge 2$ 為整數, 且 $m_1, n_1, m_2, n_2, \\dots, m_r, n_r$ 為 $2r$ 個整數, 使得 $$ |m_i n_j - m_j n_i| = 1 $$ 對所有的 $1 \\le i < j \\le r$ 皆成立。試求 $r$ 的最大可能值。"
+ },
+ {
+  "config": "Taiwan",
+  "competition": "2022 數學奧林匹亞競賽第一階段培訓營, 國際競賽實作 (二)",
+  "count": 1,
+  "year_explicit": true,
+  "ordinal": false,
+  "roc_year": false,
+  "roman": false,
+  "sample_ids": [
+   "0gga"
+  ],
+  "sample_text": "設 $n \\ge 3$ 為正整數, $p$ 是滿足 $p > 6^{n-1} - 2^n + 1$ 的質數。設 $S$ 為 $n$ 個正整數所組成的集合, 其中任兩數除以 $p$ 的餘數均不相同。證明存在正整數 $c$, 滿足恰有兩組有序數組 $(x, y, z) \\in S^3$, 其中的 $x,"
+ }
+]

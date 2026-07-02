@@ -24,6 +24,10 @@ frontend/public/problem-images/
 # it is the irreplaceable source the DB build merges; ignore the regenerable bits.
 backend/data/enrichment/shards/
 backend/data/enrichment/input.jsonl
+# Translations: keep the merged zh.jsonl sidecar in git (irreplaceable LLM
+# output, keyed by content hash); work shards are regenerable.
+backend/data/translations/shards/
+backend/data/translations/.deepseek_key
 
 # Node / Vite frontend
 frontend/node_modules/

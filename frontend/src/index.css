@@ -204,6 +204,14 @@
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
+@keyframes sheetUp {
+  from { opacity: 0.6; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sheetIn {
+  from { opacity: 0.6; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 @keyframes float {
   0%, 100% { transform: translate(0, 0); }
   50% { transform: translate(12px, -20px); }
