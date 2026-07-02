@@ -47,10 +47,40 @@ ENV_RE = re.compile(r'\\(begin|end)\{([a-zA-Z*]+)\}')
 IMG_RE = re.compile(r'attached_image_(\d+)')
 DISPLAY_RE = re.compile(r'\$\$')
 CJK_RE = re.compile(r'[一-鿿]')
+CYRILLIC_RE = re.compile(r'[А-яЁё]')
 MATH_STRIP_RE = re.compile(
     r'\$\$.*?\$\$|\$[^$\n]*\$|\\\[.*?\\\]|\\\(.*?\\\)'
     r'|\\begin\{[a-zA-Z*]+\}.*?\\end\{[a-zA-Z*]+\}|`[^`]*`',
     re.S)
+MATH_FRAG_RE = re.compile(
+    r'\$\$(.*?)\$\$|\$([^$]*)\$|\\\[(.*?)\\\]|\\\((.*?)\\\)'
+    r'|\\begin\{[a-zA-Z*]+\}(.*?)\\end\{[a-zA-Z*]+\}',
+    re.S)
+
+
+_TYPOGRAPHIC_EQUIV = [
+    (re.compile(r'\^\{\\prime\\prime\}|\^\\prime\\prime'), "''"),
+    (re.compile(r'\^\{\\prime\}|\^\\prime'), "'"),
+    (re.compile(r'\\left|\\right'), ''),
+    (re.compile(r'\\[dt]frac'), r'\\frac'),
+    (re.compile(r'\\[,;!]|\\quad|\\qquad'), ''),
+]
+
+
+def math_signature(text):
+    """Char multiset of all math content, ignoring commas/whitespace and
+    purely typographic equivalences (\\prime vs ', \\left\\right, spacing).
+
+    Splitting an enumeration ($a, b$ -> $a$、$b$) is legitimate translation
+    typography and keeps this signature identical, while any dropped
+    condition, altered digit or flipped inequality changes it."""
+    frags = [g for m in MATH_FRAG_RE.finditer(text) for g in m.groups() if g]
+    body = ''.join(frags)
+    for pat, repl in _TYPOGRAPHIC_EQUIV:
+        body = pat.sub(repl, body)
+    # braces are structural (x^{2} vs x^2): dropping them from the multiset
+    # still exposes any loss of actual content characters
+    return Counter(re.sub(r'[,{}\s]', '', body))
 
 
 def content_key(kind, raw_md):
@@ -82,8 +112,28 @@ def validate(source, zh):
     reasons = []
     if not (zh or '').strip():
         return ['empty']
-    if source.count('$') != zh.count('$'):
-        reasons.append(f'dollar-count {source.count("$")}->{zh.count("$")}')
+
+    # Bilingual sources (Taiwan zh duplicates, Russian originals appended):
+    # the correct translation SELECTS the Chinese content instead of mapping
+    # the whole bilingual text 1:1, so cross-checking exact math counts
+    # against the full source only misfires. Check internal consistency.
+    if CJK_RE.search(source) or CYRILLIC_RE.search(source):
+        if zh.count('$') % 2:
+            reasons.append('unbalanced-dollar')
+        begins = Counter(m[1] for m in ENV_RE.findall(zh) if m[0] == 'begin')
+        ends = Counter(m[1] for m in ENV_RE.findall(zh) if m[0] == 'end')
+        if begins != ends:
+            reasons.append('env-unbalanced')
+        if not set(IMG_RE.findall(zh)) <= set(IMG_RE.findall(source)):
+            reasons.append('image-ref-extra')
+        if not CJK_RE.search(zh):
+            reasons.append('no-cjk')
+        return reasons
+
+    if zh.count('$') % 2:
+        reasons.append('unbalanced-dollar')
+    elif math_signature(source) != math_signature(zh):
+        reasons.append('math-content-mismatch')
     if len(DISPLAY_RE.findall(source)) != len(DISPLAY_RE.findall(zh)):
         reasons.append('display-math-count')
     if Counter(ENV_RE.findall(source)) != Counter(ENV_RE.findall(zh)):
@@ -96,11 +146,13 @@ def validate(source, zh):
     prose_src = MATH_STRIP_RE.sub(' ', source)
     prose_zh = MATH_STRIP_RE.sub(' ', zh)
     letters = len(re.findall(r'[a-zA-Z]', prose_src))
-    if letters > 40:  # enough natural language to expect real translation
+    if letters > 40:  # enough natural language to expect real translation.
+        # Compare CJK volume to the source's letter count (Chinese is ~4-5x
+        # denser); a visible-char ratio misfires on option-heavy MCQ texts
+        # where digits/parens dominate.
         cjk = len(CJK_RE.findall(prose_zh))
-        visible = len(re.sub(r'\s', '', prose_zh))
-        if visible and cjk / visible < 0.35:
-            reasons.append(f'low-cjk {cjk}/{visible}')
+        if cjk < max(6, letters * 0.12):
+            reasons.append(f'low-cjk {cjk}cjk/{letters}letters')
     return reasons
 
 
